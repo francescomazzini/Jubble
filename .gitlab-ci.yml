@@ -1,0 +1,6 @@
+image: maven:latest
+
+build:
+  script:
+    - mvn test
+    - mvn compile
