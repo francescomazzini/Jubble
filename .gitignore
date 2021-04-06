@@ -10,6 +10,8 @@
 .project
 .settings/
 
+# Intellij
+.idea
 
 # MacOS
 
