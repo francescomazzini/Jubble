@@ -1,6 +1,20 @@
 image: maven:latest
 
+stages:
+  - build
+  - docs
+
 build:
+  stage: build
   script:
     - mvn test
     - mvn compile
+
+docs:
+  stage: docs
+  script:
+    - mvn javadoc:javadoc
+    - mvn site
+  artifacts:
+    paths:
+      - target/site
