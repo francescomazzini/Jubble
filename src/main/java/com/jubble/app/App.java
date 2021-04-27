@@ -1,7 +1,12 @@
 package com.jubble.app;
 
-/** Hello world! */
+/**
+ * Main app class
+ * */
 public class App {
+  /**
+   * Start game main loop
+   * */
   public static void main(String[] args) {
     System.out.println("Hello World!");
   }
