@@ -1,3 +1,8 @@
+Run project
+````
+mvn clean compile exec:java
+````
+
 Build project and verify code style
 ````
  mvn clean verify
