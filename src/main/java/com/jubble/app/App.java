@@ -12,6 +12,7 @@ public class App {
    * */
   public static void main(String[] args) {
     Timer timer = new Timer();
-    timer.schedule(new IncrementValues(), 0, 1000);
+    IncrementValues game = new IncrementValues();
+    timer.schedule(game, 0, 1000);
   }
 }
