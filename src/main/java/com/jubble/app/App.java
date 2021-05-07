@@ -13,6 +13,12 @@ public class App {
   public static void main(String[] args) {
     Timer timer = new Timer();
     IncrementValues game = new IncrementValues();
+
+    Observable observe = new Observable();
+    GameAction action = new Observer();
+    observe.attach(action);
+    observe.setAction("State1");
+    observe.setAction("State2");
     timer.schedule(game, 0, 1000);
   }
 }

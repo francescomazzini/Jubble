@@ -38,6 +38,8 @@ public class IncrementValues extends TimerTask {
      * */
     @Override
     public void run() {
+        Observer actionObserver = new Observer();
+        System.out.println(actionObserver.getAction());
         incrementOwnedNumber();
         System.out.println(computeNextCost());
         System.out.println(computeProductionTotal());
