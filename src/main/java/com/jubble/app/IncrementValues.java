@@ -9,6 +9,12 @@ public class IncrementValues extends TimerTask {
     private int ownedNumber = 0;
     // Represents a generator level
     private int multiplyer = 1;
+    // Observable shared object.
+    private Observable actionObservable;
+    IncrementValues(Observable actionObservable) {
+        this.actionObservable = actionObservable;
+    }
+
     // Game currency
     private BigDecimal currency = new BigDecimal(0);
 
@@ -38,8 +44,7 @@ public class IncrementValues extends TimerTask {
      * */
     @Override
     public void run() {
-        Observer actionObserver = new Observer();
-        System.out.println(actionObserver.getAction());
+        System.out.println(this.actionObservable.getAction());
         incrementOwnedNumber();
         System.out.println(computeNextCost());
         System.out.println(computeProductionTotal());
