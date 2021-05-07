@@ -35,7 +35,7 @@ public class Observable {
         if(action == null || action.isEmpty())
             throw new IllegalArgumentException();
         this.action = action;
-        notifyActinChange();
+        notifyActionChange();
     }
 
     /**
@@ -48,7 +48,7 @@ public class Observable {
     /**
      * Notify currently registered observer about Observable's change.
      * */
-    private void notifyActinChange() {
+    private void notifyActionChange() {
         for (GameAction act : playerActions) {
             act.update(getAction());
         }
