@@ -39,6 +39,7 @@ public class MainThread implements Runnable{
                         break;
 
                     case 'e':
+                        System.out.println("This feature is not implemented yet");
                         break;
 
                     case 'p':

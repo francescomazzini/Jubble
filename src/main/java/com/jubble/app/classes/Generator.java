@@ -8,16 +8,16 @@ public class Generator {
     private int multiplier;
     private final double PRODUCTIONBASE;
     private final double COSTBASE;
+    private final double RATEGROWTH;
 
-    private static final double RATEGROWTH = 1.07;
-
-    public Generator(String name, String description, double COSTBASE, double PRODUCTIONBASE) {
+    public Generator(String name, String description, double COSTBASE, double PRODUCTIONBASE, double RATEGROWTH) {
         numberOwned = 0;
         multiplier = 1;
         this.name = name;
         this.description = description;
         this.COSTBASE = COSTBASE;
         this.PRODUCTIONBASE = PRODUCTIONBASE;
+        this.RATEGROWTH = RATEGROWTH;
     }
 
     public void incrementNumberOwned() {
