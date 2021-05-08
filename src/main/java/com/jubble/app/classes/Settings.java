@@ -7,11 +7,11 @@ public class Settings {
 
     private static List<Generator> generators = List.of(
             new Generator("Stellar Panel", "",4, 1.67),
-            new Generator("Electron Absorber", "",0, 0),
-            new Generator("Nucleus Extractor", "",0,0),
-            new Generator("Hydrogenator", "",0, 0),
-            new Generator("Dyson Sphere", "",0, 0),
-            new Generator("Black Hole Reverser", "",0, 0));
+            new Generator("Electron Absorber", "",100, 0),
+            new Generator("Nucleus Extractor", "",100,0),
+            new Generator("Hydrogenator", "",100, 0),
+            new Generator("Dyson Sphere", "",100, 0),
+            new Generator("Black Hole Reverser", "",100, 0));
 
     private static List<Currency> currencies = List.of(
             new Currency("Energy"));

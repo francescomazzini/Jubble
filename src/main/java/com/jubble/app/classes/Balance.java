@@ -10,4 +10,6 @@ public class Balance {
     public static void setPrimary(double amount) {
         primary.setOwned(amount);
     }
+
+    //public static void minusPrimary (double amount) {setPrimary(getPrimary() - amount);}
 }

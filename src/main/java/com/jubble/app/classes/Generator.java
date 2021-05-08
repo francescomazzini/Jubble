@@ -31,6 +31,10 @@ public class Generator {
     public double getProduction() {
         return (PRODUCTIONBASE * numberOwned) * multiplier;
     }
+    
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
