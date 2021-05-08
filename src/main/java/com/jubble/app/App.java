@@ -12,6 +12,9 @@ public class App {
    * */
   public static void main(String[] args) {
     MainThread game = new MainThread();
-    game.run();
+    Thread t1 = new Thread(game);
+    Timer timer = new Timer();
+    t1.start();
+    timer.schedule(new IncrementValues(), 0, 1000);
   }
 }
