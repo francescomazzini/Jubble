@@ -13,9 +13,15 @@ public class Settings {
             new Generator("Dyson Sphere", "",0, 0),
             new Generator("Black Hole Reverser", "",0, 0));
 
+    private static List<Currency> currencies = List.of(
+            new Currency("Energy"));
+
     public static List<Generator> getGenerators() {
         return generators;
     }
+
+    public static List<Currency> getCurrencies() { return currencies;}
+
 
 
 }
