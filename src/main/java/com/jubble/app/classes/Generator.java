@@ -32,4 +32,8 @@ public class Generator {
         return (PRODUCTIONBASE * numberOwned) * multiplier;
     }
 
+    @Override
+    public String toString() {
+        return "Generator: " + name + " Owned: " + numberOwned;
+    }
 }

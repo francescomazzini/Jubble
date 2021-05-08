@@ -1,12 +1,15 @@
 package com.jubble.app;
 
+import com.jubble.app.classes.Balance;
+import com.jubble.app.classes.Settings;
+
 import java.util.Scanner;
+import java.util.Timer;
 
 public class MainThread implements Runnable{
 
     @Override
     public void run() {
-
         String choice;
         char c;
         boolean repeat = true;
@@ -15,7 +18,7 @@ public class MainThread implements Runnable{
 
         while(repeat) {
             badInput = false;
-            System.out.println("Your balance is ");
+            System.out.println("Your balance is " + Balance.getPrimary());
             System.out.println("What would you like to do?\n" +
                     "- 's' to check the shop\n" +
                     "- 'e' to check the exchange\n" +
@@ -23,22 +26,21 @@ public class MainThread implements Runnable{
                     "- 'q' to quit the game\n" );
 
             choice = scan.next();
-
             if(choice.length() > 1) {
-
                 badInput = true;
-
             } else {
                 c = choice.charAt(0);
 
                 switch (c) {
                     case 's':
+                        Settings.getGenerators().get(0).incrementNumberOwned();
                         break;
 
                     case 'e':
                         break;
 
                     case 'p':
+                        System.out.println(Settings.getGenerators());
                         break;
 
                     case 'q':

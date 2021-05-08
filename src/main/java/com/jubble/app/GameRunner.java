@@ -7,12 +7,11 @@ public class GameRunner {
         Timer timer = new Timer();
 
         Observable gameActionObservable = new Observable();
-        IncrementValues game = new IncrementValues(gameActionObservable);
+        IncrementValues game = new IncrementValues();
 
         GameAction action = new Observer();
         gameActionObservable.attach(action);
         gameActionObservable.setAction("State1");
         gameActionObservable.setAction("State2");
-        timer.schedule(game, 0, 1000);
     }
 }
