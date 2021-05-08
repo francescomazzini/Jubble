@@ -11,7 +11,7 @@ public class App {
    * Start game main loop
    * */
   public static void main(String[] args) {
-    GameRunner runnable = new GameRunner();
-    runnable.run();
+    MainThread game = new MainThread();
+    game.run();
   }
 }

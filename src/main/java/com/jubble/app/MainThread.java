@@ -6,7 +6,6 @@ public class MainThread implements Runnable{
 
     @Override
     public void run() {
-
         String choice;
         char c;
         boolean repeat = true;
@@ -23,11 +22,8 @@ public class MainThread implements Runnable{
                     "- 'q' to quit the game\n" );
 
             choice = scan.next();
-
             if(choice.length() > 1) {
-
                 badInput = true;
-
             } else {
                 c = choice.charAt(0);
 
