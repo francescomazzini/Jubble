@@ -2,13 +2,16 @@ package com.jubble.app;
 
 import com.jubble.app.classes.Balance;
 import com.jubble.app.classes.Settings;
-
 import java.util.Scanner;
-import java.util.Timer;
 
 public class MainThread implements Runnable{
 
     private Scanner scan = new Scanner(System.in);
+    private Balance balance;
+
+    public MainThread (Balance balance) {
+        this.balance = balance;
+    }
 
     @Override
     public void run() {
@@ -20,7 +23,7 @@ public class MainThread implements Runnable{
 
         while(repeat) {
             badInput = false;
-            System.out.println("Your balance is " + String.format("%,.2f", Balance.getPrimary()) + " $");
+            System.out.println("Your balance is " + String.format("%,.2f", balance.getPrimary()) + " $");
             System.out.println("What would you like to do?\n" +
                     "- 's' to check the shop\n" +
                     "- 'e' to check the exchange\n" +
@@ -73,7 +76,7 @@ public class MainThread implements Runnable{
 
         while(repeat) {
             badInput = false;
-            System.out.println("Welcome to the shop, your balance is " + String.format("%,.2f", Balance.getPrimary()) + "$");
+            System.out.println("Welcome to the shop, your balance is " + String.format("%,.2f", balance.getPrimary()) + "$");
             System.out.print("What would you like to do?\n");
             for(int i = 0; i < Settings.getGenerators().size(); i++)
                 System.out.println("- '"+i+"' to buy '"+Settings.getGenerators().get(i).getName()+"' which costs " +
@@ -95,8 +98,8 @@ public class MainThread implements Runnable{
                     case '4':
                     case '5':
                         int nr = Integer.parseInt(String.valueOf(c));
-                        if(Balance.getPrimary() > Settings.getGenerators().get(nr).getNextCost()) {
-                            Balance.setPrimary(Balance.getPrimary() - Settings.getGenerators().get(nr).getNextCost());
+                        if(balance.getPrimary() > Settings.getGenerators().get(nr).getNextCost()) {
+                            balance.setPrimary(balance.getPrimary() - Settings.getGenerators().get(nr).getNextCost());
                             Settings.getGenerators().get(nr).incrementNumberOwned();
 
                             System.out.println("You have successfully bought " + Settings.getGenerators().get(nr).getName() + "\n");

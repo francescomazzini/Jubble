@@ -1,15 +1,18 @@
 package com.jubble.app.classes;
 
 public class Balance {
-    private static Currency primary = Settings.getCurrencies().get(0);
+    private Currency primary;
 
-    public static double getPrimary() {
+    public Balance () {
+        this.primary = Settings.getCurrencies().get(0);
+    }
+
+    synchronized public double getPrimary() {
         return primary.getOwned();
     }
 
-    public static void setPrimary(double amount) {
+    synchronized public  void setPrimary(double amount) {
         primary.setOwned(amount);
     }
 
-    //public static void minusPrimary (double amount) {setPrimary(getPrimary() - amount);}
 }
