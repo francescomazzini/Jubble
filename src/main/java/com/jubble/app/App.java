@@ -10,6 +10,9 @@ import java.util.Timer;
  * Main app class
  * */
 public class App {
+
+  private static boolean running = true;
+
   /**
    * Start game main loop
    * */
@@ -21,5 +24,26 @@ public class App {
     Timer timer = new Timer();
     t1.start();
     timer.schedule(new IncrementValues(gameBalance), 0, 1000);
+
+    while(true) {
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+
+      if(!running)
+        break;
+    }
+
+    timer.cancel();
+    timer.purge();
+
+    t1.interrupt();
+
+  }
+
+  public static void stop () {
+    running = false;
   }
 }
