@@ -1,5 +1,7 @@
 package com.jubble.app.classes;
 
+import com.jubble.app.setting.Settings;
+
 public class Balance {
     private Currency primary;
 

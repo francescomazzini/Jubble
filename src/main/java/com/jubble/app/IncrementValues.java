@@ -2,7 +2,7 @@ package com.jubble.app;
 
 import com.jubble.app.classes.Balance;
 import com.jubble.app.classes.Generator;
-import com.jubble.app.classes.Settings;
+import com.jubble.app.setting.Settings;
 
 import java.util.TimerTask;
 

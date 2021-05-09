@@ -1,4 +1,7 @@
-package com.jubble.app.classes;
+package com.jubble.app.setting;
+
+import com.jubble.app.classes.Currency;
+import com.jubble.app.classes.Generator;
 
 import java.util.ArrayList;
 import java.util.List;

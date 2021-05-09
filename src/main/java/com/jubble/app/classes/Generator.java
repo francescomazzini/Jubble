@@ -24,6 +24,8 @@ public class Generator {
         numberOwned++;
     }
 
+    public int getNumberOwned() { return numberOwned;}
+
     public double getNextCost() {
         return COSTBASE * Math.pow(RATEGROWTH, numberOwned);
     }

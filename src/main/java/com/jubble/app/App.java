@@ -1,10 +1,12 @@
 package com.jubble.app;
 
 import com.jubble.app.classes.Balance;
-import com.jubble.app.classes.Settings;
+import com.jubble.app.classes.Generator;
+import com.jubble.app.setting.SaverLoader;
+import com.jubble.app.setting.Settings;
 
-import java.util.Scanner;
 import java.util.Timer;
+import java.util.stream.Collectors;
 
 /**
  * Main app class
@@ -17,6 +19,9 @@ public class App {
    * Start game main loop
    * */
   public static void main(String[] args) {
+
+    SaverLoader.loadGame();
+
     Balance gameBalance = new Balance();
     Settings.getGenerators().get(0).incrementNumberOwned();
     MainThread game = new MainThread(gameBalance);
@@ -40,6 +45,11 @@ public class App {
     timer.purge();
 
     t1.interrupt();
+
+    SaverLoader.saveGame(Settings.getGenerators().stream()
+                            .mapToInt(Generator::getNumberOwned)
+                            .boxed()
+                            .collect(Collectors.toList()), gameBalance.getPrimary());
 
   }
 
