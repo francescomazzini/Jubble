@@ -56,8 +56,6 @@ public class App extends Application{
     primaryStage.setFullScreen(false);
     primaryStage.show();
 
-    updateLabel(controller);
-
     primaryStage.setOnCloseRequest(e -> {
       timer.cancel();
       timer.purge();
@@ -100,28 +98,6 @@ public class App extends Application{
  */
   }
 
-  public void updateLabel (ControllerFX controller) {
-    Task<Void> task = new Task<Void>() {
-      @Override
-      protected Void call() {
-        while (true) {
-          String userInput = String.format("%.2f",gameBalance.getPrimary()) + " $";
-
-          Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-              controller.setLabelBalance(userInput);
-            }
-          });
-
-        }
-      }
-    };
-
-    Thread th = new Thread(task);
-    th.setDaemon(true);
-    th.start();
-  }
 
   public static void stopThreads() {
     SaverLoader.saveGame(

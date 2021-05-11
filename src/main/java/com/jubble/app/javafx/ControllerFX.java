@@ -11,10 +11,6 @@ public class ControllerFX implements Initializable {
     @FXML
     private Label label_balance;
 
-    public ControllerFX () {
-        label_balance = new Label("0 $");
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
