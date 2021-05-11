@@ -15,7 +15,7 @@ public class Currency {
   }
 
   /**
-   * Set amount of owned currency.
+   * Set amount of currency owned by the player.
    *
    * @param owned number of currency to set.
    */
@@ -23,7 +23,9 @@ public class Currency {
     this.owned = owned;
   }
 
-  /** Get amount of owned currency. */
+  /** Get amount of currency owned by the player.
+   * @return amount of currency owned.
+   * */
   public double getOwned() {
     return owned;
   }
