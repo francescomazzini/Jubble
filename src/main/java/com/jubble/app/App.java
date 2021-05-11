@@ -1,7 +1,7 @@
 package com.jubble.app;
 
 import com.jubble.app.components.Balance;
-import com.jubble.app.components.Generator;
+import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.SaverLoader;
 import com.jubble.app.utils.Settings;
 import java.util.Timer;
