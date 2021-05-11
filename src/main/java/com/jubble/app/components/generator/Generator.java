@@ -1,4 +1,4 @@
-package com.jubble.app.components;
+package com.jubble.app.components.generator;
 
 public class Generator {
   private GeneratorID id;

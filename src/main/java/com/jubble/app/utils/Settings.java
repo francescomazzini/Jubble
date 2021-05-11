@@ -1,8 +1,8 @@
 package com.jubble.app.utils;
 
 import com.jubble.app.components.Currency;
-import com.jubble.app.components.Generator;
-import com.jubble.app.components.GeneratorID;
+import com.jubble.app.components.generator.Generator;
+import com.jubble.app.components.generator.GeneratorID;
 
 import java.util.List;
 
