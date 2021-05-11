@@ -9,7 +9,16 @@ public class GeneratorID {
      * @param description description of the generator.
      */
     public GeneratorID(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

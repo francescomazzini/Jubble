@@ -37,7 +37,7 @@ public class Generator {
   }
 
   public String getName() {
-    return name;
+    return id.getName();
   }
 
   @Override
