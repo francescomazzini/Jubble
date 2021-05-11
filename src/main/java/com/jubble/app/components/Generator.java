@@ -1,9 +1,7 @@
 package com.jubble.app.components;
 
 public class Generator {
-
-  private String name;
-  private String description;
+  private GeneratorID id;
   private int numberOwned;
   private int multiplier;
   private final double PRODUCTIONBASE;
@@ -11,11 +9,12 @@ public class Generator {
   private final double RATEGROWTH;
 
   public Generator(
-      String name, String description, double COSTBASE, double PRODUCTIONBASE, double RATEGROWTH) {
+      GeneratorID id, double COSTBASE, double PRODUCTIONBASE, double RATEGROWTH) {
+    // Default the player does not know any generator.
     numberOwned = 0;
+    // M
     multiplier = 1;
-    this.name = name;
-    this.description = description;
+    this.id = id;
     this.COSTBASE = COSTBASE;
     this.PRODUCTIONBASE = PRODUCTIONBASE;
     this.RATEGROWTH = RATEGROWTH;
@@ -43,6 +42,6 @@ public class Generator {
 
   @Override
   public String toString() {
-    return "Generator: " + name + " Owned: " + numberOwned;
+    return id.toString() + " " + numberOwned;
   }
 }
