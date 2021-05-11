@@ -31,4 +31,9 @@ This class and the Observer interface have been deprecated. The event model supp
 ## References
 [1. Multithreading observer pattern in Java](https://www.techyourchance.com/thread-safe-observer-design-pattern-in-java/)
 
-[2. The math of Idle games, part I, II, III](https://blog.kongregate.com/the-math-of-idle-games-part-i/)
+## Next Steps
+- [ ] Add Serialization and Deserialization to save and load the game
+- [ ] Add a first graphical user interface with javafx
+- [ ] Continue the setup of the game adding more currencies, generators and multipliers
+- [ ] Add random events during the game experience
+
