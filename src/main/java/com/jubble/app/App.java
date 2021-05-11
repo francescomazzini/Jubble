@@ -16,9 +16,30 @@ import java.util.stream.Collectors;
 /**
  * Main app class
  * */
-public class App {
+public class App extends Application{
 
   private static boolean running = true;
+
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+/*
+    SaverLoader.loadGame();
+
+    Balance gameBalance = new Balance();
+    Settings.getGenerators().get(0).incrementNumberOwned();
+    MainThread game = new MainThread(gameBalance);
+
+    Thread t1 = new Thread(game);
+    Timer timer = new Timer();
+    t1.start();
+    timer.schedule(new IncrementValues(gameBalance), 0, 1000); */
+
+    Parent root = FXMLLoader.load(getClass().getResource("/../resources/graphic.fxml"));
+    primaryStage.setTitle("Jubble");
+    primaryStage.setScene(new Scene(root, 1920, 1080));
+    primaryStage.show();
+
+  }
 
 
   /**
@@ -26,15 +47,9 @@ public class App {
    * */
   public static void main(String[] args) {
 
-    SaverLoader.loadGame();
+    launch(args);
 
-    Balance gameBalance = new Balance();
-    Settings.getGenerators().get(0).incrementNumberOwned();
-    MainThread game = new MainThread(gameBalance);
-    Thread t1 = new Thread(game);
-    Timer timer = new Timer();
-    t1.start();
-    timer.schedule(new IncrementValues(gameBalance), 0, 1000);
+    /*
 
     while(true) {
       try {
@@ -56,10 +71,12 @@ public class App {
                             .mapToInt(Generator::getNumberOwned)
                             .boxed()
                             .collect(Collectors.toList()), gameBalance.getPrimary());
-
+ */
   }
 
   public static void stopThreads() {
     running = false;
   }
+
+
 }
