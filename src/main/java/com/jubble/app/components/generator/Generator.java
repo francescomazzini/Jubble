@@ -10,9 +10,8 @@ public class Generator {
 
   public Generator(
       GeneratorID id, double COSTBASE, double PRODUCTIONBASE, double RATEGROWTH) {
-    // Default the player does not know any generator.
+    // The player does not own any generator at beginning of the game.
     numberOwned = 0;
-    // M
     multiplier = 1;
     this.id = id;
     this.COSTBASE = COSTBASE;
