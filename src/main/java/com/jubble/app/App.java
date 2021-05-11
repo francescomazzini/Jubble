@@ -4,6 +4,11 @@ import com.jubble.app.classes.Balance;
 import com.jubble.app.classes.Generator;
 import com.jubble.app.setting.SaverLoader;
 import com.jubble.app.setting.Settings;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.Timer;
 import java.util.stream.Collectors;
@@ -14,6 +19,7 @@ import java.util.stream.Collectors;
 public class App {
 
   private static boolean running = true;
+
 
   /**
    * Start game main loop
@@ -53,7 +59,7 @@ public class App {
 
   }
 
-  public static void stop () {
+  public static void stopThreads() {
     running = false;
   }
 }

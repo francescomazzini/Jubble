@@ -65,7 +65,7 @@ public class MainThread implements Runnable{
         }
 
         System.out.println("Game Finished!");
-        App.stop();
+        App.stopThreads();
     }
 
     private void runShop() {
