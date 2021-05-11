@@ -1,6 +1,6 @@
 package com.jubble.app.classes;
 
-import com.jubble.app.setting.Settings;
+import com.jubble.app.utils.Settings;
 
 public class Balance {
   private Currency primary;

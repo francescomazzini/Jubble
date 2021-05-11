@@ -1,4 +1,4 @@
-package com.jubble.app.setting;
+package com.jubble.app.utils;
 
 import com.jubble.app.classes.Currency;
 import com.jubble.app.classes.Generator;

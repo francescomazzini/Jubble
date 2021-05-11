@@ -1,4 +1,4 @@
-package com.jubble.app.setting;
+package com.jubble.app.utils;
 
 import java.util.List;
 
