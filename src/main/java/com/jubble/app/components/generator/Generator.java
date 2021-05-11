@@ -2,21 +2,16 @@ package com.jubble.app.components.generator;
 
 public class Generator {
   private GeneratorID id;
+  private GeneratorValues values;
   private int numberOwned;
   private int multiplier;
-  private final double PRODUCTIONBASE;
-  private final double COSTBASE;
-  private final double RATEGROWTH;
 
-  public Generator(
-      GeneratorID id, double COSTBASE, double PRODUCTIONBASE, double RATEGROWTH) {
+  public Generator(GeneratorID id, GeneratorValues values) {
     // The player does not own any generator at beginning of the game.
     numberOwned = 0;
     multiplier = 1;
     this.id = id;
-    this.COSTBASE = COSTBASE;
-    this.PRODUCTIONBASE = PRODUCTIONBASE;
-    this.RATEGROWTH = RATEGROWTH;
+    this.values = values;
   }
 
   public void incrementNumberOwned() {
@@ -28,11 +23,11 @@ public class Generator {
   }
 
   public double getNextCost() {
-    return COSTBASE * Math.pow(RATEGROWTH, numberOwned);
+    return values.getCostBase() * Math.pow(values.getRateGrowth(), numberOwned);
   }
 
   public double getProduction() {
-    return (PRODUCTIONBASE * numberOwned) * multiplier;
+    return (values.getProductionBase() * numberOwned) * multiplier;
   }
 
   public String getName() {

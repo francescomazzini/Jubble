@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GeneratorTest {
-    Generator generator = new Generator(new GeneratorID("Stellar Panel", ""), 3.738, 1.67, 1.07);
+    Generator generator = new Generator(new GeneratorID("Stellar Panel", ""), new GeneratorValues(3.738, 1.67, 1.07));
 
     @Test
     @DisplayName("NumberOwned should be zero at beginning.")
