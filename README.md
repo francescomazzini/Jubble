@@ -13,6 +13,11 @@ Generate code style report
 mvn checkstyle:check
 ````
 
+Temporal command for formatting:
+````
+mvn com.coveo:fmt-maven-plugin:format
+````
+
 Observer pattern, please note:
 java.util.Observable
 
@@ -21,6 +26,7 @@ This class and the Observer interface have been deprecated. The event model supp
 
 ## Todo devtools
 - [ ] [Release on master](https://forum.gitlab.com/t/getting-mvn-release-to-work-with-gitlab-ci/4904/2)
+- [ ] Make formatter run on every build.
 
 ## References
 [1. Multithreading observer pattern in Java](https://www.techyourchance.com/thread-safe-observer-design-pattern-in-java/)
