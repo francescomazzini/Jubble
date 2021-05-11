@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="785.0" styleClass="flow" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jubble.app.javafx.ControllerFX">
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
    <children>
-      <Label layoutX="168.0" layoutY="152.0" prefHeight="97.0" prefWidth="264.0" text="Ciao a tutti" textAlignment="CENTER" />
+      <Label fx:id="label_balance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="171.0" textFill="RED">
+         <FlowPane.margin>
+            <Insets bottom="20.0" left="20.0" right="30.0" top="20.0" />
+         </FlowPane.margin>
+         <font>
+            <Font name="Arial" size="28.0" />
+         </font>
+      </Label>
+      <VBox />
    </children>
-</Pane>
+</FlowPane>

@@ -2,9 +2,12 @@ package com.jubble.app;
 
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
+import com.jubble.app.javafx.ControllerFX;
 import com.jubble.app.utils.SaverLoader;
 import com.jubble.app.utils.Settings;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,31 +22,49 @@ import java.util.stream.Collectors;
  * */
 public class App extends Application{
 
-  private static boolean running = true;
   private static Balance gameBalance;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
 
-/*
 
     gameBalance = new Balance();
 
-      SaverLoader.loadGame();
+    SaverLoader.loadGame();
 
     Settings.getGenerators().get(0).incrementNumberOwned();
-    MainThread game = new MainThread(gameBalance);
+    //MainThread game = new MainThread(gameBalance);
 
-    Thread t1 = new Thread(game);
+    //Thread t1 = new Thread(game);
+    //Timer timer = new Timer();
+    //t1.start();
+
+    ControllerFX controller = new ControllerFX();
+
+    FXMLLoader loader = new FXMLLoader();
+    loader.setController(controller);
+
+    Parent root = loader.load(getClass().getResource("/graphic.fxml"));
+
     Timer timer = new Timer();
-    t1.start();
+
     timer.schedule(new IncrementValues(gameBalance), 0, 1000);
-*/
-  //  Parent root = FXMLLoader.load(getClass().getResource("/../resources/graphic.fxml"));
 
     primaryStage.setTitle("Jubble");
-    primaryStage.setScene(new Scene(new FlowPane(),500,500));
+    primaryStage.setScene(new Scene(root));
+    primaryStage.setMaximized(true);
+    primaryStage.setFullScreen(false);
     primaryStage.show();
+
+    updateLabel(controller);
+
+    primaryStage.setOnCloseRequest(e -> {
+      timer.cancel();
+      timer.purge();
+      //t1.interrupt();
+      stopThreads();
+      Platform.exit();
+    });
 
   }
 
@@ -79,6 +100,29 @@ public class App extends Application{
  */
   }
 
+  public void updateLabel (ControllerFX controller) {
+    Task<Void> task = new Task<Void>() {
+      @Override
+      protected Void call() {
+        while (true) {
+          String userInput = String.format("%.2f",gameBalance.getPrimary()) + " $";
+
+          Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+              controller.setLabelBalance(userInput);
+            }
+          });
+
+        }
+      }
+    };
+
+    Thread th = new Thread(task);
+    th.setDaemon(true);
+    th.start();
+  }
+
   public static void stopThreads() {
     SaverLoader.saveGame(
         Settings.getGenerators().stream()
@@ -86,7 +130,7 @@ public class App extends Application{
             .boxed()
             .collect(Collectors.toList()),
         gameBalance.getPrimary());
-    running = false;
+
   }
 
 

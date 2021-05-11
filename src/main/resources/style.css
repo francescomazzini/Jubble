@@ -1,0 +1,4 @@
+.flow {
+    -fx-background-image: url('/assets/first-page.jpg');
+    -fx-background-size: 100% 100%;
+}

@@ -60,12 +60,13 @@ public class MainThread implements Runnable {
         }
       }
 
-        System.out.println("Game Finished!");
-        App.stopThreads();
       if (badInput) {
         System.out.println(" ' " + choice + " ' is not a command. Please try Again\n\n");
       }
     }
+
+    System.out.println("Game Finished!");
+    App.stopThreads();
 
   }
 
