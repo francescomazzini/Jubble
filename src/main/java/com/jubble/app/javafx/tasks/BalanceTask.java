@@ -5,6 +5,11 @@ import com.jubble.app.components.Balance;
 import com.jubble.app.utils.Settings;
 import javafx.concurrent.Task;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class BalanceTask extends Task<Void> {
 
     @Override
@@ -19,7 +24,7 @@ public class BalanceTask extends Task<Void> {
 
     @Override
     protected void updateProgress(double v, double v1) {
-        updateMessage(String.format("%.2f", v) +" ");
+        updateMessage(String.format(Locale.US, "%,.2f", v)+ " ");
         super.updateProgress(v, v1);
     }
 }

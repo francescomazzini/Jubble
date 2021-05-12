@@ -75,8 +75,12 @@
     -fx-text-alignment: center;
     -fx-pref-width: 65;
     -fx-pref-height: 20;
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #ffffff;
     -fx-text-fill: #282828;
     -fx-font-weight: bold;
     -fx-background-radius: 0em;
+}
+
+.button-buy:hover{
+    -fx-opacity: 0.75;
 }

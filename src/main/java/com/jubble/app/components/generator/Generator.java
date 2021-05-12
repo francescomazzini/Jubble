@@ -30,6 +30,8 @@ public class Generator {
     return (values.getProductionBase() * numberOwned) * multiplier;
   }
 
+  public double getProductionBase() { return values.getProductionBase(); }
+
   public String getName() {
     return id.getName();
   }

@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ControllerFX implements Initializable {
@@ -54,12 +55,6 @@ public class ControllerFX implements Initializable {
 
         generateShop();
 
-
-
-     //   generator_label_0_0.setText(Settings.getGenerators().get(0).getName());
-    //    generator_label_0_1.setText("Production: " + Settings.getGenerators().get(0).getProduction() + "/s");
-     //   generator_label_0_2.setText("Cost: " + Settings.getGenerators().get(0).getNextCost());
-
         BalanceTask balTask = new BalanceTask();
 
 
@@ -85,13 +80,13 @@ public class ControllerFX implements Initializable {
 
         generator_labels = new ArrayList<>();
 
-        final int maxPerRow = 4;
+        final int maxPerRow = 3;
 
         int length = Settings.getGenerators().size();
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < length; i++) {
             Label n = new Label(Settings.getGenerators().get(i).getName());
-            Label p = new Label("Production: " + Settings.getGenerators().get(i).getProduction() + "/s");
+            Label p = new Label("Production: " + String.format(Locale.US,"%,.2f", Settings.getGenerators().get(i).getProductionBase() )+ "/s");
             Label c = new Label("Cost: " + Settings.getGenerators().get(i).getNextCost());
 
             n.getStyleClass().add("generator-title");
@@ -117,8 +112,9 @@ public class ControllerFX implements Initializable {
             VBox vbx = new VBox(6, v, n, p, c, b );
             vbx.setAlignment(Pos.TOP_CENTER);
             vbx.setMargin(v, new Insets(10, 0, 0, 0));
+            vbx.setMinHeight(100);
 
-            grid_shop.add(vbx, (i / maxPerRow), (i % maxPerRow));
+            grid_shop.add(vbx, (i % maxPerRow), (i / maxPerRow));
 
         }
     }
