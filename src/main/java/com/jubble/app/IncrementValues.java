@@ -22,6 +22,5 @@ public class IncrementValues extends TimerTask {
         balance.getPrimary()
             + Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum());
 
-    System.out.println(String.format("%.2f",balance.getPrimary()) + " $");
   }
 }

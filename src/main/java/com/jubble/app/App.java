@@ -50,9 +50,17 @@ public class App extends Application{
 
     timer.schedule(new IncrementValues(gameBalance), 0, 1000);
 
+
     primaryStage.setTitle("Jubble");
-    primaryStage.setScene(new Scene(root));
-    primaryStage.setMaximized(true);
+
+    Scene scene = new Scene(root, 850, 478);
+    scene.getStylesheets().add("style.css");
+
+    primaryStage.setScene(scene);
+
+    primaryStage.setResizable(false);
+
+    primaryStage.setMaximized(false);
     primaryStage.setFullScreen(false);
     primaryStage.show();
 
@@ -74,28 +82,6 @@ public class App extends Application{
 
     launch(args);
 
-    /*
-
-    while (true) {
-      try {
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-
-      if (!running) break;
-    }
-
-    timer.cancel();
-    timer.purge();
-    t1.interrupt();
-
-<<<<<<< HEAD
-    SaverLoader.saveGame(Settings.getGenerators().stream()
-                            .mapToInt(Generator::getNumberOwned)
-                            .boxed()
-                            .collect(Collectors.toList()), gameBalance.getPrimary());
- */
   }
 
 
@@ -107,6 +93,10 @@ public class App extends Application{
             .collect(Collectors.toList()),
         gameBalance.getPrimary());
 
+  }
+
+  public static Balance getGameBalance () {
+    return gameBalance;
   }
 
 
