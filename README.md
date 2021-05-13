@@ -33,7 +33,7 @@ This class and the Observer interface have been deprecated. The event model supp
 
 ## Next Steps
 - [ ] Add Serialization and Deserialization to save and load the game.
-- [ ] Add a first graphical user interface with javafx.
+- [x] Add a first graphical user interface with javafx.
 - [ ] Continue the setup of the game adding more currencies, generators and multipliers.
 - [ ] Add random events during the game experience.
 
