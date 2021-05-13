@@ -2,6 +2,7 @@ package com.jubble.app.components;
 
 import com.jubble.app.utils.Settings;
 
+
 public class Balance {
   private Currency primary;
 
@@ -16,4 +17,5 @@ public class Balance {
   public synchronized void setPrimary(double amount) {
     primary.setOwned(amount);
   }
+
 }

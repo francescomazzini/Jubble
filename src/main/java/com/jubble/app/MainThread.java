@@ -61,12 +61,13 @@ public class MainThread implements Runnable {
       }
 
       if (badInput) {
-        System.out.println("\' " + choice + " \' is not a command. Please try Again\n\n");
+        System.out.println(" ' " + choice + " ' is not a command. Please try Again\n\n");
       }
     }
 
     System.out.println("Game Finished!");
-    App.stop();
+    App.stopThreads();
+
   }
 
   private void runShop() {
