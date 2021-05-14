@@ -8,7 +8,7 @@ import com.jubble.app.utils.Settings;
 import java.util.Timer;
 import java.util.stream.Collectors;
 
-public class ThreadManager {
+public class ThreadRunner {
     private static Balance gameBalance;
     /**
      * Setup and run all game threads.

@@ -66,7 +66,7 @@ public class PlayerThread implements Runnable {
     }
 
     System.out.println("Game Finished!");
-    ThreadManager.stop();
+    ThreadRunner.stop();
 
   }
 

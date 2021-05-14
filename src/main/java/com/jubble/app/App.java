@@ -1,7 +1,5 @@
 package com.jubble.app;
 
-import com.jubble.app.components.Balance;
-import com.jubble.app.components.generator.Generator;
 import com.jubble.app.javafx.ControllerFX;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;
@@ -11,9 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Timer;
-import java.util.stream.Collectors;
 
 /**
  * Main app class
@@ -26,7 +21,7 @@ public class App extends Application{
 
     Settings.getGenerators().get(0).incrementNumberOwned();
 
-    ThreadManager.run();
+    ThreadRunner.run();
 
     ControllerFX controller = new ControllerFX();
 
@@ -49,7 +44,7 @@ public class App extends Application{
     primaryStage.show();
 
     primaryStage.setOnCloseRequest(e -> {
-      ThreadManager.stop();
+      ThreadRunner.stop();
       Platform.exit();
     });
 
