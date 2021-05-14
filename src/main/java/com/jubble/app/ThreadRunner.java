@@ -15,7 +15,7 @@ public class ThreadRunner {
         gameBalance = new Balance();
         Timer timer = new Timer();
         timer.schedule(new GameValuesThread(gameBalance), 0, 1000);
-
+        System.out.println("Game thread started");
     }
 
 
@@ -28,6 +28,7 @@ public class ThreadRunner {
                         .boxed()
                         .collect(Collectors.toList()),
                 gameBalance.getPrimary());
+        System.out.println("Game thread stopped");
     }
 
     public static Balance getGameBalance () {

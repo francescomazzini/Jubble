@@ -23,6 +23,10 @@ public class App extends Application{
 
     ThreadRunner.run();
     GUIRunner.run(primaryStage);
+
+    primaryStage.setOnCloseRequest(e -> {
+      GUIRunner.stop();
+    });
   }
 
   /**

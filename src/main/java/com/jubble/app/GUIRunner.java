@@ -36,9 +36,8 @@ public class GUIRunner {
     }
 
     public static void stop() {
-        primaryStage.setOnCloseRequest(e -> {
             ThreadRunner.stop();
             Platform.exit();
-        });
+        System.out.println("Game GUI stopped");
     }
 }
