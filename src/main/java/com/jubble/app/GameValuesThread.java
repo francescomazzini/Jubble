@@ -8,10 +8,10 @@ import com.jubble.app.utils.Settings;
 import javax.naming.ldap.Control;
 import java.util.TimerTask;
 
-public class IncrementValues extends TimerTask {
+public class GameValuesThread extends TimerTask {
   private Balance balance;
 
-  public IncrementValues(Balance balance) {
+  public GameValuesThread(Balance balance) {
     this.balance = balance;
   }
 

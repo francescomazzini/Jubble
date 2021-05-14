@@ -4,13 +4,13 @@ import com.jubble.app.components.Balance;
 import com.jubble.app.utils.Settings;
 import java.util.Scanner;
 
-public class MainThread implements Runnable {
+public class PlayerThread implements Runnable {
 
   private Scanner scan = new Scanner(System.in);
   private Balance balance;
 
   /** Every time the class is instantiated a new player thread is created. */
-  public MainThread(Balance balance) {
+  public PlayerThread(Balance balance) {
     this.balance = balance;
   }
 
@@ -66,7 +66,7 @@ public class MainThread implements Runnable {
     }
 
     System.out.println("Game Finished!");
-    App.stopThreads();
+    ThreadRunner.stop();
 
   }
 

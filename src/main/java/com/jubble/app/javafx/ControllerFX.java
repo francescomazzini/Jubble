@@ -1,6 +1,6 @@
 package com.jubble.app.javafx;
 
-import com.jubble.app.App;
+import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
@@ -14,7 +14,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -35,7 +34,7 @@ public class ControllerFX implements Initializable {
      * is the name of the generator, the second (nr. 1) is the production of the
      * generator and the third (nr. 2) is the next cost of the generator
      */
-    private Balance bal = App.getGameBalance();
+    private Balance bal = ThreadRunner.getGameBalance();
     private List<List<Label>> generator_labels;
     private List<ImageView> generator_imageViews;
 
