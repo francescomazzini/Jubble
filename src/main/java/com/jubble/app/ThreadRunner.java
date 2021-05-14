@@ -10,20 +10,16 @@ import java.util.stream.Collectors;
 
 public class ThreadRunner {
     private static Balance gameBalance;
-    /**
-     * Setup and run all game threads.
-     * */
-    static void run() {
+
+    public static void run() {
         gameBalance = new Balance();
         Timer timer = new Timer();
         timer.schedule(new GameValuesThread(gameBalance), 0, 1000);
 
     }
 
-    /**
-     * Stop all game threads.
-     * */
-    static void stop() {
+
+    public static void stop() {
         Timer timer = new Timer();
         timer.schedule(new GameValuesThread(gameBalance), 0, 1000);
         GameProgressHandler.saveGame(

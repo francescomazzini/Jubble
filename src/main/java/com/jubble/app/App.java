@@ -22,32 +22,7 @@ public class App extends Application{
     Settings.getGenerators().get(0).incrementNumberOwned();
 
     ThreadRunner.run();
-
-    ControllerFX controller = new ControllerFX();
-
-    FXMLLoader loader = new FXMLLoader();
-    loader.setController(controller);
-
-    Parent root = loader.load(getClass().getResource("/graphic.fxml"));
-
-    primaryStage.setTitle("Jubble");
-
-    Scene scene = new Scene(root, 850, 478);
-    scene.getStylesheets().add("style.css");
-
-    primaryStage.setScene(scene);
-
-    primaryStage.setResizable(false);
-
-    primaryStage.setMaximized(false);
-    primaryStage.setFullScreen(false);
-    primaryStage.show();
-
-    primaryStage.setOnCloseRequest(e -> {
-      ThreadRunner.stop();
-      Platform.exit();
-    });
-
+    GUIRunner.run(primaryStage);
   }
 
   /**
