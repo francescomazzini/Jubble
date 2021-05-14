@@ -1,0 +1,86 @@
+.flow {
+    -fx-background-image: url('/assets/first-page2.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+.balance-label{
+    -fx-background-color: white;
+}
+
+.shop-button{
+    -fx-background-color: none;
+}
+
+.shop-panel{
+    -fx-background-color: rgba(104, 104, 130, 0.69);
+}
+
+.shop-panel-header{
+    -fx-background-color: rgba(104, 104, 130, 1);
+}
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color : rgba(104, 104, 130, 0.79);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color : rgba(104, 104, 130, 1);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.generator-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt ;
+}
+
+.generator-desc {
+    -fx-font-size: 10pt ;
+}
+
+.button-buy {
+    -fx-font-size: 11pt;
+    -fx-text-alignment: center;
+    -fx-pref-width: 65;
+    -fx-pref-height: 20;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #282828;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0em;
+}
+
+.button-buy:hover{
+    -fx-opacity: 0.75;
+}
