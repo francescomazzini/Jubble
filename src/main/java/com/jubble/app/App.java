@@ -20,15 +20,13 @@ import java.util.stream.Collectors;
  * */
 public class App extends Application{
 
-  private static Balance gameBalance;
-
   @Override
   public void start(Stage primaryStage) throws Exception {
-    gameBalance = new Balance();
-
     GameProgressHandler.loadGame();
 
     Settings.getGenerators().get(0).incrementNumberOwned();
+
+    ThreadManager.run();
 
     ControllerFX controller = new ControllerFX();
 
@@ -36,9 +34,6 @@ public class App extends Application{
     loader.setController(controller);
 
     Parent root = loader.load(getClass().getResource("/graphic.fxml"));
-
-    Timer timer = new Timer();
-    timer.schedule(new GameValuesThread(gameBalance), 0, 1000);
 
     primaryStage.setTitle("Jubble");
 
@@ -54,39 +49,17 @@ public class App extends Application{
     primaryStage.show();
 
     primaryStage.setOnCloseRequest(e -> {
-      timer.cancel();
-      timer.purge();
-      //t1.interrupt();
-      stopThreads();
+      ThreadManager.stop();
       Platform.exit();
     });
 
   }
 
-
   /**
    * Start game main loop
    * */
   public static void main(String[] args) {
-
     launch(args);
-
   }
-
-
-  public static void stopThreads() {
-    GameProgressHandler.saveGame(
-        Settings.getGenerators().stream()
-            .mapToInt(Generator::getNumberOwned)
-            .boxed()
-            .collect(Collectors.toList()),
-        gameBalance.getPrimary());
-
-  }
-
-  public static Balance getGameBalance () {
-    return gameBalance;
-  }
-
 
 }

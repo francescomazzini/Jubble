@@ -1,6 +1,7 @@
 package com.jubble.app.javafx;
 
 import com.jubble.app.App;
+import com.jubble.app.ThreadManager;
 import com.jubble.app.components.Balance;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 
 public class ControllerFX implements Initializable {
 
-    private Balance bal = App.getGameBalance();
+    private Balance bal = ThreadManager.getGameBalance();
     private List<List<Label>> generator_labels;
 
     @FXML
