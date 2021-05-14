@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +23,7 @@
       <URL value="@style.css" />
    </stylesheets>
    <children>
-      <HBox prefHeight="100.0" prefWidth="528.0">
+      <HBox prefHeight="128.0" prefWidth="499.0">
          <children>
             <Button fx:id="shop_button" mnemonicParsing="false" onAction="#displayShop" prefHeight="63.0" prefWidth="61.0" styleClass="shop-button">
                <HBox.margin>
@@ -43,64 +44,99 @@
             <Image url="@assets/energy.png" />
          </image>
          <FlowPane.margin>
-            <Insets top="10.0" />
+            <Insets />
          </FlowPane.margin>
       </ImageView>
-      <Label fx:id="label_balance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
-         <FlowPane.margin>
-            <Insets bottom="20.0" right="30.0" top="20.0" />
-         </FlowPane.margin>
-         <font>
-            <Font name="Arial" size="28.0" />
-         </font>
-      </Label>
-      <VBox />
-      <VBox alignment="TOP_CENTER" layoutX="8.0" layoutY="138.0" prefHeight="352.0" prefWidth="852.0">
+      <VBox alignment="CENTER_RIGHT" prefHeight="122.0" prefWidth="245.0">
          <children>
-            <VBox fx:id="shop_panel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
+            <Label fx:id="label_balance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
+               <font>
+                  <Font name="Arial" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="label_production_total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="24.0" prefWidth="149.0" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <FlowPane.margin>
+            <Insets right="20.0" />
+         </FlowPane.margin>
+      </VBox>
+      <VBox />
+      <StackPane prefHeight="352.0" prefWidth="852.0">
+         <children>
+            <VBox prefHeight="321.0" prefWidth="852.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#hideShop" styleClass="shop-button">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@assets/button/close-button.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel">
-                           <children>
-                              <GridPane fx:id="grid_shop" prefHeight="472.0" prefWidth="584.0" styleClass="shop-button" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.5" minWidth="10.0" prefWidth="366.5" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints maxHeight="197.5" minHeight="10.0" prefHeight="176.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="143.5" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="114.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <styleClass>
-                        <String fx:value="shop-button" />
-                        <String fx:value="scroll-bar" />
-                     </styleClass>
-                  </ScrollPane>
+                  <GridPane fx:id="grid_page" alignment="CENTER" prefHeight="332.0" prefWidth="852.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+               <StackPane.margin>
+                  <Insets top="50.0" />
+               </StackPane.margin>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
+               <children>
+                  <VBox fx:id="shop_panel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#hideShop" styleClass="shop-button">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/button/close-button.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel">
+                                 <children>
+                                    <GridPane fx:id="grid_shop" prefHeight="472.0" prefWidth="584.0" styleClass="shop-button" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.5" minWidth="10.0" prefWidth="366.5" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="197.5" minHeight="10.0" prefHeight="176.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="143.5" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="114.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="shop-button" />
+                              <String fx:value="scroll-bar" />
+                           </styleClass>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>
-      </VBox>
+      </StackPane>
    </children>
 </FlowPane>

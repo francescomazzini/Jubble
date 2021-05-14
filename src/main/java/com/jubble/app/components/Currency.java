@@ -5,7 +5,7 @@ public class Currency {
   private double owned;
 
   /**
-   * This represent the currency of the game.
+   * This represent a general currency of the game.
    *
    * @param name of the currency.
    */
