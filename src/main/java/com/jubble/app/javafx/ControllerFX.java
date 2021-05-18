@@ -170,7 +170,7 @@ public class ControllerFX implements Initializable {
 
             VBox vbx = new VBox(6, v, n, p, c, b );
             vbx.setAlignment(Pos.TOP_CENTER);
-            vbx.setMargin(v, new Insets(10, 0, 0, 0));
+            VBox.setMargin(v, new Insets(10, 0, 0, 0));
             vbx.setMinHeight(100);
 
             shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
@@ -198,12 +198,12 @@ public class ControllerFX implements Initializable {
 
             VBox vbx = new VBox(2, v, numberOwned);
             vbx.setAlignment(Pos.TOP_CENTER);
-            vbx.setMargin(v, new Insets(2, 0, 0, 0));
+            VBox.setMargin(v, new Insets(2, 0, 0, 0));
             //vbx.setMinHeight(100);
 
             generatorLabels.get(i).add(numberOwned);
 
-            pageGrid.add(vbx, (i < maxPerRow ? maxPerRow-1 : maxPerRow - maxPerRow), (i % maxPerRow));
+            pageGrid.add(vbx, (i < maxPerRow ? maxPerRow-1 : 0), (i % maxPerRow));
         }
 
     }
