@@ -122,18 +122,18 @@ public class ControllerFX implements Initializable {
 
             generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
-            Thread t2 = new Thread(costTask);
-            t2.setDaemon(true);
-            t2.start();
+            threads.add(costTask.getName(), new Thread(costTask));
+
+            threads.getThread(costTask.getName()).setDaemon(true);
+            threads.getThread(costTask.getName()).start();
 
             NumberOwnedTask nrTask = new NumberOwnedTask(i, generatorImageViews.get(i), generatorLabels.get(i).get(3));
 
             generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
 
-            Thread t3 = new Thread(nrTask);
-            t3.setDaemon(true);
-            t3.start();
-
+            threads.add(costTask.getName(), new Thread());
+            threads.getThread(costTask.getName()).setDaemon(true);
+            threads.getThread(costTask.getName()).start();
         }
 
     }
