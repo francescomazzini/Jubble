@@ -90,6 +90,7 @@ public class ControllerFX implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ThreadTaskUtil threads = new ThreadTaskUtil();
 
         generatorLabels = new ArrayList<>();
         generatorImageViews = new ArrayList<>();
@@ -112,9 +113,9 @@ public class ControllerFX implements Initializable {
 
         totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
-        Thread t0 = new Thread(prodTask);
-        t0.setDaemon(true);
-        t0.start();
+        threads.getTaskThreads().add(new Thread(prodTask));
+        threads.getTaskThreads().get(0).setDaemon(true);
+        threads.getTaskThreads().get(0).start();
 
         for(int i = 0; i < generatorLabels.size(); i++) {
             CostNextTask costTask = new CostNextTask(i);
@@ -199,7 +200,6 @@ public class ControllerFX implements Initializable {
             VBox vbx = new VBox(2, v, numberOwned);
             vbx.setAlignment(Pos.TOP_CENTER);
             VBox.setMargin(v, new Insets(2, 0, 0, 0));
-            //vbx.setMinHeight(100);
 
             generatorLabels.get(i).add(numberOwned);
 

@@ -10,10 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GUIRunner {
-    private static Stage primaryStage;
-
+    /**
+     * Initializes JavaFX scene and loads fxml file.
+     * @throws IOException when graphic.fxml is not found.
+     * */
     public static void run(Stage primaryStage) throws IOException {
-        GUIRunner.primaryStage = primaryStage;
         ControllerFX controller = new ControllerFX();
 
         FXMLLoader loader = new FXMLLoader();
@@ -38,6 +39,5 @@ public class GUIRunner {
     public static void stop() {
             ThreadRunner.stop();
             Platform.exit();
-        System.out.println("Game GUI stopped");
     }
 }

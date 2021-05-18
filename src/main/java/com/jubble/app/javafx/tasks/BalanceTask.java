@@ -10,7 +10,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class BalanceTask extends Task<Void> {
+public class BalanceTask extends AbstractTask {
 
     /**
      * This method is called when the thread that contains this task is started

@@ -7,7 +7,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class CostNextTask extends Task<Void>{
+public class CostNextTask extends AbstractTask {
 
     /**
      * This int generator represents which generator of the array this task refers to.

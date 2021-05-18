@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.Locale;
 
-public class NumberOwnedTask extends Task<Void> {
+public class NumberOwnedTask extends AbstractTask {
 
     private int generator;
     private ImageView image;
