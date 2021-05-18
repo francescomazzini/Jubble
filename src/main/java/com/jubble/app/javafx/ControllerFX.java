@@ -113,9 +113,9 @@ public class ControllerFX implements Initializable {
 
         totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
-        threads.getTaskThreads().add(new Thread(prodTask));
-        threads.getTaskThreads().get(0).setDaemon(true);
-        threads.getTaskThreads().get(0).start();
+        threads.add(prodTask.getName(), new Thread(prodTask));
+        threads.getThread(prodTask.getName()).setDaemon(true);
+        threads.getThread(prodTask.getName()).start();
 
         for(int i = 0; i < generatorLabels.size(); i++) {
             CostNextTask costTask = new CostNextTask(i);
