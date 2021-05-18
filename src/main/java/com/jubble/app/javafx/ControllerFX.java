@@ -105,15 +105,14 @@ public class ControllerFX implements Initializable {
 
         balanceLabel.textProperty().bind(balTask.messageProperty());
 
-        Thread t = new Thread(balTask);
-        t.setDaemon(true);
-        t.start();
+        threads.create(balTask);
+        threads.getThread(balTask.getName()).setDaemon(true);
+        threads.getThread(balTask.getName()).start();
 
         ProductionTask prodTask = new ProductionTask();
-
         totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
-        threads.add(prodTask.getName(), new Thread(prodTask));
+        threads.create(prodTask);
         threads.getThread(prodTask.getName()).setDaemon(true);
         threads.getThread(prodTask.getName()).start();
 
@@ -122,8 +121,7 @@ public class ControllerFX implements Initializable {
 
             generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
-            threads.add(costTask.getName(), new Thread(costTask));
-
+            threads.create(costTask);
             threads.getThread(costTask.getName()).setDaemon(true);
             threads.getThread(costTask.getName()).start();
 
@@ -131,7 +129,7 @@ public class ControllerFX implements Initializable {
 
             generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
 
-            threads.add(costTask.getName(), new Thread());
+            threads.create(costTask);
             threads.getThread(costTask.getName()).setDaemon(true);
             threads.getThread(costTask.getName()).start();
         }

@@ -1,9 +1,10 @@
 package com.jubble.app.javafx;
 
-import java.util.ArrayList;
+import com.jubble.app.javafx.tasks.AbstractTask;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 /**
  * Wrapper for a map of thread where each thread is linked to the
@@ -20,20 +21,21 @@ public class ThreadTaskUtil {
     }
 
     /**
-     * Add thread to the map.
-     * @param threadName name of the thread.
-     * @param thread
+     * Create thread from given Task
+     * @param task
      * */
-    public void add(String threadName, Thread thread) {
-        taskThreads.put(threadName, thread);
+    public void create(AbstractTask task) {
+        Thread thread = new Thread(task);
+        thread.setName(task.getName());
+        taskThreads.put(task.getName(), thread);
     }
 
     /**
      * Stops and remove a thread in the map.
      * @param threadName name of the thread to remove.
      */
-    public Thread remove(String threadName) {
-        getThread(threadName).interrupt();
+    public Thread remove(String threadName) throws InterruptedException {
+        getThread(threadName).join();
         return taskThreads.remove(threadName);
     }
 

@@ -12,24 +12,25 @@ public class ThreadTaskUtilTest {
 
     @BeforeEach
     void setup() {
-        threads.add(task.getName(), new Thread());
+        threads.create(task);
     }
 
     @Test
-    public void threadAddShouldBeUnique() {
-        threads.add(task.getName(), new Thread());
-        threads.add(task.getName(), new Thread());
-        threads.add(task.getName(), new Thread());
+    public void threadCreateShouldBeUnique() {
+        threads.create(task);
+        threads.create(task);
+        threads.create(task);
         assertEquals(1, threads.getThreadNumber());
         threads.getThread(task.getName()).interrupt();
         assertFalse(threads.getThread(task.getName()).isAlive());
     }
 
     @Test
-    public void removedThreadShouldNotBeAlive() {
+    public void removedThreadShouldNotBeAlive() throws InterruptedException {
         threads.getThread(task.getName()).start();
         assertTrue(threads.getThread(task.getName()).isAlive());
         Thread removed = threads.remove(task.getName());
+        assertNotNull(removed);
         assertFalse(removed.isAlive());
     }
 }
