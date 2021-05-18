@@ -11,8 +11,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class ProductionTask extends Task<Void> {
-
+public class ProductionTask extends AbstractTask {
 
     @Override
     protected Void call() throws Exception {
@@ -30,4 +29,5 @@ public class ProductionTask extends Task<Void> {
         updateMessage(String.format(Locale.US, "%,.2f", v)+ "/s ");
         super.updateProgress(v, v1);
     }
+
 }
