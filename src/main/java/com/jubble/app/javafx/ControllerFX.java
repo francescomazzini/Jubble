@@ -27,42 +27,44 @@ import java.util.ResourceBundle;
 public class ControllerFX implements Initializable {
 
     /**
-     * bal is the istance of the game balance which must be an object
-     * because it is used by multiple threads
-     *
-     * generator_labels contains 3 labels for each generator, the first label (nr. 0)
-     * is the name of the generator, the second (nr. 1) is the production of the
-     * generator and the third (nr. 2) is the next cost of the generator
+     * Contains the instance of the game balance.
+     * This variable is shared between the threads.
      */
-    private Balance bal = ThreadRunner.getGameBalance();
-    private List<List<Label>> generator_labels;
-    private List<ImageView> generator_imageViews;
+    private final Balance bal = ThreadRunner.getGameBalance();
+    /**
+     * Contains 3 labels for each generator: <br>
+     *
+     * 1. Name of the generator;
+     * 2. The production of the generator;
+     * 3. Next cost of the generator.
+     * */
+    private List<List<Label>> generatorLabels;
+    private List<ImageView> generatorImageViews;
 
     /**
      * Each of the following variables refers to an existing javafx object which
      * is contained in FXML file and it has an ID equals to the name of these variables
      */
     @FXML
-    private Label label_balance;
+    private Label balanceLabel;
+    @FXML
+    private VBox shopPanel;
 
     @FXML
-    private VBox shop_panel;
+    private GridPane shopGrid;
 
     @FXML
-    private GridPane grid_shop;
+    private GridPane pageGrid;
 
     @FXML
-    private GridPane grid_page;
-
-    @FXML
-    private Label label_production_total;
+    private Label totalProductionLabel;
 
     /**
      * this method set the shop panel visible
      */
     @FXML
     public void displayShop() {
-        shop_panel.setVisible(true);
+        shopPanel.setVisible(true);
     }
 
     /**
@@ -70,19 +72,18 @@ public class ControllerFX implements Initializable {
      */
     @FXML
     public void hideShop() {
-        shop_panel.setVisible(false);
+        shopPanel.setVisible(false);
     }
 
     /**
-     * This method replaces the constructor of the controller which cannot have a constructor.
-     * It is meant to be runned before the GUI is shown to the user.
+     * Replaces the constructor of the controller which cannot have a constructor.
+     * It is meant to ran before the GUI is shown to the user.
      *
      * What is done in this method:
      *  - the shop panel is set hidden by default
-     *  - it calls @generateShop which generates the shop panel
+     *  - it calls {@link #generateShop()} which generates the shop panel
      *  - it binds the text property of the label to the task BalanceTask
-     *    and it puts this task in a new Thread and start it after set it as Deamon (it stops if the main thread is stopped)
-     *  -
+     *    and it puts this task in a new Thread and start it after set it as Daemon (it stops if the main thread is stopped)
      *
      * @param url not used
      * @param resourceBundle not used
@@ -90,10 +91,10 @@ public class ControllerFX implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        generator_labels = new ArrayList<>();
-        generator_imageViews = new ArrayList<>();
+        generatorLabels = new ArrayList<>();
+        generatorImageViews = new ArrayList<>();
 
-        shop_panel.setVisible(false);
+        shopPanel.setVisible(false);
 
         generateShop();
 
@@ -101,7 +102,7 @@ public class ControllerFX implements Initializable {
 
         BalanceTask balTask = new BalanceTask();
 
-        label_balance.textProperty().bind(balTask.messageProperty());
+        balanceLabel.textProperty().bind(balTask.messageProperty());
 
         Thread t = new Thread(balTask);
         t.setDaemon(true);
@@ -109,26 +110,24 @@ public class ControllerFX implements Initializable {
 
         ProductionTask prodTask = new ProductionTask();
 
-        label_production_total.textProperty().bind(prodTask.messageProperty());
+        totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
         Thread t0 = new Thread(prodTask);
         t0.setDaemon(true);
         t0.start();
 
-        for(int i = 0; i < generator_labels.size(); i++) {
+        for(int i = 0; i < generatorLabels.size(); i++) {
             CostNextTask costTask = new CostNextTask(i);
 
-            generator_labels.get(i).get(2).textProperty().bind(costTask.messageProperty());
+            generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
             Thread t2 = new Thread(costTask);
             t2.setDaemon(true);
             t2.start();
 
+            NumberOwnedTask nrTask = new NumberOwnedTask(i, generatorImageViews.get(i), generatorLabels.get(i).get(3));
 
-
-            NumberOwnedTask nrTask = new NumberOwnedTask(i, generator_imageViews.get(i), generator_labels.get(i).get(3));
-
-            generator_labels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
+            generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
 
             Thread t3 = new Thread(nrTask);
             t3.setDaemon(true);
@@ -158,11 +157,11 @@ public class ControllerFX implements Initializable {
             v.setFitHeight(58);
             v.setFitWidth(160);
 
-            generator_labels.add(new ArrayList<>());
+            generatorLabels.add(new ArrayList<>());
 
-            generator_labels.get(i).add(n);
-            generator_labels.get(i).add(p);
-            generator_labels.get(i).add(c);
+            generatorLabels.get(i).add(n);
+            generatorLabels.get(i).add(p);
+            generatorLabels.get(i).add(c);
 
             Button b = new Button("Buy");
             b.setId(i+"");
@@ -174,7 +173,7 @@ public class ControllerFX implements Initializable {
             vbx.setMargin(v, new Insets(10, 0, 0, 0));
             vbx.setMinHeight(100);
 
-            grid_shop.add(vbx, (i % maxPerRow), (i / maxPerRow));
+            shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
 
         }
     }
@@ -194,7 +193,7 @@ public class ControllerFX implements Initializable {
             ImageView v = new ImageView("assets/game-components/generator"+ ((i > 9) ? i : ("0"+i))+".png");
             v.setFitHeight(70);
             v.setFitWidth(193);
-            generator_imageViews.add(v);
+            generatorImageViews.add(v);
             v.setVisible(false);
 
             VBox vbx = new VBox(2, v, numberOwned);
@@ -202,9 +201,9 @@ public class ControllerFX implements Initializable {
             vbx.setMargin(v, new Insets(2, 0, 0, 0));
             //vbx.setMinHeight(100);
 
-            generator_labels.get(i).add(numberOwned);
+            generatorLabels.get(i).add(numberOwned);
 
-            grid_page.add(vbx, (i < maxPerRow ? maxPerRow-1 : maxPerRow - maxPerRow), (i % maxPerRow));
+            pageGrid.add(vbx, (i < maxPerRow ? maxPerRow-1 : maxPerRow - maxPerRow), (i % maxPerRow));
         }
 
     }

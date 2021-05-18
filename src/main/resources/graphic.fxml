@@ -49,12 +49,12 @@
       </ImageView>
       <VBox alignment="CENTER_RIGHT" prefHeight="122.0" prefWidth="245.0">
          <children>
-            <Label fx:id="label_balance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
+            <Label fx:id="balanceLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
                <font>
                   <Font name="Arial" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="label_production_total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="24.0" prefWidth="149.0" textAlignment="RIGHT" textFill="WHITE">
+            <Label fx:id="totalProductionLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="24.0" prefWidth="149.0" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -72,7 +72,7 @@
          <children>
             <VBox prefHeight="321.0" prefWidth="852.0">
                <children>
-                  <GridPane fx:id="grid_page" alignment="CENTER" prefHeight="332.0" prefWidth="852.0">
+                  <GridPane fx:id="pageGrid" alignment="CENTER" prefHeight="332.0" prefWidth="852.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -91,7 +91,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
                <children>
-                  <VBox fx:id="shop_panel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
+                  <VBox fx:id="shopPanel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
                      <children>
                         <Button mnemonicParsing="false" onAction="#hideShop" styleClass="shop-button">
                            <graphic>
@@ -109,7 +109,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel">
                                  <children>
-                                    <GridPane fx:id="grid_shop" prefHeight="472.0" prefWidth="584.0" styleClass="shop-button" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane fx:id="shopGrid" prefHeight="472.0" prefWidth="584.0" styleClass="shop-button" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
