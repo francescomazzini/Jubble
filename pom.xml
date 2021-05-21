@@ -17,6 +17,7 @@
     <maven.compiler.source>13</maven.compiler.source>
     <maven.compiler.target>13</maven.compiler.target>
     <exec.mainClass>com.jubble.app.App</exec.mainClass>
+    <jackson.version>2.12.0</jackson.version>
   </properties>
 
   <dependencies>
@@ -56,7 +57,12 @@
       <artifactId>javafx-fxml</artifactId>
       <version>17-ea+9</version>
     </dependency>
-
+    <!-- File writer -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
