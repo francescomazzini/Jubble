@@ -2,9 +2,11 @@ package com.jubble.app;
 
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
+import com.jubble.app.utils.GameProgress;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.stream.Collectors;
 
@@ -23,14 +25,29 @@ public class ThreadRunner {
 
     private static boolean isTimerActive = false;
 
+
+    private static void useSavedValues(GameProgress progress) {
+        gameBalance.setPrimary(progress.getBalance());
+    }
+
+    private static void startFromScratch() {
+        System.out.println("No saved values fault. Starting from scratch.");
+        gameBalance = new Balance();
+    }
+
     /**
      * Starts instance of the timer GameValuesThread timer.
      * */
     public static void run() {
-        gameBalance = new Balance();
+        GameProgress progress = GameProgressHandler.loadGame();
+        if(progress != null)
+            useSavedValues(progress);
+        else
+            startFromScratch();
         valueTimer.schedule(new GameValuesThread(gameBalance), 0, 1000);
         isTimerActive = true;
         System.out.println("Game thread started");
+
     }
 
     /**
@@ -43,12 +60,16 @@ public class ThreadRunner {
         valueTimer.purge();
         isTimerActive = false;
         // Save game progress.
-        GameProgressHandler.saveGame(
-                Settings.getGenerators().stream()
-                        .mapToInt(Generator::getNumberOwned)
-                        .boxed()
-                        .collect(Collectors.toList()),
-                gameBalance.getPrimary());
+
+        GameProgress progress = new GameProgress(
+                Settings.getGenerators(),
+                gameBalance.getPrimary()
+        );
+        try {
+            GameProgressHandler.saveGame(progress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Game thread stopped");
     }
 
