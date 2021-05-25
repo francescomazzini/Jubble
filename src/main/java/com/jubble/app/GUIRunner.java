@@ -1,43 +1,43 @@
 package com.jubble.app;
 
 import com.jubble.app.javafx.ControllerFX;
+import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class GUIRunner {
-    /**
-     * Initializes JavaFX scene and loads fxml file.
-     * @throws IOException when graphic.fxml is not found.
-     * */
-    public static void run(Stage primaryStage) throws IOException {
-        ControllerFX controller = new ControllerFX();
+  /**
+   * Initializes JavaFX scene and loads fxml file.
+   *
+   * @throws IOException when graphic.fxml is not found.
+   */
+  public static void run(Stage primaryStage) throws IOException {
+    ControllerFX controller = new ControllerFX();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setController(controller);
+    FXMLLoader loader = new FXMLLoader();
+    loader.setController(controller);
 
-        Parent root = FXMLLoader.load(GUIRunner.class.getResource("/graphic.fxml"));
+    Parent root = FXMLLoader.load(GUIRunner.class.getResource("/graphic.fxml"));
 
-        primaryStage.setTitle("Jubble");
+    primaryStage.setTitle("Jubble");
 
-        Scene scene = new Scene(root, 850, 478);
-        scene.getStylesheets().add("style.css");
+    Scene scene = new Scene(root, 850, 478);
+    scene.getStylesheets().add("style.css");
 
-        primaryStage.setScene(scene);
+    primaryStage.setScene(scene);
 
-        primaryStage.setResizable(false);
+    primaryStage.setResizable(false);
 
-        primaryStage.setMaximized(false);
-        primaryStage.setFullScreen(false);
-        primaryStage.show();
-    }
+    primaryStage.setMaximized(false);
+    primaryStage.setFullScreen(false);
+    primaryStage.show();
+  }
 
-    public static void stop() {
-            ThreadRunner.stop();
-            Platform.exit();
-    }
+  public static void stop() {
+    ThreadRunner.stop();
+    Platform.exit();
+  }
 }
