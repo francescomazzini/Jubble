@@ -1,5 +1,8 @@
 package com.jubble.app.utils;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jubble.app.components.generator.Generator;
 
 import java.util.List;
@@ -16,10 +19,17 @@ public class GameProgress {
      * @param allOwnedGenerators list of owned generators.
      * @param balance value of game balance.
      * */
-    public GameProgress(List<Generator> allOwnedGenerators, double balance) {
+    @JsonCreator
+    public GameProgress(
+            @JsonProperty("allOwnedGenerators") List<Generator> allOwnedGenerators,
+            @JsonProperty("balance") double balance
+    ) {
+        this();
         this.allOwnedGenerators = allOwnedGenerators;
         this.balance = balance;
     }
+
+    private GameProgress() {}
 
     /**
      * @return list of owned generator.
@@ -33,5 +43,13 @@ public class GameProgress {
      * */
     public double getBalance() {
         return balance;
+    }
+
+    public void setAllOwnedGenerators(List<Generator> allOwnedGenerators) {
+        this.allOwnedGenerators = allOwnedGenerators;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
