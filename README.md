@@ -5,7 +5,7 @@ mvn clean compile exec:java
 
 Build project and verify code style
 ````
- mvn clean verify
+mvn clean verify
 ````
 
 Generate code style report
@@ -36,4 +36,3 @@ This class and the Observer interface have been deprecated. The event model supp
 - [x] Add a first graphical user interface with javafx.
 - [ ] Continue the setup of the game adding more currencies, generators and multipliers.
 - [ ] Add random events during the game experience.
-
