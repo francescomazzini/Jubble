@@ -1,7 +1,7 @@
 package com.jubble.app;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static com.google.common.truth.Truth.assertThat;
 import com.jubble.app.components.Currency;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ public class CurrencyTest {
   @Test
   @DisplayName("Currency should be zero at beginning")
   public void shouldBeZeroAtBeginning() {
-    assertEquals(currency.getOwned(), 0);
+    assertThat(currency.getOwned()).isZero();
   }
 
   @Test
@@ -20,6 +20,6 @@ public class CurrencyTest {
   public void shouldSaveCurrency() {
     final double N = 100.35;
     currency.setOwned(N);
-    assertEquals(currency.getOwned(), N);
+    assertThat(currency.getOwned()).isEqualTo(N);
   }
 }
