@@ -1,7 +1,7 @@
 package com.jubble.app.components.generator;
 
-
 import static com.google.common.truth.Truth.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

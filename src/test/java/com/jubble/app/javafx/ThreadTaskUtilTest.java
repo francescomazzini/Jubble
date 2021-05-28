@@ -1,7 +1,7 @@
 package com.jubble.app.javafx;
 
-
 import static com.google.common.truth.Truth.assertThat;
+
 import com.jubble.app.javafx.tasks.ConcreteTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,13 @@
 package com.jubble.app;
 
 import com.jubble.app.components.Balance;
+import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.GameProgress;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;
 import java.io.IOException;
 import java.util.Timer;
+import java.util.stream.Collectors;
 
 /** Wrapper to manage start/stop of GameValuesThread TimerTask. */
 public class ThreadRunner {
@@ -17,7 +19,11 @@ public class ThreadRunner {
   private static boolean isTimerActive = false;
 
   private static void useSavedValues(GameProgress progress) {
+    System.out.println("Recovering game values.");
+    gameBalance = new Balance();
     gameBalance.setPrimary(progress.getBalance());
+
+    // TODO: Here load generator values.
   }
 
   private static void startFromScratch() {
@@ -44,7 +50,12 @@ public class ThreadRunner {
     isTimerActive = false;
     // Save game progress.
 
-    GameProgress progress = new GameProgress(Settings.getGenerators(), gameBalance.getPrimary());
+    GameProgress progress =
+        new GameProgress(
+            Settings.getGenerators().stream()
+                .map(Generator::getNumberOwned)
+                .collect(Collectors.toList()),
+            gameBalance.getPrimary());
     try {
       GameProgressHandler.saveGame(progress);
     } catch (IOException e) {
