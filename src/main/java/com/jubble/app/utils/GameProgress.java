@@ -4,16 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jubble.app.components.generator.Generator;
-
 import java.util.List;
 
 /**
- * Defines all the data that should be saved in the JSON file.
- * An object of type GameProgress will be passed to the class GameProgressHandler.
- * */
+ * Defines all the data that should be saved in the JSON file. An object of type GameProgress will
+ * be passed to the class GameProgressHandler.
+ */
 public class GameProgress {
-    private List<Generator> allOwnedGenerators;
-    private double balance;
+  private List<Generator> allOwnedGenerators;
+  private double balance;
 
     /**
      * @param allOwnedGenerators list of owned generators.

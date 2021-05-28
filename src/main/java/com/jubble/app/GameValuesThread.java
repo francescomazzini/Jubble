@@ -2,10 +2,7 @@ package com.jubble.app;
 
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.javafx.ControllerFX;
 import com.jubble.app.utils.Settings;
-
-import javax.naming.ldap.Control;
 import java.util.TimerTask;
 
 public class GameValuesThread extends TimerTask {
@@ -21,6 +18,5 @@ public class GameValuesThread extends TimerTask {
     balance.setPrimary(
         balance.getPrimary()
             + Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum());
-
   }
 }

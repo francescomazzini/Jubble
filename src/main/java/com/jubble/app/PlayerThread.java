@@ -67,7 +67,6 @@ public class PlayerThread implements Runnable {
 
     System.out.println("Game Finished!");
     ThreadRunner.stop();
-
   }
 
   private void runShop() {
