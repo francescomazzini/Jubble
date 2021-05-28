@@ -1,7 +1,7 @@
 package com.jubble.app.components.generator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static com.google.common.truth.Truth.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class GeneratorTest {
   @Test
   @DisplayName("NumberOwned should be zero at beginning.")
   public void numberOwnedShouldBeZeroAtBeginning() {
-    assertEquals(generator.getNumberOwned(), 0);
+    assertThat(generator.getNumberOwned()).isEqualTo(0);
   }
 
   @Test
@@ -22,6 +22,7 @@ public class GeneratorTest {
     for (int i = 0; i < N; i++) {
       generator.incrementNumberOwned();
     }
-    assertEquals(generator.getNumberOwned(), N);
+
+    assertThat(generator.getNumberOwned()).isEqualTo(N);
   }
 }
