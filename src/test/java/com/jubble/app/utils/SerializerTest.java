@@ -14,10 +14,10 @@ public class SerializerTest {
     String data = GameProgressHandler.serialize(progress);
     assertThat(data)
         .isEqualTo(
-            "    {\n"
-                + "      \"ownedGenerators\" : [ 1, 2, 4 ],\n"
-                + "      \"balance\" : 23.0\n"
-                + "    }");
+            "{\n" +
+                    "  \"ownedGenerators\" : [ 1, 2, 4 ],\n" +
+                    "  \"balance\" : 23.0\n" +
+                    "}");
   }
 
   @Test
