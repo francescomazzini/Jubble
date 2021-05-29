@@ -1,16 +1,13 @@
 package com.jubble.app.components.generator;
 
-public class Generator {
-  private GeneratorID id;
+public class Generator extends GeneratorID {
   private GeneratorValues values;
   private int numberOwned;
-  private int multiplier;
 
   public Generator(GeneratorID id, GeneratorValues values) {
+    super(id);
     // The player does not own any generator at beginning of the game.
     numberOwned = 0;
-    multiplier = 1;
-    this.id = id;
     this.values = values;
   }
 
@@ -27,7 +24,7 @@ public class Generator {
   }
 
   public double getProduction() {
-    return (values.getProductionBase() * numberOwned) * multiplier;
+    return (values.getProductionBase() * numberOwned) * super.getLevel();
   }
 
   public double getProductionBase() {
@@ -35,11 +32,11 @@ public class Generator {
   }
 
   public String getName() {
-    return id.getName();
+    return super.getName();
   }
 
   @Override
   public String toString() {
-    return id.toString() + " " + numberOwned;
+    return super.toString() + " " + numberOwned;
   }
 }
