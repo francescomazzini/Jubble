@@ -115,9 +115,11 @@ public class ControllerFX implements Initializable {
 
       generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
 
-      threads.create(costTask);
-      threads.getThread(costTask.getName()).setDaemon(true);
-      threads.getThread(costTask.getName()).start();
+
+      threads.create(nrTask);
+      threads.getThread(nrTask.getName()).setDaemon(true);
+      threads.getThread(nrTask.getName()).start();
+
     }
   }
 
