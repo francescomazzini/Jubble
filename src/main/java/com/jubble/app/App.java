@@ -12,8 +12,6 @@ public class App extends Application {
   public void start(Stage primaryStage) throws Exception {
     GameProgressHandler.loadGame();
 
-    Settings.getGenerators().get(0).incrementNumberOwned();
-
     ThreadRunner.run();
     GUIRunner.run(primaryStage);
 
