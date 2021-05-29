@@ -4,6 +4,8 @@ import com.jubble.app.components.Currency;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorID;
 import com.jubble.app.components.generator.GeneratorValues;
+import com.jubble.app.components.generator.IllegalOperationException;
+
 import java.util.List;
 
 public class Settings {
@@ -27,6 +29,17 @@ public class Settings {
 
   public static List<Generator> getGenerators() {
     return generators;
+  }
+
+  /**
+   * Gift initial generator. Used in case the default file is not found.
+   */
+  public static void giftInitialAmount() {
+    final int FIRST = 0;
+    if(!getGenerators().get(FIRST).isNumberOwnedDefault())
+      throw new IllegalOperationException();
+
+    generators.get(FIRST).incrementNumberOwned();
   }
 
   public static List<Currency> getCurrencies() {
