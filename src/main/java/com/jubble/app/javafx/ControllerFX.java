@@ -144,8 +144,10 @@ public class ControllerFX implements Initializable {
         final int maxPerRow = 3;
 
         int length = Settings.getGenerators().size();
+        int j = 0;
 
         for (int i = 0; i < length; i++) {
+
             Label n = new Label(Settings.getGenerators().get(i).getName());
             Label p = new Label("Production: " + String.format(Locale.US,"%,.2f", Settings.getGenerators().get(i).getProductionBase() )+ "/s");
             Label c = new Label("Cost: " + Settings.getGenerators().get(i).getNextCost());
