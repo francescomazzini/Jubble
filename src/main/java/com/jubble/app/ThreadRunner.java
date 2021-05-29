@@ -6,6 +6,7 @@ import com.jubble.app.utils.GameProgress;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.stream.Collectors;
 
@@ -22,13 +23,16 @@ public class ThreadRunner {
     System.out.println("Recovering game values.");
     gameBalance = new Balance();
     gameBalance.setPrimary(progress.getBalance());
-
-    // TODO: Here load generator values.
+    List<Integer> numberOwned = progress.getOwnedGenerators();
+    for(int i = 0; i < Settings.getGenerators().size(); i++) {
+      Settings.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    }
   }
 
   private static void startFromScratch() {
     System.out.println("No saved values fault. Starting from scratch.");
     gameBalance = new Balance();
+    Settings.giftInitialAmount();
   }
 
   /** Starts instance of the timer GameValuesThread timer. */
