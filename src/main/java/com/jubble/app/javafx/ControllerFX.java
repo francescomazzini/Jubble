@@ -121,6 +121,7 @@ public class ControllerFX implements Initializable {
     }
   }
 
+
   public void generateShop() {
 
     final int maxPerRow = 3;
