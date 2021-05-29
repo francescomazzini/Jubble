@@ -34,7 +34,7 @@ public class GameProgress {
     return balance;
   }
 
-  public void setAllOwnedGenerators(List<Integer> ownedGenerators) {
+  public void setOwnedGenerators(List<Integer> ownedGenerators) {
     this.ownedGenerators = ownedGenerators;
   }
 
