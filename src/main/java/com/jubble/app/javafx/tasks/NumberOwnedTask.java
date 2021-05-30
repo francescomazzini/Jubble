@@ -1,5 +1,6 @@
 package com.jubble.app.javafx.tasks;
 
+import com.jubble.app.utils.Assets;
 import com.jubble.app.utils.Settings;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,9 +22,9 @@ public class NumberOwnedTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Settings.getGenerators().get(generator).getNumberOwned(), 0);
+      updateProgress(Assets.getInstance().getGenerators().get(generator).getNumberOwned(), 0);
 
-      if (Settings.getGenerators().get(generator).getNumberOwned() > 0) {
+      if (Assets.getInstance().getGenerators().get(generator).getNumberOwned() > 0) {
         image.setVisible(true);
         label.setVisible(true);
       }
