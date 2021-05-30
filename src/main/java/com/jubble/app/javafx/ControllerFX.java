@@ -90,35 +90,26 @@ public class ControllerFX implements Initializable {
 
     balanceLabel.textProperty().bind(balTask.messageProperty());
 
-    threads.create(balTask);
-    threads.getThread(balTask.getName()).setDaemon(true);
-    threads.getThread(balTask.getName()).start();
+    threads.autoBuild(balTask);
 
     ProductionTask prodTask = new ProductionTask();
     totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
-    threads.create(prodTask);
-    threads.getThread(prodTask.getName()).setDaemon(true);
-    threads.getThread(prodTask.getName()).start();
+    threads.autoBuild(prodTask);
 
     for (int i = 0; i < generatorLabels.size(); i++) {
       CostNextTask costTask = new CostNextTask(i);
 
       generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
-      threads.create(costTask);
-      threads.getThread(costTask.getName()).setDaemon(true);
-      threads.getThread(costTask.getName()).start();
+      threads.autoBuild(costTask);
 
       NumberOwnedTask nrTask =
           new NumberOwnedTask(i, generatorImageViews.get(i), generatorLabels.get(i).get(3));
 
       generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
 
-
-      threads.create(nrTask);
-      threads.getThread(nrTask.getName()).setDaemon(true);
-      threads.getThread(nrTask.getName()).start();
+      threads.autoBuild(nrTask);
 
     }
   }
