@@ -25,6 +25,18 @@ public class ThreadTaskUtil {
   }
 
   /**
+   * Create thread from given Task
+   * and start the task with deamonity
+   *
+   * @param task
+   */
+  public void autoBuild(AbstractTask task) {
+    this.create(task);
+    this.getThread(task.getName()).setDaemon(true);
+    this.getThread(task.getName()).start();
+  }
+
+  /**
    * Stops and remove a thread in the map.
    *
    * @param threadName name of the thread to remove.
@@ -52,4 +64,6 @@ public class ThreadTaskUtil {
   public Thread getThread(String threadName) {
     return taskThreads.get(threadName);
   }
+
+
 }
