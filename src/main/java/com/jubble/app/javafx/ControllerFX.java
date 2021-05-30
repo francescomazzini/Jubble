@@ -41,7 +41,7 @@ public class ControllerFX implements Initializable {
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
-  @FXML private FlowPane main_page_container;
+  @FXML private Button left_arrow;
 
   @FXML private VBox main_body;
 
@@ -65,6 +65,12 @@ public class ControllerFX implements Initializable {
   @FXML
   public void hideShop() {
     shopPanel.setVisible(false);
+  }
+
+  @FXML
+  public void switchPage() {
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get("page01"));
   }
 
   /**
@@ -242,5 +248,7 @@ public class ControllerFX implements Initializable {
       bal.setPrimary(bal.getPrimary() - Settings.getGenerators().get(id).getNextCost());
       Settings.getGenerators().get(id).incrementNumberOwned();
     }
+
+
   }
 }

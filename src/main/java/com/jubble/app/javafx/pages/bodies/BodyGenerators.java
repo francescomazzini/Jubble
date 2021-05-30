@@ -22,10 +22,12 @@ public class BodyGenerators extends VBox {
     public static final int NR_MAX_GENERATORS_PER_ROW = 2;
     private final GridPane gridForGenerators;
     private final List<VBox> generatorsInfo;
+    private final List<Integer> generatorsNumbers;
 
     public BodyGenerators () {
         gridForGenerators = new GridPane();
         generatorsInfo = new ArrayList<>();
+        generatorsNumbers = new ArrayList<>();
 
         this.getChildren().add(gridForGenerators);
     }
@@ -34,6 +36,8 @@ public class BodyGenerators extends VBox {
 
         if(generatorsInfo.size() == NR_MAX_GENERATORS_PER_PAGE)
             throw new IndexOutOfBoundsException("Max Number Generators Reached");
+
+        generatorsNumbers.add(number);
 
         Label numberOwned = new Label("Nr: " + Settings.getGenerators().get(number).getNumberOwned());
         numberOwned.getStyleClass().add("generator-desc");
@@ -74,6 +78,11 @@ public class BodyGenerators extends VBox {
         gridForGenerators.setPrefHeight(332);
         gridForGenerators.setAlignment(Pos.CENTER);
 
+    }
+
+    public boolean areThereGeneratorsVisible () {
+        return generatorsNumbers.stream()
+                            .anyMatch(o1 -> o1 > 0);
     }
 
 }
