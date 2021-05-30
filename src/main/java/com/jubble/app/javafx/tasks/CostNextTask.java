@@ -1,5 +1,6 @@
 package com.jubble.app.javafx.tasks;
 
+import com.jubble.app.utils.Assets;
 import com.jubble.app.utils.Settings;
 import java.util.Locale;
 
@@ -24,7 +25,7 @@ public class CostNextTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Settings.getGenerators().get(generator).getNextCost(), 0);
+      updateProgress(Assets.getInstance().getGenerators().get(generator).getNextCost(), 0);
     }
   }
 

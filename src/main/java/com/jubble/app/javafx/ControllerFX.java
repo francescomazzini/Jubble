@@ -6,6 +6,7 @@ import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
 import com.jubble.app.javafx.tasks.NumberOwnedTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
+import com.jubble.app.utils.Assets;
 import com.jubble.app.utils.Settings;
 import java.net.URL;
 import java.util.ArrayList;
@@ -128,17 +129,17 @@ public class ControllerFX implements Initializable {
 
     final int maxPerRow = 3;
 
-    int length = Settings.getGenerators().size();
+    int length = Assets.getInstance().getGenerators().size();
 
     for (int i = 0; i < length; i++) {
-      Label n = new Label(Settings.getGenerators().get(i).getName());
+      Label n = new Label(Assets.getInstance().getGenerators().get(i).getName());
       Label p =
           new Label(
               "Production: "
                   + String.format(
-                      Locale.US, "%,.2f", Settings.getGenerators().get(i).getProductionBase())
+                      Locale.US, "%,.2f", Assets.getInstance().getGenerators().get(i).getProductionBase())
                   + "/s");
-      Label c = new Label("Cost: " + Settings.getGenerators().get(i).getNextCost());
+      Label c = new Label("Cost: " + Assets.getInstance().getGenerators().get(i).getNextCost());
 
       n.getStyleClass().add("generator-title");
       p.getStyleClass().add("generator-desc");
@@ -171,13 +172,13 @@ public class ControllerFX implements Initializable {
 
   public void generatePageGenerator() {
 
-    int length = Settings.getGenerators().size();
+    int length = Assets.getInstance().getGenerators().size();
 
     final int maxPerRow = 3;
 
     for (int i = 0; i < length; i++) {
 
-      Label numberOwned = new Label("Nr: " + Settings.getGenerators().get(i).getNumberOwned());
+      Label numberOwned = new Label("Nr: " + Assets.getInstance().getGenerators().get(i).getNumberOwned());
       numberOwned.getStyleClass().add("generator-desc");
       numberOwned.setVisible(false);
 
@@ -203,9 +204,9 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
-    if (bal.getPrimary() > Settings.getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - Settings.getGenerators().get(id).getNextCost());
-      Settings.getGenerators().get(id).incrementNumberOwned();
+    if (bal.getPrimary() > Assets.getInstance().getGenerators().get(id).getNextCost()) {
+      bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
+      Assets.getInstance().getGenerators().get(id).incrementNumberOwned();
     }
   }
 }

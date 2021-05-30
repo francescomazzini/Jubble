@@ -15,6 +15,10 @@ import java.util.List;
 public class Assets {
     private final List<Generator> GENERATORS;
 
+    public List<Generator> getGenerators() {
+        return GENERATORS;
+    }
+
     private Assets() {
         GENERATORS =
                 List.of(
@@ -41,7 +45,7 @@ public class Assets {
      * Instantiates and returns an Asset object.
      * @return unique INSTANCE the Assets class.
      */
-    private static Assets getInstance() {
+    public static Assets getInstance() {
         return SingletonCage.INSTANCE;
     }
 }
