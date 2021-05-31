@@ -18,10 +18,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
 
@@ -43,13 +42,15 @@ public class ControllerFX implements Initializable {
    */
   @FXML private Button left_arrow;
 
+  @FXML private ScrollPane scroll_pane_shop;
+
+  @FXML private AnchorPane anchor_pane_shop;
+
   @FXML private VBox main_body;
 
   @FXML private Label balanceLabel;
 
   @FXML private VBox shopPanel;
-
-  @FXML private GridPane shopGrid;
 
   @FXML private GridPane pageGrid;
 
@@ -97,6 +98,10 @@ public class ControllerFX implements Initializable {
 
     generateShop();
 
+    int nGenerators =Settings.getGenerators().size();
+    anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 +
+            ((nGenerators % 3 == 0) ? 0 : 1)));
+
     generatePageGenerator();
 
     main_body.getChildren().clear();
@@ -120,23 +125,29 @@ public class ControllerFX implements Initializable {
 
       ThreadTaskUtil.autoBuild(costTask);
 
-      /*
-      NumberOwnedTask nrTask =
-          new NumberOwnedTask(i, generatorImageViews.get(i), generatorLabels.get(i).get(3));
-
-      generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
-
-      ThreadTaskUtil.autoBuild(nrTask); */
-
     }
   }
 
 
   public void generateShop() {
 
+    GridPane shopGrid = new GridPane();
+
     final int maxPerRow = 3;
 
     int length = Settings.getGenerators().size();
+
+    for (int i = 0; i < maxPerRow; i++) {
+      ColumnConstraints column = new ColumnConstraints();
+      column.setPercentWidth(100 / maxPerRow);
+      shopGrid.getColumnConstraints().add(column);
+    }
+
+    for (int i = 0; i < length / (length / 3 +
+            ((length % 3 == 0) ? 0 : 1)); i++) {
+      RowConstraints row = new RowConstraints(220);
+      shopGrid.getRowConstraints().add(row);
+    }
 
     for (int i = 0; i < length; i++) {
       Label n = new Label(Settings.getGenerators().get(i).getName());
@@ -168,13 +179,23 @@ public class ControllerFX implements Initializable {
       b.setOnAction(this::buyGenerator);
       b.getStyleClass().add("button-buy");
 
-      VBox vbx = new VBox(6, v, n, p, c, b);
+      VBox topPadding = new VBox();
+      topPadding.setMinHeight(25);
+
+      VBox botPadding = new VBox();
+      botPadding.setMinHeight(15);
+
+
+      VBox vbx = new VBox(topPadding, v, n, p, c, botPadding, b);
       vbx.setAlignment(Pos.TOP_CENTER);
-      VBox.setMargin(v, new Insets(10, 0, 0, 0));
       vbx.setMinHeight(100);
 
       shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
+
     }
+
+    anchor_pane_shop.getChildren().clear();
+    anchor_pane_shop.getChildren().add(shopGrid);
   }
 
   public void generatePageGenerator() {
@@ -184,28 +205,6 @@ public class ControllerFX implements Initializable {
     final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
 
     int counter = 0;
-/*
-    for (int i = 0; i < length; i++) {
-
-      Label numberOwned = new Label("Nr: " + Settings.getGenerators().get(i).getNumberOwned());
-      numberOwned.getStyleClass().add("generator-desc");
-      numberOwned.setVisible(false);
-
-      ImageView v =
-          new ImageView("assets/game-components/generator" + ((i > 9) ? i : ("0" + i)) + ".png");
-      v.setFitHeight(70);
-      v.setFitWidth(193);
-      generatorImageViews.add(v);
-      v.setVisible(false);
-
-      VBox vbx = new VBox(2, v, numberOwned);
-      vbx.setAlignment(Pos.TOP_CENTER);
-      VBox.setMargin(v, new Insets(2, 0, 0, 0));
-
-      generatorLabels.get(i).add(numberOwned);
-
-      pageGrid.add(vbx, (i < maxPerRow ? maxPerRow - 1 : 0), (i % maxPerRow));
-    } */
 
     int maxItimes = ((length / max) + ((length % max == 0) ? 0 : 1));
 
