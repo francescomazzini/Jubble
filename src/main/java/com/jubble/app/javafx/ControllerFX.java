@@ -179,7 +179,7 @@ public class ControllerFX implements Initializable {
       shopGrid.getColumnConstraints().add(column);
     }
 
-    for (int i = 0; i < length / (length / 3 +
+    for (int i = 0; i < (length / 3 +
             ((length % 3 == 0) ? 0 : 1)); i++) {
       RowConstraints row = new RowConstraints(220);
       shopGrid.getRowConstraints().add(row);

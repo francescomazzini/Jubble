@@ -23,10 +23,19 @@ public class Settings {
                           new GeneratorID("Dyson Sphere", "", 5), new GeneratorValues(103680, 2160, 1.12)),
                   new Generator(
                           new GeneratorID("Black Hole Reverser", "", 6),
-                          new GeneratorValues(1244160, 6480, 1.11)),
+                          new GeneratorValues(1244160.0, 6480, 1.11)),
                   new Generator(
-                          new GeneratorID("Planet Distruptor", "", 7),
-                          new GeneratorValues(14929920, 19440, 1.10)));
+                          new GeneratorID("Planet Destroyer", "", 7),
+                          new GeneratorValues(14929920.0, 19440, 1.10)),
+                  new Generator(
+                          new GeneratorID("Galaxyneus", "", 8),
+                          new GeneratorValues(179159040.0, 58320, 1.09)),
+                  new Generator(
+                          new GeneratorID("Spacevoker", "", 9),
+                          new GeneratorValues(	2149908480.0, 174960, 1.08)),
+                  new Generator(
+                          new GeneratorID("Multiverse NMX", "", 10),
+                          new GeneratorValues(25798901760.0, 804816, 1.07)));
 
   private static List<Currency> currencies = List.of(new Currency("Energy"));
 
