@@ -36,6 +36,8 @@ public class ControllerFX implements Initializable {
 
   private Map<String, VBox> bodyPages;
 
+  private int pageSelected;
+
   /**
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
@@ -56,22 +58,52 @@ public class ControllerFX implements Initializable {
 
   @FXML private Label totalProductionLabel;
 
+  @FXML private VBox shop_panel_container;
+
   /** this method set the shop panel visible */
   @FXML
   public void displayShop() {
+    shop_panel_container.setVisible(true);
     shopPanel.setVisible(true);
   }
 
   /** this method set the shop panel hidden */
   @FXML
   public void hideShop() {
+    shop_panel_container.setVisible(false);
     shopPanel.setVisible(false);
   }
 
   @FXML
-  public void switchPage() {
+  public void switchPageLeft() {
+    int nrPageWanted = pageSelected + 1;
+    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+
+    if(body != null)
+      if(body.areThereGeneratorsVisible())
+        pageSelected++;
+
+    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
     main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get("page01"));
+    main_body.getChildren().add(bodyPages.get(pageWanted));
+
+  }
+
+  @FXML
+  public void switchPageRight() {
+    int nrPageWanted = pageSelected - 1;
+    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+
+    if(body != null)
+      if(body.areThereGeneratorsVisible())
+        pageSelected--;
+
+    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get(pageWanted));
+
   }
 
   /**
@@ -88,6 +120,8 @@ public class ControllerFX implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    pageSelected = 0;
 
     bodyPages = new HashMap<>();
 
@@ -126,6 +160,8 @@ public class ControllerFX implements Initializable {
       ThreadTaskUtil.autoBuild(costTask);
 
     }
+
+    hideShop();
   }
 
 

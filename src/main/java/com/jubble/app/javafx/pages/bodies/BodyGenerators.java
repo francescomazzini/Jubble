@@ -81,8 +81,11 @@ public class BodyGenerators extends VBox {
     }
 
     public boolean areThereGeneratorsVisible () {
-        return generatorsNumbers.stream()
-                            .anyMatch(o1 -> o1 > 0);
+        for(int i = generatorsNumbers.get(0); i <= generatorsNumbers.get(generatorsNumbers.size()-1); i++)
+            if(Settings.getGenerators().get(i).getNumberOwned() > 0)
+                return true;
+
+        return false;
     }
 
 }

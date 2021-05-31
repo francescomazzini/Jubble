@@ -91,14 +91,35 @@
             </VBox>
             <HBox prefHeight="362.0" prefWidth="852.0">
                <children>
-                  <Button fx:id="left_arrow" mnemonicParsing="false" onAction="#switchPage" text="Button">
+                  <Button fx:id="left_arrow" mnemonicParsing="false" onAction="#switchPageLeft" prefHeight="37.0" prefWidth="39.0" styleClass="shop-button">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/button/left-button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
+                  <HBox alignment="TOP_RIGHT" prefHeight="352.0" prefWidth="779.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#switchPageRight" prefHeight="42.0" prefWidth="54.0" styleClass="shop-button">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/button/right-button.png" />
+                                 </image></ImageView>
+                           </graphic></Button>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
+            <VBox fx:id="shop_panel_container" alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
                <children>
                   <VBox fx:id="shopPanel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
                      <children>
