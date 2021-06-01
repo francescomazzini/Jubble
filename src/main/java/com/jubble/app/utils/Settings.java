@@ -9,6 +9,7 @@ import com.jubble.app.components.generator.IllegalOperationException;
 import java.util.List;
 
 public class Settings {
+
  private static List<Currency> currencies = List.of(new Currency("Energy"));
   /**
    * Gift initial generator. Used in case the default file is not found.
