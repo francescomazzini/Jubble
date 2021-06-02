@@ -2,6 +2,7 @@ package com.jubble.app.javafx;
 
 import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
+import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
 import com.jubble.app.javafx.tasks.NumberOwnedTask;
@@ -9,10 +10,8 @@ import com.jubble.app.javafx.tasks.ProductionTask;
 import com.jubble.app.utils.Assets;
 import com.jubble.app.utils.Settings;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +19,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
 
@@ -36,30 +35,76 @@ public class ControllerFX implements Initializable {
 
   private List<ImageView> generatorImageViews;
 
+  private Map<String, VBox> bodyPages;
+
+  private int pageSelected;
+
   /**
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
+  @FXML private Button left_arrow;
+
+  @FXML private ScrollPane scroll_pane_shop;
+
+  @FXML private AnchorPane anchor_pane_shop;
+
+  @FXML private VBox main_body;
+
   @FXML private Label balanceLabel;
 
   @FXML private VBox shopPanel;
-
-  @FXML private GridPane shopGrid;
 
   @FXML private GridPane pageGrid;
 
   @FXML private Label totalProductionLabel;
 
+  @FXML private VBox shop_panel_container;
+
   /** this method set the shop panel visible */
   @FXML
   public void displayShop() {
+    shop_panel_container.setVisible(true);
     shopPanel.setVisible(true);
   }
 
   /** this method set the shop panel hidden */
   @FXML
   public void hideShop() {
+    shop_panel_container.setVisible(false);
     shopPanel.setVisible(false);
+  }
+
+  @FXML
+  public void switchPageLeft() {
+    int nrPageWanted = pageSelected + 1;
+    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+
+    if(body != null)
+      if(body.areThereGeneratorsVisible())
+        pageSelected++;
+
+    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get(pageWanted));
+
+  }
+
+  @FXML
+  public void switchPageRight() {
+    int nrPageWanted = pageSelected - 1;
+    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+
+    if(body != null)
+      if(body.areThereGeneratorsVisible())
+        pageSelected--;
+
+    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get(pageWanted));
+
   }
 
   /**
@@ -76,7 +121,10 @@ public class ControllerFX implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    ThreadTaskUtil threads = new ThreadTaskUtil();
+
+    pageSelected = 0;
+
+    bodyPages = new HashMap<>();
 
     generatorLabels = new ArrayList<>();
     generatorImageViews = new ArrayList<>();
@@ -85,51 +133,58 @@ public class ControllerFX implements Initializable {
 
     generateShop();
 
+    int nGenerators = Assets.getInstance().getGenerators().size();
+    anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 +
+            ((nGenerators % 3 == 0) ? 0 : 1)));
+
     generatePageGenerator();
+
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get("page00"));
 
     BalanceTask balTask = new BalanceTask();
 
     balanceLabel.textProperty().bind(balTask.messageProperty());
 
-    threads.create(balTask);
-    threads.getThread(balTask.getName()).setDaemon(true);
-    threads.getThread(balTask.getName()).start();
+    ThreadTaskUtil.autoBuild(balTask);
 
     ProductionTask prodTask = new ProductionTask();
     totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
-    threads.create(prodTask);
-    threads.getThread(prodTask.getName()).setDaemon(true);
-    threads.getThread(prodTask.getName()).start();
+    ThreadTaskUtil.autoBuild(prodTask);
 
     for (int i = 0; i < generatorLabels.size(); i++) {
       CostNextTask costTask = new CostNextTask(i);
 
       generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
-      threads.create(costTask);
-      threads.getThread(costTask.getName()).setDaemon(true);
-      threads.getThread(costTask.getName()).start();
-
-      NumberOwnedTask nrTask =
-          new NumberOwnedTask(i, generatorImageViews.get(i), generatorLabels.get(i).get(3));
-
-      generatorLabels.get(i).get(3).textProperty().bind(nrTask.messageProperty());
-
-
-      threads.create(nrTask);
-      threads.getThread(nrTask.getName()).setDaemon(true);
-      threads.getThread(nrTask.getName()).start();
+      ThreadTaskUtil.autoBuild(costTask);
 
     }
+
+    hideShop();
   }
 
 
   public void generateShop() {
 
+    GridPane shopGrid = new GridPane();
+
     final int maxPerRow = 3;
 
     int length = Assets.getInstance().getGenerators().size();
+
+    for (int i = 0; i < maxPerRow; i++) {
+      ColumnConstraints column = new ColumnConstraints();
+      column.setPercentWidth(100 / maxPerRow);
+      shopGrid.getColumnConstraints().add(column);
+    }
+
+    for (int i = 0; i < (length / 3 +
+            ((length % 3 == 0) ? 0 : 1)); i++) {
+      RowConstraints row = new RowConstraints(220);
+      shopGrid.getRowConstraints().add(row);
+    }
 
     for (int i = 0; i < length; i++) {
       Label n = new Label(Assets.getInstance().getGenerators().get(i).getName());
@@ -161,41 +216,62 @@ public class ControllerFX implements Initializable {
       b.setOnAction(this::buyGenerator);
       b.getStyleClass().add("button-buy");
 
-      VBox vbx = new VBox(6, v, n, p, c, b);
+      VBox topPadding = new VBox();
+      topPadding.setMinHeight(25);
+
+      VBox botPadding = new VBox();
+      botPadding.setMinHeight(15);
+
+
+      VBox vbx = new VBox(topPadding, v, n, p, c, botPadding, b);
       vbx.setAlignment(Pos.TOP_CENTER);
-      VBox.setMargin(v, new Insets(10, 0, 0, 0));
       vbx.setMinHeight(100);
 
       shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
+
     }
+
+    anchor_pane_shop.getChildren().clear();
+    anchor_pane_shop.getChildren().add(shopGrid);
   }
 
   public void generatePageGenerator() {
 
     int length = Assets.getInstance().getGenerators().size();
 
-    final int maxPerRow = 3;
+    final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
 
-    for (int i = 0; i < length; i++) {
+    int counter = 0;
 
-      Label numberOwned = new Label("Nr: " + Assets.getInstance().getGenerators().get(i).getNumberOwned());
-      numberOwned.getStyleClass().add("generator-desc");
-      numberOwned.setVisible(false);
+    int maxItimes = ((length / max) + ((length % max == 0) ? 0 : 1));
 
-      ImageView v =
-          new ImageView("assets/game-components/generator" + ((i > 9) ? i : ("0" + i)) + ".png");
-      v.setFitHeight(70);
-      v.setFitWidth(193);
-      generatorImageViews.add(v);
-      v.setVisible(false);
+    for (int i = 0; i < maxItimes; i++) {
 
-      VBox vbx = new VBox(2, v, numberOwned);
-      vbx.setAlignment(Pos.TOP_CENTER);
-      VBox.setMargin(v, new Insets(2, 0, 0, 0));
+      BodyGenerators body = new BodyGenerators();
 
-      generatorLabels.get(i).add(numberOwned);
+      /**
+       * maxItimes is the number of pages of generators needed when generators number is more than
+       * max that is NR_MAX_GENERATORS_PER_PAGE
+       *
+       * Therefore the outer cycle represents page creation.
+       *
+       * Inner cycle is the generator creation which must repeat NR_MAX_GENERATORS_PER_PAGE if the
+       * number of generators for that page is sufficient to fill it completely or it must repeat
+       * only for less times that would be the number of the generators left to put.
+       * This case happens when numberOfGenerators % NR_MAX_GENERATORS_PER_PAGE != 0
+       *
+       */
+      for(int j = 0; j < ((((maxItimes == (length / max)) ? maxItimes :(maxItimes - 1)) == i) ? (length % max) : max); j++) {
 
-      pageGrid.add(vbx, (i < maxPerRow ? maxPerRow - 1 : 0), (i % maxPerRow));
+        body.addGenerator(counter, "assets/game-components/generator" + ((counter > 9) ? counter : ("0" + counter)) + ".png");
+
+        counter++;
+      }
+
+      body.buildPage();
+
+      bodyPages.put(("page" + ((i > 9) ? i : ("0" + i))), body);
+
     }
   }
 
@@ -208,5 +284,7 @@ public class ControllerFX implements Initializable {
       bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
       Assets.getInstance().getGenerators().get(id).incrementNumberOwned();
     }
+
+
   }
 }

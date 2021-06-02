@@ -7,21 +7,29 @@ import java.util.Map;
 /** Wrapper for a map of thread where each thread is linked to the name of its specific task. */
 public class ThreadTaskUtil {
   /** Contains threads of each task. */
-  private final Map<String, Thread> taskThreads;
-
-  ThreadTaskUtil() {
-    taskThreads = new HashMap<>();
-  }
+  private static final Map<String, Thread> taskThreads  = new HashMap<>();
 
   /**
    * Create thread from given Task
    *
    * @param task
    */
-  public void create(AbstractTask task) {
+  public static void create(AbstractTask task) {
     Thread thread = new Thread(task);
     thread.setName(task.getName());
     taskThreads.put(task.getName(), thread);
+  }
+
+  /**
+   * Create thread from given Task
+   * and start the task with deamonity
+   *
+   * @param task
+   */
+  public static void autoBuild(AbstractTask task) {
+    create(task);
+    getThread(task.getName()).setDaemon(true);
+    getThread(task.getName()).start();
   }
 
   /**
@@ -29,7 +37,7 @@ public class ThreadTaskUtil {
    *
    * @param threadName name of the thread to remove.
    */
-  public Thread remove(String threadName) throws InterruptedException {
+  public static Thread remove(String threadName) throws InterruptedException {
     getThread(threadName).join();
     return taskThreads.remove(threadName);
   }
@@ -39,7 +47,7 @@ public class ThreadTaskUtil {
    *
    * @return number of threads
    */
-  public int getThreadNumber() {
+  public static int getThreadNumber() {
     return taskThreads.size();
   }
 
@@ -49,7 +57,9 @@ public class ThreadTaskUtil {
    * @param threadName name of the thread to retrieve.
    * @return thread linked to the map.
    */
-  public Thread getThread(String threadName) {
+  public static Thread getThread(String threadName) {
     return taskThreads.get(threadName);
   }
+
+
 }
