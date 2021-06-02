@@ -7,7 +7,7 @@ import java.util.Map;
 /** Wrapper for a map of thread where each thread is linked to the name of its specific task. */
 public class ThreadTaskUtil {
   /** Contains threads of each task. */
-  private static final Map<String, Thread> taskThreads  = new HashMap<>();
+  private static final Map<String, Thread> taskThreads = new HashMap<>();
 
   /**
    * Create thread from given Task
@@ -21,8 +21,7 @@ public class ThreadTaskUtil {
   }
 
   /**
-   * Create thread from given Task
-   * and start the task with deamonity
+   * Create thread from given Task and start the task with deamonity
    *
    * @param task
    */
@@ -60,6 +59,4 @@ public class ThreadTaskUtil {
   public static Thread getThread(String threadName) {
     return taskThreads.get(threadName);
   }
-
-
 }

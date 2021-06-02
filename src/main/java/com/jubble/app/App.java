@@ -1,7 +1,6 @@
 package com.jubble.app;
 
 import com.jubble.app.utils.GameProgressHandler;
-import com.jubble.app.utils.Settings;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

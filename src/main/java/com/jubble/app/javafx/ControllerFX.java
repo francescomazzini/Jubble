@@ -5,17 +5,13 @@ import com.jubble.app.components.Balance;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
-import com.jubble.app.javafx.tasks.NumberOwnedTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import com.jubble.app.utils.Assets;
-import com.jubble.app.utils.Settings;
 import java.net.URL;
 import java.util.*;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -81,14 +77,11 @@ public class ControllerFX implements Initializable {
     String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
     BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
 
-    if(body != null)
-      if(body.areThereGeneratorsVisible())
-        pageSelected++;
+    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected++;
 
     pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
     main_body.getChildren().clear();
     main_body.getChildren().add(bodyPages.get(pageWanted));
-
   }
 
   @FXML
@@ -97,14 +90,11 @@ public class ControllerFX implements Initializable {
     String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
     BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
 
-    if(body != null)
-      if(body.areThereGeneratorsVisible())
-        pageSelected--;
+    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected--;
 
     pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
     main_body.getChildren().clear();
     main_body.getChildren().add(bodyPages.get(pageWanted));
-
   }
 
   /**
@@ -134,8 +124,7 @@ public class ControllerFX implements Initializable {
     generateShop();
 
     int nGenerators = Assets.getInstance().getGenerators().size();
-    anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 +
-            ((nGenerators % 3 == 0) ? 0 : 1)));
+    anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
 
@@ -159,12 +148,10 @@ public class ControllerFX implements Initializable {
       generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
 
       ThreadTaskUtil.autoBuild(costTask);
-
     }
 
     hideShop();
   }
-
 
   public void generateShop() {
 
@@ -180,8 +167,7 @@ public class ControllerFX implements Initializable {
       shopGrid.getColumnConstraints().add(column);
     }
 
-    for (int i = 0; i < (length / 3 +
-            ((length % 3 == 0) ? 0 : 1)); i++) {
+    for (int i = 0; i < (length / 3 + ((length % 3 == 0) ? 0 : 1)); i++) {
       RowConstraints row = new RowConstraints(220);
       shopGrid.getRowConstraints().add(row);
     }
@@ -192,7 +178,9 @@ public class ControllerFX implements Initializable {
           new Label(
               "Production: "
                   + String.format(
-                      Locale.US, "%,.2f", Assets.getInstance().getGenerators().get(i).getProductionBase())
+                      Locale.US,
+                      "%,.2f",
+                      Assets.getInstance().getGenerators().get(i).getProductionBase())
                   + "/s");
       Label c = new Label("Cost: " + Assets.getInstance().getGenerators().get(i).getNextCost());
 
@@ -222,13 +210,11 @@ public class ControllerFX implements Initializable {
       VBox botPadding = new VBox();
       botPadding.setMinHeight(15);
 
-
       VBox vbx = new VBox(topPadding, v, n, p, c, botPadding, b);
       vbx.setAlignment(Pos.TOP_CENTER);
       vbx.setMinHeight(100);
 
       shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
-
     }
 
     anchor_pane_shop.getChildren().clear();
@@ -253,17 +239,25 @@ public class ControllerFX implements Initializable {
        * maxItimes is the number of pages of generators needed when generators number is more than
        * max that is NR_MAX_GENERATORS_PER_PAGE
        *
-       * Therefore the outer cycle represents page creation.
+       * <p>Therefore the outer cycle represents page creation.
        *
-       * Inner cycle is the generator creation which must repeat NR_MAX_GENERATORS_PER_PAGE if the
-       * number of generators for that page is sufficient to fill it completely or it must repeat
-       * only for less times that would be the number of the generators left to put.
-       * This case happens when numberOfGenerators % NR_MAX_GENERATORS_PER_PAGE != 0
-       *
+       * <p>Inner cycle is the generator creation which must repeat NR_MAX_GENERATORS_PER_PAGE if
+       * the number of generators for that page is sufficient to fill it completely or it must
+       * repeat only for less times that would be the number of the generators left to put. This
+       * case happens when numberOfGenerators % NR_MAX_GENERATORS_PER_PAGE != 0
        */
-      for(int j = 0; j < ((((maxItimes == (length / max)) ? maxItimes :(maxItimes - 1)) == i) ? (length % max) : max); j++) {
+      for (int j = 0;
+          j
+              < ((((maxItimes == (length / max)) ? maxItimes : (maxItimes - 1)) == i)
+                  ? (length % max)
+                  : max);
+          j++) {
 
-        body.addGenerator(counter, "assets/game-components/generator" + ((counter > 9) ? counter : ("0" + counter)) + ".png");
+        body.addGenerator(
+            counter,
+            "assets/game-components/generator"
+                + ((counter > 9) ? counter : ("0" + counter))
+                + ".png");
 
         counter++;
       }
@@ -271,7 +265,6 @@ public class ControllerFX implements Initializable {
       body.buildPage();
 
       bodyPages.put(("page" + ((i > 9) ? i : ("0" + i))), body);
-
     }
   }
 
@@ -284,7 +277,5 @@ public class ControllerFX implements Initializable {
       bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
       Assets.getInstance().getGenerators().get(id).incrementNumberOwned();
     }
-
-
   }
 }

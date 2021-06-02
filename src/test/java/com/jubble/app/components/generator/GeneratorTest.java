@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 
 public class GeneratorTest {
   Generator generator =
-      new Generator(new GeneratorID("Stellar Panel", "", 1), new GeneratorValues(3.738, 1.67, 1.07));
+      new Generator(
+          new GeneratorID("Stellar Panel", "", 1), new GeneratorValues(3.738, 1.67, 1.07));
 
   @Test
   @DisplayName("NumberOwned should be DEFAULT at beginning.")

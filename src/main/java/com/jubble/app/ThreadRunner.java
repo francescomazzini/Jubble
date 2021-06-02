@@ -25,7 +25,7 @@ public class ThreadRunner {
     gameBalance = new Balance();
     gameBalance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for(int i = 0; i < Assets.getInstance().getGenerators().size(); i++) {
+    for (int i = 0; i < Assets.getInstance().getGenerators().size(); i++) {
       Assets.getInstance().getGenerators().get(i).setNumberOwned(numberOwned.get(i));
     }
   }

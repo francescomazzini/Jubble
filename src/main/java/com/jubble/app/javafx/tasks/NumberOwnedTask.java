@@ -1,7 +1,6 @@
 package com.jubble.app.javafx.tasks;
 
 import com.jubble.app.utils.Assets;
-import com.jubble.app.utils.Settings;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 

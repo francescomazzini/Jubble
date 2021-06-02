@@ -2,7 +2,6 @@ package com.jubble.app.javafx.tasks;
 
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.Assets;
-import com.jubble.app.utils.Settings;
 import java.util.Locale;
 
 public class ProductionTask extends AbstractTask {
@@ -13,7 +12,8 @@ public class ProductionTask extends AbstractTask {
 
       Thread.sleep(500);
       updateProgress(
-          Assets.getInstance().getGenerators().stream().mapToDouble(Generator::getProduction).sum(), 0);
+          Assets.getInstance().getGenerators().stream().mapToDouble(Generator::getProduction).sum(),
+          0);
     }
   }
 

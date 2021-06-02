@@ -43,6 +43,7 @@ public class Generator extends GeneratorID {
 
   /**
    * Tells if numberOwned is default.
+   *
    * @return true if numberOwned is default.
    */
   public boolean isNumberOwnedDefault() {

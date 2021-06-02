@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 
 public class GameProgressHandlerTest {
   List<Integer> list =
-      Assets.getInstance().getGenerators().stream().map(Generator::getNumberOwned).collect(Collectors.toList());
+      Assets.getInstance().getGenerators().stream()
+          .map(Generator::getNumberOwned)
+          .collect(Collectors.toList());
   GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 0.0);
   GameProgress generators;
   String json;
