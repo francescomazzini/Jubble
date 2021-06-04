@@ -2,6 +2,7 @@ package com.jubble.app.javafx;
 
 import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
+import com.jubble.app.components.generator.Generator;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.CostNextTask;
@@ -29,7 +30,7 @@ public class ControllerFX implements Initializable {
    */
   private List<List<Label>> generatorLabels;
 
-  private List<ImageView> generatorImageViews;
+  private List<List<Label>> generatorLabelsManager;
 
   private Map<String, VBox> bodyPages;
 
@@ -117,7 +118,8 @@ public class ControllerFX implements Initializable {
     bodyPages = new HashMap<>();
 
     generatorLabels = new ArrayList<>();
-    generatorImageViews = new ArrayList<>();
+
+    generatorLabelsManager = new ArrayList<>();
 
     shopPanel.setVisible(false);
 
@@ -142,13 +144,6 @@ public class ControllerFX implements Initializable {
 
     ThreadTaskUtil.autoBuild(prodTask);
 
-    for (int i = 0; i < generatorLabels.size(); i++) {
-      CostNextTask costTask = new CostNextTask(i);
-
-      generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
-
-      ThreadTaskUtil.autoBuild(costTask);
-    }
 
     hideShop();
   }
@@ -173,31 +168,46 @@ public class ControllerFX implements Initializable {
     }
 
     for (int i = 0; i < length; i++) {
-      Label n = new Label(Assets.getInstance().getGenerators().get(i).getName());
-      Label p =
+      Generator currentGenerator = Assets.getInstance().getGenerators().get(i);
+
+      Label nameGeneratorLabel =
+              new Label(currentGenerator.getName());
+
+      Label productionGeneratorLabel =
           new Label(
               "Production: "
                   + String.format(
                       Locale.US,
                       "%,.2f",
-                      Assets.getInstance().getGenerators().get(i).getProductionBase())
-                  + "/s");
-      Label c = new Label("Cost: " + Assets.getInstance().getGenerators().get(i).getNextCost());
+                      currentGenerator.getProductionBase())
+                  + "/s"
+          );
 
-      n.getStyleClass().add("generator-title");
-      p.getStyleClass().add("generator-desc");
-      c.getStyleClass().add("generator-desc");
+      Label costGeneratorLabel =
+              new Label(
+                      "Cost: "
+                      + String.format(
+                              Locale.US,
+                              "%,.2f",
+                              currentGenerator.getNextCost()
+                      )
+              );
+
+      nameGeneratorLabel.getStyleClass().add("generator-title");
+      productionGeneratorLabel.getStyleClass().add("generator-desc");
+      costGeneratorLabel.getStyleClass().add("generator-desc");
 
       ImageView v =
           new ImageView("assets/game-components/generator" + i + ".png");
       v.setFitHeight(58);
       v.setFitWidth(160);
 
-      generatorLabels.add(new ArrayList<>());
+      //NEW MANAGER LETS TRY
+      generatorLabelsManager.add(new ArrayList<>());
 
-      generatorLabels.get(i).add(n);
-      generatorLabels.get(i).add(p);
-      generatorLabels.get(i).add(c);
+      generatorLabelsManager.get(i).add(nameGeneratorLabel);
+      generatorLabelsManager.get(i).add(productionGeneratorLabel);
+      generatorLabelsManager.get(i).add(costGeneratorLabel);
 
       Button b = new Button("Buy");
       b.setId(i + "");
@@ -210,7 +220,7 @@ public class ControllerFX implements Initializable {
       VBox botPadding = new VBox();
       botPadding.setMinHeight(15);
 
-      VBox vbx = new VBox(topPadding, v, n, p, c, botPadding, b);
+      VBox vbx = new VBox(topPadding, v, nameGeneratorLabel, productionGeneratorLabel, costGeneratorLabel, botPadding, b);
       vbx.setAlignment(Pos.TOP_CENTER);
       vbx.setMinHeight(100);
 
@@ -273,9 +283,14 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
+    Generator currentGenerator = Assets.getInstance().getGenerators().get(id);
+
     if (bal.getPrimary() > Assets.getInstance().getGenerators().get(id).getNextCost()) {
       bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
-      Assets.getInstance().getGenerators().get(id).incrementNumberOwned();
+      currentGenerator.incrementNumberOwned();
     }
+
+    generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
+
   }
 }
