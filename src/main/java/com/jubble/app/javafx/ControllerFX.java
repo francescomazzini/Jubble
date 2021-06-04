@@ -5,7 +5,6 @@ import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
-import com.jubble.app.javafx.tasks.CostNextTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import com.jubble.app.utils.Assets;
 import java.net.URL;
