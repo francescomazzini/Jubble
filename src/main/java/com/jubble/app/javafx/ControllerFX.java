@@ -189,7 +189,7 @@ public class ControllerFX implements Initializable {
       c.getStyleClass().add("generator-desc");
 
       ImageView v =
-          new ImageView("assets/game-components/generator" + ((i > 9) ? i : ("0" + i)) + ".png");
+          new ImageView("assets/game-components/generator" + i + ".png");
       v.setFitHeight(58);
       v.setFitWidth(160);
 
@@ -256,7 +256,7 @@ public class ControllerFX implements Initializable {
         body.addGenerator(
             counter,
             "assets/game-components/generator"
-                + ((counter > 9) ? counter : ("0" + counter))
+                + counter
                 + ".png");
 
         counter++;
