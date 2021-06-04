@@ -12,7 +12,7 @@ public class ProductionTask extends AbstractTask {
 
       Thread.sleep(500);
       updateProgress(
-          Assets.getInstance().getGenerators().stream().mapToDouble(Generator::getProduction).sum(),
+          Assets.getGenerators().stream().mapToDouble(Generator::getProduction).sum(),
           0);
     }
   }

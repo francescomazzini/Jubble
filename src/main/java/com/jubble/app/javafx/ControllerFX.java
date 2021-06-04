@@ -123,7 +123,7 @@ public class ControllerFX implements Initializable {
 
     generateShop();
 
-    int nGenerators = Assets.getInstance().getGenerators().size();
+    int nGenerators = Assets.getGenerators().size();
     anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
@@ -159,7 +159,7 @@ public class ControllerFX implements Initializable {
 
     final int maxPerRow = 3;
 
-    int length = Assets.getInstance().getGenerators().size();
+    int length = Assets.getGenerators().size();
 
     for (int i = 0; i < maxPerRow; i++) {
       ColumnConstraints column = new ColumnConstraints();
@@ -173,16 +173,16 @@ public class ControllerFX implements Initializable {
     }
 
     for (int i = 0; i < length; i++) {
-      Label n = new Label(Assets.getInstance().getGenerators().get(i).getName());
+      Label n = new Label(Assets.getGenerators().get(i).getName());
       Label p =
           new Label(
               "Production: "
                   + String.format(
                       Locale.US,
                       "%,.2f",
-                      Assets.getInstance().getGenerators().get(i).getProductionBase())
+                      Assets.getGenerators().get(i).getProductionBase())
                   + "/s");
-      Label c = new Label("Cost: " + Assets.getInstance().getGenerators().get(i).getNextCost());
+      Label c = new Label("Cost: " + Assets.getGenerators().get(i).getNextCost());
 
       n.getStyleClass().add("generator-title");
       p.getStyleClass().add("generator-desc");
@@ -223,7 +223,7 @@ public class ControllerFX implements Initializable {
 
   public void generatePageGenerator() {
 
-    int length = Assets.getInstance().getGenerators().size();
+    int length = Assets.getGenerators().size();
 
     final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
 
@@ -273,9 +273,9 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
-    if (bal.getPrimary() > Assets.getInstance().getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
-      Assets.getInstance().getGenerators().get(id).incrementNumberOwned();
+    if (bal.getPrimary() > Assets.getGenerators().get(id).getNextCost()) {
+      bal.setPrimary(bal.getPrimary() - Assets.getGenerators().get(id).getNextCost());
+      Assets.getGenerators().get(id).incrementNumberOwned();
     }
   }
 }

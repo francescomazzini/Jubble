@@ -24,7 +24,7 @@ public class CostNextTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Assets.getInstance().getGenerators().get(generator).getNextCost(), 0);
+      updateProgress(Assets.getGenerators().get(generator).getNextCost(), 0);
     }
   }
 

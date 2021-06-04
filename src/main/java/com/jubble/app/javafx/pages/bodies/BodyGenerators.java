@@ -38,7 +38,7 @@ public class BodyGenerators extends VBox {
     generatorsNumbers.add(number);
 
     Label numberOwned =
-        new Label("Nr: " + Assets.getInstance().getGenerators().get(number).getNumberOwned());
+        new Label("Nr: " + Assets.getGenerators().get(number).getNumberOwned());
     numberOwned.getStyleClass().add("generator-desc");
     numberOwned.setVisible(false);
 
@@ -79,7 +79,7 @@ public class BodyGenerators extends VBox {
   public boolean areThereGeneratorsVisible() {
     for (int i = generatorsNumbers.get(0);
         i <= generatorsNumbers.get(generatorsNumbers.size() - 1);
-        i++) if (Assets.getInstance().getGenerators().get(i).getNumberOwned() > 0) return true;
+        i++) if (Assets.getGenerators().get(i).getNumberOwned() > 0) return true;
 
     return false;
   }

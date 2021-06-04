@@ -17,7 +17,7 @@ public class GameValuesThread extends TimerTask {
   public void run() {
     balance.setPrimary(
         balance.getPrimary()
-            + Assets.getInstance().getGenerators().stream()
+            + Assets.getGenerators().stream()
                 .mapToDouble(Generator::getProduction)
                 .sum());
   }

@@ -21,9 +21,9 @@ public class NumberOwnedTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Assets.getInstance().getGenerators().get(generator).getNumberOwned(), 0);
+      updateProgress(Assets.getGenerators().get(generator).getNumberOwned(), 0);
 
-      if (Assets.getInstance().getGenerators().get(generator).getNumberOwned() > 0) {
+      if (Assets.getGenerators().get(generator).getNumberOwned() > 0) {
         image.setVisible(true);
         label.setVisible(true);
       }
