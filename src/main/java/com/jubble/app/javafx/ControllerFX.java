@@ -27,9 +27,8 @@ public class ControllerFX implements Initializable {
    * Contains 3 labels for each generator: <br>
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
    */
-  private List<List<Label>> generatorLabels;
-
   private List<List<Label>> generatorLabelsManager;
+  private List<VBox> generatorVBoxManager;
 
   private Map<String, VBox> bodyPages;
 
@@ -116,9 +115,8 @@ public class ControllerFX implements Initializable {
 
     bodyPages = new HashMap<>();
 
-    generatorLabels = new ArrayList<>();
-
     generatorLabelsManager = new ArrayList<>();
+    generatorVBoxManager = new ArrayList<>();
 
     shopPanel.setVisible(false);
 
@@ -262,11 +260,15 @@ public class ControllerFX implements Initializable {
                   : max);
           j++) {
 
-        body.addGenerator(
+        generatorVBoxManager.add(body.addGenerator(
             counter,
             "assets/game-components/generator"
                 + counter
-                + ".png");
+                + ".png"));
+
+        generatorLabelsManager.get(counter).add(
+                (Label) generatorVBoxManager.get(counter).getChildren().get(1)
+        );
 
         counter++;
       }
@@ -290,6 +292,10 @@ public class ControllerFX implements Initializable {
     }
 
     generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
+    generatorLabelsManager.get(id).get(3).setText("Qt: " + currentGenerator.getNumberOwned());
+
+    if(currentGenerator.getNumberOwned() > 0)
+      generatorVBoxManager.get(id).setVisible(true);
 
   }
 }
