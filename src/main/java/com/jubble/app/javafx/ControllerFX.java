@@ -72,28 +72,12 @@ public class ControllerFX implements Initializable {
 
   @FXML
   public void switchPageLeft() {
-    int nrPageWanted = pageSelected + 1;
-    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
-    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
-
-    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected++;
-
-    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
-    main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get(pageWanted));
+    switchPage(true);
   }
 
   @FXML
   public void switchPageRight() {
-    int nrPageWanted = pageSelected - 1;
-    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
-    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
-
-    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected--;
-
-    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
-    main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get(pageWanted));
+    switchPage(false);
   }
 
   /**
@@ -298,4 +282,30 @@ public class ControllerFX implements Initializable {
       generatorVBoxManager.get(id).setVisible(true);
 
   }
+
+  public void switchPage(boolean left) {
+
+    int nrPageWanted;
+
+    if(left)
+      nrPageWanted = pageSelected + 1;
+    else
+      nrPageWanted = pageSelected - 1;
+
+    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+
+    if (body != null)
+      if (body.areThereGeneratorsVisible())
+        if(left)
+         pageSelected++;
+        else
+          pageSelected--;
+
+    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
+    main_body.getChildren().clear();
+    main_body.getChildren().add(bodyPages.get(pageWanted));
+
+  }
+
 }

@@ -46,11 +46,6 @@ public class BodyGenerators extends VBox {
     v.setFitHeight(70);
     v.setFitWidth(193);
 
-    //il task serviva anche a vedere quando il generator fosse disponibile
-    //NumberOwnedTask nrTask = new NumberOwnedTask(number, v, numberOwned);
-    //numberOwned.textProperty().bind(nrTask.messageProperty());
-    //ThreadTaskUtil.autoBuild(nrTask);
-
     VBox info = new VBox(2, v, numberOwned);
     info.setAlignment(Pos.TOP_CENTER);
     VBox.setMargin(v, new Insets(2, 0, 0, 0));
