@@ -38,9 +38,6 @@ public class ControllerFX implements Initializable {
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
-  @FXML private Button left_arrow;
-
-  @FXML private ScrollPane scroll_pane_shop;
 
   @FXML private AnchorPane anchor_pane_shop;
 
@@ -49,8 +46,6 @@ public class ControllerFX implements Initializable {
   @FXML private Label balanceLabel;
 
   @FXML private VBox shopPanel;
-
-  @FXML private GridPane pageGrid;
 
   @FXML private Label totalProductionLabel;
 
@@ -112,7 +107,8 @@ public class ControllerFX implements Initializable {
     generatePageGenerator();
 
     main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get("page00"));
+    //here
+    main_body.getChildren().add(bodyPages.get("page0"));
 
     BalanceTask balTask = new BalanceTask();
 
@@ -259,7 +255,7 @@ public class ControllerFX implements Initializable {
 
       body.buildPage();
 
-      bodyPages.put(("page" + ((i > 9) ? i : ("0" + i))), body);
+      bodyPages.put("page" + i, body);
     }
   }
 
@@ -292,7 +288,7 @@ public class ControllerFX implements Initializable {
     else
       nrPageWanted = pageSelected - 1;
 
-    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
+    String pageWanted = "page" + nrPageWanted;
     BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
 
     if (body != null)
@@ -302,7 +298,7 @@ public class ControllerFX implements Initializable {
         else
           pageSelected--;
 
-    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
+    pageWanted = "page" + pageSelected;
     main_body.getChildren().clear();
     main_body.getChildren().add(bodyPages.get(pageWanted));
 
