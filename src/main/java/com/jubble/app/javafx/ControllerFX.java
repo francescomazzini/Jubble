@@ -3,7 +3,7 @@ package com.jubble.app.javafx;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
-import com.jubble.app.javafx.pages.bodies.BodyGenerators;
+import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import java.net.URL;
