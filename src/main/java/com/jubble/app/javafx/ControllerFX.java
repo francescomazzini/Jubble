@@ -3,6 +3,7 @@ package com.jubble.app.javafx;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
@@ -91,28 +92,18 @@ public class ControllerFX implements Initializable {
 
     shopPanel.setVisible(false);
 
+    setUpBalanceFX();
     setUpGeneratorFX();
     generateShop();
 
-    int nGenerators = GeneratorsSingleton.getGenerators().size();
-    shopAnchorPane.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
 
     mainBody.getChildren().clear();
-    // here
+
     mainBody.getChildren().add(bodyPages.get("page0"));
 
-    BalanceTask balTask = new BalanceTask();
 
-    balanceLabel.textProperty().bind(balTask.messageProperty());
-
-    ThreadTaskUtil.autoBuild(balTask);
-
-    ProductionTask prodTask = new ProductionTask();
-    totalProductionLabel.textProperty().bind(prodTask.messageProperty());
-
-    ThreadTaskUtil.autoBuild(prodTask);
 
     hideShop();
   }
@@ -132,6 +123,10 @@ public class ControllerFX implements Initializable {
 
   }
 
+  public void setUpBalanceFX() {
+    BalanceFX balanceFX = new BalanceFX(balanceLabel, totalProductionLabel);
+  }
+
   public void generateShop() {
 
     ShopGenerator shop = new ShopGenerator(3, generatorFXList );
@@ -140,6 +135,9 @@ public class ControllerFX implements Initializable {
 
     shopAnchorPane.getChildren().clear();
     shopAnchorPane.getChildren().add(shop);
+
+    int nGenerators = GeneratorsSingleton.getGenerators().size();
+    shopAnchorPane.setMinHeight(220 * Math.ceil(nGenerators / 3.0));
   }
 
   public void generatePageGenerator() {
