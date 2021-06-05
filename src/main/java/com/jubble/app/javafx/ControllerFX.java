@@ -34,9 +34,9 @@ public class ControllerFX implements Initializable {
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
-  @FXML private AnchorPane anchor_pane_shop;
+  @FXML private AnchorPane shopAnchorPane;
 
-  @FXML private VBox main_body;
+  @FXML private VBox mainBody;
 
   @FXML private Label balanceLabel;
 
@@ -44,19 +44,19 @@ public class ControllerFX implements Initializable {
 
   @FXML private Label totalProductionLabel;
 
-  @FXML private VBox shop_panel_container;
+  @FXML private VBox shopPanelContainer;
 
   /** this method set the shop panel visible */
   @FXML
   public void displayShop() {
-    shop_panel_container.setVisible(true);
+    shopPanelContainer.setVisible(true);
     shopPanel.setVisible(true);
   }
 
   /** this method set the shop panel hidden */
   @FXML
   public void hideShop() {
-    shop_panel_container.setVisible(false);
+    shopPanelContainer.setVisible(false);
     shopPanel.setVisible(false);
   }
 
@@ -97,13 +97,13 @@ public class ControllerFX implements Initializable {
     generateShop();
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
-    anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
+    shopAnchorPane.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
 
-    main_body.getChildren().clear();
+    mainBody.getChildren().clear();
     // here
-    main_body.getChildren().add(bodyPages.get("page0"));
+    mainBody.getChildren().add(bodyPages.get("page0"));
 
     BalanceTask balTask = new BalanceTask();
 
@@ -193,8 +193,8 @@ public class ControllerFX implements Initializable {
       shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
     }
 
-    anchor_pane_shop.getChildren().clear();
-    anchor_pane_shop.getChildren().add(shopGrid);
+    shopAnchorPane.getChildren().clear();
+    shopAnchorPane.getChildren().add(shopGrid);
   }
 
   public void generatePageGenerator() {
@@ -279,8 +279,8 @@ public class ControllerFX implements Initializable {
 
     if (bodyWanted != null)
       if (bodyWanted.areThereGeneratorsVisible()) {
-        main_body.getChildren().clear();
-        main_body.getChildren().add(bodyWanted);
+        mainBody.getChildren().clear();
+        mainBody.getChildren().add(bodyWanted);
         return;
       }
 
