@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 /** Wrapper to manage start/stop of GameValuesThread TimerTask. */
 public class ThreadRunner {
-  /** Contains Balance of the player. */
-  private static Balance gameBalance;
   /** Contains each GameValuesThread TimerTask instantiated by run(). */
   private static final Timer valueTimer = new Timer();
 
@@ -22,8 +20,7 @@ public class ThreadRunner {
 
   private static void useSavedValues(GameProgress progress) {
     System.out.println("Recovering game values.");
-    gameBalance = new Balance();
-    gameBalance.setPrimary(progress.getBalance());
+    Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
     for (int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
       GeneratorsSingleton.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
@@ -32,7 +29,6 @@ public class ThreadRunner {
 
   private static void startFromScratch() {
     System.out.println("No saved values fault. Starting from scratch.");
-    gameBalance = new Balance();
     Settings.giftInitialAmount();
   }
 
@@ -41,7 +37,7 @@ public class ThreadRunner {
     GameProgress progress = GameProgressHandler.loadGame();
     if (progress != null) useSavedValues(progress);
     else startFromScratch();
-    valueTimer.schedule(new GameValuesThread(gameBalance), 0, 1000);
+    valueTimer.schedule(new GameValuesThread(), 0, 1000);
     isTimerActive = true;
     System.out.println("Game thread started");
   }
@@ -60,22 +56,13 @@ public class ThreadRunner {
             GeneratorsSingleton.getGenerators().stream()
                 .map(Generator::getNumberOwned)
                 .collect(Collectors.toList()),
-            gameBalance.getPrimary());
+            Balance.getPrimary());
     try {
       GameProgressHandler.saveGame(progress);
     } catch (IOException e) {
       e.printStackTrace();
     }
     System.out.println("Game thread stopped");
-  }
-
-  /**
-   * Returns current balance.
-   *
-   * @return gameBalance balance of the player.
-   */
-  public static Balance getGameBalance() {
-    return gameBalance;
   }
 
   /**

@@ -6,17 +6,11 @@ import com.jubble.app.components.generator.GeneratorsSingleton;
 import java.util.TimerTask;
 
 public class GameValuesThread extends TimerTask {
-  private Balance balance;
-
-  public GameValuesThread(Balance balance) {
-    this.balance = balance;
-  }
-
   /** Increment game values */
   @Override
   public void run() {
-    balance.setPrimary(
-        balance.getPrimary()
+    Balance.setPrimary(
+        Balance.getPrimary()
             + GeneratorsSingleton.getGenerators().stream()
                 .mapToDouble(Generator::getProduction)
                 .sum());

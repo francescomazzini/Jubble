@@ -20,9 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
-
-  /** Contains the instance of the game balance. This variable is shared between the threads. */
-  private final Balance bal = ThreadRunner.getGameBalance();
   /**
    * Contains 3 labels for each generator: <br>
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
@@ -266,8 +263,8 @@ public class ControllerFX implements Initializable {
 
     Generator currentGenerator = GeneratorsSingleton.getGenerators().get(id);
 
-    if (bal.getPrimary() > GeneratorsSingleton.getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - GeneratorsSingleton.getGenerators().get(id).getNextCost());
+    if (Balance.getPrimary() > GeneratorsSingleton.getGenerators().get(id).getNextCost()) {
+      Balance.setPrimary(Balance.getPrimary() - GeneratorsSingleton.getGenerators().get(id).getNextCost());
       currentGenerator.incrementNumberOwned();
     }
 
