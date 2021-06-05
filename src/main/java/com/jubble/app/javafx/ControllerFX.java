@@ -1,13 +1,11 @@
 package com.jubble.app.javafx;
 
-import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
-
 import java.net.URL;
 import java.util.*;
 import javafx.event.ActionEvent;
@@ -25,6 +23,7 @@ public class ControllerFX implements Initializable {
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
    */
   private List<List<Label>> generatorLabelsManager;
+
   private List<VBox> generatorVBoxManager;
 
   private Map<String, VBox> bodyPages;
@@ -35,7 +34,6 @@ public class ControllerFX implements Initializable {
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
-
   @FXML private AnchorPane anchor_pane_shop;
 
   @FXML private VBox main_body;
@@ -104,7 +102,7 @@ public class ControllerFX implements Initializable {
     generatePageGenerator();
 
     main_body.getChildren().clear();
-    //here
+    // here
     main_body.getChildren().add(bodyPages.get("page0"));
 
     BalanceTask balTask = new BalanceTask();
@@ -117,7 +115,6 @@ public class ControllerFX implements Initializable {
     totalProductionLabel.textProperty().bind(prodTask.messageProperty());
 
     ThreadTaskUtil.autoBuild(prodTask);
-
 
     hideShop();
   }
@@ -144,39 +141,26 @@ public class ControllerFX implements Initializable {
     for (int i = 0; i < length; i++) {
       Generator currentGenerator = GeneratorsSingleton.getGenerators().get(i);
 
-      Label nameGeneratorLabel =
-              new Label(currentGenerator.getName());
+      Label nameGeneratorLabel = new Label(currentGenerator.getName());
 
       Label productionGeneratorLabel =
           new Label(
               "Production: "
-                  + String.format(
-                      Locale.US,
-                      "%,.2f",
-                      currentGenerator.getProductionBase())
-                  + "/s"
-          );
+                  + String.format(Locale.US, "%,.2f", currentGenerator.getProductionBase())
+                  + "/s");
 
       Label costGeneratorLabel =
-              new Label(
-                      "Cost: "
-                      + String.format(
-                              Locale.US,
-                              "%,.2f",
-                              currentGenerator.getNextCost()
-                      )
-              );
+          new Label("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
 
       nameGeneratorLabel.getStyleClass().add("generator-title");
       productionGeneratorLabel.getStyleClass().add("generator-desc");
       costGeneratorLabel.getStyleClass().add("generator-desc");
 
-      ImageView v =
-          new ImageView("assets/game-components/generator" + i + ".png");
+      ImageView v = new ImageView("assets/game-components/generator" + i + ".png");
       v.setFitHeight(58);
       v.setFitWidth(160);
 
-      //NEW MANAGER LETS TRY
+      // NEW MANAGER LETS TRY
       generatorLabelsManager.add(new ArrayList<>());
 
       generatorLabelsManager.get(i).add(nameGeneratorLabel);
@@ -194,7 +178,15 @@ public class ControllerFX implements Initializable {
       VBox botPadding = new VBox();
       botPadding.setMinHeight(15);
 
-      VBox vbx = new VBox(topPadding, v, nameGeneratorLabel, productionGeneratorLabel, costGeneratorLabel, botPadding, b);
+      VBox vbx =
+          new VBox(
+              topPadding,
+              v,
+              nameGeneratorLabel,
+              productionGeneratorLabel,
+              costGeneratorLabel,
+              botPadding,
+              b);
       vbx.setAlignment(Pos.TOP_CENTER);
       vbx.setMinHeight(100);
 
@@ -237,15 +229,12 @@ public class ControllerFX implements Initializable {
                   : max);
           j++) {
 
-        generatorVBoxManager.add(body.addGenerator(
-            counter,
-            "assets/game-components/generator"
-                + counter
-                + ".png"));
+        generatorVBoxManager.add(
+            body.addGenerator(counter, "assets/game-components/generator" + counter + ".png"));
 
-        generatorLabelsManager.get(counter).add(
-                (Label) generatorVBoxManager.get(counter).getChildren().get(1)
-        );
+        generatorLabelsManager
+            .get(counter)
+            .add((Label) generatorVBoxManager.get(counter).getChildren().get(1));
 
         counter++;
       }
@@ -264,26 +253,26 @@ public class ControllerFX implements Initializable {
     Generator currentGenerator = GeneratorsSingleton.getGenerators().get(id);
 
     if (Balance.getPrimary() > GeneratorsSingleton.getGenerators().get(id).getNextCost()) {
-      Balance.setPrimary(Balance.getPrimary() - GeneratorsSingleton.getGenerators().get(id).getNextCost());
+      Balance.setPrimary(
+          Balance.getPrimary() - GeneratorsSingleton.getGenerators().get(id).getNextCost());
       currentGenerator.incrementNumberOwned();
     }
 
-    generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
+    generatorLabelsManager
+        .get(id)
+        .get(2)
+        .setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
     generatorLabelsManager.get(id).get(3).setText("Qt: " + currentGenerator.getNumberOwned());
 
-    if(currentGenerator.getNumberOwned() > 0)
-      generatorVBoxManager.get(id).setVisible(true);
-
+    if (currentGenerator.getNumberOwned() > 0) generatorVBoxManager.get(id).setVisible(true);
   }
 
   public void switchPage(boolean left) {
 
     int copyOfPageSelected = pageSelected;
 
-    if(left)
-      pageSelected++;
-    else
-      pageSelected--;
+    if (left) pageSelected++;
+    else pageSelected--;
 
     String namePageWanted = "page" + pageSelected;
     BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
@@ -297,5 +286,4 @@ public class ControllerFX implements Initializable {
 
     pageSelected = copyOfPageSelected;
   }
-
 }

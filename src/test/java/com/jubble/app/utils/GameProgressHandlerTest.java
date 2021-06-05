@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class GameProgressHandlerTest {
- GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 0.0);
+  GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 0.0);
   GameProgress generators;
   String json;
 
