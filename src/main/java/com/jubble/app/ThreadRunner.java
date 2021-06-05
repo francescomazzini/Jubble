@@ -2,7 +2,7 @@ package com.jubble.app;
 
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.Assets;
+import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.GameProgress;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;
@@ -25,8 +25,8 @@ public class ThreadRunner {
     gameBalance = new Balance();
     gameBalance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < Assets.getGenerators().size(); i++) {
-      Assets.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    for (int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
+      GeneratorsSingleton.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
     }
   }
 
@@ -57,7 +57,7 @@ public class ThreadRunner {
 
     GameProgress progress =
         new GameProgress(
-            Assets.getGenerators().stream()
+            GeneratorsSingleton.getGenerators().stream()
                 .map(Generator::getNumberOwned)
                 .collect(Collectors.toList()),
             gameBalance.getPrimary());

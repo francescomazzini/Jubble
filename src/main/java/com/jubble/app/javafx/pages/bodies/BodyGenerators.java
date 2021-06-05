@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.pages.bodies;
 
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.Assets;
+import com.jubble.app.components.generator.GeneratorsSingleton;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
@@ -31,7 +31,7 @@ public class BodyGenerators extends VBox {
 
   public VBox addGenerator(int number, String imagePath) {
 
-    Generator currentGenerator = Assets.getGenerators().get(number);
+    Generator currentGenerator = GeneratorsSingleton.getGenerators().get(number);
 
     if (generatorsInfo.size() == NR_MAX_GENERATORS_PER_PAGE)
       throw new IndexOutOfBoundsException("Max Number Generators Reached");
@@ -81,7 +81,7 @@ public class BodyGenerators extends VBox {
   public boolean areThereGeneratorsVisible() {
     for (int i = generatorsNumbers.get(0);
         i <= generatorsNumbers.get(generatorsNumbers.size() - 1);
-        i++) if (Assets.getGenerators().get(i).getNumberOwned() > 0) return true;
+        i++) if (GeneratorsSingleton.getGenerators().get(i).getNumberOwned() > 0) return true;
 
     return false;
   }
