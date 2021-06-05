@@ -1,14 +1,11 @@
 package com.jubble.app.javafx;
 
-import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
-import com.jubble.app.javafx.tasks.BalanceTask;
-import com.jubble.app.javafx.tasks.ProductionTask;
 import java.net.URL;
 import java.util.*;
 import javafx.fxml.FXML;
@@ -17,16 +14,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
-  /**
-   * Contains 3 labels for each generator: <br>
-   * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
-   * 4. Number Owned Of That Generator
-   */
 
+  /**
+   * bodyPages is a Map which contains all the body pages of the game. A body page is a body of the
+   * Main Screen, that is the part in the background with the generators placed.
+   * Since there can be n generators, bodyPages keeps bodies, each has 6 generators, and associate to
+   * them a string (ex: "page0", "page13", ...)
+   */
   private Map<String, VBox> bodyPages;
 
+  /**
+   * generatorFXList is a list which group all the {@link com.jubble.app.javafx.components.GeneratorFX}
+   * of the game
+   */
   private static List<GeneratorFX> generatorFXList;
 
+  /**
+   * pageSelected represent the current body page selected, at the beginning it will be 0, which means
+   * that the first page shown is "page0"
+   */
   private int pageSelected;
 
   /**
@@ -59,24 +65,29 @@ public class ControllerFX implements Initializable {
     shopPanel.setVisible(false);
   }
 
+  /** this method switch the page to left, incrementing the current pageSelected */
   @FXML
   public void switchPageLeft() {
     switchPage(pageSelected + 1);
   }
 
+  /** this method switch the page to right, decrementing the current pageSelected */
   @FXML
   public void switchPageRight() {
     switchPage(pageSelected - 1);
   }
 
   /**
-   * Replaces the constructor of the controller which cannot have a constructor. It is meant to ran
+   * Replaces the constructor of the controller which cannot have a constructor. It is meant to run
    * before the GUI is shown to the user.
    *
-   * <p>What is done in this method: - the shop panel is set hidden by default - it calls {@link
-   * #generateShop()} which generates the shop panel - it binds the text property of the label to
-   * the task BalanceTask and it puts this task in a new Thread and start it after set it as Daemon
-   * (it stops if the main thread is stopped)
+   * <p>What is done in this method:
+   * <ul>
+   *     <li>calls {@link #setUpBalanceFX()} which set up the Balance FX elements</li>
+   *     <li>calls {@link #setUpGeneratorFX()} which set up the Generator FX elements for each Generator FX</li>
+   *     <li>calls {@link #generateShop()} which generate the graphic of the shop panel </li>
+   *     <li>calls {@link #generatePageGenerator()} which generate the graphic of the place of Generator FX in the background </li>
+   * </ul>
    *
    * @param url not used
    * @param resourceBundle not used
@@ -91,6 +102,10 @@ public class ControllerFX implements Initializable {
 
   }
 
+  /**
+   * This method set up all the graphic elements for all {@link com.jubble.app.components.generator.Generator}, creating a {@link com.jubble.app.javafx.components.GeneratorFX}
+   * for each of them, which includes all the graphic elements needed for the graphical representation of a Generator
+   */
   public void setUpGeneratorFX() {
 
     generatorFXList = new ArrayList<>();
@@ -108,17 +123,25 @@ public class ControllerFX implements Initializable {
 
   }
 
+  /**
+   * This method set up all the graphic elements for the graphical representation of the
+   * {@link com.jubble.app.components.Balance} class
+   */
   public void setUpBalanceFX() {
-    BalanceFX balanceFX = new BalanceFX(balanceLabel, totalProductionLabel);
+    new BalanceFX(balanceLabel, totalProductionLabel);
   }
 
+  /**
+   * This method generates the Shop pane creating an object of {@link com.jubble.app.javafx.components.popups.ShopGenerator}
+   * and adding it to the Anchor Pane which is the actual popup. Thus the popup size must be set according
+   * to the number of Generators which must be inside it. The the shop is hidden by default
+   */
   public void generateShop() {
 
     ShopGenerator shop = new ShopGenerator(3, generatorFXList );
 
     shop.generateShopPanel();
 
-    shopAnchorPane.getChildren().clear();
     shopAnchorPane.getChildren().add(shop);
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
@@ -127,6 +150,12 @@ public class ControllerFX implements Initializable {
     hideShop();
   }
 
+  /**
+   * This method generates the page in the background which contains the generators bought with their
+   * quantity. Therefore a number (NR_MAX_GENERATORS_PER_PAGE) of generators must be in a page.
+   * This page created using {@link com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators} is put
+   * in the HashMap which contains all the pages and associate them a String, like "page0", "page9",...
+   */
   public void generatePageGenerator() {
 
     pageSelected = 0;
@@ -147,6 +176,12 @@ public class ControllerFX implements Initializable {
 
   }
 
+  /**
+   * <p>This method is used by {@link #switchPageLeft()} and {@link #switchPageRight()} to switch Page,
+   * they give it the number of the page adding or subtracting 1 to the current SelectedPage.</p>
+   *
+   * @param newPageNumber is the new page number
+   */
   public void switchPage(int newPageNumber) {
     String namePageWanted = "page" + newPageNumber;
 
