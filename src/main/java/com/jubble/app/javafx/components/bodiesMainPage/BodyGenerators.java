@@ -46,7 +46,7 @@ public class BodyGenerators extends VBox {
 
     for (int i = beginIndex; i < endIndex; i++) {
       gridForGenerators.add(generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
-              (i < maxXCol ? maxXCol - 1 : 0),
+              ((i % NR_MAX_GENERATORS_PER_PAGE) < maxXCol ? maxXCol - 1 : 0),
               (i % maxXCol));
     }
 

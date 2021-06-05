@@ -62,7 +62,7 @@ public class GeneratorFX {
 
     public void setProductionGeneratorLabel() {
 
-        String formattingProduction = String.format(Locale.US,"%,.2f",generator.getProduction());
+        String formattingProduction = String.format(Locale.US,"%,.2f",generator.getProductionBase());
         productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
 
     }
@@ -140,7 +140,6 @@ public class GeneratorFX {
 
         GameActions.buyGenerator(generator);
 
-        setProductionGeneratorLabel();
         setCostGeneratorLabel();
         setNumberOwnedGeneratorLabel();
 
