@@ -1,7 +1,5 @@
 package com.jubble.app.javafx.components.popups;
 
-import com.jubble.app.ThreadRunner;
-import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.GameActions;
@@ -23,16 +21,14 @@ public class ShopGenerator extends GridPane {
 
     private final int maxPerRow;
     private final int maxLengthPerCol;
-    private final Balance bal;
     private List<List<Label>> generatorLabelsManager;
     private List<VBox> generatorVBoxManager;
     private List<Generator> generatorList;
 
-    public ShopGenerator (int maxPerRow, List<Generator> generatorList, Balance bal, List<List<Label>> generatorLabelsManager, List<VBox> generatorVBoxManager) {
+    public ShopGenerator (int maxPerRow, List<Generator> generatorList, List<List<Label>> generatorLabelsManager, List<VBox> generatorVBoxManager) {
         this.maxPerRow = maxPerRow;
         this.generatorList = generatorList;
         this.maxLengthPerCol = (int) Math.ceil((double) generatorList.size() / maxPerRow);
-        this.bal = bal;
         this.generatorLabelsManager = generatorLabelsManager;
         this.generatorVBoxManager = generatorVBoxManager;
     }
@@ -63,7 +59,7 @@ public class ShopGenerator extends GridPane {
                                     Locale.US,
                                     "%,.2f",
                                     currentGenerator.getProductionBase())
-                                    + "/s"
+                                + "/s"
                     );
 
             Label costGeneratorLabel =
@@ -104,13 +100,13 @@ public class ShopGenerator extends GridPane {
             bottomPadding.setMinHeight(15);
 
             VBox containerGenerator = new VBox(topPadding,
-                    imageGenerator,
-                    nameGeneratorLabel,
-                    productionGeneratorLabel,
-                    costGeneratorLabel,
-                    bottomPadding,
-                    buttonBuyGenerator
-            );
+                                imageGenerator,
+                                nameGeneratorLabel,
+                                productionGeneratorLabel,
+                                costGeneratorLabel,
+                                bottomPadding,
+                                buttonBuyGenerator
+                        );
 
             containerGenerator.setAlignment(Pos.TOP_CENTER);
             containerGenerator.setMinHeight(100);
@@ -126,7 +122,7 @@ public class ShopGenerator extends GridPane {
 
         Generator currentGenerator = GeneratorsSingleton.getGenerators().get(id);
 
-        GameActions.buyGenerator(id, bal);
+        GameActions.buyGenerator(id);
 
         generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
         generatorLabelsManager.get(id).get(3).setText("Qt: " + currentGenerator.getNumberOwned());

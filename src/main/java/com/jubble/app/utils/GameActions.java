@@ -6,12 +6,12 @@ import com.jubble.app.components.generator.GeneratorsSingleton;
 
 public class GameActions {
 
-    public static void buyGenerator (int id, Balance primaryCurrency) {
+    public static void buyGenerator (int id) {
 
         Generator currentGenerator = GeneratorsSingleton.getGenerators().get(id);
 
-        if (primaryCurrency.getPrimary() > currentGenerator.getNextCost()) {
-            primaryCurrency.setPrimary(primaryCurrency.getPrimary() - currentGenerator.getNextCost());
+        if (Balance.getPrimary() > currentGenerator.getNextCost()) {
+            Balance.setPrimary(Balance.getPrimary() - currentGenerator.getNextCost());
             currentGenerator.incrementNumberOwned();
         }
 
