@@ -2,7 +2,7 @@ package com.jubble.app;
 
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.Assets;
+import com.jubble.app.components.generator.Assets;
 import java.util.TimerTask;
 
 public class GameValuesThread extends TimerTask {

@@ -1,6 +1,7 @@
 package com.jubble.app.utils;
 
 import com.jubble.app.components.Currency;
+import com.jubble.app.components.generator.Assets;
 import com.jubble.app.components.generator.IllegalOperationException;
 import java.util.List;
 

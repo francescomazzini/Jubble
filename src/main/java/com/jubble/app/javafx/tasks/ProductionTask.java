@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.tasks;
 
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.Assets;
+import com.jubble.app.components.generator.Assets;
 import java.util.Locale;
 
 public class ProductionTask extends AbstractTask {

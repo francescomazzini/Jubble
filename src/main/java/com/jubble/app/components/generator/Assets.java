@@ -1,8 +1,5 @@
-package com.jubble.app.utils;
+package com.jubble.app.components.generator;
 
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorID;
-import com.jubble.app.components.generator.GeneratorValues;
 import java.util.List;
 
 /**

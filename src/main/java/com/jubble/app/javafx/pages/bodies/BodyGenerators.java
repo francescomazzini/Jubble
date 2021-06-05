@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.pages.bodies;
 
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.Assets;
+import com.jubble.app.components.generator.Assets;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
