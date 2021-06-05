@@ -281,27 +281,24 @@ public class ControllerFX implements Initializable {
 
   public void switchPage(boolean left) {
 
-    int nrPageWanted;
+    int copyOfPageSelected = pageSelected;
 
     if(left)
-      nrPageWanted = pageSelected + 1;
+      pageSelected++;
     else
-      nrPageWanted = pageSelected - 1;
+      pageSelected--;
 
-    String pageWanted = "page" + nrPageWanted;
-    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
+    String namePageWanted = "page" + pageSelected;
+    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
 
-    if (body != null)
-      if (body.areThereGeneratorsVisible())
-        if(left)
-         pageSelected++;
-        else
-          pageSelected--;
+    if (bodyWanted != null)
+      if (bodyWanted.areThereGeneratorsVisible()) {
+        main_body.getChildren().clear();
+        main_body.getChildren().add(bodyWanted);
+        return;
+      }
 
-    pageWanted = "page" + pageSelected;
-    main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get(pageWanted));
-
+    pageSelected = copyOfPageSelected;
   }
 
 }
