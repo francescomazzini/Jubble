@@ -84,31 +84,16 @@ public class ControllerFX implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    pageSelected = 0;
-
-    bodyPages = new HashMap<>();
-
-    generatorFXList = new ArrayList<>();
-
-    shopPanel.setVisible(false);
-
     setUpBalanceFX();
     setUpGeneratorFX();
     generateShop();
-
-
     generatePageGenerator();
 
-    mainBody.getChildren().clear();
-
-    mainBody.getChildren().add(bodyPages.get("page0"));
-
-
-
-    hideShop();
   }
 
   public void setUpGeneratorFX() {
+
+    generatorFXList = new ArrayList<>();
 
     List<Generator> generatorList = GeneratorsSingleton.getGenerators();
 
@@ -138,9 +123,14 @@ public class ControllerFX implements Initializable {
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
     shopAnchorPane.setMinHeight(220 * Math.ceil(nGenerators / 3.0));
+
+    hideShop();
   }
 
   public void generatePageGenerator() {
+
+    pageSelected = 0;
+    bodyPages = new HashMap<>();
 
     int counter = 0;
 
@@ -152,6 +142,8 @@ public class ControllerFX implements Initializable {
         counter++;
       }
     }
+
+    mainBody.getChildren().add(bodyPages.get("page0"));
 
   }
 
@@ -167,4 +159,5 @@ public class ControllerFX implements Initializable {
         this.pageSelected = newPageNumber;
       }
   }
+
 }
