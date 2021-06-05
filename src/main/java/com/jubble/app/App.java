@@ -15,9 +15,7 @@ public class App extends Application {
     GUIRunner.run(primaryStage);
 
     primaryStage.setOnCloseRequest(
-        e -> {
-          GUIRunner.stop();
-        });
+        e -> GUIRunner.stop());
   }
 
   /** Start game main loop */

@@ -16,8 +16,6 @@ public class ThreadRunner {
   /** Contains each GameValuesThread TimerTask instantiated by run(). */
   private static final Timer valueTimer = new Timer();
 
-  private static boolean isTimerActive = false;
-
   private static void useSavedValues(GameProgress progress) {
     System.out.println("Recovering game values.");
     Balance.setPrimary(progress.getBalance());
@@ -38,7 +36,6 @@ public class ThreadRunner {
     if (progress != null) useSavedValues(progress);
     else startFromScratch();
     valueTimer.schedule(new GameValuesThread(), 0, 1000);
-    isTimerActive = true;
     System.out.println("Game thread started");
   }
 
@@ -48,7 +45,6 @@ public class ThreadRunner {
     valueTimer.cancel();
     // Purge cancelled timers.
     valueTimer.purge();
-    isTimerActive = false;
     // Save game progress.
 
     GameProgress progress =
@@ -65,12 +61,4 @@ public class ThreadRunner {
     System.out.println("Game thread stopped");
   }
 
-  /**
-   * Returns true if timer is active, false otherwise.
-   *
-   * @return isTimerActive
-   */
-  public static boolean timerStatus() {
-    return isTimerActive;
-  }
 }
