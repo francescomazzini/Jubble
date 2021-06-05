@@ -1,8 +1,5 @@
-package com.jubble.app.utils;
+package com.jubble.app.components.generator;
 
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorID;
-import com.jubble.app.components.generator.GeneratorValues;
 import java.util.List;
 
 /**
@@ -10,10 +7,10 @@ import java.util.List;
  * holds a private instance. This ensures that the data can be shared across the application without
  * keeping a global variable.
  */
-public class Assets {
+public class GeneratorsSingleton {
   private final List<Generator> GENERATORS;
 
-  private Assets() {
+  private GeneratorsSingleton() {
     GENERATORS =
         List.of(
             new Generator(
@@ -44,13 +41,13 @@ public class Assets {
   }
 
   private static class SingletonCage {
-    private static final Assets INSTANCE = new Assets();
+    private static final GeneratorsSingleton INSTANCE = new GeneratorsSingleton();
   }
 
   /**
    * Instantiates and returns an Asset object.
    *
-   * @return unique INSTANCE the Assets class.
+   * @return unique INSTANCE the GeneratorsSingleton class.
    */
   public static List<Generator> getGenerators() {
     return SingletonCage.INSTANCE.GENERATORS;

@@ -3,10 +3,11 @@ package com.jubble.app.javafx;
 import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
+import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
-import com.jubble.app.utils.Assets;
+
 import java.net.URL;
 import java.util.*;
 import javafx.event.ActionEvent;
@@ -100,7 +101,7 @@ public class ControllerFX implements Initializable {
 
     generateShop();
 
-    int nGenerators = Assets.getGenerators().size();
+    int nGenerators = GeneratorsSingleton.getGenerators().size();
     anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
@@ -130,7 +131,7 @@ public class ControllerFX implements Initializable {
 
     final int maxPerRow = 3;
 
-    int length = Assets.getGenerators().size();
+    int length = GeneratorsSingleton.getGenerators().size();
 
     for (int i = 0; i < maxPerRow; i++) {
       ColumnConstraints column = new ColumnConstraints();
@@ -144,7 +145,7 @@ public class ControllerFX implements Initializable {
     }
 
     for (int i = 0; i < length; i++) {
-      Generator currentGenerator = Assets.getGenerators().get(i);
+      Generator currentGenerator = GeneratorsSingleton.getGenerators().get(i);
 
       Label nameGeneratorLabel =
               new Label(currentGenerator.getName());
@@ -209,7 +210,7 @@ public class ControllerFX implements Initializable {
 
   public void generatePageGenerator() {
 
-    int length = Assets.getGenerators().size();
+    int length = GeneratorsSingleton.getGenerators().size();
 
     final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
 
@@ -263,10 +264,10 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
-    Generator currentGenerator = Assets.getGenerators().get(id);
+    Generator currentGenerator = GeneratorsSingleton.getGenerators().get(id);
 
-    if (bal.getPrimary() > Assets.getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - Assets.getGenerators().get(id).getNextCost());
+    if (bal.getPrimary() > GeneratorsSingleton.getGenerators().get(id).getNextCost()) {
+      bal.setPrimary(bal.getPrimary() - GeneratorsSingleton.getGenerators().get(id).getNextCost());
       currentGenerator.incrementNumberOwned();
     }
 

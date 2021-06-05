@@ -1,6 +1,6 @@
 package com.jubble.app.javafx.tasks;
 
-import com.jubble.app.utils.Assets;
+import com.jubble.app.components.generator.GeneratorsSingleton;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -21,9 +21,9 @@ public class NumberOwnedTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Assets.getGenerators().get(generator).getNumberOwned(), 0);
+      updateProgress(GeneratorsSingleton.getGenerators().get(generator).getNumberOwned(), 0);
 
-      if (Assets.getGenerators().get(generator).getNumberOwned() > 0) {
+      if (GeneratorsSingleton.getGenerators().get(generator).getNumberOwned() > 0) {
         image.setVisible(true);
         label.setVisible(true);
       }
