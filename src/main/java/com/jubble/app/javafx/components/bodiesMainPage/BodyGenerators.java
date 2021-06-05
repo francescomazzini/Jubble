@@ -1,13 +1,9 @@
 package com.jubble.app.javafx.components.bodiesMainPage;
 
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
-import java.util.ArrayList;
 import java.util.List;
-import javafx.geometry.Insets;
+
+import com.jubble.app.javafx.components.GeneratorFX;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -17,57 +13,41 @@ public class BodyGenerators extends VBox {
   public static final int NR_MAX_GENERATORS_PER_PAGE = 6;
   public static final int NR_MAX_GENERATORS_PER_COLUMN = 3;
   public static final int NR_MAX_GENERATORS_PER_ROW = 2;
-  private final GridPane gridForGenerators;
-  private final List<VBox> generatorsInfo;
-  private final List<Integer> generatorsNumbers;
 
-  public BodyGenerators() {
+  private final GridPane gridForGenerators;
+  private List<GeneratorFX> generatorFXList;
+  private int beginIndex;
+  private int endIndex;
+
+  public BodyGenerators(List<GeneratorFX> generatorList, int beginIndex) {
     gridForGenerators = new GridPane();
-    generatorsInfo = new ArrayList<>();
-    generatorsNumbers = new ArrayList<>();
+    this.generatorFXList = generatorList;
+    this.beginIndex = beginIndex;
+
+    if((beginIndex + NR_MAX_GENERATORS_PER_PAGE) > generatorList.size())
+      endIndex = generatorList.size();
+    else
+      endIndex = beginIndex + NR_MAX_GENERATORS_PER_PAGE;
+
+    buildPage();
 
     this.getChildren().add(gridForGenerators);
   }
 
-  public VBox addGenerator(int number, String imagePath) {
-
-    Generator currentGenerator = GeneratorsSingleton.getGenerators().get(number);
-
-    if (generatorsInfo.size() == NR_MAX_GENERATORS_PER_PAGE)
-      throw new IndexOutOfBoundsException("Max Number Generators Reached");
-
-    generatorsNumbers.add(number);
-
-    Label numberOwned = new Label("Qt: " + currentGenerator.getNumberOwned());
-    numberOwned.getStyleClass().add("generator-desc");
-
-    ImageView v = new ImageView(imagePath);
-    v.setFitHeight(70);
-    v.setFitWidth(193);
-
-    VBox info = new VBox(2, v, numberOwned);
-    info.setAlignment(Pos.TOP_CENTER);
-    VBox.setMargin(v, new Insets(2, 0, 0, 0));
-
-    generatorsInfo.add(info);
-
-    if (currentGenerator.getNumberOwned() > 0) info.setVisible(true);
-    else info.setVisible(false);
-
-    return info;
-  }
-
   public void buildPage() {
-    int max = NR_MAX_GENERATORS_PER_COLUMN;
+    int maxXCol = NR_MAX_GENERATORS_PER_COLUMN;
+    int maxXRow = NR_MAX_GENERATORS_PER_ROW;
 
-    for (int i = 0; i < NR_MAX_GENERATORS_PER_ROW + 1; i++) {
+    for (int i = 0; i < maxXRow + 1; i++) {
       ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(100 / (NR_MAX_GENERATORS_PER_ROW + 1));
+      column.setPercentWidth(100 / (maxXRow + 1));
       gridForGenerators.getColumnConstraints().add(column);
     }
 
-    for (int i = 0; i < generatorsInfo.size(); i++) {
-      gridForGenerators.add(generatorsInfo.get(i), (i < max ? max - 1 : 0), (i % max));
+    for (int i = beginIndex; i < endIndex; i++) {
+      gridForGenerators.add(generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
+              (i < maxXCol ? maxXCol - 1 : 0),
+              (i % maxXCol));
     }
 
     gridForGenerators.setPrefWidth(852);
@@ -76,9 +56,9 @@ public class BodyGenerators extends VBox {
   }
 
   public boolean areThereGeneratorsVisible() {
-    for (int i = generatorsNumbers.get(0);
-        i <= generatorsNumbers.get(generatorsNumbers.size() - 1);
-        i++) if (GeneratorsSingleton.getGenerators().get(i).getNumberOwned() > 0) return true;
+    for (int i = beginIndex; i < endIndex; i++)
+      if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible())
+        return true;
 
     return false;
   }

@@ -3,19 +3,16 @@ package com.jubble.app.javafx;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import java.net.URL;
 import java.util.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
@@ -24,10 +21,10 @@ public class ControllerFX implements Initializable {
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
    * 4. Number Owned Of That Generator
    */
-  private static List<List<Label>> generatorLabelsManager;
-  private static List<VBox> generatorVBoxManager;
 
   private Map<String, VBox> bodyPages;
+
+  private static List<GeneratorFX> generatorFXList;
 
   private int pageSelected;
 
@@ -90,11 +87,11 @@ public class ControllerFX implements Initializable {
 
     bodyPages = new HashMap<>();
 
-    generatorLabelsManager = new ArrayList<>();
-    generatorVBoxManager = new ArrayList<>();
+    generatorFXList = new ArrayList<>();
 
     shopPanel.setVisible(false);
 
+    setUpGeneratorFX();
     generateShop();
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
@@ -120,14 +117,24 @@ public class ControllerFX implements Initializable {
     hideShop();
   }
 
+  public void setUpGeneratorFX() {
+
+    List<Generator> generatorList = GeneratorsSingleton.getGenerators();
+
+    for (int i = 0; i < generatorList.size(); i++) {
+      Generator currentGenerator = generatorList.get(i);
+
+      generatorFXList.add(new GeneratorFX(currentGenerator,
+                          "assets/game-components/generator" + i + ".png")
+      );
+
+    }
+
+  }
+
   public void generateShop() {
 
-    ShopGenerator shop = new ShopGenerator(3,
-            GeneratorsSingleton.getGenerators(),
-            generatorLabelsManager,
-            generatorVBoxManager
-    );
-
+    ShopGenerator shop = new ShopGenerator(3, generatorFXList );
 
     shop.generateShopPanel();
 
@@ -137,50 +144,17 @@ public class ControllerFX implements Initializable {
 
   public void generatePageGenerator() {
 
-    int length = GeneratorsSingleton.getGenerators().size();
-
-    final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
-
     int counter = 0;
 
-    int maxItimes = ((length / max) + ((length % max == 0) ? 0 : 1));
+    for(int i = 0; i < generatorFXList.size(); i++) {
+      if(i % BodyGenerators.NR_MAX_GENERATORS_PER_PAGE == 0) {
 
-    for (int i = 0; i < maxItimes; i++) {
-
-      BodyGenerators body = new BodyGenerators();
-
-      /**
-       * maxItimes is the number of pages of generators needed when generators number is more than
-       * max that is NR_MAX_GENERATORS_PER_PAGE
-       *
-       * <p>Therefore the outer cycle represents page creation.
-       *
-       * <p>Inner cycle is the generator creation which must repeat NR_MAX_GENERATORS_PER_PAGE if
-       * the number of generators for that page is sufficient to fill it completely or it must
-       * repeat only for less times that would be the number of the generators left to put. This
-       * case happens when numberOfGenerators % NR_MAX_GENERATORS_PER_PAGE != 0
-       */
-      for (int j = 0;
-          j
-              < ((((maxItimes == (length / max)) ? maxItimes : (maxItimes - 1)) == i)
-                  ? (length % max)
-                  : max);
-          j++) {
-
-        generatorVBoxManager.add(
-            body.addGenerator(counter, "assets/game-components/generator" + counter + ".png"));
-
-        generatorLabelsManager
-            .get(counter)
-            .add((Label) generatorVBoxManager.get(counter).getChildren().get(1));
+        bodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
 
         counter++;
       }
-
-      body.buildPage();
-
-      bodyPages.put("page" + i, body);
     }
+
   }
 
   public void switchPage(int newPageNumber) {
