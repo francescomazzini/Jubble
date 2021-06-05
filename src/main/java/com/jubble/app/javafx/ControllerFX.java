@@ -2,9 +2,9 @@ package com.jubble.app.javafx;
 
 import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
+import com.jubble.app.components.generator.Generator;
 import com.jubble.app.javafx.pages.bodies.BodyGenerators;
 import com.jubble.app.javafx.tasks.BalanceTask;
-import com.jubble.app.javafx.tasks.CostNextTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import com.jubble.app.utils.Assets;
 import java.net.URL;
@@ -27,9 +27,8 @@ public class ControllerFX implements Initializable {
    * Contains 3 labels for each generator: <br>
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
    */
-  private List<List<Label>> generatorLabels;
-
-  private List<ImageView> generatorImageViews;
+  private List<List<Label>> generatorLabelsManager;
+  private List<VBox> generatorVBoxManager;
 
   private Map<String, VBox> bodyPages;
 
@@ -39,9 +38,6 @@ public class ControllerFX implements Initializable {
    * Each of the following variables refers to an existing javafx object which is contained in FXML
    * file and it has an ID equals to the name of these variables
    */
-  @FXML private Button left_arrow;
-
-  @FXML private ScrollPane scroll_pane_shop;
 
   @FXML private AnchorPane anchor_pane_shop;
 
@@ -50,8 +46,6 @@ public class ControllerFX implements Initializable {
   @FXML private Label balanceLabel;
 
   @FXML private VBox shopPanel;
-
-  @FXML private GridPane pageGrid;
 
   @FXML private Label totalProductionLabel;
 
@@ -73,28 +67,12 @@ public class ControllerFX implements Initializable {
 
   @FXML
   public void switchPageLeft() {
-    int nrPageWanted = pageSelected + 1;
-    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
-    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
-
-    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected++;
-
-    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
-    main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get(pageWanted));
+    switchPage(true);
   }
 
   @FXML
   public void switchPageRight() {
-    int nrPageWanted = pageSelected - 1;
-    String pageWanted = "page" + ((nrPageWanted > 9) ? nrPageWanted : ("0" + nrPageWanted));
-    BodyGenerators body = (BodyGenerators) bodyPages.get(pageWanted);
-
-    if (body != null) if (body.areThereGeneratorsVisible()) pageSelected--;
-
-    pageWanted = "page" + ((pageSelected > 9) ? pageSelected : ("0" + pageSelected));
-    main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get(pageWanted));
+    switchPage(false);
   }
 
   /**
@@ -116,8 +94,8 @@ public class ControllerFX implements Initializable {
 
     bodyPages = new HashMap<>();
 
-    generatorLabels = new ArrayList<>();
-    generatorImageViews = new ArrayList<>();
+    generatorLabelsManager = new ArrayList<>();
+    generatorVBoxManager = new ArrayList<>();
 
     shopPanel.setVisible(false);
 
@@ -129,7 +107,8 @@ public class ControllerFX implements Initializable {
     generatePageGenerator();
 
     main_body.getChildren().clear();
-    main_body.getChildren().add(bodyPages.get("page00"));
+    //here
+    main_body.getChildren().add(bodyPages.get("page0"));
 
     BalanceTask balTask = new BalanceTask();
 
@@ -142,13 +121,6 @@ public class ControllerFX implements Initializable {
 
     ThreadTaskUtil.autoBuild(prodTask);
 
-    for (int i = 0; i < generatorLabels.size(); i++) {
-      CostNextTask costTask = new CostNextTask(i);
-
-      generatorLabels.get(i).get(2).textProperty().bind(costTask.messageProperty());
-
-      ThreadTaskUtil.autoBuild(costTask);
-    }
 
     hideShop();
   }
@@ -173,31 +145,46 @@ public class ControllerFX implements Initializable {
     }
 
     for (int i = 0; i < length; i++) {
-      Label n = new Label(Assets.getGenerators().get(i).getName());
-      Label p =
+      Generator currentGenerator = Assets.getGenerators().get(i);
+
+      Label nameGeneratorLabel =
+              new Label(currentGenerator.getName());
+
+      Label productionGeneratorLabel =
           new Label(
               "Production: "
                   + String.format(
                       Locale.US,
                       "%,.2f",
-                      Assets.getGenerators().get(i).getProductionBase())
-                  + "/s");
-      Label c = new Label("Cost: " + Assets.getGenerators().get(i).getNextCost());
+                      currentGenerator.getProductionBase())
+                  + "/s"
+          );
 
-      n.getStyleClass().add("generator-title");
-      p.getStyleClass().add("generator-desc");
-      c.getStyleClass().add("generator-desc");
+      Label costGeneratorLabel =
+              new Label(
+                      "Cost: "
+                      + String.format(
+                              Locale.US,
+                              "%,.2f",
+                              currentGenerator.getNextCost()
+                      )
+              );
+
+      nameGeneratorLabel.getStyleClass().add("generator-title");
+      productionGeneratorLabel.getStyleClass().add("generator-desc");
+      costGeneratorLabel.getStyleClass().add("generator-desc");
 
       ImageView v =
           new ImageView("assets/game-components/generator" + i + ".png");
       v.setFitHeight(58);
       v.setFitWidth(160);
 
-      generatorLabels.add(new ArrayList<>());
+      //NEW MANAGER LETS TRY
+      generatorLabelsManager.add(new ArrayList<>());
 
-      generatorLabels.get(i).add(n);
-      generatorLabels.get(i).add(p);
-      generatorLabels.get(i).add(c);
+      generatorLabelsManager.get(i).add(nameGeneratorLabel);
+      generatorLabelsManager.get(i).add(productionGeneratorLabel);
+      generatorLabelsManager.get(i).add(costGeneratorLabel);
 
       Button b = new Button("Buy");
       b.setId(i + "");
@@ -210,7 +197,7 @@ public class ControllerFX implements Initializable {
       VBox botPadding = new VBox();
       botPadding.setMinHeight(15);
 
-      VBox vbx = new VBox(topPadding, v, n, p, c, botPadding, b);
+      VBox vbx = new VBox(topPadding, v, nameGeneratorLabel, productionGeneratorLabel, costGeneratorLabel, botPadding, b);
       vbx.setAlignment(Pos.TOP_CENTER);
       vbx.setMinHeight(100);
 
@@ -253,18 +240,22 @@ public class ControllerFX implements Initializable {
                   : max);
           j++) {
 
-        body.addGenerator(
+        generatorVBoxManager.add(body.addGenerator(
             counter,
             "assets/game-components/generator"
                 + counter
-                + ".png");
+                + ".png"));
+
+        generatorLabelsManager.get(counter).add(
+                (Label) generatorVBoxManager.get(counter).getChildren().get(1)
+        );
 
         counter++;
       }
 
       body.buildPage();
 
-      bodyPages.put(("page" + ((i > 9) ? i : ("0" + i))), body);
+      bodyPages.put("page" + i, body);
     }
   }
 
@@ -273,9 +264,41 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
+    Generator currentGenerator = Assets.getGenerators().get(id);
+
     if (bal.getPrimary() > Assets.getGenerators().get(id).getNextCost()) {
       bal.setPrimary(bal.getPrimary() - Assets.getGenerators().get(id).getNextCost());
-      Assets.getGenerators().get(id).incrementNumberOwned();
+      currentGenerator.incrementNumberOwned();
     }
+
+    generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
+    generatorLabelsManager.get(id).get(3).setText("Qt: " + currentGenerator.getNumberOwned());
+
+    if(currentGenerator.getNumberOwned() > 0)
+      generatorVBoxManager.get(id).setVisible(true);
+
   }
+
+  public void switchPage(boolean left) {
+
+    int copyOfPageSelected = pageSelected;
+
+    if(left)
+      pageSelected++;
+    else
+      pageSelected--;
+
+    String namePageWanted = "page" + pageSelected;
+    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
+
+    if (bodyWanted != null)
+      if (bodyWanted.areThereGeneratorsVisible()) {
+        main_body.getChildren().clear();
+        main_body.getChildren().add(bodyWanted);
+        return;
+      }
+
+    pageSelected = copyOfPageSelected;
+  }
+
 }

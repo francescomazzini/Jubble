@@ -1,7 +1,6 @@
 package com.jubble.app.javafx.pages.bodies;
 
-import com.jubble.app.javafx.ThreadTaskUtil;
-import com.jubble.app.javafx.tasks.NumberOwnedTask;
+import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.Assets;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,9 @@ public class BodyGenerators extends VBox {
     this.getChildren().add(gridForGenerators);
   }
 
-  public void addGenerator(int number, String imagePath) {
+  public VBox addGenerator(int number, String imagePath) {
+
+    Generator currentGenerator = Assets.getGenerators().get(number);
 
     if (generatorsInfo.size() == NR_MAX_GENERATORS_PER_PAGE)
       throw new IndexOutOfBoundsException("Max Number Generators Reached");
@@ -38,24 +39,25 @@ public class BodyGenerators extends VBox {
     generatorsNumbers.add(number);
 
     Label numberOwned =
-        new Label("Nr: " + Assets.getGenerators().get(number).getNumberOwned());
+        new Label("Qt: " + currentGenerator.getNumberOwned());
     numberOwned.getStyleClass().add("generator-desc");
-    numberOwned.setVisible(false);
 
     ImageView v = new ImageView(imagePath);
     v.setFitHeight(70);
     v.setFitWidth(193);
-    v.setVisible(false);
-
-    NumberOwnedTask nrTask = new NumberOwnedTask(number, v, numberOwned);
-    numberOwned.textProperty().bind(nrTask.messageProperty());
-    ThreadTaskUtil.autoBuild(nrTask);
 
     VBox info = new VBox(2, v, numberOwned);
     info.setAlignment(Pos.TOP_CENTER);
     VBox.setMargin(v, new Insets(2, 0, 0, 0));
 
     generatorsInfo.add(info);
+
+    if(currentGenerator.getNumberOwned() > 0)
+      info.setVisible(true);
+    else
+      info.setVisible(false);
+
+    return info;
   }
 
   public void buildPage() {
