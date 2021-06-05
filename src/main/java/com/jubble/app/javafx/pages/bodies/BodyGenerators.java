@@ -38,8 +38,7 @@ public class BodyGenerators extends VBox {
 
     generatorsNumbers.add(number);
 
-    Label numberOwned =
-        new Label("Qt: " + currentGenerator.getNumberOwned());
+    Label numberOwned = new Label("Qt: " + currentGenerator.getNumberOwned());
     numberOwned.getStyleClass().add("generator-desc");
 
     ImageView v = new ImageView(imagePath);
@@ -52,10 +51,8 @@ public class BodyGenerators extends VBox {
 
     generatorsInfo.add(info);
 
-    if(currentGenerator.getNumberOwned() > 0)
-      info.setVisible(true);
-    else
-      info.setVisible(false);
+    if (currentGenerator.getNumberOwned() > 0) info.setVisible(true);
+    else info.setVisible(false);
 
     return info;
   }
