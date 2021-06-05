@@ -1,4 +1,4 @@
-package com.jubble.app.javafx.pages.bodies;
+package com.jubble.app.javafx.components.bodiesMainPage;
 
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.Assets;

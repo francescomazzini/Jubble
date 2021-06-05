@@ -3,7 +3,8 @@ package com.jubble.app.javafx;
 import com.jubble.app.ThreadRunner;
 import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.javafx.pages.bodies.BodyGenerators;
+import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
+import com.jubble.app.javafx.components.popups.ShopGenerator;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
 import com.jubble.app.utils.Assets;
@@ -15,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
@@ -26,9 +26,10 @@ public class ControllerFX implements Initializable {
   /**
    * Contains 3 labels for each generator: <br>
    * 1. Name of the generator; 2. The production of the generator; 3. Next cost of the generator.
+   * 4. Number Owned Of That Generator
    */
-  private List<List<Label>> generatorLabelsManager;
-  private List<VBox> generatorVBoxManager;
+  private static List<List<Label>> generatorLabelsManager;
+  private static List<VBox> generatorVBoxManager;
 
   private Map<String, VBox> bodyPages;
 
@@ -107,7 +108,6 @@ public class ControllerFX implements Initializable {
     generatePageGenerator();
 
     main_body.getChildren().clear();
-    //here
     main_body.getChildren().add(bodyPages.get("page0"));
 
     BalanceTask balTask = new BalanceTask();
@@ -127,85 +127,17 @@ public class ControllerFX implements Initializable {
 
   public void generateShop() {
 
-    GridPane shopGrid = new GridPane();
+    ShopGenerator shop = new ShopGenerator(3,
+            Assets.getInstance().getGenerators(),
+            bal,
+            generatorLabelsManager,
+            generatorVBoxManager
+    );
 
-    final int maxPerRow = 3;
-
-    int length = Assets.getInstance().getGenerators().size();
-
-    for (int i = 0; i < maxPerRow; i++) {
-      ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(100 / maxPerRow);
-      shopGrid.getColumnConstraints().add(column);
-    }
-
-    for (int i = 0; i < (length / 3 + ((length % 3 == 0) ? 0 : 1)); i++) {
-      RowConstraints row = new RowConstraints(220);
-      shopGrid.getRowConstraints().add(row);
-    }
-
-    for (int i = 0; i < length; i++) {
-      Generator currentGenerator = Assets.getInstance().getGenerators().get(i);
-
-      Label nameGeneratorLabel =
-              new Label(currentGenerator.getName());
-
-      Label productionGeneratorLabel =
-          new Label(
-              "Production: "
-                  + String.format(
-                      Locale.US,
-                      "%,.2f",
-                      currentGenerator.getProductionBase())
-                  + "/s"
-          );
-
-      Label costGeneratorLabel =
-              new Label(
-                      "Cost: "
-                      + String.format(
-                              Locale.US,
-                              "%,.2f",
-                              currentGenerator.getNextCost()
-                      )
-              );
-
-      nameGeneratorLabel.getStyleClass().add("generator-title");
-      productionGeneratorLabel.getStyleClass().add("generator-desc");
-      costGeneratorLabel.getStyleClass().add("generator-desc");
-
-      ImageView v =
-          new ImageView("assets/game-components/generator" + i + ".png");
-      v.setFitHeight(58);
-      v.setFitWidth(160);
-
-      //NEW MANAGER LETS TRY
-      generatorLabelsManager.add(new ArrayList<>());
-
-      generatorLabelsManager.get(i).add(nameGeneratorLabel);
-      generatorLabelsManager.get(i).add(productionGeneratorLabel);
-      generatorLabelsManager.get(i).add(costGeneratorLabel);
-
-      Button b = new Button("Buy");
-      b.setId(i + "");
-      b.setOnAction(this::buyGenerator);
-      b.getStyleClass().add("button-buy");
-
-      VBox topPadding = new VBox();
-      topPadding.setMinHeight(25);
-
-      VBox botPadding = new VBox();
-      botPadding.setMinHeight(15);
-
-      VBox vbx = new VBox(topPadding, v, nameGeneratorLabel, productionGeneratorLabel, costGeneratorLabel, botPadding, b);
-      vbx.setAlignment(Pos.TOP_CENTER);
-      vbx.setMinHeight(100);
-
-      shopGrid.add(vbx, (i % maxPerRow), (i / maxPerRow));
-    }
+    shop.generateShopPanel();
 
     anchor_pane_shop.getChildren().clear();
-    anchor_pane_shop.getChildren().add(shopGrid);
+    anchor_pane_shop.getChildren().add(shop);
   }
 
   public void generatePageGenerator() {
@@ -257,26 +189,6 @@ public class ControllerFX implements Initializable {
 
       bodyPages.put("page" + i, body);
     }
-  }
-
-  public void buyGenerator(ActionEvent event) {
-
-    Button b = (Button) event.getSource();
-    int id = Integer.parseInt(b.getId());
-
-    Generator currentGenerator = Assets.getInstance().getGenerators().get(id);
-
-    if (bal.getPrimary() > Assets.getInstance().getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
-      currentGenerator.incrementNumberOwned();
-    }
-
-    generatorLabelsManager.get(id).get(2).setText("Cost: " + String.format(Locale.US, "%,.2f", currentGenerator.getNextCost()));
-    generatorLabelsManager.get(id).get(3).setText("Qt: " + currentGenerator.getNumberOwned());
-
-    if(currentGenerator.getNumberOwned() > 0)
-      generatorVBoxManager.get(id).setVisible(true);
-
   }
 
   public void switchPage(boolean left) {
