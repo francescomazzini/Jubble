@@ -10,10 +10,10 @@ public class Settings {
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
     final int FIRST = 0;
-    if (!Assets.getInstance().getGenerators().get(FIRST).isNumberOwnedDefault())
+    if (!Assets.getGenerators().get(FIRST).isNumberOwnedDefault())
       throw new IllegalOperationException();
 
-    Assets.getInstance().getGenerators().get(FIRST).incrementNumberOwned();
+    Assets.getGenerators().get(FIRST).incrementNumberOwned();
   }
 
   public static List<Currency> getCurrencies() {

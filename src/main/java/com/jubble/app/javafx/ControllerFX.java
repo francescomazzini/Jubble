@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
@@ -101,7 +100,7 @@ public class ControllerFX implements Initializable {
 
     generateShop();
 
-    int nGenerators = Assets.getInstance().getGenerators().size();
+    int nGenerators = Assets.getGenerators().size();
     anchor_pane_shop.setMinHeight(220 * (nGenerators / 3 + ((nGenerators % 3 == 0) ? 0 : 1)));
 
     generatePageGenerator();
@@ -131,7 +130,7 @@ public class ControllerFX implements Initializable {
 
     final int maxPerRow = 3;
 
-    int length = Assets.getInstance().getGenerators().size();
+    int length = Assets.getGenerators().size();
 
     for (int i = 0; i < maxPerRow; i++) {
       ColumnConstraints column = new ColumnConstraints();
@@ -145,7 +144,7 @@ public class ControllerFX implements Initializable {
     }
 
     for (int i = 0; i < length; i++) {
-      Generator currentGenerator = Assets.getInstance().getGenerators().get(i);
+      Generator currentGenerator = Assets.getGenerators().get(i);
 
       Label nameGeneratorLabel =
               new Label(currentGenerator.getName());
@@ -210,7 +209,7 @@ public class ControllerFX implements Initializable {
 
   public void generatePageGenerator() {
 
-    int length = Assets.getInstance().getGenerators().size();
+    int length = Assets.getGenerators().size();
 
     final int max = BodyGenerators.NR_MAX_GENERATORS_PER_PAGE;
 
@@ -264,10 +263,10 @@ public class ControllerFX implements Initializable {
     Button b = (Button) event.getSource();
     int id = Integer.parseInt(b.getId());
 
-    Generator currentGenerator = Assets.getInstance().getGenerators().get(id);
+    Generator currentGenerator = Assets.getGenerators().get(id);
 
-    if (bal.getPrimary() > Assets.getInstance().getGenerators().get(id).getNextCost()) {
-      bal.setPrimary(bal.getPrimary() - Assets.getInstance().getGenerators().get(id).getNextCost());
+    if (bal.getPrimary() > Assets.getGenerators().get(id).getNextCost()) {
+      bal.setPrimary(bal.getPrimary() - Assets.getGenerators().get(id).getNextCost());
       currentGenerator.incrementNumberOwned();
     }
 

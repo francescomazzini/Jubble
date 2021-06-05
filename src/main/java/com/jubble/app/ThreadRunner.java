@@ -25,8 +25,8 @@ public class ThreadRunner {
     gameBalance = new Balance();
     gameBalance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < Assets.getInstance().getGenerators().size(); i++) {
-      Assets.getInstance().getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    for (int i = 0; i < Assets.getGenerators().size(); i++) {
+      Assets.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
     }
   }
 
@@ -57,7 +57,7 @@ public class ThreadRunner {
 
     GameProgress progress =
         new GameProgress(
-            Assets.getInstance().getGenerators().stream()
+            Assets.getGenerators().stream()
                 .map(Generator::getNumberOwned)
                 .collect(Collectors.toList()),
             gameBalance.getPrimary());

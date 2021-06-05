@@ -31,7 +31,7 @@ public class BodyGenerators extends VBox {
 
   public VBox addGenerator(int number, String imagePath) {
 
-    Generator currentGenerator = Assets.getInstance().getGenerators().get(number);
+    Generator currentGenerator = Assets.getGenerators().get(number);
 
     if (generatorsInfo.size() == NR_MAX_GENERATORS_PER_PAGE)
       throw new IndexOutOfBoundsException("Max Number Generators Reached");
@@ -81,7 +81,7 @@ public class BodyGenerators extends VBox {
   public boolean areThereGeneratorsVisible() {
     for (int i = generatorsNumbers.get(0);
         i <= generatorsNumbers.get(generatorsNumbers.size() - 1);
-        i++) if (Assets.getInstance().getGenerators().get(i).getNumberOwned() > 0) return true;
+        i++) if (Assets.getGenerators().get(i).getNumberOwned() > 0) return true;
 
     return false;
   }
