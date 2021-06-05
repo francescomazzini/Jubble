@@ -3,31 +3,40 @@ package com.jubble.app.components;
 import com.jubble.app.utils.Settings;
 
 /**
- * This class contains all the currencies used in this game. Primary is the primary currency and it
- * uses synchronized methods because it is often accessed by more than one thread
+ * Bill Pugh Singleton pattern Implementation.
+ * This class contains all the currencies used in this game.
+ * The use of the singleton pattern ensures an unique instance
+ * of this class across the app.
  */
 public class Balance {
+  /**
+   * Primary currency of the game.
+   */
   private Currency primary;
 
-  public Balance() {
+  private Balance() {
     this.primary = Settings.getCurrencies().get(0);
   }
 
-  /**
-   * Get amount of primary currency owned by the player
-   *
-   * @return amount of primary currency owned
-   */
-  public synchronized double getPrimary() {
-    return primary.getOwned();
+  private static class BalanceCage {
+    private static final Balance INSTANCE = new Balance();
   }
 
   /**
-   * Set amount of primary currency owned by the player
+   * Get amount of primary currency owned by the player.
+   *
+   * @return amount of primary currency owned
+   */
+  public static synchronized double getPrimary() {
+    return BalanceCage.INSTANCE.primary.getOwned();
+  }
+
+  /**
+   * Set amount of primary currency owned by the player.
    *
    * @param amount is the amount of primary currency owned by the player
    */
-  public synchronized void setPrimary(double amount) {
-    primary.setOwned(amount);
+  public static synchronized void setPrimary(double amount) {
+    BalanceCage.INSTANCE.primary.setOwned(amount);
   }
 }
