@@ -29,11 +29,7 @@ public class ControllerFX implements Initializable {
    */
   private static List<GeneratorFX> generatorFXList;
 
-  /**
-   * pageSelected represent the current body page selected, at the beginning it will be 0, which means
-   * that the first page shown is "page0"
-   */
-  private int pageSelected;
+  private int currentSelectedPage = 0;
 
   /**
    * Each of the following variables refers to an existing javafx object which is contained in FXML
@@ -77,18 +73,18 @@ public class ControllerFX implements Initializable {
       if (bodyWanted.areThereGeneratorsVisible()) {
         mainBody.getChildren().clear();
         mainBody.getChildren().add(bodyWanted);
-        this.pageSelected = newPageNumber;
+        this.currentSelectedPage = newPageNumber;
       }
   }
 
   @FXML
   public void switchMainPageLeft() {
-    switchMainPage(pageSelected + 1);
+    switchMainPage(currentSelectedPage + 1);
   }
 
   @FXML
   public void switchMainPageRight() {
-    switchMainPage(pageSelected - 1);
+    switchMainPage(currentSelectedPage - 1);
   }
 
   /**
@@ -172,7 +168,6 @@ public class ControllerFX implements Initializable {
    */
   public void generatePageGenerator() {
 
-    pageSelected = 0;
     bodyPages = new HashMap<>();
 
     int counter = 0;
