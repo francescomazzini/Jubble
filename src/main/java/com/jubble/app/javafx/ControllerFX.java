@@ -51,18 +51,20 @@ public class ControllerFX implements Initializable {
 
   @FXML private VBox shopPanelContainer;
 
-  /** this method set the shop panel visible */
-  @FXML
-  public void displayShop() {
-    shopPanelContainer.setVisible(true);
-    shopPanel.setVisible(true);
+
+  private void setShopVisibility(boolean status) {
+    shopPanelContainer.setVisible(status);
+    shopPanel.setVisible(status);
   }
 
-  /** this method set the shop panel hidden */
   @FXML
-  public void hideShop() {
-    shopPanelContainer.setVisible(false);
-    shopPanel.setVisible(false);
+  public void showShopPanel() {
+    setShopVisibility(true);
+  }
+
+  @FXML
+  public void hideShopPanel() {
+    setShopVisibility(false);
   }
 
   /** this method switch the page to left, incrementing the current pageSelected */
@@ -147,7 +149,7 @@ public class ControllerFX implements Initializable {
     int nGenerators = GeneratorsSingleton.getGenerators().size();
     shopAnchorPane.setMinHeight(220 * Math.ceil(nGenerators / 3.0));
 
-    hideShop();
+    hideShopPanel();
   }
 
   /**
