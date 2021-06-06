@@ -134,19 +134,17 @@ public class ControllerFX implements Initializable {
     }
   }
 
-  /**
-   * Set up the graphical representation of the {@link com.jubble.app.components.Balance} class
-   */
+  /** Set up the graphical representation of the {@link com.jubble.app.components.Balance} class */
   public void setUpBalanceFX() {
     new BalanceFX(balanceLabel, totalProductionLabel);
   }
 
   /**
-   * Generates the Shop pane instantiating {@link com.jubble.app.javafx.components.popups.ShopGenerator}
-   * and adding it to the Anchor Pane which is the actual popup.
-   * Thus the popup size must be set according to the number of Generators
-   * which must be inside it.
-   * The the shop is hidden by default, the visibility is toggled by player action.
+   * Generates the Shop pane instantiating {@link
+   * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the Anchor Pane which
+   * is the actual popup. Thus the popup size must be set according to the number of Generators
+   * which must be inside it. The the shop is hidden by default, the visibility is toggled by player
+   * action.
    */
   public void generateShopPane() {
 
