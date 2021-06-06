@@ -14,14 +14,14 @@ import javafx.scene.layout.VBox;
 
 public class GeneratorFX {
 
-  private Generator generator;
-  private Label nameGeneratorLabel;
-  private Label productionGeneratorLabel;
-  private Label costGeneratorLabel;
-  private Label numberOwnedGeneratorLabel;
-  private ImageView imageGeneratorShopIcon;
-  private ImageView imageGeneratorPageIcon;
-  private Button buttonBuyGenerator;
+  private final Generator generator;
+  private final Label nameGeneratorLabel;
+  private final Label productionGeneratorLabel;
+  private final Label costGeneratorLabel;
+  private final Label numberOwnedGeneratorLabel;
+  private final ImageView imageGeneratorShopIcon;
+  private final ImageView imageGeneratorPageIcon;
+  private final Button buttonBuyGenerator;
 
   private VBox wrapperGeneratorAsShopElement;
   private VBox wrapperGeneratorAsPageElement;
@@ -114,8 +114,7 @@ public class GeneratorFX {
     wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
     VBox.setMargin(imageGeneratorPageIcon, new Insets(2, 0, 0, 0));
 
-    if (generator.getNumberOwned() > 0) wrapperGeneratorAsPageElement.setVisible(true);
-    else wrapperGeneratorAsPageElement.setVisible(false);
+    wrapperGeneratorAsPageElement.setVisible(!generator.isZeroOwned());
   }
 
   public VBox getWrapperGeneratorAsShopElement() {
@@ -137,6 +136,6 @@ public class GeneratorFX {
     setCostGeneratorLabel();
     setNumberOwnedGeneratorLabel();
 
-    if (generator.getNumberOwned() > 0) wrapperGeneratorAsPageElement.setVisible(true);
+    if (!generator.isZeroOwned()) wrapperGeneratorAsPageElement.setVisible(true);
   }
 }

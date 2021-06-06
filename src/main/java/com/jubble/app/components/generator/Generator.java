@@ -46,7 +46,7 @@ public class Generator extends GeneratorID {
    *
    * @return true if numberOwned is default.
    */
-  public boolean isNumberOwnedDefault() {
+  public boolean isZeroOwned() {
     return numberOwned == DEFAULT_NUMBER_OWNED_GENERATORS;
   }
 

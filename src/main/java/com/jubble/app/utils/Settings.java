@@ -11,7 +11,7 @@ public class Settings {
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
     final int FIRST = 0;
-    if (!GeneratorsSingleton.getGenerators().get(FIRST).isNumberOwnedDefault())
+    if (!GeneratorsSingleton.getGenerators().get(FIRST).isZeroOwned())
       throw new IllegalOperationException();
 
     GeneratorsSingleton.getGenerators().get(FIRST).incrementNumberOwned();
