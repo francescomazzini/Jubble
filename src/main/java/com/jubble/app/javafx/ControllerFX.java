@@ -96,7 +96,7 @@ public class ControllerFX implements Initializable {
    *     <li>calls {@link #setUpBalanceFX()} which set up the Balance FX elements</li>
    *     <li>calls {@link #setUpGeneratorFX()} which set up the Generator FX elements for each Generator FX</li>
    *     <li>calls {@link #generateShop()} which generate the graphic of the shop panel </li>
-   *     <li>calls {@link #generatePageGenerator()} which generate the graphic of the place of Generator FX in the background </li>
+   *     <li>calls {@link #generateGeneratorPage()} which generate the graphic of the place of Generator FX in the background </li>
    * </ul>
    *
    * @param url not used
@@ -108,7 +108,7 @@ public class ControllerFX implements Initializable {
     setUpBalanceFX();
     setUpGeneratorFX();
     generateShop();
-    generatePageGenerator();
+    generateGeneratorPage();
 
   }
 
@@ -167,14 +167,13 @@ public class ControllerFX implements Initializable {
    * This page created using {@link com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators} is put
    * in the HashMap which contains all the pages and associate them a String, like "page0", "page9",...
    */
-  public void generatePageGenerator() {
-
+  public void generateGeneratorPage() {
     bodyPages = new HashMap<>();
 
     int counter = 0;
 
     for(int i = 0; i < generatorFXList.size(); i++) {
-      if(i % BodyGenerators.NR_MAX_GENERATORS_PER_PAGE == 0) {
+      if(i % BodyGenerators.MAX_GENERATORS_PER_PAGE == 0) {
 
         bodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
 
