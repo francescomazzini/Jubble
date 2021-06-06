@@ -6,6 +6,7 @@ import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
+import com.jubble.app.javafx.components.popups.ShopPos;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
 import java.net.URL;
 import java.util.*;
@@ -148,16 +149,15 @@ public class ControllerFX implements Initializable {
    * to the number of Generators which must be inside it. The the shop is hidden by default
    */
   public void generateShop() {
-    final int MAX_GENERATORS_PER_ROW = 3;
 
-    ShopGenerator shop = new ShopGenerator(MAX_GENERATORS_PER_ROW, generatorFXList);
+    ShopGenerator shop = new ShopGenerator(generatorFXList);
 
     shop.generateShopPanel();
 
     shopAnchorPane.getChildren().add(shop);
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
-    shopAnchorPane.setMinHeight(220 * Math.ceil((double)nGenerators / MAX_GENERATORS_PER_ROW));
+    shopAnchorPane.setMinHeight(220 * Math.ceil((double)nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 
     hideShopPanel();
   }
