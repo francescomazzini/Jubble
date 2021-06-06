@@ -31,10 +31,11 @@ public class BodyGenerators extends VBox {
   }
 
   public void buildPage() {
+    final double HUNDRED = 100.0;
 
     for (int i = 0; i < MAX_GENERATORS_PER_ROW + 1; i++) {
       ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(100 / (MAX_GENERATORS_PER_ROW + 1));
+      column.setPercentWidth(HUNDRED / (MAX_GENERATORS_PER_ROW + 1));
       gridForGenerators.getColumnConstraints().add(column);
     }
 
@@ -44,8 +45,10 @@ public class BodyGenerators extends VBox {
               (i % MAX_GENERATORS_PER_COLUMN));
     }
 
-    gridForGenerators.setPrefWidth(852);
-    gridForGenerators.setPrefHeight(332);
+    final int WIDTH = 852;
+    final int HEIGHT = 332;
+    gridForGenerators.setPrefWidth(WIDTH);
+    gridForGenerators.setPrefHeight(HEIGHT);
     gridForGenerators.setAlignment(Pos.CENTER);
   }
 
