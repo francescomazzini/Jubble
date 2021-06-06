@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.tasks;
 
+import com.jubble.app.utils.NumberNames;
 import com.jubble.app.utils.Settings;
-import java.util.Locale;
 
 public class BalanceTask extends AbstractTask {
 
@@ -31,7 +31,7 @@ public class BalanceTask extends AbstractTask {
    */
   @Override
   protected void updateProgress(double v, double v1) {
-    updateMessage(String.format(Locale.US, "%,.2f", v) + " ");
+    updateMessage(NumberNames.createString(v));
     super.updateProgress(v, v1);
   }
 }
