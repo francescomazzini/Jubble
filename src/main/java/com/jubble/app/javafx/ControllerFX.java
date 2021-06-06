@@ -97,7 +97,7 @@ public class ControllerFX implements Initializable {
    *   <li>calls {@link #setUpBalanceFX()} which set up the Balance FX elements
    *   <li>calls {@link #setUpGeneratorFX()} which set up the Generator FX elements for each
    *       Generator FX
-   *   <li>calls {@link #generateShop()} which generate the graphic of the shop panel
+   *   <li>calls {@link #generateShopPane()} which generate the graphic of the shop panel
    *   <li>calls {@link #generateGeneratorPage()} which generate the graphic of the place of
    *       Generator FX in the background
    * </ul>
@@ -110,7 +110,7 @@ public class ControllerFX implements Initializable {
 
     setUpBalanceFX();
     setUpGeneratorFX();
-    generateShop();
+    generateShopPane();
     generateGeneratorPage();
   }
 
@@ -134,21 +134,19 @@ public class ControllerFX implements Initializable {
     }
   }
 
-  /**
-   * This method set up all the graphic elements for the graphical representation of the {@link
-   * com.jubble.app.components.Balance} class
-   */
+  /** Set up the graphical representation of the {@link com.jubble.app.components.Balance} class */
   public void setUpBalanceFX() {
     new BalanceFX(balanceLabel, totalProductionLabel);
   }
 
   /**
-   * This method generates the Shop pane creating an object of {@link
+   * Generates the Shop pane instantiating {@link
    * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the Anchor Pane which
    * is the actual popup. Thus the popup size must be set according to the number of Generators
-   * which must be inside it. The the shop is hidden by default
+   * which must be inside it. The the shop is hidden by default, the visibility is toggled by player
+   * action.
    */
-  public void generateShop() {
+  public void generateShopPane() {
 
     ShopGenerator shop = new ShopGenerator(generatorFXList);
 
