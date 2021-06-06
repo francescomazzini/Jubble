@@ -4,7 +4,9 @@ import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
+import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
+import com.jubble.app.javafx.components.popups.ShopPos;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
 import java.net.URL;
 import java.util.*;
@@ -29,11 +31,7 @@ public class ControllerFX implements Initializable {
    */
   private static List<GeneratorFX> generatorFXList;
 
-  /**
-   * pageSelected represent the current body page selected, at the beginning it will be 0, which means
-   * that the first page shown is "page0"
-   */
-  private int pageSelected;
+  private int currentSelectedPage = 0;
 
   /**
    * Each of the following variables refers to an existing javafx object which is contained in FXML
@@ -51,30 +49,44 @@ public class ControllerFX implements Initializable {
 
   @FXML private VBox shopPanelContainer;
 
-  /** this method set the shop panel visible */
-  @FXML
-  public void displayShop() {
-    shopPanelContainer.setVisible(true);
-    shopPanel.setVisible(true);
+
+  private void setShopVisibility(boolean status) {
+    shopPanelContainer.setVisible(status);
+    shopPanel.setVisible(status);
   }
 
-  /** this method set the shop panel hidden */
   @FXML
-  public void hideShop() {
-    shopPanelContainer.setVisible(false);
-    shopPanel.setVisible(false);
+  public void showShopPanel() {
+    setShopVisibility(true);
   }
 
-  /** this method switch the page to left, incrementing the current pageSelected */
   @FXML
-  public void switchPageLeft() {
-    switchPage(pageSelected + 1);
+  public void hideShopPanel() {
+    setShopVisibility(false);
   }
 
-  /** this method switch the page to right, decrementing the current pageSelected */
+
+  public void switchMainPage(int newPageNumber) {
+    String namePageWanted = "page" + newPageNumber;
+
+    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
+
+    if (bodyWanted != null)
+      if (bodyWanted.areThereGeneratorsVisible()) {
+        mainBody.getChildren().clear();
+        mainBody.getChildren().add(bodyWanted);
+        this.currentSelectedPage = newPageNumber;
+      }
+  }
+
   @FXML
-  public void switchPageRight() {
-    switchPage(pageSelected - 1);
+  public void switchMainPageLeft() {
+    switchMainPage(currentSelectedPage + 1);
+  }
+
+  @FXML
+  public void switchMainPageRight() {
+    switchMainPage(currentSelectedPage - 1);
   }
 
   /**
@@ -86,7 +98,7 @@ public class ControllerFX implements Initializable {
    *     <li>calls {@link #setUpBalanceFX()} which set up the Balance FX elements</li>
    *     <li>calls {@link #setUpGeneratorFX()} which set up the Generator FX elements for each Generator FX</li>
    *     <li>calls {@link #generateShop()} which generate the graphic of the shop panel </li>
-   *     <li>calls {@link #generatePageGenerator()} which generate the graphic of the place of Generator FX in the background </li>
+   *     <li>calls {@link #generateGeneratorPage()} which generate the graphic of the place of Generator FX in the background </li>
    * </ul>
    *
    * @param url not used
@@ -98,7 +110,7 @@ public class ControllerFX implements Initializable {
     setUpBalanceFX();
     setUpGeneratorFX();
     generateShop();
-    generatePageGenerator();
+    generateGeneratorPage();
 
   }
 
@@ -138,16 +150,16 @@ public class ControllerFX implements Initializable {
    */
   public void generateShop() {
 
-    ShopGenerator shop = new ShopGenerator(3, generatorFXList );
+    ShopGenerator shop = new ShopGenerator(generatorFXList);
 
     shop.generateShopPanel();
 
     shopAnchorPane.getChildren().add(shop);
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
-    shopAnchorPane.setMinHeight(220 * Math.ceil(nGenerators / 3.0));
+    shopAnchorPane.setMinHeight(220 * Math.ceil((double)nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 
-    hideShop();
+    hideShopPanel();
   }
 
   /**
@@ -156,15 +168,13 @@ public class ControllerFX implements Initializable {
    * This page created using {@link com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators} is put
    * in the HashMap which contains all the pages and associate them a String, like "page0", "page9",...
    */
-  public void generatePageGenerator() {
-
-    pageSelected = 0;
+  public void generateGeneratorPage() {
     bodyPages = new HashMap<>();
 
     int counter = 0;
 
     for(int i = 0; i < generatorFXList.size(); i++) {
-      if(i % BodyGenerators.NR_MAX_GENERATORS_PER_PAGE == 0) {
+      if(i % BodyGeneratorPos.PAGE_MAX.value() == 0) {
 
         bodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
 
@@ -176,23 +186,5 @@ public class ControllerFX implements Initializable {
 
   }
 
-  /**
-   * <p>This method is used by {@link #switchPageLeft()} and {@link #switchPageRight()} to switch Page,
-   * they give it the number of the page adding or subtracting 1 to the current SelectedPage.</p>
-   *
-   * @param newPageNumber is the new page number
-   */
-  public void switchPage(int newPageNumber) {
-    String namePageWanted = "page" + newPageNumber;
-
-    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
-
-    if (bodyWanted != null)
-      if (bodyWanted.areThereGeneratorsVisible()) {
-        mainBody.getChildren().clear();
-        mainBody.getChildren().add(bodyWanted);
-        this.pageSelected = newPageNumber;
-      }
-  }
 
 }

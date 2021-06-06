@@ -7,22 +7,20 @@ import javafx.scene.layout.RowConstraints;
 import java.util.List;
 
 public class ShopGenerator extends GridPane {
-
-    private final int maxPerRow;
     private final int maxLengthPerCol;
-    private List<GeneratorFX> generatorList;
+    private final List<GeneratorFX> generatorList;
 
-    public ShopGenerator (int maxPerRow, List<GeneratorFX> generatorList) {
-        this.maxPerRow = maxPerRow;
+    public ShopGenerator (List<GeneratorFX> generatorList) {
         this.generatorList = generatorList;
-        this.maxLengthPerCol = (int) Math.ceil((double) generatorList.size() / maxPerRow);
+        this.maxLengthPerCol = (int) Math.ceil((double) generatorList.size() / ShopPos.ROW_GENERATOR_MAX.value());
     }
 
     public void generateShopPanel () {
+        final double HUNDRED = 100;
 
-        for (int i = 0; i < maxPerRow; i++) {
+        for (int i = 0; i < ShopPos.ROW_GENERATOR_MAX.value(); i++) {
             ColumnConstraints column = new ColumnConstraints();
-            column.setPercentWidth(100 / maxPerRow);
+            column.setPercentWidth(HUNDRED / ShopPos.ROW_GENERATOR_MAX.value());
             this.getColumnConstraints().add(column);
         }
 
@@ -34,7 +32,7 @@ public class ShopGenerator extends GridPane {
         for (int i = 0; i < generatorList.size(); i++) {
             GeneratorFX currentGeneratorFX = generatorList.get(i);
 
-            this.add(currentGeneratorFX.getWrapperGeneratorAsShopElement(), (i % maxPerRow), (i / maxPerRow));
+            this.add(currentGeneratorFX.getWrapperGeneratorAsShopElement(), (i % ShopPos.ROW_GENERATOR_MAX.value()), (i / ShopPos.ROW_GENERATOR_MAX.value()));
         }
     }
 

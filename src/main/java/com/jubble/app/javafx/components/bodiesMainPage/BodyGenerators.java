@@ -10,24 +10,17 @@ import javafx.scene.layout.VBox;
 
 public class BodyGenerators extends VBox {
 
-  public static final int NR_MAX_GENERATORS_PER_PAGE = 6;
-  public static final int NR_MAX_GENERATORS_PER_COLUMN = 3;
-  public static final int NR_MAX_GENERATORS_PER_ROW = 2;
-
   private final GridPane gridForGenerators;
-  private List<GeneratorFX> generatorFXList;
-  private int beginIndex;
-  private int endIndex;
+  private final List<GeneratorFX> generatorFXList;
+  private final int beginIndex;
+  private final int endIndex;
 
   public BodyGenerators(List<GeneratorFX> generatorList, int beginIndex) {
     gridForGenerators = new GridPane();
     this.generatorFXList = generatorList;
     this.beginIndex = beginIndex;
 
-    if((beginIndex + NR_MAX_GENERATORS_PER_PAGE) > generatorList.size())
-      endIndex = generatorList.size();
-    else
-      endIndex = beginIndex + NR_MAX_GENERATORS_PER_PAGE;
+    endIndex = Math.min((beginIndex + BodyGeneratorPos.PAGE_MAX.value()), generatorList.size());
 
     buildPage();
 
@@ -35,23 +28,24 @@ public class BodyGenerators extends VBox {
   }
 
   public void buildPage() {
-    int maxXCol = NR_MAX_GENERATORS_PER_COLUMN;
-    int maxXRow = NR_MAX_GENERATORS_PER_ROW;
+    final double HUNDRED = 100.0;
 
-    for (int i = 0; i < maxXRow + 1; i++) {
+    for (int i = 0; i <= BodyGeneratorPos.ROW_MAX.value(); i++) {
       ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(100 / (maxXRow + 1));
+      column.setPercentWidth(HUNDRED / (BodyGeneratorPos.ROW_MAX.value() + 1));
       gridForGenerators.getColumnConstraints().add(column);
     }
 
     for (int i = beginIndex; i < endIndex; i++) {
       gridForGenerators.add(generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
-              ((i % NR_MAX_GENERATORS_PER_PAGE) < maxXCol ? maxXCol - 1 : 0),
-              (i % maxXCol));
+              ((i % BodyGeneratorPos.PAGE_MAX.value()) < BodyGeneratorPos.COLUMN_MAX.value() ? BodyGeneratorPos.COLUMN_MAX.value() - 1 : 0),
+              (i % BodyGeneratorPos.COLUMN_MAX.value()));
     }
 
-    gridForGenerators.setPrefWidth(852);
-    gridForGenerators.setPrefHeight(332);
+    final int WIDTH = 852;
+    final int HEIGHT = 332;
+    gridForGenerators.setPrefWidth(WIDTH);
+    gridForGenerators.setPrefHeight(HEIGHT);
     gridForGenerators.setAlignment(Pos.CENTER);
   }
 
