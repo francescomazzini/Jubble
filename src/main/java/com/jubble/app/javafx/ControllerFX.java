@@ -67,16 +67,28 @@ public class ControllerFX implements Initializable {
     setShopVisibility(false);
   }
 
-  /** this method switch the page to left, incrementing the current pageSelected */
-  @FXML
-  public void switchPageLeft() {
-    switchPage(pageSelected + 1);
+
+  public void switchMainPage(int newPageNumber) {
+    String namePageWanted = "page" + newPageNumber;
+
+    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
+
+    if (bodyWanted != null)
+      if (bodyWanted.areThereGeneratorsVisible()) {
+        mainBody.getChildren().clear();
+        mainBody.getChildren().add(bodyWanted);
+        this.pageSelected = newPageNumber;
+      }
   }
 
-  /** this method switch the page to right, decrementing the current pageSelected */
   @FXML
-  public void switchPageRight() {
-    switchPage(pageSelected - 1);
+  public void switchMainPageLeft() {
+    switchMainPage(pageSelected + 1);
+  }
+
+  @FXML
+  public void switchMainPageRight() {
+    switchMainPage(pageSelected - 1);
   }
 
   /**
@@ -178,23 +190,5 @@ public class ControllerFX implements Initializable {
 
   }
 
-  /**
-   * <p>This method is used by {@link #switchPageLeft()} and {@link #switchPageRight()} to switch Page,
-   * they give it the number of the page adding or subtracting 1 to the current SelectedPage.</p>
-   *
-   * @param newPageNumber is the new page number
-   */
-  public void switchPage(int newPageNumber) {
-    String namePageWanted = "page" + newPageNumber;
-
-    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
-
-    if (bodyWanted != null)
-      if (bodyWanted.areThereGeneratorsVisible()) {
-        mainBody.getChildren().clear();
-        mainBody.getChildren().add(bodyWanted);
-        this.pageSelected = newPageNumber;
-      }
-  }
 
 }
