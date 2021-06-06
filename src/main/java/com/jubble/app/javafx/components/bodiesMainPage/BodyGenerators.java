@@ -1,8 +1,7 @@
 package com.jubble.app.javafx.components.bodiesMainPage;
 
-import java.util.List;
-
 import com.jubble.app.javafx.components.GeneratorFX;
+import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -37,9 +36,12 @@ public class BodyGenerators extends VBox {
     }
 
     for (int i = beginIndex; i < endIndex; i++) {
-      gridForGenerators.add(generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
-              ((i % BodyGeneratorPos.PAGE_MAX.value()) < BodyGeneratorPos.COLUMN_MAX.value() ? BodyGeneratorPos.COLUMN_MAX.value() - 1 : 0),
-              (i % BodyGeneratorPos.COLUMN_MAX.value()));
+      gridForGenerators.add(
+          generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
+          ((i % BodyGeneratorPos.PAGE_MAX.value()) < BodyGeneratorPos.COLUMN_MAX.value()
+              ? BodyGeneratorPos.COLUMN_MAX.value() - 1
+              : 0),
+          (i % BodyGeneratorPos.COLUMN_MAX.value()));
     }
 
     final int WIDTH = 852;
@@ -51,8 +53,7 @@ public class BodyGenerators extends VBox {
 
   public boolean areThereGeneratorsVisible() {
     for (int i = beginIndex; i < endIndex; i++)
-      if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible())
-        return true;
+      if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible()) return true;
 
     return false;
   }

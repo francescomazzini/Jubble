@@ -6,22 +6,14 @@ import com.jubble.app.javafx.tasks.ProductionTask;
 import javafx.scene.control.Label;
 
 public class BalanceFX {
+  public BalanceFX(Label balanceLabel, Label totalProductionLabel) {
 
-    private Label balanceLabel;
-    private Label totalProductionLabel;
+    BalanceTask balTask = new BalanceTask();
+    balanceLabel.textProperty().bind(balTask.messageProperty());
+    ThreadTaskUtil.autoBuild(balTask);
 
-    public BalanceFX(Label balanceLabel, Label totalProductionLabel) {
-
-        this.balanceLabel = balanceLabel;
-        this.totalProductionLabel = totalProductionLabel;
-
-        BalanceTask balTask = new BalanceTask();
-        balanceLabel.textProperty().bind(balTask.messageProperty());
-        ThreadTaskUtil.autoBuild(balTask);
-
-        ProductionTask prodTask = new ProductionTask();
-        totalProductionLabel.textProperty().bind(prodTask.messageProperty());
-        ThreadTaskUtil.autoBuild(prodTask);
-
-    }
+    ProductionTask prodTask = new ProductionTask();
+    totalProductionLabel.textProperty().bind(prodTask.messageProperty());
+    ThreadTaskUtil.autoBuild(prodTask);
+  }
 }

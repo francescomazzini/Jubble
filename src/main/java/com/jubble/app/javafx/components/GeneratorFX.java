@@ -2,6 +2,7 @@ package com.jubble.app.javafx.components;
 
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.GameActions;
+import java.util.Locale;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,140 +12,131 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import java.util.Locale;
-
 public class GeneratorFX {
 
-    private Generator generator;
-    private Label nameGeneratorLabel;
-    private Label productionGeneratorLabel;
-    private Label costGeneratorLabel;
-    private Label numberOwnedGeneratorLabel;
-    private ImageView imageGeneratorShopIcon;
-    private ImageView imageGeneratorPageIcon;
-    private Button buttonBuyGenerator;
+  private Generator generator;
+  private Label nameGeneratorLabel;
+  private Label productionGeneratorLabel;
+  private Label costGeneratorLabel;
+  private Label numberOwnedGeneratorLabel;
+  private ImageView imageGeneratorShopIcon;
+  private ImageView imageGeneratorPageIcon;
+  private Button buttonBuyGenerator;
 
-    private VBox wrapperGeneratorAsShopElement;
-    private VBox wrapperGeneratorAsPageElement;
+  private VBox wrapperGeneratorAsShopElement;
+  private VBox wrapperGeneratorAsPageElement;
 
-    public GeneratorFX (Generator generator, String imageGeneratorPath) {
-        this.generator = generator;
+  public GeneratorFX(Generator generator, String imageGeneratorPath) {
+    this.generator = generator;
 
-        nameGeneratorLabel = new Label();
-        productionGeneratorLabel = new Label();
-        costGeneratorLabel = new Label();
-        numberOwnedGeneratorLabel = new Label();
-        imageGeneratorShopIcon = new ImageView();
-        imageGeneratorPageIcon = new ImageView();
-        buttonBuyGenerator = new Button("Buy");
+    nameGeneratorLabel = new Label();
+    productionGeneratorLabel = new Label();
+    costGeneratorLabel = new Label();
+    numberOwnedGeneratorLabel = new Label();
+    imageGeneratorShopIcon = new ImageView();
+    imageGeneratorPageIcon = new ImageView();
+    buttonBuyGenerator = new Button("Buy");
 
-        setNameGeneratorLabel();
-        setProductionGeneratorLabel();
-        setCostGeneratorLabel();
-        setNumberOwnedGeneratorLabel();
-        setImageGeneratorShopIcon(imageGeneratorPath);
-        setImageGeneratorPageIcon(imageGeneratorPath);
-        setWrapperGeneratorAsShopElement();
-        setWrapperGeneratorAsPageElement();
+    setNameGeneratorLabel();
+    setProductionGeneratorLabel();
+    setCostGeneratorLabel();
+    setNumberOwnedGeneratorLabel();
+    setImageGeneratorShopIcon(imageGeneratorPath);
+    setImageGeneratorPageIcon(imageGeneratorPath);
+    setWrapperGeneratorAsShopElement();
+    setWrapperGeneratorAsPageElement();
 
-        buttonBuyGenerator.setOnAction(this::buyGenerator);
+    buttonBuyGenerator.setOnAction(this::buyGenerator);
 
-        nameGeneratorLabel.getStyleClass().add("generator-title");
-        productionGeneratorLabel.getStyleClass().add("generator-desc");
-        costGeneratorLabel.getStyleClass().add("generator-desc");
-        numberOwnedGeneratorLabel.getStyleClass().add("generator-desc");
-        buttonBuyGenerator.getStyleClass().add("button-buy");
-    }
+    nameGeneratorLabel.getStyleClass().add("generator-title");
+    productionGeneratorLabel.getStyleClass().add("generator-desc");
+    costGeneratorLabel.getStyleClass().add("generator-desc");
+    numberOwnedGeneratorLabel.getStyleClass().add("generator-desc");
+    buttonBuyGenerator.getStyleClass().add("button-buy");
+  }
 
-    public void setNameGeneratorLabel() {
-        nameGeneratorLabel.setText(generator.getName());
-    }
+  public void setNameGeneratorLabel() {
+    nameGeneratorLabel.setText(generator.getName());
+  }
 
-    public void setProductionGeneratorLabel() {
+  public void setProductionGeneratorLabel() {
 
-        String formattingProduction = String.format(Locale.US,"%,.2f",generator.getProductionBase());
-        productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
+    String formattingProduction = String.format(Locale.US, "%,.2f", generator.getProductionBase());
+    productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
+  }
 
-    }
+  public void setCostGeneratorLabel() {
 
-    public void setCostGeneratorLabel() {
+    String formattingCost = String.format(Locale.US, "%,.2f", generator.getNextCost());
+    costGeneratorLabel.setText("Cost: " + formattingCost);
+  }
 
-        String formattingCost = String.format(Locale.US,"%,.2f",generator.getNextCost());
-        costGeneratorLabel.setText("Cost: " + formattingCost);
+  public void setNumberOwnedGeneratorLabel() {
+    numberOwnedGeneratorLabel.setText("Qt: " + generator.getNumberOwned());
+  }
 
-    }
+  public void setImageGeneratorShopIcon(String imageGeneratorPath) {
+    imageGeneratorShopIcon.setImage(new Image(imageGeneratorPath));
+    imageGeneratorShopIcon.setFitHeight(58);
+    imageGeneratorShopIcon.setFitWidth(160);
+  }
 
-    public void setNumberOwnedGeneratorLabel () {
-        numberOwnedGeneratorLabel.setText("Qt: " + generator.getNumberOwned());
-    }
+  public void setImageGeneratorPageIcon(String imageGeneratorPath) {
+    imageGeneratorPageIcon.setImage(new Image(imageGeneratorPath));
+    imageGeneratorPageIcon.setFitHeight(70);
+    imageGeneratorPageIcon.setFitWidth(193);
+  }
 
-    public void setImageGeneratorShopIcon(String imageGeneratorPath) {
-        imageGeneratorShopIcon.setImage(new Image(imageGeneratorPath));
-        imageGeneratorShopIcon.setFitHeight(58);
-        imageGeneratorShopIcon.setFitWidth(160);
-    }
+  public void setWrapperGeneratorAsShopElement() {
+    VBox topPadding = new VBox();
+    topPadding.setMinHeight(25);
 
-    public void setImageGeneratorPageIcon(String imageGeneratorPath) {
-        imageGeneratorPageIcon.setImage(new Image(imageGeneratorPath));
-        imageGeneratorPageIcon.setFitHeight(70);
-        imageGeneratorPageIcon.setFitWidth(193);
-    }
+    VBox bottomPadding = new VBox();
+    bottomPadding.setMinHeight(15);
 
-    public void setWrapperGeneratorAsShopElement() {
-        VBox topPadding = new VBox();
-        topPadding.setMinHeight(25);
+    wrapperGeneratorAsShopElement =
+        new VBox(
+            topPadding,
+            imageGeneratorShopIcon,
+            nameGeneratorLabel,
+            productionGeneratorLabel,
+            costGeneratorLabel,
+            bottomPadding,
+            buttonBuyGenerator);
 
-        VBox bottomPadding = new VBox();
-        bottomPadding.setMinHeight(15);
+    wrapperGeneratorAsShopElement.setAlignment(Pos.TOP_CENTER);
+    wrapperGeneratorAsShopElement.setMinHeight(100);
+  }
 
-        wrapperGeneratorAsShopElement = new VBox(
-                topPadding,
-                imageGeneratorShopIcon,
-                nameGeneratorLabel,
-                productionGeneratorLabel,
-                costGeneratorLabel,
-                bottomPadding,
-                buttonBuyGenerator
-        );
+  public void setWrapperGeneratorAsPageElement() {
 
-        wrapperGeneratorAsShopElement.setAlignment(Pos.TOP_CENTER);
-        wrapperGeneratorAsShopElement.setMinHeight(100);
-    }
+    wrapperGeneratorAsPageElement = new VBox(2, imageGeneratorPageIcon, numberOwnedGeneratorLabel);
+    wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
+    VBox.setMargin(imageGeneratorPageIcon, new Insets(2, 0, 0, 0));
 
-    public void setWrapperGeneratorAsPageElement() {
+    if (generator.getNumberOwned() > 0) wrapperGeneratorAsPageElement.setVisible(true);
+    else wrapperGeneratorAsPageElement.setVisible(false);
+  }
 
-        wrapperGeneratorAsPageElement = new VBox(2, imageGeneratorPageIcon, numberOwnedGeneratorLabel);
-        wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
-        VBox.setMargin(imageGeneratorPageIcon, new Insets(2, 0, 0, 0));
+  public VBox getWrapperGeneratorAsShopElement() {
+    return wrapperGeneratorAsShopElement;
+  }
 
-        if(generator.getNumberOwned() > 0)
-            wrapperGeneratorAsPageElement.setVisible(true);
-        else
-            wrapperGeneratorAsPageElement.setVisible(false);
+  public VBox getWrapperGeneratorAsPageElement() {
+    return wrapperGeneratorAsPageElement;
+  }
 
-    }
+  public boolean isWrapperGeneratorAsPageElementVisible() {
+    return wrapperGeneratorAsPageElement.isVisible();
+  }
 
-    public VBox getWrapperGeneratorAsShopElement() {
-        return wrapperGeneratorAsShopElement;
-    }
+  public void buyGenerator(ActionEvent event) {
 
-    public VBox getWrapperGeneratorAsPageElement() {
-        return wrapperGeneratorAsPageElement;
-    }
+    GameActions.buyGenerator(generator);
 
-    public boolean isWrapperGeneratorAsPageElementVisible () {
-        return wrapperGeneratorAsPageElement.isVisible();
-    }
+    setCostGeneratorLabel();
+    setNumberOwnedGeneratorLabel();
 
-    public void buyGenerator(ActionEvent event) {
-
-        GameActions.buyGenerator(generator);
-
-        setCostGeneratorLabel();
-        setNumberOwnedGeneratorLabel();
-
-        if(generator.getNumberOwned() > 0)
-            wrapperGeneratorAsPageElement.setVisible(true);
-
-    }
+    if (generator.getNumberOwned() > 0) wrapperGeneratorAsPageElement.setVisible(true);
+  }
 }

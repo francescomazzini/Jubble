@@ -60,5 +60,4 @@ public class ThreadRunner {
     }
     System.out.println("Game thread stopped");
   }
-
 }
