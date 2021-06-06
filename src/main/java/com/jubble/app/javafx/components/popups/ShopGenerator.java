@@ -10,7 +10,7 @@ public class ShopGenerator extends GridPane {
 
     private final int maxPerRow;
     private final int maxLengthPerCol;
-    private List<GeneratorFX> generatorList;
+    private final List<GeneratorFX> generatorList;
 
     public ShopGenerator (int maxPerRow, List<GeneratorFX> generatorList) {
         this.maxPerRow = maxPerRow;
@@ -19,10 +19,11 @@ public class ShopGenerator extends GridPane {
     }
 
     public void generateShopPanel () {
+        final double HUNDRED = 100;
 
         for (int i = 0; i < maxPerRow; i++) {
             ColumnConstraints column = new ColumnConstraints();
-            column.setPercentWidth(100 / maxPerRow);
+            column.setPercentWidth(HUNDRED / maxPerRow);
             this.getColumnConstraints().add(column);
         }
 
