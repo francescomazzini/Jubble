@@ -147,15 +147,16 @@ public class ControllerFX implements Initializable {
    * to the number of Generators which must be inside it. The the shop is hidden by default
    */
   public void generateShop() {
+    final int MAX_GENERATORS_PER_ROW = 3;
 
-    ShopGenerator shop = new ShopGenerator(3, generatorFXList );
+    ShopGenerator shop = new ShopGenerator(MAX_GENERATORS_PER_ROW, generatorFXList);
 
     shop.generateShopPanel();
 
     shopAnchorPane.getChildren().add(shop);
 
     int nGenerators = GeneratorsSingleton.getGenerators().size();
-    shopAnchorPane.setMinHeight(220 * Math.ceil(nGenerators / 3.0));
+    shopAnchorPane.setMinHeight(220 * Math.ceil((double)nGenerators / MAX_GENERATORS_PER_ROW));
 
     hideShopPanel();
   }
