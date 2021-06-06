@@ -7,21 +7,20 @@ import javafx.scene.control.Label;
 
 public class BalanceFX {
 
-    private Label balanceLabel;
-    private Label totalProductionLabel;
+  private Label balanceLabel;
+  private Label totalProductionLabel;
 
-    public BalanceFX(Label balanceLabel, Label totalProductionLabel) {
+  public BalanceFX(Label balanceLabel, Label totalProductionLabel) {
 
-        this.balanceLabel = balanceLabel;
-        this.totalProductionLabel = totalProductionLabel;
+    this.balanceLabel = balanceLabel;
+    this.totalProductionLabel = totalProductionLabel;
 
-        BalanceTask balTask = new BalanceTask();
-        balanceLabel.textProperty().bind(balTask.messageProperty());
-        ThreadTaskUtil.autoBuild(balTask);
+    BalanceTask balTask = new BalanceTask();
+    balanceLabel.textProperty().bind(balTask.messageProperty());
+    ThreadTaskUtil.autoBuild(balTask);
 
-        ProductionTask prodTask = new ProductionTask();
-        totalProductionLabel.textProperty().bind(prodTask.messageProperty());
-        ThreadTaskUtil.autoBuild(prodTask);
-
-    }
+    ProductionTask prodTask = new ProductionTask();
+    totalProductionLabel.textProperty().bind(prodTask.messageProperty());
+    ThreadTaskUtil.autoBuild(prodTask);
+  }
 }
