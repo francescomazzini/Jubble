@@ -9,9 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class BodyGenerators extends VBox {
-  public static final int MAX_GENERATORS_PER_PAGE = 6;
-  public static final int MAX_GENERATORS_PER_COLUMN = 3;
-  public static final int MAX_GENERATORS_PER_ROW = 2;
 
   private final GridPane gridForGenerators;
   private final List<GeneratorFX> generatorFXList;
@@ -23,7 +20,7 @@ public class BodyGenerators extends VBox {
     this.generatorFXList = generatorList;
     this.beginIndex = beginIndex;
 
-    endIndex = Math.min((beginIndex + MAX_GENERATORS_PER_PAGE), generatorList.size());
+    endIndex = Math.min((beginIndex + BodyGeneratorPos.PAGE_MAX.value()), generatorList.size());
 
     buildPage();
 
@@ -33,16 +30,16 @@ public class BodyGenerators extends VBox {
   public void buildPage() {
     final double HUNDRED = 100.0;
 
-    for (int i = 0; i < MAX_GENERATORS_PER_ROW + 1; i++) {
+    for (int i = 0; i <= BodyGeneratorPos.ROW_MAX.value(); i++) {
       ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(HUNDRED / (MAX_GENERATORS_PER_ROW + 1));
+      column.setPercentWidth(HUNDRED / (BodyGeneratorPos.ROW_MAX.value() + 1));
       gridForGenerators.getColumnConstraints().add(column);
     }
 
     for (int i = beginIndex; i < endIndex; i++) {
       gridForGenerators.add(generatorFXList.get(i).getWrapperGeneratorAsPageElement(),
-              ((i % MAX_GENERATORS_PER_PAGE) < MAX_GENERATORS_PER_COLUMN ? MAX_GENERATORS_PER_COLUMN - 1 : 0),
-              (i % MAX_GENERATORS_PER_COLUMN));
+              ((i % BodyGeneratorPos.PAGE_MAX.value()) < BodyGeneratorPos.COLUMN_MAX.value() ? BodyGeneratorPos.COLUMN_MAX.value() - 1 : 0),
+              (i % BodyGeneratorPos.COLUMN_MAX.value()));
     }
 
     final int WIDTH = 852;

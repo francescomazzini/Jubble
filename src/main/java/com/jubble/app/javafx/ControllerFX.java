@@ -4,6 +4,7 @@ import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
+import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators;
 import com.jubble.app.javafx.components.popups.ShopGenerator;
 import java.net.URL;
@@ -173,7 +174,7 @@ public class ControllerFX implements Initializable {
     int counter = 0;
 
     for(int i = 0; i < generatorFXList.size(); i++) {
-      if(i % BodyGenerators.MAX_GENERATORS_PER_PAGE == 0) {
+      if(i % BodyGeneratorPos.PAGE_MAX.value() == 0) {
 
         bodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
 
