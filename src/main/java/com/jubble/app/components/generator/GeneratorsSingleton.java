@@ -13,31 +13,16 @@ public class GeneratorsSingleton {
   private GeneratorsSingleton() {
     GENERATORS =
         List.of(
-            new Generator(
-                new GeneratorID("Stellar Panel", "", 1), new GeneratorValues(3.738, 1.67, 1.07)),
-            new Generator(
-                new GeneratorID("Electron Absorber", "", 2), new GeneratorValues(60, 20, 1.15)),
-            new Generator(
-                new GeneratorID("Nucleus Extractor", "", 3), new GeneratorValues(720, 90, 1.14)),
-            new Generator(
-                new GeneratorID("Hydrogenator", "", 4), new GeneratorValues(8640, 360, 1.13)),
-            new Generator(
-                new GeneratorID("Dyson Sphere", "", 5), new GeneratorValues(103680, 2160, 1.12)),
-            new Generator(
-                new GeneratorID("Black Hole Reverser", "", 6),
-                new GeneratorValues(1244160.0, 6480, 1.11)),
-            new Generator(
-                new GeneratorID("Planet Destroyer", "", 7),
-                new GeneratorValues(14929920.0, 19440, 1.10)),
-            new Generator(
-                new GeneratorID("Galaxyneus", "", 8),
-                new GeneratorValues(179159040.0, 58320, 1.09)),
-            new Generator(
-                new GeneratorID("Spacevoker", "", 9),
-                new GeneratorValues(2149908480.0, 174960, 1.08)),
-            new Generator(
-                new GeneratorID("Multiverse NMX", "", 10),
-                new GeneratorValues(25798901760.0, 804816, 1.07)));
+            new Generator.Builder().name("Stellar Panel").level(1).costBase(3.738).productionBase(1.67).rateGrowth(1.07).build(),
+            new Generator.Builder().name("Electron Absorber").level(2).costBase(60).productionBase(20).rateGrowth(1.15).build(),
+            new Generator.Builder().name("Nucleus Extractor").level(3).costBase(720).productionBase(90).rateGrowth(1.14).build(),
+            new Generator.Builder().name("Hydrogenator").level(4).costBase(8640).productionBase(360).rateGrowth(1.13).build(),
+            new Generator.Builder().name("Dyson Sphere").level(5).costBase(103680).productionBase(2160).rateGrowth(1.12).build(),
+            new Generator.Builder().name("Black Hole Reverser").level(6).costBase(1244160.0).productionBase(6480).rateGrowth(1.11).build(),
+            new Generator.Builder().name("Planet Destroyer").level(7).costBase(14929920.0).productionBase(19440).rateGrowth(1.10).build(),
+            new Generator.Builder().name("Galaxyneus").level(8).costBase(179159040.0).productionBase(58320).rateGrowth(1.09).build(),
+            new Generator.Builder().name("Spacevoker").level(9).costBase(2149908480.0).productionBase(174960).rateGrowth(1.08).build(),
+            new Generator.Builder().name("Multiverse NMX").level(10).costBase(25798901760.0).productionBase(804816).rateGrowth(1.07).build());
   }
 
   private static class SingletonCage {

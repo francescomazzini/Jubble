@@ -114,7 +114,7 @@ public class GeneratorFX {
     wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
     VBox.setMargin(imageGeneratorPageIcon, new Insets(2, 0, 0, 0));
 
-    wrapperGeneratorAsPageElement.setVisible(!generator.isZeroOwned());
+    wrapperGeneratorAsPageElement.setVisible(generator.isMoreThanZeroOwned());
   }
 
   public VBox getWrapperGeneratorAsShopElement() {
@@ -136,6 +136,6 @@ public class GeneratorFX {
     setCostGeneratorLabel();
     setNumberOwnedGeneratorLabel();
 
-    if (!generator.isZeroOwned()) wrapperGeneratorAsPageElement.setVisible(true);
+    if (generator.isMoreThanZeroOwned()) wrapperGeneratorAsPageElement.setVisible(true);
   }
 }
