@@ -1,5 +1,9 @@
 package com.jubble.app.components.generator;
 
+/**
+ * Represents a generator in the game.
+ * Implements the builder pattern and can be instantiated only providing a builder.
+ */
 public class Generator {
     /**
      * Represents the name of this generator.
