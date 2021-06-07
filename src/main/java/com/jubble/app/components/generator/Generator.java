@@ -4,112 +4,49 @@ package com.jubble.app.components.generator;
  * Represents a generator in the game.
  * Implements the builder pattern and can be instantiated only providing a builder.
  */
-public class Generator {
-    /**
-     * Represents the name of this generator.
-     */
-    private final String name;
-    /**
-     * Represents the description of this generator.
-     */
-    private final String description;
-    /**
-     * Represents a level (or progress) in the game.
-     */
-    private final int level;
-    private final double costBase;
-    private final double productionBase;
-    private final double rateGrowth;
-    public static final int DEFAULT_NUMBER_OWNED_GENERATORS = 0;
-    private int numberOwned;
+public class Generator extends GeneratorBody {
 
     private Generator(Builder builder) {
-        name = builder.name;
-        description = builder.description;
-        level = builder.level;
-        costBase = builder.costBase;
-        productionBase = builder.productionBase;
-        rateGrowth = builder.rateGrowth;
-        numberOwned = builder.numberOwned;
-    }
+        super(builder);
+   }
+    public static class Builder extends GeneratorBody.Builder<Builder> {
 
-    public static class Builder {
-        // Optional parameters - initialized to default values.
-        private String name = "";
-        private String description = "";
-        private int level = 0;
-        private double costBase = 0d;
-        private double productionBase = 0d;
-        private double rateGrowth = 0d;
-        private int numberOwned = DEFAULT_NUMBER_OWNED_GENERATORS;
-
-        public Builder name(String val) {
-            name = val;
-            return this;
-        }
-
-        public Builder description(String val) {
-            description = val;
-            return this;
-        }
-
-        public Builder level(int val) {
-            level = val;
-            return this;
-        }
-
-        public Builder costBase(double val) {
-            costBase = val;
-            return this;
-        }
-
-        public Builder productionBase(double val) {
-            productionBase = val;
-            return this;
-        }
-
-        public Builder rateGrowth(double val) {
-            rateGrowth = val;
-            return this;
-        }
-
-        public Builder numberOwned(int val) {
-            numberOwned = val;
-            return this;
-        }
-
+        @Override
         public Generator build() {
             return new Generator(this);
         }
+
+        @Override
+        protected Builder self() { return this; }
     }
 
     public void incrementNumberOwned() {
-        numberOwned++;
+        super.setNumberOwned(getNumberOwned()+1);
     }
 
     public int getNumberOwned() {
-        return numberOwned;
+        return super.getNumberOwned();
     }
 
     public void setNumberOwned(int numberOwned) {
-        IllegalOperationException.checkIfNumberOwnedIsDefault(this.numberOwned);
-        this.numberOwned = numberOwned;
+        IllegalOperationException.checkIfNumberOwnedIsDefault(super.getNumberOwned());
+        super.setNumberOwned(super.getNumberOwned());
     }
 
     public double getNextCost() {
-        return costBase * Math.pow(rateGrowth, numberOwned);
+        return super.getCostBase() * Math.pow(super.getRateGrowth(), super.getNumberOwned());
     }
 
     public double getProduction() {
-        return (productionBase * numberOwned) * level;
+        return (super.getProductionBase() * super.getNumberOwned()) * super.getLevel();
     }
 
     public double getProductionBase() {
-        return productionBase;
+        return super.getProductionBase();
     }
 
     public String getName() {
-        return name;
+        return super.getName();
     }
 
     /**
@@ -118,11 +55,7 @@ public class Generator {
      * @return true if numberOwned is different than default.
      */
     public boolean isMoreThanZeroOwned() {
-        return numberOwned != DEFAULT_NUMBER_OWNED_GENERATORS;
+        return getNumberOwned() != DEFAULT_NUMBER_OWNED_GENERATORS;
     }
 
-    @Override
-    public String toString() {
-        return "Generator: " + name + " level: " + level + " number owned: " + numberOwned;
-    }
 }
