@@ -8,13 +8,19 @@ import org.junit.jupiter.api.Test;
 
 public class GeneratorTest {
   Generator generator =
-      new Generator(
-          new GeneratorID("Stellar Panel", "", 1), new GeneratorValues(3.738, 1.67, 1.07));
+          new Generator.Builder().name("Stellar Panel").level(1).costBase(3.738).productionBase(1.67).rateGrowth(1.07).build();
 
   @Test
   @DisplayName("NumberOwned should be DEFAULT at beginning.")
   public void numberOwnedShouldBeDEFAULTAtBeginning() {
     assertThat(generator.getNumberOwned()).isEqualTo(Generator.DEFAULT_NUMBER_OWNED_GENERATORS);
+  }
+
+  @Test
+  public void shouldBuildGeneratorWithDefaults() {
+    Generator.Builder builder =
+            new Generator.Builder().name("TEST");
+    assertThat(builder.build().toString()).isEqualTo("Generator: TEST level: 0 number owned: 0");
   }
 
   @Test
