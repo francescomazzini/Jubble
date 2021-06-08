@@ -101,7 +101,7 @@ public class Generator {
     }
 
     public double getProduction() {
-        return (productionBase * numberOwned) * level;
+        return (productionBase * numberOwned);
     }
 
     public double getProductionBase() {
