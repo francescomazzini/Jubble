@@ -1,11 +1,14 @@
 package com.jubble.app;
 
 import com.jubble.app.javafx.ControllerFX;
+
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class GUIRunner {
@@ -28,6 +31,7 @@ public class GUIRunner {
     scene.getStylesheets().add("style.css");
 
     primaryStage.setScene(scene);
+    primaryStage.getIcons().add(new Image(new File("src/main/resources/assets/logo.png").toURI().toString()));
 
     primaryStage.setResizable(false);
 
