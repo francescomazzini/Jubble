@@ -2,6 +2,8 @@ package com.jubble.app.javafx.tasks;
 
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.utils.NumberNames;
+
 import java.util.Locale;
 
 public class ProductionTask extends AbstractTask {
@@ -19,7 +21,7 @@ public class ProductionTask extends AbstractTask {
 
   @Override
   protected void updateProgress(double v, double v1) {
-    updateMessage(String.format(Locale.US, "%,.2f", v) + "/s ");
+    updateMessage(NumberNames.createString(v) + "/s ");
     super.updateProgress(v, v1);
   }
 }

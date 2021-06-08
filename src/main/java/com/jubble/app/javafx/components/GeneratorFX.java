@@ -3,6 +3,8 @@ package com.jubble.app.javafx.components;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.utils.GameActions;
 import java.util.Locale;
+
+import com.jubble.app.utils.NumberNames;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -61,13 +63,13 @@ public class GeneratorFX {
 
   public void setProductionGeneratorLabel() {
 
-    String formattingProduction = String.format(Locale.US, "%,.2f", generator.getProductionBase());
+    String formattingProduction = NumberNames.createString(generator.getProductionBase());
     productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
   }
 
   public void setCostGeneratorLabel() {
 
-    String formattingCost = String.format(Locale.US, "%,.2f", generator.getNextCost());
+    String formattingCost = NumberNames.createString(generator.getNextCost());
     costGeneratorLabel.setText("Cost: " + formattingCost);
   }
 

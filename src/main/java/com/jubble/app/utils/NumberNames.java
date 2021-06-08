@@ -1,6 +1,7 @@
 package com.jubble.app.utils;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -9,7 +10,7 @@ import java.util.TreeMap;
 public class NumberNames {
   private static final String NAMES[] =
       new String[] {
-        " ",
+        "",
         "K",
         "M",
         "B",
@@ -48,14 +49,13 @@ public class NumberNames {
    * @return spelled number, spelled in english and approximated.
    */
   public static String createString(Double number) {
-    DecimalFormat formatter = new DecimalFormat(".00");
     Map.Entry<Double, String> entry = MAP.floorEntry(number);
     String numberName;
     if (entry == null) {
-      numberName = formatter.format(number);
+      numberName = String.format(Locale.US, "%,.2f", number);
     } else {
       double rounded = performApproximation(entry.getKey(), number);
-      numberName = formatter.format(rounded) + " " + entry.getValue();
+      numberName = String.format(Locale.US, "%,.2f", rounded) + " " + entry.getValue();
     }
 
     return numberName + " ";
