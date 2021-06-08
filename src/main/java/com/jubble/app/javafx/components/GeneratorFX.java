@@ -114,7 +114,6 @@ public class GeneratorFX {
 
     wrapperGeneratorAsPageElement = new VBox(2, imageGeneratorPageIcon, numberOwnedGeneratorLabel);
     wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
-    VBox.setMargin(imageGeneratorPageIcon, new Insets(2, 0, 0, 0));
 
     wrapperGeneratorAsPageElement.setVisible(generator.isMoreThanZeroOwned());
   }

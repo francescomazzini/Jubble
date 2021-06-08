@@ -182,6 +182,7 @@ public class ControllerFX implements Initializable {
       }
     }
 
+    mainBody.getChildren().clear();
     mainBody.getChildren().add(bodyPages.get("page0"));
   }
 }

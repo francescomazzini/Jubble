@@ -45,7 +45,7 @@ public class BodyGenerators extends VBox {
     }
 
     final int WIDTH = 852;
-    final int HEIGHT = 332;
+    final int HEIGHT = 302;
     gridForGenerators.setPrefWidth(WIDTH);
     gridForGenerators.setPrefHeight(HEIGHT);
     gridForGenerators.setAlignment(Pos.CENTER);
