@@ -9,27 +9,12 @@ import java.util.TreeMap;
 public class NumberNames {
   private static final String NAMES[] =
       new String[] {
-        "Thousand",
-        "Million",
-        "Billion",
-        "Trillion",
-        "Quadrillion",
-        "Quintillion",
-        "Sextillion",
-        "Septillion",
-        "Octillion",
-        "Nonillion",
-        "Decillion",
-        "Undecillion",
-        "Duodecillion",
-        "Tredecillion",
-        "Quattuordecillion",
-        "Quindecillion",
-        "Sexdecillion",
-        "Septendecillion",
-        "Octodecillion",
-        "Novemdecillion",
-        "Vigintillion",
+        " ",
+        "K",
+        "M",
+        "B",
+        "T",
+        "Q"
       };
 
   private static final int THOUSAND = 1000;
@@ -38,7 +23,7 @@ public class NumberNames {
   static {
     MAP = new TreeMap<>();
     for (int i = 0; i < NAMES.length; i++) {
-      MAP.put(Math.pow(THOUSAND, i + 1), NAMES[i]);
+      MAP.put(Math.pow(THOUSAND, i), NAMES[i]);
     }
   }
 
@@ -53,7 +38,7 @@ public class NumberNames {
     double d = key / THOUSAND;
     double m = number / d;
     double f = m / 1000.0f;
-    return Math.floor(f);
+    return f;
   }
 
   /**
@@ -63,16 +48,16 @@ public class NumberNames {
    * @return spelled number, spelled in english and approximated.
    */
   public static String createString(Double number) {
+    DecimalFormat formatter = new DecimalFormat(".00");
     Map.Entry<Double, String> entry = MAP.floorEntry(number);
     String numberName;
     if (entry == null) {
-      numberName = "Nearly nothing";
+      numberName = formatter.format(number);
     } else {
       double rounded = performApproximation(entry.getKey(), number);
-      DecimalFormat formatter = new DecimalFormat();
       numberName = formatter.format(rounded) + " " + entry.getValue();
     }
 
-    return numberName;
+    return numberName + " ";
   }
 }
