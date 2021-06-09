@@ -91,29 +91,7 @@ public class JubbleBot extends TelegramLongPollingBot {
                     stringMessage = "The game is already running";
 
 
-            } else if (command.equals("/status")) {
-
-                if (isGameOn) {
-                    stringMessage = ("*STATUS*: " +
-                            "\n *Balance*: " + NumberNames.createString(Balance.getPrimary()) +
-                            "\n *Total Production*: " +
-                            NumberNames.createString(GeneratorsSingleton.getGenerators()
-                                    .stream()
-                                    .mapToDouble(Generator::getProduction)
-                                    .sum())
-                            + " / s" +
-                            "\n\n *Generators Owned*: ");
-
-                    for (Generator gen : GeneratorsSingleton.getGenerators()) {
-                        stringMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
-                    }
-
-
-                } else
-                    stringMessage = "The game is not running";
-
-
-            } else if (command.equals("/stop")) {
+            }  else if (command.equals("/stop")) {
 
                 if (isGameOn) {
                     stringMessage = "Thank you " + chatUser.getFrom().getUserName() + ", the game stopped";
