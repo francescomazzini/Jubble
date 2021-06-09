@@ -1,28 +1,25 @@
 package com.jubble.app.telegram;
 
 import com.jubble.app.ThreadRunner;
-import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
+import com.jubble.app.utils.GameActions;
 import com.jubble.app.utils.GameProgressHandler;
-import com.jubble.app.utils.NumberNames;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
-public class JubbleBot extends TelegramLongPollingBot {
+public class JubbleBot extends TelegramLongPollingBot  {
 
     private final Map<String, TelegramMessage> listMessages = TypeMessages.listOfMessages;
     private boolean isGameOn;
@@ -56,9 +53,18 @@ public class JubbleBot extends TelegramLongPollingBot {
 
         TelegramMessage telegramMessage = listMessages.get(command);
 
+        if(telegramMessage == null) {
+            String tempCommand = command.substring(0,3);
+            telegramMessage = listMessages.get(tempCommand);
+        }
+
         if(telegramMessage != null) {
 
-            actionPerformer(command, telegramMessage);
+            try {
+                actionPerformer(command, telegramMessage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             telegramMessage.setChatId(update);
 
@@ -71,7 +77,7 @@ public class JubbleBot extends TelegramLongPollingBot {
 
     }
 
-    private void actionPerformer (String action, TelegramMessage tlMsg) {
+    private void actionPerformer (String action, TelegramMessage tlMsg) throws FileNotFoundException {
 
         if(action.equals("begin") && !isGameOn) {
             tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
@@ -85,8 +91,27 @@ public class JubbleBot extends TelegramLongPollingBot {
             isGameOn = false;
         }
 
-        if(action.equals("status")) {
-            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatus());
+        if(action.equals("status"))
+            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatusMessage());
+
+        if(action.equals("shop")) {
+            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateShopMessage());
+
+            tlMsg.setInlineButtons(TypeMessages.generateShopButtons(), 5);
+
+        }
+
+        if(action.startsWith("gen")) {
+
+            int numGenerator = Integer.parseInt(action.substring(3));
+            Generator gen = GeneratorsSingleton.getGenerators().get(numGenerator);
+            boolean isBought = GameActions.buyGenerator(gen);
+
+            if(isBought)
+                tlMsg.setText(tlMsg.getContent() + " successfully bought " + gen.getName());
+            else
+                tlMsg.setText(tlMsg.getContent() + " not enough money");
+
         }
 
     }
