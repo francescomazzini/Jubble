@@ -63,8 +63,8 @@ public class TelegramMessage extends SendMessage {
         return content;
     }
 
-/*
-    public Map<String, String> getInlineButtons() {
-        return inlineButtons;
-    } */
+    public void setContent(String content) {
+        this.content = content;
+        this.setText(content);
+    }
 }

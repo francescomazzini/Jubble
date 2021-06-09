@@ -58,6 +58,8 @@ public class JubbleBot extends TelegramLongPollingBot {
 
         if(telegramMessage != null) {
 
+            actionPerformer(command, telegramMessage);
+
             telegramMessage.setChatId(update);
 
             try {
@@ -65,6 +67,26 @@ public class JubbleBot extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
+        }
+
+    }
+
+    private void actionPerformer (String action, TelegramMessage tlMsg) {
+
+        if(action.equals("begin") && !isGameOn) {
+            tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
+            GameProgressHandler.loadGame();
+            ThreadRunner.run();
+            isGameOn = true;
+        }
+
+        if(action.equals("stop") && isGameOn) {
+            ThreadRunner.stop();
+            isGameOn = false;
+        }
+
+        if(action.equals("status")) {
+            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatus());
         }
 
     }
