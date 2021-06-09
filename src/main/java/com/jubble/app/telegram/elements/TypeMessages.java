@@ -14,9 +14,9 @@ import java.util.Map;
 public class TypeMessages {
 
     private final static List<String> listOfContentMessages = List.of(
-            "Hi! Welcome to *Jubble*.\nPress the *button* below to start the game!",
-            "You can choose *one* of the *options* below to interact with the game",
-            "The *game* has stopped.\nThank you for playing. Hope to see you soon!",
+            "Hi! Welcome to *Jubble* \uD83D\uDC4B.\n\nPress the *button* below to start the game! \uD83D\uDC7D",
+            "You can choose *one* of the *options* below to interact with the game \uD83D\uDC47",
+            "The *game* has stopped. \uD83D\uDCDB\n\nThank you for playing. Hope to see you soon! ✌️",
             "*STATUS*: ",
             "*SHOP*: ",
             "You have "
@@ -26,14 +26,14 @@ public class TypeMessages {
     //forse treemap per pulsanti
 
     public final static Map<String, TelegramMessage> listOfMessages = Map.of(
-            "/start", new TelegramMessage(listOfContentMessages.get(0), Map.of("begin", "Begin")),
-            "begin", new TelegramMessage(listOfContentMessages.get(1), Map.of( "shop", "Shop",
-                                                                                "status", "Status",
-                                                                                "stop", "Stop")),
+            "/start", new TelegramMessage(listOfContentMessages.get(0), Map.of("begin", "✅ Begin ")),
+            "begin", new TelegramMessage(listOfContentMessages.get(1), Map.of( "shop", "\uD83D\uDCB8 Shop ",
+                                                                                "status", "\uD83D\uDD01 Status ",
+                                                                                "stop", "\uD83D\uDCDB Stop ")),
             "stop", new TelegramMessage(listOfContentMessages.get(2), Map.of()),
-            "status", new TelegramMessage(listOfContentMessages.get(3), Map.of("begin", "Back")),
-            "shop", new TelegramMessage(listOfContentMessages.get(4), Map.of("begin", "Back")),
-            "gen", new TelegramMessage(listOfContentMessages.get(5), Map.of("shop", "Back"))
+            "status", new TelegramMessage(listOfContentMessages.get(3), Map.of("begin", " ◀️ Back")),
+            "shop", new TelegramMessage(listOfContentMessages.get(4), Map.of("begin", " ◀️ Back")),
+            "gen", new TelegramMessage(listOfContentMessages.get(5), Map.of("shop", " ◀️ Back"))
 
     );
 
@@ -41,14 +41,14 @@ public class TypeMessages {
     public static String generateStatusMessage() {
         String stringMessage;
         stringMessage = (
-                "\n *Balance*: " + NumberNames.createString(Balance.getPrimary()) +
-                "\n *Total Production*: " +
+                "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
+                "\n *Total Production* \uD83D\uDCC8: " +
                 NumberNames.createString(GeneratorsSingleton.getGenerators()
                         .stream()
                         .mapToDouble(Generator::getProduction)
                         .sum())
                 + " / s" +
-                "\n\n *Generators Owned*: ");
+                "\n\n *Generators Owned* \uD83D\uDE80: ");
 
         for(Generator gen : GeneratorsSingleton.getGenerators()) {
             stringMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
@@ -60,8 +60,8 @@ public class TypeMessages {
     public static String generateShopMessage() {
         String stringMessage;
         stringMessage = (
-                "\n *Balance*: " + NumberNames.createString(Balance.getPrimary()) +
-                        "\n\n*Shop*:");
+                "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
+                        "\n\n*Shop* \uD83D\uDCB8:");
 
         for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
             Generator gen = GeneratorsSingleton.getGenerators().get(i);
@@ -79,7 +79,7 @@ public class TypeMessages {
         for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++)
             generatorButtons.put("gen" + i, (i+1) + "");
 
-        generatorButtons.put("begin", "Back");
+        generatorButtons.put("begin", " ◀️ Back");
 
         return generatorButtons;
     }
