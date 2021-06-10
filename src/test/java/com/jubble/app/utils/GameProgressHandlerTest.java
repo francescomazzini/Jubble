@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class GameProgressHandlerTest {
@@ -20,6 +21,7 @@ public class GameProgressHandlerTest {
   }
 
   @Test
+  @DisplayName("")
   public void mockShouldBeNotNull() {
     assertThat(generators).isNotNull();
   }
