@@ -37,4 +37,8 @@ public class GeneratorsSingleton {
   public static List<Generator> getGenerators() {
     return SingletonCage.INSTANCE.GENERATORS;
   }
+
+  public static GeneratorsSingleton getInstance() {
+    return SingletonCage.INSTANCE;
+  }
 }
