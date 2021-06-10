@@ -1,4 +1,6 @@
-package com.jubble.app.components.generator;
+package com.jubble.app.components;
+
+import com.jubble.app.components.generator.Generator;
 
 import java.util.List;
 
@@ -7,38 +9,38 @@ import java.util.List;
  * holds a private instance. This ensures that the data can be shared across the application without
  * keeping a global variable.
  */
-public class GeneratorsSingleton {
-  private final List<Generator> GENERATORS;
+public class NewSettings {
+  private List<Generator> generators;
+  private List<Currency> currencies;
 
-  private GeneratorsSingleton() {
-    GENERATORS =
-        List.of(
-            new Generator.Builder().name("Stellar Panel").level(1).costBase(3.738).productionBase(1.67).rateGrowth(1.07).build(),
-            new Generator.Builder().name("Electron Absorber").level(2).costBase(60).productionBase(20).rateGrowth(1.15).build(),
-            new Generator.Builder().name("Nucleus Extractor").level(3).costBase(720).productionBase(90).rateGrowth(1.14).build(),
-            new Generator.Builder().name("Hydrogenator").level(4).costBase(8640).productionBase(360).rateGrowth(1.13).build(),
-            new Generator.Builder().name("Dyson Sphere").level(5).costBase(103680).productionBase(2160).rateGrowth(1.12).build(),
-            new Generator.Builder().name("Black Hole Reverser").level(6).costBase(1244160.0).productionBase(6480).rateGrowth(1.11).build(),
-            new Generator.Builder().name("Planet Destroyer").level(7).costBase(14929920.0).productionBase(19440).rateGrowth(1.10).build(),
-            new Generator.Builder().name("Galaxyneus").level(8).costBase(179159040.0).productionBase(58320).rateGrowth(1.09).build(),
-            new Generator.Builder().name("Spacevoker").level(9).costBase(2149908480.0).productionBase(174960).rateGrowth(1.08).build(),
-            new Generator.Builder().name("Multiverse NMX").level(10).costBase(25798901760.0).productionBase(804816).rateGrowth(1.07).build());
+  private NewSettings(List<Currency> currencies, List<Generator> generators) {
+    this.generators = generators;
+    this.currencies = currencies;
+  }
+
+  private NewSettings() {
+    currencies = List.of(new Currency("Energy"));
+    generators = List.of(new Generator.Builder().name("test").build());
   }
 
   private static class SingletonCage {
-    private static final GeneratorsSingleton INSTANCE = new GeneratorsSingleton();
+    private static NewSettings INSTANCE;
   }
 
   /**
    * Instantiates and returns an Asset object.
    *
-   * @return unique INSTANCE the GeneratorsSingleton class.
+   * @return unique INSTANCE the NewSettings class.
    */
   public static List<Generator> getGenerators() {
-    return SingletonCage.INSTANCE.GENERATORS;
+    return SingletonCage.INSTANCE.generators;
   }
 
-  public static GeneratorsSingleton getInstance() {
+  public static NewSettings getInstance() {
     return SingletonCage.INSTANCE;
+  }
+
+  public List<Currency> getCurrencies() {
+    return currencies;
   }
 }

@@ -1,7 +1,7 @@
 package com.jubble.app.javafx;
 
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.components.NewSettings;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
@@ -124,7 +124,7 @@ public class ControllerFX implements Initializable {
 
     generatorFXList = new ArrayList<>();
 
-    List<Generator> generatorList = GeneratorsSingleton.getGenerators();
+    List<Generator> generatorList = NewSettings.getGenerators();
 
     for (int i = 0; i < generatorList.size(); i++) {
       Generator currentGenerator = generatorList.get(i);
@@ -154,7 +154,7 @@ public class ControllerFX implements Initializable {
 
     shopAnchorPane.getChildren().add(shop);
 
-    int nGenerators = GeneratorsSingleton.getGenerators().size();
+    int nGenerators = NewSettings.getGenerators().size();
     shopAnchorPane.setMinHeight(
         220 * Math.ceil((double) nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 

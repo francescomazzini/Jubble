@@ -5,9 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.jubble.app.utils.GameProgress;
+import com.jubble.app.components.NewSettings;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,7 +47,7 @@ public class GeneratorLoader {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        return mapper.writeValueAsString(GeneratorsSingleton.getGenerators());
+        return mapper.writeValueAsString(NewSettings.getGenerators());
     }
 
     public static void testsaveGenerators() throws IOException {
