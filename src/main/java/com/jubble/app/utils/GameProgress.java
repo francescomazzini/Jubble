@@ -11,12 +11,6 @@ import java.util.List;
 public class GameProgress {
   private List<Integer> ownedGenerators;
   private double balance;
-  /* TODO: Saving date
-      Optional feature.
-   Each time is saved this date is serialize.
-  // Then when deserialized, money is gifted by the time that passed.
-  // private Date saveDate;
-  */
 
   /**
    * @param ownedGenerators list of owned generators.
