@@ -1,8 +1,9 @@
 package com.jubble.app.utils;
 
 import com.jubble.app.components.Currency;
-import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.components.NewSettings;
 import com.jubble.app.components.generator.IllegalOperationException;
+
 import java.util.List;
 
 public class Settings {
@@ -11,10 +12,10 @@ public class Settings {
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
     final int FIRST = 0;
-    if (GeneratorsSingleton.getGenerators().get(FIRST).isMoreThanZeroOwned())
+    if (NewSettings.getGenerators().get(FIRST).isMoreThanZeroOwned())
       throw new IllegalOperationException();
 
-    GeneratorsSingleton.getGenerators().get(FIRST).incrementNumberOwned();
+    NewSettings.getGenerators().get(FIRST).incrementNumberOwned();
   }
 
   public static List<Currency> getCurrencies() {
