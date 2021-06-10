@@ -8,19 +8,19 @@ import com.jubble.app.telegram.elements.TypeMessages;
 import com.jubble.app.utils.GameActions;
 import com.jubble.app.utils.GameProgressHandler;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.FileNotFoundException;
 import java.util.Map;
 
 public class JubbleBot extends TelegramLongPollingBot  {
 
+    /**
+     * listMessages map is a Map that for each type of TelegramMessage (already written in TypeMessages) has
+     * the callBackQuery as key. In this way only one TelegramMessage correspond to a callBackQuery.
+     */
     private final Map<String, TelegramMessage> listMessages = TypeMessages.listOfMessages;
     private boolean isGameOn;
-
-    public boolean isGameOn() { return isGameOn; }
 
     public void setGameOn(boolean gameOn) { isGameOn = gameOn; }
 
@@ -34,13 +34,23 @@ public class JubbleBot extends TelegramLongPollingBot  {
         return "1711656042:AAFPvyLcWPSeHwpq7qM-kodBXCYhIKwfKWo";
     }
 
+    /**
+     * Each time that the bot receives an update, it analyzes the command receive. It could be a normal
+     * command like "/start" or a callBackQuery like "shop". They are treated in the same way
+     * so it just put it in a string. Then it search in the map the correct TelegramMessage to use
+     * it to answer to the command given.
+     *
+     * There can be cases where the command is not found and it could be because the commands to buy generators
+     * are all wrapped under "gen" command and then followed by the number of the generator they refer to.
+     * Because of this there is an if which checks if this is the case. If it is not even the command obviously is
+     * not run
+     *
+     * @param update is the object given by API when the user interacts with the bot
+     */
     @Override
     public void onUpdateReceived(Update update) {
 
-        String stringMessage = "";
-        SendMessage message = new SendMessage();
         String command;
-
 
         if(update.hasCallbackQuery())
             command = update.getCallbackQuery().getData();
@@ -56,11 +66,7 @@ public class JubbleBot extends TelegramLongPollingBot  {
 
         if(telegramMessage != null) {
 
-            try {
-                actionPerformer(command, telegramMessage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            actionPerformer(command, telegramMessage);
 
             telegramMessage.setChatId(update);
 
@@ -73,7 +79,15 @@ public class JubbleBot extends TelegramLongPollingBot  {
 
     }
 
-    private void actionPerformer (String action, TelegramMessage tlMsg) throws FileNotFoundException {
+    /**
+     * actionPerformer runs snippet of code modifying TelegramMessage depending on the command
+     * inserted. This is needed because some information are generated or executed at run time
+     *
+     * @param action that is the command given by the update
+     * @param tlMsg is the TelegramMessage which correspond to the key command in the Map
+     *
+     */
+    private void actionPerformer (String action, TelegramMessage tlMsg) {
 
         if(action.equals("begin") && !isGameOn) {
             tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
@@ -88,10 +102,10 @@ public class JubbleBot extends TelegramLongPollingBot  {
         }
 
         if(action.equals("status"))
-            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatusMessage());
+            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatusContent());
 
         if(action.equals("shop")) {
-            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateShopMessage());
+            tlMsg.setText(tlMsg.getContent() + TypeMessages.generateShopContent());
 
             tlMsg.setInlineButtons(TypeMessages.generateShopButtons(), 5);
 
@@ -112,11 +126,4 @@ public class JubbleBot extends TelegramLongPollingBot  {
 
     }
 
-    /**
-     * The commands available are:
-     * begin - starts the game
-     * stop - stops the game
-     * status - gives you the status of your game stats
-     * shop - open the shop
-     */
 }

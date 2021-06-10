@@ -4,9 +4,7 @@ import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,10 @@ public class TelegramMessage extends SendMessage {
 
     }
 
+    /**
+     * This method generate buttons for the Message in a way that buttons are
+     * one under the other. Therefore there is only one button per line
+     */
     private void generateButtons() {
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
@@ -50,6 +52,13 @@ public class TelegramMessage extends SendMessage {
         this.setReplyMarkup(markupInline);
     }
 
+    /**
+     * This method generates buttons for the Message in a way that they are
+     * more than one and maximum MAX_PER_ROW in a line. Therefore in a line
+     * there can be a maximum of MAX_PER_ROW buttons.
+     *
+     * @param MAX_PER_ROW
+     */
     private void generateButtons(int MAX_PER_ROW) {
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -98,10 +107,6 @@ public class TelegramMessage extends SendMessage {
     public void setContent(String content) {
         this.content = content;
         this.setText(content);
-    }
-
-    public Map<String, String> getInlineButtons() {
-        return inlineButtons;
     }
 
     public void setInlineButtons(Map<String, String> inlineButtons) {

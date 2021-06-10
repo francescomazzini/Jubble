@@ -4,10 +4,8 @@ import com.jubble.app.components.Balance;
 import com.jubble.app.components.generator.Generator;
 import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.NumberNames;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +21,6 @@ public class TypeMessages {
 
     );
 
-    //forse treemap per pulsanti
-
     public final static Map<String, TelegramMessage> listOfMessages = Map.of(
             "/start", new TelegramMessage(listOfContentMessages.get(0), Map.of("begin", "✅ Begin ")),
             "begin", new TelegramMessage(listOfContentMessages.get(1), Map.of( "shop", "\uD83D\uDCB8 Shop ",
@@ -37,10 +33,15 @@ public class TypeMessages {
 
     );
 
-
-    public static String generateStatusMessage() {
-        String stringMessage;
-        stringMessage = (
+    /**
+     * It generates the status telegram message content. It is needed to be generated because it changes in
+     * run time and it is also quite complex.
+     *
+     * @return statusContentMessage
+     */
+    public static String generateStatusContent() {
+        String statusContentMessage;
+        statusContentMessage = (
                 "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
                 "\n *Total Production* \uD83D\uDCC8: " +
                 NumberNames.createString(GeneratorsSingleton.getGenerators()
@@ -51,39 +52,50 @@ public class TypeMessages {
                 "\n\n *Generators Owned* \uD83D\uDE80: ");
 
         for(Generator gen : GeneratorsSingleton.getGenerators()) {
-            stringMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
+            statusContentMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
         }
 
-        return stringMessage;
+        return statusContentMessage;
     }
 
-    public static String generateShopMessage() {
-        String stringMessage;
-        stringMessage = (
+    /**
+     * It generates the shop telegram message content. It is needed to be generated because it changes in
+     * run time and it is also quite complex.
+     *
+     * @return statusContentMessage
+     */
+    public static String generateShopContent() {
+        String shopContentMessage;
+        shopContentMessage = (
                 "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
                         "\n\n*Shop* \uD83D\uDCB8:");
 
         for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
             Generator gen = GeneratorsSingleton.getGenerators().get(i);
-            stringMessage += "\n   " + (i+1) + ": " + gen.getName() + ", cost: " + NumberNames.createString(gen.getNextCost());
-            stringMessage += "\n        production: " + NumberNames.createString(gen.getProductionBase()) + " / s";
+            shopContentMessage += "\n   " + (i+1) + ": " + gen.getName() + ", cost: " + NumberNames.createString(gen.getNextCost());
+            shopContentMessage += "\n        production: " + NumberNames.createString(gen.getProductionBase()) + " / s";
         }
 
-        return stringMessage;
+        return shopContentMessage;
     }
 
+    /**
+     * It generates the shop telegram message buttons. It is needed to be generated because
+     * it is also quite complex and each button need its specific key which should refer to its generator.
+     *
+     * @return
+     */
     public static Map<String, String> generateShopButtons() {
 
-        Map<String, String> generatorButtons = new HashMap<>();
+        Map<String, String> shopButtonsMessage = new HashMap<>();
 
         for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++)
-            generatorButtons.put("gen" + i, (i+1) + "");
+            shopButtonsMessage.put("gen" + i, (i+1) + "");
 
-        generatorButtons.put("begin", " ◀️ Back");
+        shopButtonsMessage.put("begin", " ◀️ Back");
 
-        return generatorButtons;
+        return shopButtonsMessage;
     }
-
 
 
 }

@@ -1,12 +1,18 @@
 package com.jubble.app.telegram;
 
-import com.jubble.app.ThreadRunner;
-import com.jubble.app.utils.GameProgressHandler;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class MainTelegram {
+
+    /**
+     * Main methods create a istance of the bot and run it following the telegram
+     * API and use gameOn as variable in the game to know if the user has
+     * already clicked begin or not.
+     *
+     * @param args
+     */
 
     public static void main(String[] args) {
 
