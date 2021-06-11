@@ -3,12 +3,18 @@ image: maven:latest
 stages:
   - build
   - docs
+  - format
 
 build:
   stage: build
   script:
     - mvn test
     - mvn compile
+
+format:
+  stage: format
+  script:
+    - mvn spotless:apply
 
 docs:
   stage: docs
