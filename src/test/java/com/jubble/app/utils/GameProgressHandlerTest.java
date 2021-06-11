@@ -19,8 +19,10 @@ import org.junit.jupiter.api.Test;
 
 public class GameProgressHandlerTest {
   GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 15.0);
-  static GameProgress progressDeserialized;
-  static String jsonOfProgress;
+  static String jsonOfProgress = "{\n" +
+          "  \"ownedGenerators\" : [ 1, 0, 0, 0, 0, 0 ],\n" +
+          "  \"balance\" : 15.0\n" +
+          "}";
   static Path jsonStoredPath = Path.of(GameProgressHandler.PROGRESS_FILE_PATH);
   static String initialFileState;
 
@@ -30,11 +32,7 @@ public class GameProgressHandlerTest {
     if(Files.exists(jsonStoredPath))
       initialFileState= Files.readString(jsonStoredPath);
 
-    jsonOfProgress = "{\n" +
-            "  \"ownedGenerators\" : [ 1, 0, 0, 0, 0, 0 ],\n" +
-            "  \"balance\" : 15.0\n" +
-            "}";
-    progressDeserialized = new ObjectMapper().readValue(jsonOfProgress, GameProgress.class);
+
   }
 
   @AfterAll
@@ -45,24 +43,6 @@ public class GameProgressHandlerTest {
       Files.delete(jsonStoredPath);
   }
 
-  @Test
-  @DisplayName("Generators Data retrieved by a JSon should not be null")
-  public void dataFromJsonShouldNotBeNull() {
-    assertThat(progressDeserialized).isNotNull();
-  }
-
-  @Test
-  @DisplayName("Balance Value (15.0) retrieved by a JSon should be equal to 15.0")
-  public void balanceFromJsonShouldBeRetrieved() {
-    assertThat(progressDeserialized.getBalance()).isEqualTo(progress.getBalance());
-  }
-
-  @Test
-  @DisplayName("Generators List [ 1, 0, 0, 0, 0, 0 ] retrieved by a JSon should be equal to [ 1, 0, 0, 0, 0, 0 ]")
-  public void generatorsFromJsonShouldBeRetrieved() {
-    assertThat(progressDeserialized.getOwnedGenerators()).isEqualTo(progress.getOwnedGenerators());
-  }
-
 
   /**
    * This test checks equality directly from the file with the jsonOfProgress.
@@ -70,9 +50,16 @@ public class GameProgressHandlerTest {
    * but the type of line breaks could be different.
    */
   @Test
-  @DisplayName("Saving Progress ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Serialized Correctly")
-  public void savingProgressShouldBeSerializedCorrectly() throws IOException {
+  @DisplayName("Serializing Progress ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Serialized Correctly")
+  public void serializingProgressShouldBeSerializedCorrectly() throws JsonProcessingException {
+    String data = GameProgressHandler.serialize(progress);
+    assertThat(data.replaceAll("\\r", ""))
+            .isEqualTo(jsonOfProgress.replaceAll("\\r", ""));
+  }
 
+  @Test
+  @DisplayName("Saving Progress in File ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Serialized Correctly")
+  public void savingProgressInFileShouldBeSerializedCorrectly() throws IOException {
     GameProgressHandler.saveGame(progress);
     assertThat(Files.readString(jsonStoredPath).replaceAll("\\r", ""))
             .isEqualTo(jsonOfProgress.replaceAll("\\r", ""));
@@ -81,8 +68,8 @@ public class GameProgressHandlerTest {
 
 
   @Test
-  @DisplayName("Saving then Loading Progress ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Deserialized Correctly")
-  public void savingThenLoadingProgressShouldBeDeserializedCorrectly() throws IOException {
+  @DisplayName("Saving then Loading Progress from File ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Deserialized Correctly")
+  public void savingThenLoadingProgressFromFileShouldBeDeserializedCorrectly() throws IOException {
 
     GameProgressHandler.saveGame(progress);
 
@@ -97,7 +84,8 @@ public class GameProgressHandlerTest {
   @Test
   @DisplayName("if progress == null serialize should throw IllegalArgumentException")
   public void serializeNullProgressShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class, () -> GameProgressHandler.serialize(null));
+    Exception expected = assertThrows(IllegalArgumentException.class, () -> GameProgressHandler.serialize(null));
+    assertThat(expected.getMessage()).contains("Progress can't be null.");
   }
 
 }

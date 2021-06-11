@@ -7,7 +7,7 @@ public class GameActions {
 
   public static boolean buyGenerator(Generator generator) {
 
-    if (Balance.getPrimary() > generator.getNextCost()) {
+    if (Balance.getPrimary() >= generator.getNextCost()) {
       Balance.setPrimary(Balance.getPrimary() - generator.getNextCost());
       generator.incrementNumberOwned();
 
