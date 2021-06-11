@@ -1,11 +1,12 @@
-package com.jubble.app;
+package com.jubble.app.core.threads;
 
-import com.jubble.app.components.Balance;
-import com.jubble.app.components.GeneratorsSingleton;
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.GameProgress;
-import com.jubble.app.utils.GameProgressHandler;
-import com.jubble.app.utils.Settings;
+import com.jubble.app.core.Settings;
+import com.jubble.app.core.components.Balance;
+import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.GameActions;
+import com.jubble.app.core.utils.GameProgress;
+import com.jubble.app.core.utils.GameProgressHandler;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
@@ -20,14 +21,14 @@ public class ThreadRunner {
     System.out.println("Recovering game values.");
     Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
-      GeneratorsSingleton.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    for (int i = 0; i < Settings.getGenerators().size(); i++) {
+      Settings.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
     }
   }
 
   private static void startFromScratch() {
     System.out.println("No saved values fault. Starting from scratch.");
-    Settings.giftInitialAmount();
+    GameActions.giftInitialAmount();
   }
 
   /** Starts instance of the timer GameValuesThread timer. */
@@ -49,7 +50,7 @@ public class ThreadRunner {
 
     GameProgress progress =
         new GameProgress(
-            GeneratorsSingleton.getGenerators().stream()
+              Settings.getGenerators().stream()
                 .map(Generator::getNumberOwned)
                 .collect(Collectors.toList()),
             Balance.getPrimary());

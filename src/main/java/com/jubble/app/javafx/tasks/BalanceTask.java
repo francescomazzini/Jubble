@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.tasks;
 
-import com.jubble.app.utils.NumberNames;
-import com.jubble.app.utils.Settings;
+import com.jubble.app.core.utils.NumberNames;
+import com.jubble.app.core.Settings;
 
 public class BalanceTask extends AbstractTask {
 

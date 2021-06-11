@@ -1,6 +1,5 @@
-package com.jubble.app.utils;
+package com.jubble.app.core.utils;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;

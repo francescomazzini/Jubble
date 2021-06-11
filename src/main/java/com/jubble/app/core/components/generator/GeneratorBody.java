@@ -1,14 +1,9 @@
-package com.jubble.app.components.generator;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+package com.jubble.app.core.components.generator;
 
 /**
  * Represents a generator in the game.
  * Implements the builder pattern and can be instantiated only providing a builder.
  */
-@JsonDeserialize(builder = GeneratorBody.Builder.class)
 public abstract class GeneratorBody {
     /**
      * Represents the name of this generator.
@@ -38,7 +33,6 @@ public abstract class GeneratorBody {
         numberOwned = builder.numberOwned;
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
     abstract static class Builder<T extends Builder<T>> {
         // Optional parameters - initialized to default values.
         private String name = "";

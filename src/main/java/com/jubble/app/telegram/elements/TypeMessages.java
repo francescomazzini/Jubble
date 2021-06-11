@@ -1,9 +1,9 @@
 package com.jubble.app.telegram.elements;
 
-import com.jubble.app.components.Balance;
-import com.jubble.app.components.GeneratorsSingleton;
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.NumberNames;
+import com.jubble.app.core.components.Balance;
+import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.NumberNames;
+import com.jubble.app.core.Settings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,14 +44,14 @@ public class TypeMessages {
         statusContentMessage = (
                 "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
                 "\n *Total Production* \uD83D\uDCC8: " +
-                NumberNames.createString(GeneratorsSingleton.getGenerators()
+                NumberNames.createString(Settings.getGenerators()
                         .stream()
                         .mapToDouble(Generator::getProduction)
                         .sum())
                 + " / s" +
                 "\n\n *Generators Owned* \uD83D\uDE80: ");
 
-        for(Generator gen : GeneratorsSingleton.getGenerators()) {
+        for(Generator gen : Settings.getGenerators()) {
             statusContentMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
         }
 
@@ -70,8 +70,8 @@ public class TypeMessages {
                 "\n *Balance* \uD83D\uDCB0: " + NumberNames.createString(Balance.getPrimary()) +
                         "\n\n*Shop* \uD83D\uDCB8:");
 
-        for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++) {
-            Generator gen = GeneratorsSingleton.getGenerators().get(i);
+        for(int i = 0; i < Settings.getGenerators().size(); i++) {
+            Generator gen = Settings.getGenerators().get(i);
             shopContentMessage += "\n   " + (i+1) + ": " + gen.getName() + ", cost: " + NumberNames.createString(gen.getNextCost());
             shopContentMessage += "\n        production: " + NumberNames.createString(gen.getProductionBase()) + " / s";
         }
@@ -89,7 +89,7 @@ public class TypeMessages {
 
         Map<String, String> shopButtonsMessage = new HashMap<>();
 
-        for(int i = 0; i < GeneratorsSingleton.getGenerators().size(); i++)
+        for(int i = 0; i < Settings.getGenerators().size(); i++)
             shopButtonsMessage.put("gen" + i, (i+1) + "");
 
         shopButtonsMessage.put("begin", " ◀️ Back");

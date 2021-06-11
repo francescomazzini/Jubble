@@ -1,12 +1,10 @@
 package com.jubble.app.javafx.components;
 
-import com.jubble.app.components.generator.Generator;
-import com.jubble.app.utils.GameActions;
-import java.util.Locale;
+import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.GameActions;
 
-import com.jubble.app.utils.NumberNames;
+import com.jubble.app.core.utils.NumberNames;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

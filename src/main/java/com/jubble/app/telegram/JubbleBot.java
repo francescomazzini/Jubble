@@ -1,12 +1,12 @@
 package com.jubble.app.telegram;
 
-import com.jubble.app.ThreadRunner;
-import com.jubble.app.components.GeneratorsSingleton;
-import com.jubble.app.components.generator.Generator;
+import com.jubble.app.core.threads.ThreadRunner;
+import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
-import com.jubble.app.utils.GameActions;
-import com.jubble.app.utils.GameProgressHandler;
+import com.jubble.app.core.utils.GameActions;
+import com.jubble.app.core.utils.GameProgressHandler;
+import com.jubble.app.core.Settings;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -114,7 +114,7 @@ public class JubbleBot extends TelegramLongPollingBot  {
         if(action.startsWith("gen")) {
 
             int numGenerator = Integer.parseInt(action.substring(3));
-            Generator gen = GeneratorsSingleton.getGenerators().get(numGenerator);
+            Generator gen = Settings.getGenerators().get(numGenerator);
             boolean isBought = GameActions.buyGenerator(gen);
 
             if(isBought)

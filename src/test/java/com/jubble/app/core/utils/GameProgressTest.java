@@ -1,4 +1,4 @@
-package com.jubble.app.utils;
+package com.jubble.app.core.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;

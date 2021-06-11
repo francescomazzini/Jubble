@@ -1,4 +1,4 @@
-package com.jubble.app.utils;
+package com.jubble.app.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

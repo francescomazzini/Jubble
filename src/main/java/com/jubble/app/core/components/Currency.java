@@ -1,4 +1,4 @@
-package com.jubble.app.components;
+package com.jubble.app.core.components;
 
 public class Currency {
   private String name;

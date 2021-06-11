@@ -4,7 +4,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-public class MainTelegram {
+public class AppTelegram {
 
     /**
      * Main methods create a istance of the bot and run it following the telegram

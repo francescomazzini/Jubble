@@ -1,8 +1,7 @@
-package com.jubble.app.utils;
+package com.jubble.app.core.utils;
 
-import com.jubble.app.components.Balance;
-import com.jubble.app.components.generator.Generator;
-import org.junit.jupiter.api.BeforeAll;
+import com.jubble.app.core.components.Balance;
+import com.jubble.app.core.components.generator.Generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

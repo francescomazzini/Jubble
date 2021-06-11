@@ -1,8 +1,8 @@
-package com.jubble.app;
+package com.jubble.app.core.threads;
 
-import com.jubble.app.components.Balance;
-import com.jubble.app.components.GeneratorsSingleton;
-import com.jubble.app.components.generator.Generator;
+import com.jubble.app.core.Settings;
+import com.jubble.app.core.components.Balance;
+import com.jubble.app.core.components.generator.Generator;
 
 import java.util.TimerTask;
 
@@ -12,7 +12,7 @@ public class GameValuesThread extends TimerTask {
   public void run() {
     Balance.setPrimary(
         Balance.getPrimary()
-            + GeneratorsSingleton.getGenerators().stream()
+            + Settings.getGenerators().stream()
                 .mapToDouble(Generator::getProduction)
                 .sum());
   }

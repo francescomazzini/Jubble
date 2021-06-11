@@ -1,6 +1,6 @@
-package com.jubble.app.components;
+package com.jubble.app.core.components;
 
-import com.jubble.app.utils.Settings;
+import com.jubble.app.core.Settings;
 
 /**
  * Bill Pugh Singleton pattern Implementation. This class contains all the currencies used in this
