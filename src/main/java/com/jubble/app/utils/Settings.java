@@ -1,8 +1,9 @@
 package com.jubble.app.utils;
 
 import com.jubble.app.components.Currency;
-import com.jubble.app.components.generator.GeneratorsSingleton;
+import com.jubble.app.components.GeneratorsSingleton;
 import com.jubble.app.components.generator.IllegalOperationException;
+
 import java.util.List;
 
 public class Settings {

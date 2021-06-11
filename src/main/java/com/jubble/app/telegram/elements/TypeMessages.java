@@ -1,8 +1,8 @@
 package com.jubble.app.telegram.elements;
 
 import com.jubble.app.components.Balance;
+import com.jubble.app.components.GeneratorsSingleton;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.NumberNames;
 
 import java.util.HashMap;
