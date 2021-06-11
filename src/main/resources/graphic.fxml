@@ -41,7 +41,7 @@
       </HBox>
       <ImageView fitHeight="79.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/energy.png" />
+            <Image url="@assets/game-components/primary-resource.png" />
          </image>
          <FlowPane.margin>
             <Insets />

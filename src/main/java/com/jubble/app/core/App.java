@@ -11,8 +11,6 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    GameProgressHandler.loadGame();
-
     ThreadRunner.run();
     GUIRunner.run(primaryStage);
 

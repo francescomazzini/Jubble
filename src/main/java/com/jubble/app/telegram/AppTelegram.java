@@ -7,7 +7,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 public class AppTelegram {
 
     /**
-     * Main methods create a istance of the bot and run it following the telegram
+     * Main methods create a instance of the bot and run it following the telegram
      * API and use gameOn as variable in the game to know if the user has
      * already clicked begin or not.
      *
