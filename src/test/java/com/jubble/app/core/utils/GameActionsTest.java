@@ -88,4 +88,33 @@ public class GameActionsTest {
 
     }
 
+    @Test
+    @DisplayName("Buy a Generator Should Decrease Balance of the Cost of Generator")
+    public void buyGeneratorShouldDecreaseBalanceOfCostOfGenerator() {
+
+        Balance.setPrimary(10);
+
+        genExample.setNumberOwned(1);
+        double generatorCost = genExample.getNextCost();
+
+        GameActions.buyGenerator(genExample);
+
+        assertThat(Balance.getPrimary()).isEqualTo(10 - generatorCost);
+
+    }
+
+    @Test
+    @DisplayName("Buy a Generator Without Enough Money Should Not Decrease Balance")
+    public void buyGeneratorWithoutEnoughMoneyShouldNotDecreaseBalance() {
+
+        Balance.setPrimary(10);
+
+        genExample.setNumberOwned(50);
+
+        GameActions.buyGenerator(genExample);
+
+        assertThat(Balance.getPrimary()).isEqualTo(10 );
+
+    }
+
 }

@@ -28,11 +28,23 @@ public class Balance {
   }
 
   /**
-   * Set amount of primary currency owned by the player.
+   * Add amount of primary currency owned by the player.
    *
    * @param amount is the amount of primary currency owned by the player
    */
-  public static synchronized void setPrimary(double amount) {
+  public static synchronized void addPrimary(double amount) {
+    BalanceCage.INSTANCE.primary.setOwned(getPrimary() + amount);
+  }
+
+  /**
+   * This method is NOT Thread Safe because it is meant to be used only at
+   * the beginning to restore values or only for testing
+   *
+   * @param amount is the amount of primary currency owned by the player
+   */
+  public static void setPrimary(double amount) {
     BalanceCage.INSTANCE.primary.setOwned(amount);
   }
+
+
 }

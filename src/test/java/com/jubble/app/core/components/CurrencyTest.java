@@ -1,4 +1,4 @@
-package com.jubble.app;
+package com.jubble.app.core.components;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -10,14 +10,14 @@ public class CurrencyTest {
   Currency currency = new Currency("TEST");
 
   @Test
-  @DisplayName("Currency should be zero at beginning")
+  @DisplayName("Currency Should Be Zero At Beginning")
   public void shouldBeZeroAtBeginning() {
     assertThat(currency.getOwned()).isZero();
   }
 
   @Test
-  @DisplayName("Currency should be saved")
-  public void shouldSaveCurrency() {
+  @DisplayName("Currency Should Be Set with setOwned()")
+  public void shouldSetCurrencyCorrectly() {
     final double N = 100.35;
     currency.setOwned(N);
     assertThat(currency.getOwned()).isEqualTo(N);

@@ -10,9 +10,8 @@ public class GameValuesThread extends TimerTask {
   /** Increment game values */
   @Override
   public void run() {
-    Balance.setPrimary(
-        Balance.getPrimary()
-            + Settings.getGenerators().stream()
+    Balance.addPrimary(
+            Settings.getGenerators().stream()
                 .mapToDouble(Generator::getProduction)
                 .sum());
   }
