@@ -98,7 +98,7 @@
                      <graphic>
                         <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/button/left-button.png" />
+                              <Image url="@assets/button/left-arrow-button.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -112,7 +112,7 @@
                            <graphic>
                               <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@assets/button/right-button.png" />
+                                    <Image url="@assets/button/right-arrow-button.png" />
                                  </image></ImageView>
                            </graphic></Button>
                      </children>
