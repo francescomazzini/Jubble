@@ -1,8 +1,8 @@
 package com.jubble.app;
 
 import com.jubble.app.components.Balance;
+import com.jubble.app.components.GeneratorsSingleton;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.GameProgress;
 import com.jubble.app.utils.GameProgressHandler;
 import com.jubble.app.utils.Settings;

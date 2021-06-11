@@ -1,8 +1,8 @@
 package com.jubble.app.telegram;
 
 import com.jubble.app.ThreadRunner;
+import com.jubble.app.components.GeneratorsSingleton;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import com.jubble.app.utils.GameActions;

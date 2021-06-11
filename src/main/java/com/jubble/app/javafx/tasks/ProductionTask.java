@@ -1,10 +1,8 @@
 package com.jubble.app.javafx.tasks;
 
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.utils.NumberNames;
-
-import java.util.Locale;
+import com.jubble.app.components.GeneratorsSingleton;
 
 public class ProductionTask extends AbstractTask {
 

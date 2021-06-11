@@ -1,7 +1,7 @@
 package com.jubble.app.javafx;
 
+import com.jubble.app.components.GeneratorsSingleton;
 import com.jubble.app.components.generator.Generator;
-import com.jubble.app.components.generator.GeneratorsSingleton;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
