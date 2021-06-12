@@ -40,16 +40,12 @@ public class NumberNames {
    * @return spelled number, spelled in english and approximated.
    */
   public static String createString(Double number) {
-    boolean negative = number < 0;
-    number = Math.abs(number);
-    Map.Entry<Double, String> entry = MAP.floorEntry(number);
+    Map.Entry<Double, String> entry = MAP.floorEntry(Math.abs(number));
     String numberName;
     if (entry == null) {
-      if (negative) number = number * -1;
       numberName = String.format(Locale.US, "%,.2f", number);
     } else {
       double rounded = performApproximation(entry.getKey(), number);
-      if (negative) rounded = rounded * -1;
       numberName =
           String.format(Locale.US, "%,.2f", rounded)
               + (!entry.getValue().equals("") ? " " : "")
