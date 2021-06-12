@@ -48,14 +48,8 @@ public class GameProgressHandler {
    *
    * @return loaded progress from file or null if file was found.
    */
-  public static GameProgress loadGame() {
+  public static GameProgress loadGame() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-
-    try {
-      return mapper.readValue(FILE, GameProgress.class);
-    } catch (IOException e) {
-      e.printStackTrace();
-      return null;
-    }
+    return mapper.readValue(FILE, GameProgress.class);
   }
 }
