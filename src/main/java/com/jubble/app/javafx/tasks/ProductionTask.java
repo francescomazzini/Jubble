@@ -1,7 +1,6 @@
 package com.jubble.app.javafx.tasks;
 
-import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.GameActions;
 import com.jubble.app.core.utils.NumberNames;
 
 public class ProductionTask extends AbstractTask {
@@ -11,8 +10,7 @@ public class ProductionTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(
-          Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum(), 0);
+      updateProgress(GameActions.getTotalGeneratorsSum(), 0);
     }
   }
 

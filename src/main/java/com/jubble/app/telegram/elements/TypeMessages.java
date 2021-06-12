@@ -3,6 +3,7 @@ package com.jubble.app.telegram.elements;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.components.Balance;
 import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.GameActions;
 import com.jubble.app.core.utils.NumberNames;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +50,7 @@ public class TypeMessages {
         ("\n *Balance* \uD83D\uDCB0: "
             + NumberNames.createString(Balance.getPrimary())
             + "\n *Total Production* \uD83D\uDCC8: "
-            + NumberNames.createString(
-                Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum())
+            + NumberNames.createString(GameActions.getTotalGeneratorsSum())
             + " / s"
             + "\n\n *Generators Owned* \uD83D\uDE80: ");
 
