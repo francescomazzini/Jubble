@@ -1,6 +1,11 @@
-Run project
+Run Javafx app.
 ````
-mvn clean compile exec:java
+mvn clean compile exec:java@javafx
+````
+
+Run telegram bot.
+````
+mvn clean compile exec:java@telegram
 ````
 
 Build project and verify code style
