@@ -92,6 +92,25 @@
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <executions>
+                        <execution>
+                            <id>javafx</id>
+                            <configuration>
+                                <mainClass>com.jubble.app.core.App</mainClass>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>telegram</id>
+                            <configuration>
+                                <mainClass>com.jubble.app.telegram.AppTelegram</mainClass>
+                            </configuration>
+                        </execution>
+                   </executions>
+                </plugin>
+                <plugin>
                     <groupId>com.diffplug.spotless</groupId>
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>${spotless.version}</version>
