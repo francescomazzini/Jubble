@@ -7,33 +7,32 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ThreadTaskUtilTest {
-  ThreadTaskUtil threads = new ThreadTaskUtil();
   BalanceTask task = new BalanceTask();
 
   @BeforeEach
   void setup() {
-    threads.create(task);
+    ThreadTaskUtil.create(task);
   }
 
   @Test
   public void threadCreateShouldBeUnique() {
-    threads.create(task);
-    threads.create(task);
-    threads.create(task);
+    ThreadTaskUtil.create(task);
+    ThreadTaskUtil.create(task);
+    ThreadTaskUtil.create(task);
 
-    assertThat(threads.getThreadNumber()).isEqualTo(1);
+    assertThat(ThreadTaskUtil.getThreadNumber()).isEqualTo(1);
 
-    threads.getThread(task.getName()).interrupt();
-    assertThat(threads.getThread(task.getName()).isAlive()).isFalse();
+    ThreadTaskUtil.getThread(task.getName()).interrupt();
+    assertThat(ThreadTaskUtil.getThread(task.getName()).isAlive()).isFalse();
   }
 
   @Test
   public void removedThreadShouldNotBeAlive() throws InterruptedException {
-    threads.getThread(task.getName()).start();
+    ThreadTaskUtil.getThread(task.getName()).start();
 
-    assertThat(threads.getThread(task.getName()).isAlive()).isTrue();
+    assertThat(ThreadTaskUtil.getThread(task.getName()).isAlive()).isTrue();
 
-    Thread removed = threads.remove(task.getName());
+    Thread removed = ThreadTaskUtil.remove(task.getName());
 
     assertThat(removed).isNotNull();
 

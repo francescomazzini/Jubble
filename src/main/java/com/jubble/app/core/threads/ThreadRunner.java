@@ -20,8 +20,10 @@ public class ThreadRunner {
 
   /** Starts instance of the timer GameValuesThread timer. */
   public static void run() {
+    final int TIMER_REFRESH_RATE = 1000;
+    final int TIMER_DELAY = 0;
     GameStarterUtil.setUp();
-   valueTimer.schedule(new GameValuesThread(), 0, 1000);
+    valueTimer.schedule(new GameValuesThread(), TIMER_DELAY, TIMER_REFRESH_RATE);
     System.out.println("Game thread started");
   }
 
