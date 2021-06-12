@@ -19,6 +19,10 @@ public class GameActions {
     return false;
   }
 
+  public static double getTotalGeneratorsSum() {
+    return Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum();
+  }
+
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
     final int FIRST = 0;
