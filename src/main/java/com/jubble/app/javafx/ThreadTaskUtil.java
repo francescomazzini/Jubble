@@ -9,6 +9,8 @@ public class ThreadTaskUtil {
   /** Contains threads of each task. */
   private static final Map<String, Thread> taskThreads = new HashMap<>();
 
+  private ThreadTaskUtil() {}
+
   /**
    * Create thread from given Task
    *
