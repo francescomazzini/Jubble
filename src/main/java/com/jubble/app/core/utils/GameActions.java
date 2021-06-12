@@ -27,5 +27,4 @@ public class GameActions {
 
     Settings.getGenerators().get(FIRST).incrementNumberOwned();
   }
-
 }

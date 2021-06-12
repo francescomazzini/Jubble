@@ -1,123 +1,115 @@
 package com.jubble.app.telegram.elements;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class TelegramMessage extends SendMessage {
 
+  private String content;
+  private Map<String, String> inlineButtons;
 
-    private String content;
-    private Map<String, String> inlineButtons;
+  public TelegramMessage(String content, Map<String, String> inlineButtons) {
+    this.content = content;
+    this.inlineButtons = inlineButtons;
 
-    public TelegramMessage (String content,  Map<String, String> inlineButtons ) {
-        this.content = content;
-        this.inlineButtons = inlineButtons;
+    this.setText(content);
+    this.setParseMode(ParseMode.MARKDOWN);
 
-        this.setText(content);
-        this.setParseMode(ParseMode.MARKDOWN);
+    generateButtons();
+  }
 
-        generateButtons();
+  /**
+   * This method generate buttons for the Message in a way that buttons are one under the other.
+   * Therefore there is only one button per line
+   */
+  private void generateButtons() {
 
+    InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+    List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+
+    for (String key : inlineButtons.keySet()) {
+
+      InlineKeyboardButton button = new InlineKeyboardButton();
+      button.setText(inlineButtons.get(key));
+      button.setCallbackData(key);
+
+      // Set the keyboard to the markup
+      rowsInline.add(new ArrayList<>(List.of(button)));
     }
 
-    /**
-     * This method generate buttons for the Message in a way that buttons are
-     * one under the other. Therefore there is only one button per line
-     */
-    private void generateButtons() {
+    markupInline.setKeyboard(rowsInline);
+    this.setReplyMarkup(markupInline);
+  }
 
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+  /**
+   * This method generates buttons for the Message in a way that they are more than one and maximum
+   * MAX_PER_ROW in a line. Therefore in a line there can be a maximum of MAX_PER_ROW buttons.
+   *
+   * @param MAX_PER_ROW
+   */
+  private void generateButtons(int MAX_PER_ROW) {
+    InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+    List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+    List<InlineKeyboardButton> rowInline = null;
 
+    int counter = 0;
 
-        for(String key : inlineButtons.keySet()) {
+    for (String key : inlineButtons.keySet()) {
 
-            InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(inlineButtons.get(key));
-            button.setCallbackData(key);
+      if (counter % MAX_PER_ROW == 0) {
+        rowInline = new ArrayList<>();
+        rowsInline.add(rowInline);
+      }
 
-            // Set the keyboard to the markup
-            rowsInline.add(new ArrayList<>(List.of(button)));
+      InlineKeyboardButton button = new InlineKeyboardButton();
+      button.setText(inlineButtons.get(key));
+      button.setCallbackData(key);
 
-        }
+      // Set the keyboard to the markup
+      rowInline.add(button);
 
-        markupInline.setKeyboard(rowsInline);
-        this.setReplyMarkup(markupInline);
+      counter++;
     }
 
-    /**
-     * This method generates buttons for the Message in a way that they are
-     * more than one and maximum MAX_PER_ROW in a line. Therefore in a line
-     * there can be a maximum of MAX_PER_ROW buttons.
-     *
-     * @param MAX_PER_ROW
-     */
-    private void generateButtons(int MAX_PER_ROW) {
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = null;
+    markupInline.setKeyboard(rowsInline);
+    this.setReplyMarkup(markupInline);
+  }
 
-        int counter = 0;
+  public void setChatId(Update update) {
 
-        for(String key : inlineButtons.keySet()) {
+    String parameter = "";
 
-            if(counter % MAX_PER_ROW == 0) {
-                rowInline = new ArrayList<>();
-                rowsInline.add(rowInline);
-            }
+    if (update.hasCallbackQuery())
+      parameter = update.getCallbackQuery().getMessage().getChatId() + "";
+    else parameter = update.getMessage().getChatId() + "";
 
-            InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(inlineButtons.get(key));
-            button.setCallbackData(key);
+    this.setChatId(parameter);
+  }
 
-            // Set the keyboard to the markup
-            rowInline.add(button);
+  public String getContent() {
+    return content;
+  }
 
-            counter++;
+  public void setContent(String content) {
+    this.content = content;
+    this.setText(content);
+  }
 
-        }
+  public void setInlineButtons(Map<String, String> inlineButtons) {
+    this.inlineButtons = inlineButtons;
 
-        markupInline.setKeyboard(rowsInline);
-        this.setReplyMarkup(markupInline);
-    }
+    generateButtons();
+  }
 
-    public void setChatId (Update update) {
+  public void setInlineButtons(Map<String, String> inlineButtons, int MAX_PER_ROW) {
+    this.inlineButtons = inlineButtons;
 
-        String parameter = "";
-
-        if(update.hasCallbackQuery())
-            parameter = update.getCallbackQuery().getMessage().getChatId() + "";
-        else
-            parameter = update.getMessage().getChatId() + "";
-
-        this.setChatId(parameter);
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-        this.setText(content);
-    }
-
-    public void setInlineButtons(Map<String, String> inlineButtons) {
-        this.inlineButtons = inlineButtons;
-
-        generateButtons();
-    }
-
-    public void setInlineButtons(Map<String, String> inlineButtons, int MAX_PER_ROW) {
-        this.inlineButtons = inlineButtons;
-
-        generateButtons(MAX_PER_ROW);
-    }
+    generateButtons(MAX_PER_ROW);
+  }
 }

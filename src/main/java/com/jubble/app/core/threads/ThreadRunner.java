@@ -1,12 +1,11 @@
 package com.jubble.app.core.threads;
 
-import com.jubble.app.core.utils.GameStarterUtil;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.components.Balance;
 import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.core.utils.GameProgress;
 import com.jubble.app.core.utils.GameProgressHandler;
-
+import com.jubble.app.core.utils.GameStarterUtil;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.stream.Collectors;
@@ -15,8 +14,6 @@ import java.util.stream.Collectors;
 public class ThreadRunner {
   /** Contains each GameValuesThread TimerTask instantiated by run(). */
   private static final Timer valueTimer = new Timer();
-
-
 
   /** Starts instance of the timer GameValuesThread timer. */
   public static void run() {
@@ -37,7 +34,7 @@ public class ThreadRunner {
 
     GameProgress progress =
         new GameProgress(
-              Settings.getGenerators().stream()
+            Settings.getGenerators().stream()
                 .map(Generator::getNumberOwned)
                 .collect(Collectors.toList()),
             Balance.getPrimary());

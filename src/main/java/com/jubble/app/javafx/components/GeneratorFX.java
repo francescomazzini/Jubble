@@ -2,7 +2,6 @@ package com.jubble.app.javafx.components;
 
 import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.core.utils.GameActions;
-
 import com.jubble.app.core.utils.NumberNames;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;

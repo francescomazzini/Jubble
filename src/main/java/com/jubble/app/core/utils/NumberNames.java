@@ -7,15 +7,7 @@ import java.util.TreeMap;
 
 /** Util to perform spellout of a double number. */
 public class NumberNames {
-  private static final String NAMES[] =
-      new String[] {
-        "",
-        "K",
-        "M",
-        "B",
-        "T",
-        "Q"
-      };
+  private static final String NAMES[] = new String[] {"", "K", "M", "B", "T", "Q"};
 
   private static final int THOUSAND = 1000;
   private static final NavigableMap<Double, String> MAP;
@@ -53,14 +45,15 @@ public class NumberNames {
     Map.Entry<Double, String> entry = MAP.floorEntry(number);
     String numberName;
     if (entry == null) {
-      if(negative)
-        number = number * -1;
+      if (negative) number = number * -1;
       numberName = String.format(Locale.US, "%,.2f", number);
     } else {
       double rounded = performApproximation(entry.getKey(), number);
-      if(negative)
-        rounded = rounded * -1;
-      numberName = String.format(Locale.US, "%,.2f", rounded) + (!entry.getValue().equals("") ? " " : "") + entry.getValue();
+      if (negative) rounded = rounded * -1;
+      numberName =
+          String.format(Locale.US, "%,.2f", rounded)
+              + (!entry.getValue().equals("") ? " " : "")
+              + entry.getValue();
     }
 
     return numberName + " ";
