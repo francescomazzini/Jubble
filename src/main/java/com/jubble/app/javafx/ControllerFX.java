@@ -1,5 +1,6 @@
 package com.jubble.app.javafx;
 
+import com.jubble.app.core.Settings;
 import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
@@ -9,8 +10,6 @@ import com.jubble.app.javafx.components.popups.ShopGenerator;
 import com.jubble.app.javafx.components.popups.ShopPos;
 import java.net.URL;
 import java.util.*;
-
-import com.jubble.app.core.Settings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -135,7 +134,9 @@ public class ControllerFX implements Initializable {
     }
   }
 
-  /** Set up the graphical representation of the {@link com.jubble.app.core.components.Balance} class */
+  /**
+   * Set up the graphical representation of the {@link com.jubble.app.core.components.Balance} class
+   */
   public void setUpBalanceFX() {
     new BalanceFX(balanceLabel, totalProductionLabel);
   }

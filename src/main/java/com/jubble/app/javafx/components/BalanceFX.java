@@ -3,9 +3,8 @@ package com.jubble.app.javafx.components;
 import com.jubble.app.javafx.ThreadTaskUtil;
 import com.jubble.app.javafx.tasks.BalanceTask;
 import com.jubble.app.javafx.tasks.ProductionTask;
-import javafx.scene.control.Label;
-
 import java.util.Objects;
+import javafx.scene.control.Label;
 
 public class BalanceFX {
   private final Label balanceLabel;
@@ -29,5 +28,4 @@ public class BalanceFX {
     totalProductionLabel.textProperty().bind(prodTask.messageProperty());
     ThreadTaskUtil.autoBuild(prodTask);
   }
-
 }

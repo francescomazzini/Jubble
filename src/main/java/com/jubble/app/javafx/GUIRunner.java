@@ -1,7 +1,6 @@
 package com.jubble.app.javafx;
 
 import com.jubble.app.core.threads.ThreadRunner;
-
 import java.io.File;
 import java.io.IOException;
 import javafx.application.Platform;
@@ -31,7 +30,9 @@ public class GUIRunner {
     scene.getStylesheets().add("style.css");
 
     primaryStage.setScene(scene);
-    primaryStage.getIcons().add(new Image(new File("src/main/resources/assets/logo.png").toURI().toString()));
+    primaryStage
+        .getIcons()
+        .add(new Image(new File("src/main/resources/assets/logo.png").toURI().toString()));
 
     primaryStage.setResizable(false);
 

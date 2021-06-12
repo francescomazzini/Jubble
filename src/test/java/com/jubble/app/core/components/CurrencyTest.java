@@ -2,7 +2,6 @@ package com.jubble.app.core.components;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.jubble.app.core.components.Currency;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 public class GeneratorTest {
   Generator generator =
-          new Generator.Builder().name("Stellar Panel")
-                  .level(1)
-                  .costBase(3.738)
-                  .productionBase(1.67)
-                  .rateGrowth(1.07).build();
+      new Generator.Builder()
+          .name("Stellar Panel")
+          .level(1)
+          .costBase(3.738)
+          .productionBase(1.67)
+          .rateGrowth(1.07)
+          .build();
 
   @Test
   @DisplayName("NumberOwned should be DEFAULT at beginning")
@@ -23,13 +25,13 @@ public class GeneratorTest {
   @Test
   @DisplayName("Generator Properties Should Be Default If Not Specified")
   public void shouldBuildGeneratorWithDefaults() {
-    Generator.Builder builder =
-            new Generator.Builder().name("TEST");
+    Generator.Builder builder = new Generator.Builder().name("TEST");
     assertThat(builder.build().toString()).isEqualTo("Generator: TEST level: 0 number owned: 0");
   }
 
   @Test
-  @DisplayName("Trying To Set Generator Number Owned When Not Default Should Throw IllegalOperationException")
+  @DisplayName(
+      "Trying To Set Generator Number Owned When Not Default Should Throw IllegalOperationException")
   public void tryToSetGeneratorNumberOwnedWhenNotDefaultShouldThrowIllegalOperationException() {
     generator.incrementNumberOwned();
     assertThrows(IllegalOperationException.class, () -> generator.setNumberOwned(44));
@@ -56,7 +58,7 @@ public class GeneratorTest {
 
   @Test
   @DisplayName("Cost of Generator Should Increase Based On Rate Growth")
-  public void costShouldIncrementBasedOnRateGrowth () {
+  public void costShouldIncrementBasedOnRateGrowth() {
 
     generator.setNumberOwned(3);
 
@@ -64,24 +66,21 @@ public class GeneratorTest {
 
     generator.incrementNumberOwned();
 
-    double actualResult = Math.round(generator.getNextCost() * 10000) /10000.0;
-    double expectedResult = Math.round((costNow * generator.getRateGrowth()) * 10000) /10000.0;
+    double actualResult = Math.round(generator.getNextCost() * 10000) / 10000.0;
+    double expectedResult = Math.round((costNow * generator.getRateGrowth()) * 10000) / 10000.0;
 
     assertThat(actualResult).isEqualTo(expectedResult);
-
   }
 
   @Test
   @DisplayName("Total Production of a Generator Should Be numberOwned * productionBase")
-  public void totalProductionOfAGeneratorShouldBeNumberOwnedTimesProductionBase () {
+  public void totalProductionOfAGeneratorShouldBeNumberOwnedTimesProductionBase() {
 
     generator.setNumberOwned(3);
 
-    double actualResult = Math.round(generator.getProduction() * 10000) /10000.0;
-    double expectedResult = Math.round((generator.getProductionBase() * 3) * 10000) /10000.0;
+    double actualResult = Math.round(generator.getProduction() * 10000) / 10000.0;
+    double expectedResult = Math.round((generator.getProductionBase() * 3) * 10000) / 10000.0;
 
     assertThat(actualResult).isEqualTo(expectedResult);
-
   }
-
 }
