@@ -2,6 +2,8 @@ package com.jubble.app.telegram;
 
 import com.jubble.app.core.threads.ThreadRunner;
 import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.utils.GameProgress;
+import com.jubble.app.core.utils.GameStarterUtil;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import com.jubble.app.core.utils.GameActions;
@@ -11,6 +13,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class JubbleBot extends TelegramLongPollingBot  {
@@ -91,8 +94,8 @@ public class JubbleBot extends TelegramLongPollingBot  {
 
         if(action.equals("begin") && !isGameOn) {
             tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
-            GameProgressHandler.loadGame();
-            ThreadRunner.run();
+            GameStarterUtil.setUp();
+           ThreadRunner.run();
             isGameOn = true;
         }
 
