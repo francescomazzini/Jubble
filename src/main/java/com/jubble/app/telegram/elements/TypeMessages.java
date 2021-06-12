@@ -6,26 +6,17 @@ import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.core.utils.GameActions;
 import com.jubble.app.core.utils.NumberNames;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TypeMessages {
 
-  private static final List<String> listOfContentMessages =
-      List.of(
-          "Hi! Welcome to *Jubble* \uD83D\uDC4B.\n\nPress the *button* below to start the game! \uD83D\uDC7D",
-          "You can choose *one* of the *options* below to interact with the game \uD83D\uDC47",
-          "The *game* has stopped. \uD83D\uDCDB\n\nThank you for playing. Hope to see you soon! ✌️",
-          "*STATUS*: ",
-          "*SHOP*: ",
-          "You have ");
-
   public static final Map<String, TelegramMessage> listOfMessages =
       Map.of(
-          "/start", new TelegramMessage(listOfContentMessages.get(0), Map.of("begin", "✅ Begin ")),
+          "/start",
+              new TelegramMessage(MessageContent.WELCOME.getMessage(), Map.of("begin", "✅ Begin ")),
           "begin",
               new TelegramMessage(
-                  listOfContentMessages.get(1),
+                  MessageContent.CHOSE_OPTIONS.getMessage(),
                   Map.of(
                       "shop",
                       "\uD83D\uDCB8 Shop ",
@@ -33,10 +24,15 @@ public class TypeMessages {
                       "\uD83D\uDD01 Status ",
                       "stop",
                       "\uD83D\uDCDB Stop ")),
-          "stop", new TelegramMessage(listOfContentMessages.get(2), Map.of()),
-          "status", new TelegramMessage(listOfContentMessages.get(3), Map.of("begin", " ◀️ Back")),
-          "shop", new TelegramMessage(listOfContentMessages.get(4), Map.of("begin", " ◀️ Back")),
-          "gen", new TelegramMessage(listOfContentMessages.get(5), Map.of("shop", " ◀️ Back")));
+          "stop", new TelegramMessage(MessageContent.STOP_GAME.getMessage(), Map.of()),
+          "status",
+              new TelegramMessage(MessageContent.STATUS.getMessage(), Map.of("begin", " ◀️ Back")),
+          "shop",
+              new TelegramMessage(
+                  MessageContent.OPEN_SHOP.getMessage(), Map.of("begin", " ◀️ Back")),
+          "gen",
+              new TelegramMessage(
+                  MessageContent.CHECK_BALANCE.getMessage(), Map.of("shop", " ◀️ Back")));
 
   /**
    * It generates the status telegram message content. It is needed to be generated because it
@@ -45,20 +41,25 @@ public class TypeMessages {
    * @return statusContentMessage
    */
   public static String generateStatusContent() {
-    String statusContentMessage;
+    StringBuilder statusContentMessage;
     statusContentMessage =
-        ("\n *Balance* \uD83D\uDCB0: "
-            + NumberNames.createString(Balance.getPrimary())
-            + "\n *Total Production* \uD83D\uDCC8: "
-            + NumberNames.createString(GameActions.getTotalGeneratorsSum())
-            + " / s"
-            + "\n\n *Generators Owned* \uD83D\uDE80: ");
+        new StringBuilder(
+            ("\n *Balance* \uD83D\uDCB0: "
+                + NumberNames.createString(Balance.getPrimary())
+                + "\n *Total Production* \uD83D\uDCC8: "
+                + NumberNames.createString(GameActions.getTotalGeneratorsSum())
+                + " / s"
+                + "\n\n *Generators Owned* \uD83D\uDE80: "));
 
     for (Generator gen : Settings.getGenerators()) {
-      statusContentMessage += "\n   • " + gen.getName() + ": " + gen.getNumberOwned();
+      statusContentMessage
+          .append("\n   • ")
+          .append(gen.getName())
+          .append(": ")
+          .append(gen.getNumberOwned());
     }
 
-    return statusContentMessage;
+    return statusContentMessage.toString();
   }
 
   /**
@@ -68,26 +69,29 @@ public class TypeMessages {
    * @return statusContentMessage
    */
   public static String generateShopContent() {
-    String shopContentMessage;
+    StringBuilder shopContentMessage;
     shopContentMessage =
-        ("\n *Balance* \uD83D\uDCB0: "
-            + NumberNames.createString(Balance.getPrimary())
-            + "\n\n*Shop* \uD83D\uDCB8:");
+        new StringBuilder(
+            ("\n *Balance* \uD83D\uDCB0: "
+                + NumberNames.createString(Balance.getPrimary())
+                + "\n\n*Shop* \uD83D\uDCB8:"));
 
     for (int i = 0; i < Settings.getGenerators().size(); i++) {
       Generator gen = Settings.getGenerators().get(i);
-      shopContentMessage +=
-          "\n   "
-              + (i + 1)
-              + ": "
-              + gen.getName()
-              + ", cost: "
-              + NumberNames.createString(gen.getNextCost());
-      shopContentMessage +=
-          "\n        production: " + NumberNames.createString(gen.getProductionBase()) + " / s";
+      shopContentMessage
+          .append("\n   ")
+          .append(i + 1)
+          .append(": ")
+          .append(gen.getName())
+          .append(", cost: ")
+          .append(NumberNames.createString(gen.getNextCost()));
+      shopContentMessage
+          .append("\n        production: ")
+          .append(NumberNames.createString(gen.getProductionBase()))
+          .append(" / s");
     }
 
-    return shopContentMessage;
+    return shopContentMessage.toString();
   }
 
   /**

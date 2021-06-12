@@ -83,7 +83,7 @@ public class TelegramMessage extends SendMessage {
 
   public void setChatId(Update update) {
 
-    String parameter = "";
+    String parameter;
 
     if (update.hasCallbackQuery())
       parameter = update.getCallbackQuery().getMessage().getChatId() + "";
@@ -99,12 +99,6 @@ public class TelegramMessage extends SendMessage {
   public void setContent(String content) {
     this.content = content;
     this.setText(content);
-  }
-
-  public void setInlineButtons(Map<String, String> inlineButtons) {
-    this.inlineButtons = inlineButtons;
-
-    generateButtons();
   }
 
   public void setInlineButtons(Map<String, String> inlineButtons, int MAX_PER_ROW) {
