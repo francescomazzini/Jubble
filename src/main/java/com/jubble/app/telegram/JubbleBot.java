@@ -94,8 +94,7 @@ public class JubbleBot extends TelegramLongPollingBot  {
 
         if(action.equals("begin") && !isGameOn) {
             tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
-            GameStarterUtil.setUp();
-           ThreadRunner.run();
+            ThreadRunner.run();
             isGameOn = true;
         }
 
