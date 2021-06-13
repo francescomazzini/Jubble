@@ -7,6 +7,7 @@ import com.jubble.app.core.threads.ThreadRunner;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import java.util.Map;
+import java.util.Objects;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -36,6 +37,18 @@ public class JubbleBot extends TelegramLongPollingBot {
     return "1711656042:AAFPvyLcWPSeHwpq7qM-kodBXCYhIKwfKWo";
   }
 
+  private void tryToExecuteAction(TelegramMessage telegramMessage, String command, Update update) {
+    Objects.requireNonNull(telegramMessage);
+    actionPerformer(command, telegramMessage);
+    telegramMessage.setChatId(update);
+
+    try {
+      execute(telegramMessage);
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * Each time that the bot receives an update, it analyzes the command receive. It could be a
    * normal command like "/start" or a callBackQuery like "shop". They are treated in the same way
@@ -59,23 +72,12 @@ public class JubbleBot extends TelegramLongPollingBot {
 
     TelegramMessage telegramMessage = listMessages.get(command);
 
-    if (telegramMessage == null) {
+    if (Objects.isNull(telegramMessage)) {
       String tempCommand = command.substring(0, 3);
       telegramMessage = listMessages.get(tempCommand);
     }
 
-    if (telegramMessage != null) {
-
-      actionPerformer(command, telegramMessage);
-
-      telegramMessage.setChatId(update);
-
-      try {
-        execute(telegramMessage);
-      } catch (TelegramApiException e) {
-        e.printStackTrace();
-      }
-    }
+    tryToExecuteAction(telegramMessage, command, update);
   }
 
   /**
