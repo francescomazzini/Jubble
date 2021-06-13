@@ -3,6 +3,7 @@ image: maven:latest
 stages:
   - build
   - docs
+  - check
   - format
 
 build:
@@ -16,6 +17,10 @@ format:
   script:
     - mvn spotless:apply
 
+check:
+  stage: check
+  script:
+    - mvn checkstyle:check
 docs:
   stage: docs
   script:
