@@ -1,4 +1,4 @@
-package com.jubble.app.core.components.generator;
+package com.jubble.app.core.resources.generator;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

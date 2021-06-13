@@ -1,6 +1,6 @@
 package com.jubble.app.core.threads;
 
-import com.jubble.app.core.utils.GameStarterUtil;
+import com.jubble.app.core.progress.GameStarterUtil;
 import java.util.Timer;
 
 /** Wrapper to manage start/stop of GameValuesThread TimerTask. */

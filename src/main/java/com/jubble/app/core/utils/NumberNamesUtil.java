@@ -6,7 +6,7 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 
 /** Util to perform spellout of a double number. */
-public class NumberNames {
+public class NumberNamesUtil {
   private static final String[] NAMES = new String[] {"", "K", "M", "B", "T", "Q"};
 
   private static final int THOUSAND = 1000;
@@ -19,6 +19,7 @@ public class NumberNames {
     }
   }
 
+  private NumberNamesUtil() {}
   /**
    * Strips decimal part of the number, keeping only the first three significant digits.
    *

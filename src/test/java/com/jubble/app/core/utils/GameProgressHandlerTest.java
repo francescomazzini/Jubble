@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jubble.app.core.progress.GameProgress;
+import com.jubble.app.core.progress.GameProgressSerializer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

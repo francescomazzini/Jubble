@@ -1,7 +1,7 @@
 package com.jubble.app.javafx;
 
 import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.javafx.components.BalanceFX;
 import com.jubble.app.javafx.components.GeneratorFX;
 import com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos;
@@ -116,7 +116,7 @@ public class ControllerFX implements Initializable {
 
   /**
    * This method set up all the graphic elements for all {@link
-   * com.jubble.app.core.components.generator.Generator}, creating a {@link
+   * com.jubble.app.core.resources.generator.Generator}, creating a {@link
    * com.jubble.app.javafx.components.GeneratorFX} for each of them, which includes all the graphic
    * elements needed for the graphical representation of a Generator
    */
@@ -135,7 +135,7 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Set up the graphical representation of the {@link com.jubble.app.core.components.Balance} class
+   * Set up the graphical representation of the {@link com.jubble.app.core.resources.Balance} class
    */
   public void setUpBalanceFX() {
     new BalanceFX(balanceLabel, totalProductionLabel);

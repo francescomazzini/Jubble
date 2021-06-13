@@ -1,10 +1,10 @@
 package com.jubble.app.telegram.elements;
 
+import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.Balance;
-import com.jubble.app.core.components.generator.Generator;
-import com.jubble.app.core.utils.GameActions;
-import com.jubble.app.core.utils.NumberNames;
+import com.jubble.app.core.resources.Balance;
+import com.jubble.app.core.resources.generator.Generator;
+import com.jubble.app.core.utils.NumberNamesUtil;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,9 +45,9 @@ public class TypeMessages {
     statusContentMessage =
         new StringBuilder(
             ("\n *Balance* \uD83D\uDCB0: "
-                + NumberNames.createString(Balance.getPrimary())
+                + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n *Total Production* \uD83D\uDCC8: "
-                + NumberNames.createString(GameActions.getTotalGeneratorsSum())
+                + NumberNamesUtil.createString(GameActions.getTotalGeneratorsSum())
                 + " / s"
                 + "\n\n *Generators Owned* \uD83D\uDE80: "));
 
@@ -73,7 +73,7 @@ public class TypeMessages {
     shopContentMessage =
         new StringBuilder(
             ("\n *Balance* \uD83D\uDCB0: "
-                + NumberNames.createString(Balance.getPrimary())
+                + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n\n*Shop* \uD83D\uDCB8:"));
 
     for (int i = 0; i < Settings.getGenerators().size(); i++) {
@@ -84,10 +84,10 @@ public class TypeMessages {
           .append(": ")
           .append(gen.getName())
           .append(", cost: ")
-          .append(NumberNames.createString(gen.getNextCost()));
+          .append(NumberNamesUtil.createString(gen.getNextCost()));
       shopContentMessage
           .append("\n        production: ")
-          .append(NumberNames.createString(gen.getProductionBase()))
+          .append(NumberNamesUtil.createString(gen.getProductionBase()))
           .append(" / s");
     }
 

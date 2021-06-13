@@ -1,4 +1,4 @@
-package com.jubble.app.core.components.generator;
+package com.jubble.app.core.resources.generator;
 
 /**
  * Represents a generator in the game. Implements the builder pattern and can be instantiated only

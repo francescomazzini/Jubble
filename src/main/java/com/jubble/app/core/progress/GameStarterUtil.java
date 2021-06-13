@@ -1,9 +1,8 @@
-package com.jubble.app.core.utils;
+package com.jubble.app.core.progress;
 
-import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.Balance;
 import com.jubble.app.core.GameActions;
-
+import com.jubble.app.core.Settings;
+import com.jubble.app.core.resources.Balance;
 import java.io.IOException;
 import java.util.List;
 

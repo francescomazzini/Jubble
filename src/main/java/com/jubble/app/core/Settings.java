@@ -1,7 +1,7 @@
 package com.jubble.app.core;
 
-import com.jubble.app.core.components.Currency;
-import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.resources.Currency;
+import com.jubble.app.core.resources.generator.Generator;
 import java.util.List;
 
 public class Settings {

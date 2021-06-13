@@ -1,8 +1,8 @@
 package com.jubble.app.javafx.components;
 
-import com.jubble.app.core.components.generator.Generator;
-import com.jubble.app.core.utils.GameActions;
-import com.jubble.app.core.utils.NumberNames;
+import com.jubble.app.core.GameActions;
+import com.jubble.app.core.resources.generator.Generator;
+import com.jubble.app.core.utils.NumberNamesUtil;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -60,13 +60,13 @@ public class GeneratorFX {
 
   public void setProductionGeneratorLabel() {
 
-    String formattingProduction = NumberNames.createString(generator.getProductionBase());
+    String formattingProduction = NumberNamesUtil.createString(generator.getProductionBase());
     productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
   }
 
   public void setCostGeneratorLabel() {
 
-    String formattingCost = NumberNames.createString(generator.getNextCost());
+    String formattingCost = NumberNamesUtil.createString(generator.getNextCost());
     costGeneratorLabel.setText("Cost: " + formattingCost);
   }
 
