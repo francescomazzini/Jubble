@@ -4,8 +4,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.jubble.app.core.components.Balance;
-import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.GameActions;
+import com.jubble.app.core.resources.Balance;
+import com.jubble.app.core.resources.generator.Generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

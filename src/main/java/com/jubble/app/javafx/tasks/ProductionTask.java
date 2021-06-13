@@ -1,7 +1,7 @@
 package com.jubble.app.javafx.tasks;
 
-import com.jubble.app.core.utils.GameActions;
-import com.jubble.app.core.utils.NumberNames;
+import com.jubble.app.core.GameActions;
+import com.jubble.app.core.utils.NumberNamesUtil;
 
 public class ProductionTask extends AbstractTask {
 
@@ -16,7 +16,7 @@ public class ProductionTask extends AbstractTask {
 
   @Override
   protected void updateProgress(double v, double v1) {
-    updateMessage(NumberNames.createString(v) + "/s ");
+    updateMessage(NumberNamesUtil.createString(v) + "/s ");
     super.updateProgress(v, v1);
   }
 }

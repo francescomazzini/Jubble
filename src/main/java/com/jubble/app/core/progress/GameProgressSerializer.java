@@ -1,4 +1,4 @@
-package com.jubble.app.core.utils;
+package com.jubble.app.core.progress;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /** Saves and loads the game. */
-public class GameProgressHandler {
+public class GameProgressSerializer {
   public static final String PROGRESS_FILE_PATH = "game_progress.json";
   private static final File FILE = new File(PROGRESS_FILE_PATH);
 

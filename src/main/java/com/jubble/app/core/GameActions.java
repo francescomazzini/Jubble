@@ -1,13 +1,14 @@
-package com.jubble.app.core.utils;
+package com.jubble.app.core;
 
-import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.Balance;
-import com.jubble.app.core.components.generator.Generator;
-import com.jubble.app.core.components.generator.IllegalOperationException;
+import com.jubble.app.core.resources.Balance;
+import com.jubble.app.core.resources.generator.Generator;
+import com.jubble.app.core.resources.generator.IllegalOperationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameActions {
+
+  private GameActions() {}
 
   public static boolean buyGenerator(Generator generator) {
 

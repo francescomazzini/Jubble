@@ -1,9 +1,9 @@
 package com.jubble.app.telegram;
 
+import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.generator.Generator;
+import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.threads.ThreadRunner;
-import com.jubble.app.core.utils.GameActions;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import java.util.Map;

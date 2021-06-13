@@ -1,4 +1,4 @@
-package com.jubble.app.core.components.generator;
+package com.jubble.app.core.resources.generator;
 
 /**
  * The game requires to load saved values from a file, which are set in the lists of generators.

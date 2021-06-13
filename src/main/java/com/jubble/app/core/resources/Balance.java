@@ -1,4 +1,4 @@
-package com.jubble.app.core.components;
+package com.jubble.app.core.resources;
 
 import com.jubble.app.core.Settings;
 

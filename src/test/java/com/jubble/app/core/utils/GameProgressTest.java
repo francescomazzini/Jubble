@@ -3,6 +3,7 @@ package com.jubble.app.core.utils;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jubble.app.core.progress.GameProgress;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;

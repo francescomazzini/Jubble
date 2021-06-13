@@ -11,7 +11,7 @@ public enum MessageContent {
   OPEN_SHOP("*SHOP*: "),
   CHECK_BALANCE("You have ");
 
-  private String message;
+  private final String message;
 
   public String getMessage() {
     return message;

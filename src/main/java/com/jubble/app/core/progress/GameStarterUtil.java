@@ -1,7 +1,8 @@
-package com.jubble.app.core.utils;
+package com.jubble.app.core.progress;
 
+import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
-import com.jubble.app.core.components.Balance;
+import com.jubble.app.core.resources.Balance;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,13 +21,24 @@ public class GameStarterUtil {
     GameActions.giftInitialAmount();
   }
 
-  public static void setUp() {
+  /** Restore game progress if present. Otherwise start with default values. */
+  public static void load() {
     try {
-      GameProgress savedProgress = GameProgressHandler.loadGame();
+      GameProgress savedProgress = GameProgressSerializer.loadGame();
       recoverGameValues(savedProgress);
     } catch (IOException e) {
       System.out.println(e.getMessage());
       startFromScratch();
+    }
+  }
+
+  public static void save() {
+    GameProgress progress =
+        new GameProgress(GameActions.getListOfGeneratorsNumberOwned(), Balance.getPrimary());
+    try {
+      GameProgressSerializer.saveGame(progress);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }

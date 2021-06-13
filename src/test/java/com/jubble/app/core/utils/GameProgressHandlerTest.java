@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jubble.app.core.progress.GameProgress;
+import com.jubble.app.core.progress.GameProgressSerializer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +20,7 @@ public class GameProgressHandlerTest {
   GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 15.0);
   static String jsonOfProgress =
       "{\n" + "  \"ownedGenerators\" : [ 1, 0, 0, 0, 0, 0 ],\n" + "  \"balance\" : 15.0\n" + "}";
-  static Path jsonStoredPath = Path.of(GameProgressHandler.PROGRESS_FILE_PATH);
+  static Path jsonStoredPath = Path.of(GameProgressSerializer.PROGRESS_FILE_PATH);
   static String initialFileState;
 
   @BeforeAll
@@ -41,7 +43,7 @@ public class GameProgressHandlerTest {
   @Test
   @DisplayName("Serializing Progress ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Serialized Correctly")
   public void serializingProgressShouldBeSerializedCorrectly() throws JsonProcessingException {
-    String data = GameProgressHandler.serialize(progress);
+    String data = GameProgressSerializer.serialize(progress);
     assertThat(data.replaceAll("\\r", "")).isEqualTo(jsonOfProgress.replaceAll("\\r", ""));
   }
 
@@ -49,7 +51,7 @@ public class GameProgressHandlerTest {
   @DisplayName(
       "Saving Progress in File ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Serialized Correctly")
   public void savingProgressInFileShouldBeSerializedCorrectly() throws IOException {
-    GameProgressHandler.saveGame(progress);
+    GameProgressSerializer.saveGame(progress);
     assertThat(Files.readString(jsonStoredPath).replaceAll("\\r", ""))
         .isEqualTo(jsonOfProgress.replaceAll("\\r", ""));
   }
@@ -59,9 +61,9 @@ public class GameProgressHandlerTest {
       "Saving then Loading Progress from File ([ 1, 0, 0, 0, 0, 0 ], 15.0) Should Be Deserialized Correctly")
   public void savingThenLoadingProgressFromFileShouldBeDeserializedCorrectly() throws IOException {
 
-    GameProgressHandler.saveGame(progress);
+    GameProgressSerializer.saveGame(progress);
 
-    GameProgress progressFromFile = GameProgressHandler.loadGame();
+    GameProgress progressFromFile = GameProgressSerializer.loadGame();
     assertAll(
         () ->
             assertThat(progressFromFile.getOwnedGenerators())
@@ -73,7 +75,7 @@ public class GameProgressHandlerTest {
   @DisplayName("if progress == null serialize should throw IllegalArgumentException")
   public void serializeNullProgressShouldThrowIllegalArgumentException() {
     Exception expected =
-        assertThrows(IllegalArgumentException.class, () -> GameProgressHandler.serialize(null));
+        assertThrows(IllegalArgumentException.class, () -> GameProgressSerializer.serialize(null));
     assertThat(expected.getMessage()).contains("Progress can't be null.");
   }
 }

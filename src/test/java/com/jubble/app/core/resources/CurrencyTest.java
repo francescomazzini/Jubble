@@ -1,4 +1,4 @@
-package com.jubble.app.core.components;
+package com.jubble.app.core.resources;
 
 import static com.google.common.truth.Truth.assertThat;
 
