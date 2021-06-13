@@ -29,7 +29,7 @@ public class ControllerFX implements Initializable {
    * generatorFXList is a list which group all the {@link
    * com.jubble.app.javafx.components.GeneratorFX} of the game
    */
-  private static List<GeneratorFX> generatorFXList;
+  private List<GeneratorFX> generatorFXList;
 
   private int currentSelectedPage = 0;
 
