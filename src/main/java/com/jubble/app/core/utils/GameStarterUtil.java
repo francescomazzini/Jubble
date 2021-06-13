@@ -20,16 +20,24 @@ public class GameStarterUtil {
     GameActions.giftInitialAmount();
   }
 
-  /**
-   * Restore game progress if present. Otherwise start with default values.
-   */
-  public static void setUp() {
+  /** Restore game progress if present. Otherwise start with default values. */
+  public static void load() {
     try {
       GameProgress savedProgress = GameProgressSerializer.loadGame();
       recoverGameValues(savedProgress);
     } catch (IOException e) {
       System.out.println(e.getMessage());
       startFromScratch();
+    }
+  }
+
+  public static void save() {
+    GameProgress progress =
+        new GameProgress(GameActions.getListOfGeneratorsNumberOwned(), Balance.getPrimary());
+    try {
+      GameProgressSerializer.saveGame(progress);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }
