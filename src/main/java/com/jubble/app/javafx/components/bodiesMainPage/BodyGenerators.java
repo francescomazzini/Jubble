@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class BodyGenerators extends VBox {
-
   private final GridPane gridForGenerators;
   private final List<GeneratorFX> generatorFXList;
   private final int beginIndex;
@@ -54,7 +53,6 @@ public class BodyGenerators extends VBox {
   public boolean areThereGeneratorsVisible() {
     for (int i = beginIndex; i < endIndex; i++)
       if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible()) return true;
-
     return false;
   }
 }

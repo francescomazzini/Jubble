@@ -137,7 +137,7 @@
                         </Button>
                         <ScrollPane fx:id="scroll_pane_shop" hbarPolicy="NEVER">
                           <content>
-                            <AnchorPane fx:id="shopAnchorPane" minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel" />
+                            <AnchorPane fx:id="shopPopUp" minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel" />
                           </content>
                            <VBox.margin>
                               <Insets />
