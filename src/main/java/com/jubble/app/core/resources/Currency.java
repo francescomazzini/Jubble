@@ -1,7 +1,7 @@
 package com.jubble.app.core.resources;
 
 public class Currency {
-  private String name;
+  private final String name;
   private double owned;
 
   /**
@@ -30,5 +30,10 @@ public class Currency {
    */
   public double getOwned() {
     return owned;
+  }
+
+  @Override
+  public String toString() {
+    return "Currency: " + name;
   }
 }
