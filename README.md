@@ -55,8 +55,7 @@ Basing on the typical model of tycoon games, the game is composed by:
 
 - A main character (the player)
 - An environment (the space)
-- Unexpected events/accidents caused by external events where the player will have the possibility to choose how he should go ahead
-  gaining pros or cons of their choice (not implemented)
+- Unexpected events/accidents caused by external events where the player will have the possibility to choose how he should go ahead gaining pros or cons of their choice (not implemented)
 - A Platonic goal to achieve by the player: accumulate resources endlessly.
 
 

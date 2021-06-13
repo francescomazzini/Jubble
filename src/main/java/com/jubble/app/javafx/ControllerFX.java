@@ -16,37 +16,22 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
-
   /**
-   * bodyPages is a Map which contains all the body pages of the game. A body page is a body of the
-   * Main Screen, that is the part in the background with the generators placed. Since there can be
-   * n generators, bodyPages keeps bodies, each has 6 generators, and associate to them a string
-   * (ex: "page0", "page13", ...)
+   * Maps the name of the page with its physical element.
+   * A mainScreenBodyPages is a body page of the Main Screen, which is the part in which the background with the generators is placed.
    */
-  private Map<String, VBox> bodyPages;
-
+  private Map<String, VBox> mainScreenBodyPages;
   /**
-   * generatorFXList is a list which group all the {@link
-   * com.jubble.app.javafx.components.GeneratorFX} of the game
+   * generatorFXList is a list which group all the {@link com.jubble.app.javafx.components.GeneratorFX} of the game
    */
-  private static List<GeneratorFX> generatorFXList;
-
+  private List<GeneratorFX> generatorFXList;
   private int currentSelectedPage = 0;
 
-  /**
-   * Each of the following variables refers to an existing javafx object which is contained in FXML
-   * file and it has an ID equals to the name of these variables
-   */
-  @FXML private AnchorPane shopAnchorPane;
-
+  @FXML private AnchorPane shopPopUp;
   @FXML private VBox mainBody;
-
   @FXML private Label balanceLabel;
-
   @FXML private VBox shopPanel;
-
   @FXML private Label totalProductionLabel;
-
   @FXML private VBox shopPanelContainer;
 
   private void setShopVisibility(boolean status) {
@@ -67,7 +52,7 @@ public class ControllerFX implements Initializable {
   public void switchMainPage(int newPageNumber) {
     String namePageWanted = "page" + newPageNumber;
 
-    BodyGenerators bodyWanted = (BodyGenerators) bodyPages.get(namePageWanted);
+    BodyGenerators bodyWanted = (BodyGenerators) mainScreenBodyPages.get(namePageWanted);
 
     if (bodyWanted != null)
       if (bodyWanted.areThereGeneratorsVisible()) {
@@ -87,27 +72,8 @@ public class ControllerFX implements Initializable {
     switchMainPage(currentSelectedPage - 1);
   }
 
-  /**
-   * Replaces the constructor of the controller which cannot have a constructor. It is meant to run
-   * before the GUI is shown to the user.
-   *
-   * <p>What is done in this method:
-   *
-   * <ul>
-   *   <li>calls {@link #setUpBalanceFX()} which set up the Balance FX elements
-   *   <li>calls {@link #setUpGeneratorFX()} which set up the Generator FX elements for each
-   *       Generator FX
-   *   <li>calls {@link #generateShopPane()} which generate the graphic of the shop panel
-   *   <li>calls {@link #generateGeneratorPage()} which generate the graphic of the place of
-   *       Generator FX in the background
-   * </ul>
-   *
-   * @param url not used
-   * @param resourceBundle not used
-   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-
     setUpBalanceFX();
     setUpGeneratorFX();
     generateShopPane();
@@ -121,9 +87,7 @@ public class ControllerFX implements Initializable {
    * elements needed for the graphical representation of a Generator
    */
   public void setUpGeneratorFX() {
-
     generatorFXList = new ArrayList<>();
-
     List<Generator> generatorList = Settings.getGenerators();
 
     for (int i = 0; i < generatorList.size(); i++) {
@@ -142,49 +106,38 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Generates the Shop pane instantiating {@link
-   * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the Anchor Pane which
-   * is the actual popup. Thus the popup size must be set according to the number of Generators
-   * which must be inside it. The the shop is hidden by default, the visibility is toggled by player
-   * action.
+   * Generates the Shop pane instantiating {@link com.jubble.app.javafx.components.popups.ShopGenerator}
+   * and adding it to the shopPopUp. The popup size must be set according to the number of Generators
+   * that were defined.
+   * The shop visibility is hidden by default and toggled by player action.
    */
   public void generateShopPane() {
-
     ShopGenerator shop = new ShopGenerator(generatorFXList);
-
     shop.generateShopPanel();
-
-    shopAnchorPane.getChildren().add(shop);
+    shopPopUp.getChildren().add(shop);
 
     int nGenerators = Settings.getGenerators().size();
-    shopAnchorPane.setMinHeight(
+    shopPopUp.setMinHeight(
         220 * Math.ceil((double) nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 
     hideShopPanel();
   }
 
   /**
-   * This method generates the page in the background which contains the generators bought with
-   * their quantity. Therefore a number (NR_MAX_GENERATORS_PER_PAGE) of generators must be in a
-   * page. This page created using {@link
-   * com.jubble.app.javafx.components.bodiesMainPage.BodyGenerators} is put in the HashMap which
-   * contains all the pages and associate them a String, like "page0", "page9",...
-   */
+   * Generates the page in the background which contains the generators owned by the player.
+   * The number of generator per page is define in the enum {@link com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos}
+  */
   public void generateGeneratorPage() {
-    bodyPages = new HashMap<>();
-
+    mainScreenBodyPages = new HashMap<>();
     int counter = 0;
 
     for (int i = 0; i < generatorFXList.size(); i++) {
       if (i % BodyGeneratorPos.PAGE_MAX.value() == 0) {
-
-        bodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
-
+        mainScreenBodyPages.put("page" + counter, new BodyGenerators(generatorFXList, i));
         counter++;
       }
     }
-
     mainBody.getChildren().clear();
-    mainBody.getChildren().add(bodyPages.get("page0"));
+    mainBody.getChildren().add(mainScreenBodyPages.get("page0"));
   }
 }
