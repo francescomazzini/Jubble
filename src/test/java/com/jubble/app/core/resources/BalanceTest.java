@@ -2,8 +2,9 @@ package com.jubble.app.core.components;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.jubble.app.core.GameActions;
 import com.jubble.app.core.components.generator.Generator;
-import com.jubble.app.core.utils.GameActions;
+
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
