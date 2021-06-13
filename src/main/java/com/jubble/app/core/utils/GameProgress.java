@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Defines all the data that should be saved in the JSON file. An object of type GameProgress will
- * be passed to the class GameProgressHandler.
+ * be passed to the class GameProgressSerializer.
  */
 public class GameProgress {
   private List<Integer> ownedGenerators;

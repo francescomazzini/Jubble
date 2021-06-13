@@ -20,9 +20,12 @@ public class GameStarterUtil {
     GameActions.giftInitialAmount();
   }
 
+  /**
+   * Restore game progress if present. Otherwise start with default values.
+   */
   public static void setUp() {
     try {
-      GameProgress savedProgress = GameProgressHandler.loadGame();
+      GameProgress savedProgress = GameProgressSerializer.loadGame();
       recoverGameValues(savedProgress);
     } catch (IOException e) {
       System.out.println(e.getMessage());
