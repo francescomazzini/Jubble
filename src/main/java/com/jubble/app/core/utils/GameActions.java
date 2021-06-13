@@ -4,6 +4,8 @@ import com.jubble.app.core.Settings;
 import com.jubble.app.core.components.Balance;
 import com.jubble.app.core.components.generator.Generator;
 import com.jubble.app.core.components.generator.IllegalOperationException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameActions {
 
@@ -21,6 +23,12 @@ public class GameActions {
 
   public static double getTotalGeneratorsSum() {
     return Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum();
+  }
+
+  public static List<Integer> getListOfGeneratorsNumberOwned() {
+    return Settings.getGenerators().stream()
+        .map(Generator::getNumberOwned)
+        .collect(Collectors.toList());
   }
 
   /** Gift initial generator. Used in case the default file is not found. */
