@@ -106,5 +106,4 @@ public class TelegramMessage extends SendMessage {
 
     generateButtons(MAX_PER_ROW);
   }
-
 }
