@@ -7,7 +7,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class BodyGenerators extends VBox {
+public final class BodyGenerators extends VBox {
   private final GridPane gridForGenerators;
   private final List<GeneratorFX> generatorFXList;
   private final int beginIndex;
@@ -26,11 +26,11 @@ public class BodyGenerators extends VBox {
   }
 
   public void buildPage() {
-    final double HUNDRED = 100.0;
+    final double hundred = 100.0;
 
     for (int i = 0; i <= BodyGeneratorPos.ROW_MAX.value(); i++) {
       ColumnConstraints column = new ColumnConstraints();
-      column.setPercentWidth(HUNDRED / (BodyGeneratorPos.ROW_MAX.value() + 1));
+      column.setPercentWidth(hundred / (BodyGeneratorPos.ROW_MAX.value() + 1));
       gridForGenerators.getColumnConstraints().add(column);
     }
 
@@ -43,16 +43,19 @@ public class BodyGenerators extends VBox {
           (i % BodyGeneratorPos.COLUMN_MAX.value()));
     }
 
-    final int WIDTH = 852;
-    final int HEIGHT = 302;
-    gridForGenerators.setPrefWidth(WIDTH);
-    gridForGenerators.setPrefHeight(HEIGHT);
+    final int width = 852;
+    final int height = 302;
+    gridForGenerators.setPrefWidth(width);
+    gridForGenerators.setPrefHeight(height);
     gridForGenerators.setAlignment(Pos.CENTER);
   }
 
   public boolean areThereGeneratorsVisible() {
-    for (int i = beginIndex; i < endIndex; i++)
-      if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible()) return true;
+    for (int i = beginIndex; i < endIndex; i++) {
+      if (generatorFXList.get(i).isWrapperGeneratorAsPageElementVisible()) {
+        return true;
+      }
+    }
     return false;
   }
 }

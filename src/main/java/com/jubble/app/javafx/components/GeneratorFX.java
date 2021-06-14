@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-public class GeneratorFX {
+public final class GeneratorFX {
   private final Generator generator;
   private final Label nameGeneratorLabel;
   private final Label productionGeneratorLabel;
