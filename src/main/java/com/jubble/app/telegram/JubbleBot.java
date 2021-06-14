@@ -4,6 +4,7 @@ import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.threads.ThreadRunner;
+import com.jubble.app.telegram.elements.MessageContent;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import java.util.Map;
@@ -89,28 +90,26 @@ public class JubbleBot extends TelegramLongPollingBot {
    */
   private void actionPerformer(String action, TelegramMessage tlMsg) {
 
-    if (action.equals("begin") && !isGameOn) {
+    if (action.equals(MessageContent.CHOSE_OPTIONS.getAction()) && !isGameOn) {
       tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
       ThreadRunner.run();
       isGameOn = true;
     }
 
-    if (action.equals("stop") && isGameOn) {
+    if (action.equals(MessageContent.STOP_GAME.getAction()) && isGameOn) {
       ThreadRunner.stop();
       isGameOn = false;
     }
 
-    if (action.equals("status"))
+    if (action.equals(MessageContent.STATUS.getAction()))
       tlMsg.setText(tlMsg.getContent() + TypeMessages.generateStatusContent());
 
-    if (action.equals("shop")) {
+    if (action.equals(MessageContent.OPEN_SHOP.getAction())) {
       tlMsg.setText(tlMsg.getContent() + TypeMessages.generateShopContent());
-
       tlMsg.setInlineButtons(TypeMessages.generateShopButtons(), 5);
     }
 
-    if (action.startsWith("gen")) {
-
+    if (action.startsWith(MessageContent.CHECK_BALANCE.getAction())) {
       int numGenerator = Integer.parseInt(action.substring(3));
       Generator gen = Settings.getGenerators().get(numGenerator);
       boolean isBought = GameActions.buyGenerator(gen);

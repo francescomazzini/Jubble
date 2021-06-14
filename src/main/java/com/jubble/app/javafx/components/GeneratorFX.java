@@ -3,6 +3,7 @@ package com.jubble.app.javafx.components;
 import com.jubble.app.core.GameActions;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.utils.NumberNamesUtil;
+import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,8 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-
-import java.util.Objects;
 
 public class GeneratorFX {
   private final Generator generator;
