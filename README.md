@@ -49,25 +49,9 @@ mvn com.coveo:fmt-maven-plugin:format
 - HTTP
 - Asynchronous programming
 - Method overriding
-
-# Game mechanics
-Basing on the typical model of tycoon games, the game is composed by:
-
-- A main character (the player)
-- An environment (the space)
-- Unexpected events/accidents caused by external events where the player will have the possibility to choose how he should go ahead gaining pros or cons of their choice (not implemented)
-- A Platonic goal to achieve by the player: accumulate resources endlessly.
-
-
-The total production (or balance) is computed with:
-
-$production_{total} = (production_{base} \times owned) \times multipliers$
-
-_Where:_
-
-$production_{base}$: costant of the $owned$: number of owned generators.
-
-$multipliers$: current prestige of the player.
+- Singleton pattern
+- Builder pattern
+- Facade pattern
 
 ## References
 
