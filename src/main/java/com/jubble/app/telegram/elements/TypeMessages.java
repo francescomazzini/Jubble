@@ -28,7 +28,7 @@ public class TypeMessages {
           MessageContent.CHOSE_OPTIONS.getAction(),
           new TelegramMessage(MessageContent.CHOSE_OPTIONS.getMessage(), OPTION_MENU_BUTTONS),
           MessageContent.STOP_GAME.getAction(),
-          new TelegramMessage(MessageContent.STOP_GAME.getMessage(), null),
+          new TelegramMessage(MessageContent.STOP_GAME.getMessage(), Map.of()),
           MessageContent.STATUS.getAction(),
           new TelegramMessage(MessageContent.STATUS.getMessage(), NAVIGATION_BUTTONS),
           MessageContent.OPEN_SHOP.getAction(),
