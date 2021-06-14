@@ -6,7 +6,7 @@
 
     <groupId>com.jubble.app</groupId>
     <artifactId>prpr_project_jubble</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>prpr_project_jubble</name>
     <!-- FIXME change it to the project's website -->
