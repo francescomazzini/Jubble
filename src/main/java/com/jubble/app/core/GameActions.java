@@ -34,10 +34,10 @@ public class GameActions {
 
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
-    final int FIRST = 0;
-    if (Settings.getGenerators().get(FIRST).isMoreThanZeroOwned())
+    final int first = 0;
+    if (Settings.getGenerators().get(first).isMoreThanZeroOwned())
       throw new IllegalOperationException();
 
-    Settings.getGenerators().get(FIRST).incrementNumberOwned();
+    Settings.getGenerators().get(first).incrementNumberOwned();
   }
 }

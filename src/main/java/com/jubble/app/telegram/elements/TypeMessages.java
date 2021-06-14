@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TypeMessages {
-  private static final Map<String, String> startPage =
+  private static final Map<String, String> START_BUTTON =
       Map.of(MessageContent.CHOSE_OPTIONS.getAction(), "✅ Begin ");
-  private static final Map<String, String> messageNavigateButtons = Map.of("begin", " ◀️ Back");
-  private static final Map<String, String> menu =
+  private static final Map<String, String> NAVIGATION_BUTTONS = Map.of("begin", " ◀️ Back");
+  private static final Map<String, String> OPTION_MENU_BUTTONS =
       Map.of(
           MessageContent.OPEN_SHOP.getAction(),
           "\uD83D\uDCB8 Shop ",
@@ -24,17 +24,17 @@ public class TypeMessages {
   public static final Map<String, TelegramMessage> listOfMessages =
       Map.of(
           MessageContent.WELCOME.getAction(),
-          new TelegramMessage(MessageContent.WELCOME.getMessage(), startPage),
+          new TelegramMessage(MessageContent.WELCOME.getMessage(), START_BUTTON),
           MessageContent.CHOSE_OPTIONS.getAction(),
-          new TelegramMessage(MessageContent.CHOSE_OPTIONS.getMessage(), menu),
+          new TelegramMessage(MessageContent.CHOSE_OPTIONS.getMessage(), OPTION_MENU_BUTTONS),
           MessageContent.STOP_GAME.getAction(),
           new TelegramMessage(MessageContent.STOP_GAME.getMessage(), null),
           MessageContent.STATUS.getAction(),
-          new TelegramMessage(MessageContent.STATUS.getMessage(), messageNavigateButtons),
+          new TelegramMessage(MessageContent.STATUS.getMessage(), NAVIGATION_BUTTONS),
           MessageContent.OPEN_SHOP.getAction(),
-          new TelegramMessage(MessageContent.OPEN_SHOP.getMessage(), messageNavigateButtons),
+          new TelegramMessage(MessageContent.OPEN_SHOP.getMessage(), NAVIGATION_BUTTONS),
           MessageContent.OPEN_SHOP.getAction(),
-          new TelegramMessage(MessageContent.CHECK_BALANCE.getMessage(), messageNavigateButtons));
+          new TelegramMessage(MessageContent.CHECK_BALANCE.getMessage(), NAVIGATION_BUTTONS));
 
   /**
    * It generates the status telegram message content. It is needed to be generated because it

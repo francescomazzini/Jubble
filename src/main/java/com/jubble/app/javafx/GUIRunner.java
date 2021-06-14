@@ -10,13 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class GUIRunner {
+public final class GUIRunner {
+  private GUIRunner() {}
+
   /**
    * Initializes JavaFX scene and loads fxml file.
    *
+   * @param primaryStage JavaFX primary stage.
    * @throws IOException when graphic.fxml is not found.
    */
-  public static void run(Stage primaryStage) throws IOException {
+  public static void run(final Stage primaryStage) throws IOException {
     ControllerFX controller = new ControllerFX();
 
     FXMLLoader loader = new FXMLLoader();
