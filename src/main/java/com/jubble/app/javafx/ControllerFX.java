@@ -17,14 +17,16 @@ import javafx.scene.layout.*;
 
 public class ControllerFX implements Initializable {
   /**
-   * Maps the name of the page with its physical element.
-   * A mainScreenBodyPages is a body page of the Main Screen, which is the part in which the background with the generators is placed.
+   * Maps the name of the page with its physical element. A mainScreenBodyPages is a body page of
+   * the Main Screen, which is the part in which the background with the generators is placed.
    */
   private Map<String, VBox> mainScreenBodyPages;
   /**
-   * generatorFXList is a list which group all the {@link com.jubble.app.javafx.components.GeneratorFX} of the game
+   * generatorFXList is a list which group all the {@link
+   * com.jubble.app.javafx.components.GeneratorFX} of the game
    */
   private List<GeneratorFX> generatorFXList;
+
   private int currentSelectedPage = 0;
 
   @FXML private AnchorPane shopPopUp;
@@ -106,10 +108,10 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Generates the Shop pane instantiating {@link com.jubble.app.javafx.components.popups.ShopGenerator}
-   * and adding it to the shopPopUp. The popup size must be set according to the number of Generators
-   * that were defined.
-   * The shop visibility is hidden by default and toggled by player action.
+   * Generates the Shop pane instantiating {@link
+   * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the shopPopUp. The
+   * popup size must be set according to the number of Generators that were defined. The shop
+   * visibility is hidden by default and toggled by player action.
    */
   public void generateShopPane() {
     ShopGenerator shop = new ShopGenerator(generatorFXList);
@@ -124,9 +126,10 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Generates the page in the background which contains the generators owned by the player.
-   * The number of generator per page is define in the enum {@link com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos}
-  */
+   * Generates the page in the background which contains the generators owned by the player. The
+   * number of generator per page is define in the enum {@link
+   * com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos}
+   */
   public void generateGeneratorPage() {
     mainScreenBodyPages = new HashMap<>();
     int counter = 0;
