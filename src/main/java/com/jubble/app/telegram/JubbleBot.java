@@ -30,12 +30,12 @@ public class JubbleBot extends TelegramLongPollingBot {
 
   @Override
   public String getBotUsername() {
-    return "jubble_bot";
+    return BotConstants.BOT_USERNAME.getValue();
   }
 
   @Override
   public String getBotToken() {
-    return "1711656042:AAFPvyLcWPSeHwpq7qM-kodBXCYhIKwfKWo";
+    return BotConstants.BOT_TOKEN.getValue();
   }
 
   private void tryToExecuteAction(TelegramMessage telegramMessage, String command, Update update) {
