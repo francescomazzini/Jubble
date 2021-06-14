@@ -16,7 +16,7 @@ public class TypeMessages {
       Map.of(
           MessageContent.OPEN_SHOP.getAction(),
           "\uD83D\uDCB8 Shop ",
-          MessageContent.CHOSE_OPTIONS.getAction(),
+          MessageContent.STATUS.getAction(),
           "\uD83D\uDD01 Status ",
           MessageContent.STOP_GAME.getAction(),
           "\uD83D\uDCDB Stop ");
@@ -33,7 +33,7 @@ public class TypeMessages {
           new TelegramMessage(MessageContent.STATUS.getMessage(), NAVIGATION_BUTTONS),
           MessageContent.OPEN_SHOP.getAction(),
           new TelegramMessage(MessageContent.OPEN_SHOP.getMessage(), NAVIGATION_BUTTONS),
-          MessageContent.OPEN_SHOP.getAction(),
+          MessageContent.CHECK_BALANCE.getAction(),
           new TelegramMessage(MessageContent.CHECK_BALANCE.getMessage(), NAVIGATION_BUTTONS));
 
   /**
