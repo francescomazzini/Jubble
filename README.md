@@ -139,6 +139,7 @@ Francesco: "I think I had two main challenges while developing the game. The fir
 
 Alberto:
 
+
 ## Next Steps
 
 What could we add in the future versions:
@@ -146,6 +147,11 @@ What could we add in the future versions:
 - [ ] Implement the concept of derivative currencies (secondary currencies that can be exchanged with the primary and gainable from different type of generators).  
 - [ ] Add random events during the game experience.  
 - [ ] Add minigames which allow to bet using the primary currency, risking to lose it or gain more of it.
+
+## Youtube Video 
+
+Link: ()[]
+
 
 ## References
 
