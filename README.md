@@ -10,7 +10,7 @@ Alberto Defendi (@ahl-berto)
 Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition. 
 
 You can play it via javafx or via a telegram bot.  
-If you want to play it you have to run the command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).  
+If you want to play it using Telegram you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).  
 Be aware that the server of telegram bot can only have one client, because we did not want to create a more complicated server able to manage more requests and with a database of all the data from every player. Through telegram bot we only wanted to show that the core of the game is separated from the User Interfaces used. Therefore you can play the game with javafx, then close it and resume your session using the telegram bot (using same data!).
 
 ## Commands
