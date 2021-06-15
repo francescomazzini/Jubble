@@ -33,7 +33,7 @@ Build project and verify code style
 mvn clean verify
 ```
 
-Generate code style report
+Generate code style report (the errors reported are suggestions and should not be considered as the only as absolute truth)
 
 ```
 mvn checkstyle:check
