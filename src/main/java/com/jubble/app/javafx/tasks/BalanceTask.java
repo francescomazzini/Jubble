@@ -17,7 +17,7 @@ public class BalanceTask extends AbstractTask {
     while (true) {
 
       Thread.sleep(500);
-      updateProgress(Settings.getCurrencies().get(0).getOwned(), 0);
+      updateProgress(Settings.getCurrencyList().get(0).getOwned(), 0);
     }
   }
 

@@ -90,7 +90,7 @@ public class ControllerFX implements Initializable {
    */
   public void setUpGeneratorFX() {
     generatorFXList = new ArrayList<>();
-    List<Generator> generatorList = Settings.getGenerators();
+    List<Generator> generatorList = Settings.getGeneratorList();
 
     for (int i = 0; i < generatorList.size(); i++) {
       Generator currentGenerator = generatorList.get(i);
@@ -118,7 +118,7 @@ public class ControllerFX implements Initializable {
     shop.generateShopPanel();
     shopPopUp.getChildren().add(shop);
 
-    int nGenerators = Settings.getGenerators().size();
+    int nGenerators = Settings.getGeneratorList().size();
     shopPopUp.setMinHeight(
         220 * Math.ceil((double) nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 

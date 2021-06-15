@@ -11,7 +11,7 @@ public class Balance {
   private Currency primary;
 
   private Balance() {
-    this.primary = Settings.getCurrencies().get(0);
+    this.primary = Settings.getCurrencyList().get(0);
   }
 
   private static class BalanceCage {

@@ -13,8 +13,8 @@ public final class GameStarterUtil {
     System.out.println("Recovering game values.");
     Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < Settings.getGenerators().size(); i++) {
-      Settings.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+      Settings.getGeneratorList().get(i).setNumberOwned(numberOwned.get(i));
     }
   }
 
