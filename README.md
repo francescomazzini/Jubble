@@ -47,9 +47,9 @@ mvn com.coveo:fmt-maven-plugin:format
 
 ## Gameplay
 
-In Jubble, a little Astronaut landed on a random planet because of a problem with his rocket. At the beginnning he only has a little stellar panel to gain some Energy. But this is obviously not enough to repair and make his rocket able to be launched again in the space. He needs to collect more and more energy in order to do so! In the shop, the player can also buy using Energy more generators with different production rate!
+In Jubble, a little Astronaut landed on a planet after having run out of fuel. This planet is mostly inhabitated, at the beginnning he (or she) only has a little stellar panel to gain some Energy to back home. But this is obviously not enough to repair and make his rocket able to travel for millions of light years in the space. More and more energy is needed in order to do so! In the shop, the player can also buy using Energy more generators with different production rate!
 
-The goal is platonic and it is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
+The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
 
 ## Game mechanics
 
