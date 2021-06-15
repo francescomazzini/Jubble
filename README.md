@@ -2,7 +2,7 @@
 
 ## Group Members
 
-Francesco Mazzini  
+@Francesco.Mazzini
 Alberto Defendi  
 
 ## What is Jubble?
