@@ -33,5 +33,4 @@ public final class GameProgress {
   public double getBalance() {
     return balance;
   }
-
 }

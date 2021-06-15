@@ -2,15 +2,15 @@
 
 ## Group Members
 
-Francesco Mazzini (@Francesco.Mazzini)  
-Alberto Defendi (@ahl-berto)  
+Francesco Mazzini (@Francesco.Mazzini)
+Alberto Defendi (@ahl-berto)
 
 ## What is Jubble?
 
-Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition. 
+Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition.
 
-You can play it via javafx or via a telegram bot.  
-If you want to play it using Telegram you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).  
+You can play it via javafx or via a telegram bot.
+If you want to play it using Telegram you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).
 Be aware that the server of telegram bot can only have one client, because we did not want to create a more complicated server able to manage more requests and with a database of all the data from every player. Through telegram bot we only wanted to show that the core of the game is separated from the User Interfaces used. Therefore you can play the game with javafx, then close it and resume your session using the telegram bot (using same data!).
 
 ## Commands
@@ -45,7 +45,7 @@ Temporal command for formatting:
 mvn com.coveo:fmt-maven-plugin:format
 ```
 
-## Gameplay 
+## Gameplay
 
 In Jubble, a little Astronaut landed on a random planet because of a problem with his rocket. At the beginnning he only has a little stellar panel to gain some Energy. But this is obviously not enough to repair and make his rocket able to be launched again in the space. He needs to collect more and more energy in order to do so! In the shop, the player can also buy using Energy more generators with different production rate!
 
@@ -63,14 +63,14 @@ Primary currency: ↯
 Is incremented every second basing of the number of owned generators.
 
 Generator:
-Item that produces the primary currency. 
+Item that produces the primary currency.
 There are different types of generator, each produces a certain amount of ↯ per second.
 
 Production rate:
-Ratio between ↯ production and costs. 
+Ratio between ↯ production and costs.
 
 Multiplier:
-Number of level achieved by the player. It ranges from 1 to n, where n is the number of generator level achieved by the player 
+Number of level achieved by the player. It ranges from 1 to n, where n is the number of generator level achieved by the player
 
 This is how we compute the cost of the next generator:
 $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
@@ -84,12 +84,12 @@ thihngs
 
 ## Implemented features:
 
-- Abstract classes: needed to separate the various calculation methods and the normal variables of a generator. 
-- Generics (methods or classes): following the advices provided in effective Java, we generified a builder pattern. 
+- Abstract classes: needed to separate the various calculation methods and the normal variables of a generator.
+- Generics (methods or classes): following the advices provided in effective Java, we generified a builder pattern.
 - Collections: principally lists and maps.
 - Custom exceptions: IllegalOperationException.
-- Exception handling: 
-Like in Json file reading. We had to "mute" some exceptions where throwing them would have stopped the app without any meaning. In those situation, we have written the cause in the method. 
+- Exception handling:
+Like in Json file reading. We had to "mute" some exceptions where throwing them would have stopped the app without any meaning. In those situation, we have written the cause in the method.
 - Method overriding
 - Lambdas
 - Streams
@@ -110,7 +110,7 @@ thhingsss
 ## Dependencies of the project
 ### Dependencies
 - Truth: assertion library
-- Javafx  
+- Javafx
 - Telegram
 
 ### Devdependencies
@@ -118,7 +118,7 @@ thhingsss
 
 ## Our Experience
 ### Internal Organization
-We didn't decide at the beginning any special organization between us. We only wanted to try things, discover new techniques and create what we thought it could have been useful for the project. 
+We didn't decide at the beginning any special organization between us. We only wanted to try things, discover new techniques and create what we thought it could have been useful for the project.
 
 In a more advanced part of the development, we divided a bit the jobs, but just to avoid many conflicts. For example Francesco spent a bit more time in the interfaces (when the main core was ready) while Alberto continued developing in the core adding loading and saving the game. Each time we thought it was needed to focus on different things, we divided jobs to do, otherwise we only advised each other on what we were working, based on we wanted to do for curiosity or because of specific ideas.
 
@@ -147,11 +147,11 @@ Alberto:
 
 What could we add in the future versions:
 
-- [ ] Implement the concept of derivative currencies (secondary currencies that can be exchanged with the primary and gainable from different type of generators).  
-- [ ] Add random events during the game experience.  
+- [ ] Implement the concept of derivative currencies (secondary currencies that can be exchanged with the primary and gainable from different type of generators).
+- [ ] Add random events during the game experience.
 - [ ] Add minigames which allow to bet using the primary currency, risking to lose it or gain more of it.
 
-## Youtube Video 
+## Youtube Video
 
 Link: ()[]
 

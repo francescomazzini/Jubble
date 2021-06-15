@@ -3,14 +3,14 @@ package com.jubble.app.core.resources;
 import com.jubble.app.core.Settings;
 
 /**
- * This class contains all the currencies used in this
- * game.
- * The use of the singleton pattern ensures an unique instance of this class across the app.
- * Bill Pugh Singleton pattern Implementation.
+ * This class contains all the currencies used in this game. The use of the singleton pattern
+ * ensures an unique instance of this class across the app. Bill Pugh Singleton pattern
+ * Implementation.
  */
 public final class Balance {
   /** Primary currency of the game. */
   private final Currency primary;
+
   private static final int DEFAULT_PRIMARY_CURRENCY = 0;
 
   private Balance() {

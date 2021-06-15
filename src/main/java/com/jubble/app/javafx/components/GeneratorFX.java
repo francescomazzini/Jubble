@@ -12,9 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-/**
- * GUI representation of a generator.
- */
+/** GUI representation of a generator. */
 public final class GeneratorFX {
   private final Generator generator;
   private final Label nameGeneratorLabel;
@@ -56,7 +54,7 @@ public final class GeneratorFX {
     buttonBuyGenerator.getStyleClass().add("button-buy");
   }
 
-private void setNameGeneratorLabel() {
+  private void setNameGeneratorLabel() {
     nameGeneratorLabel.setText(generator.getName());
   }
 
@@ -74,7 +72,7 @@ private void setNameGeneratorLabel() {
     numberOwnedGeneratorLabel.setText("Qt: " + generator.getNumberOwned());
   }
 
- private void setImageGeneratorShopIcon(String imageGeneratorPath) {
+  private void setImageGeneratorShopIcon(String imageGeneratorPath) {
     final int HEIGHT = 58;
     final int WIDTH = 160;
     imageGeneratorShopIcon.setImage(new Image(imageGeneratorPath));
@@ -90,7 +88,7 @@ private void setNameGeneratorLabel() {
     imageGeneratorPageIcon.setFitWidth(HEIGHT);
   }
 
-private void setWrapperGeneratorAsShopElement() {
+  private void setWrapperGeneratorAsShopElement() {
     VBox topPadding = new VBox();
     topPadding.setMinHeight(25);
 
@@ -119,6 +117,7 @@ private void setWrapperGeneratorAsShopElement() {
 
   /**
    * Returns the VBox of a generator.
+   *
    * @return the shop version of a generator.
    */
   public VBox getWrapperGeneratorAsShopElement() {
@@ -127,6 +126,7 @@ private void setWrapperGeneratorAsShopElement() {
 
   /**
    * Returns the VBox of a generator.
+   *
    * @return the page version of a generator.
    */
   public VBox getWrapperGeneratorAsPageElement() {

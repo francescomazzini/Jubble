@@ -6,15 +6,14 @@ import com.jubble.app.core.resources.generator.IllegalOperationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Util that wraps common actions performed during the game.
- */
+/** Util that wraps common actions performed during the game. */
 public class GameActions {
 
   private GameActions() {}
 
   /**
    * Buys a generator.
+   *
    * @param generator type of generator to buy.
    * @return true if generator was bought, false if was no bought.
    */
@@ -30,6 +29,7 @@ public class GameActions {
 
   /**
    * Sums the production value of each generator and returns the sum.
+   *
    * @return total production.
    */
   public static double getTotalGeneratorsSum() {
@@ -38,6 +38,7 @@ public class GameActions {
 
   /**
    * Maps each generator into a list of numberOwned attribute.
+   *
    * @return list of number owned generators.
    */
   public static List<Integer> getListOfGeneratorsNumberOwned() {

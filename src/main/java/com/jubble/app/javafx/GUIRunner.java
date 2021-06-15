@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * Wrapper class that handles the GUI lifecycle.
- */
+/** Wrapper class that handles the GUI lifecycle. */
 public final class GUIRunner {
   private GUIRunner() {}
 
@@ -47,9 +45,7 @@ public final class GUIRunner {
     primaryStage.show();
   }
 
-  /**
-   * Stop the GUI.
-   */
+  /** Stop the GUI. */
   public static void stop() {
     ThreadRunner.stop();
     Platform.exit();

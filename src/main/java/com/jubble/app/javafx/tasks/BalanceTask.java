@@ -21,8 +21,8 @@ public class BalanceTask extends AbstractGameTask {
   }
 
   /**
-   * This method is called by @call every 500ms and it updates the progress of the balance.
-   * Not only does it update the progress itself but also it gives a message that is binded to the label
+   * This method is called by @call every 500ms and it updates the progress of the balance. Not only
+   * does it update the progress itself but also it gives a message that is binded to the label
    * which represents the game balance
    *
    * @param v is the actual balance variable

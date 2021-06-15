@@ -15,19 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
-/**
- * Main application panel. Contains all the submodules for the
- * various panels of the game.
- */
+/** Main application panel. Contains all the submodules for the various panels of the game. */
 public class ControllerFX implements Initializable {
   /**
-   * Maps the name of the page with its physical element.
-   * A mainScreenBodyPages is a body page of the Main Screen, which is the part in which the background with the generators is placed.
+   * Maps the name of the page with its physical element. A mainScreenBodyPages is a body page of
+   * the Main Screen, which is the part in which the background with the generators is placed.
    */
   private Map<String, VBox> mainScreenBodyPages;
-  /**
-   * Contains all the Javafx elements of a generator.
-   */
+  /** Contains all the Javafx elements of a generator. */
   private List<GeneratorFX> generatorFXList;
 
   private int currentSelectedPage = 0;
@@ -103,7 +98,8 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Set up the graphical representation of the game Balance {@link com.jubble.app.core.resources.Balance}.
+   * Set up the graphical representation of the game Balance {@link
+   * com.jubble.app.core.resources.Balance}.
    */
   public void setUpBalanceFX() {
     new BalanceFX(balanceLabel, totalProductionLabel);
@@ -111,9 +107,9 @@ public class ControllerFX implements Initializable {
 
   /**
    * Generates the Shop pane instantiating {@link
-   * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the shopPopUp.
-   * The popup size must be set according to the number of Generators that were defined.
-   * The shop visibility is hidden by default and toggled by player action.
+   * com.jubble.app.javafx.components.popups.ShopGenerator} and adding it to the shopPopUp. The
+   * popup size must be set according to the number of Generators that were defined. The shop
+   * visibility is hidden by default and toggled by player action.
    */
   public void generateShopPane() {
     ShopGenerator shop = new ShopGenerator(generatorFXList);
@@ -128,8 +124,8 @@ public class ControllerFX implements Initializable {
   }
 
   /**
-   * Generates the page in the background which contains the generators owned by the player.
-   * The number of generator per page is define in the enum {@link
+   * Generates the page in the background which contains the generators owned by the player. The
+   * number of generator per page is define in the enum {@link
    * com.jubble.app.javafx.components.bodiesMainPage.BodyGeneratorPos}
    */
   public void generateGeneratorPage() {

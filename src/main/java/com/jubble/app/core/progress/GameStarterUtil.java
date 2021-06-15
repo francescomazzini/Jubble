@@ -6,9 +6,7 @@ import com.jubble.app.core.resources.Balance;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Wrapper class that abstract the the game lifecycle to simpler methods.
- */
+/** Wrapper class that abstract the the game lifecycle to simpler methods. */
 public final class GameStarterUtil {
   private GameStarterUtil() {}
 

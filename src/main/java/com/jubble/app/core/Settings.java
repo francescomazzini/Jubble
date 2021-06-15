@@ -83,6 +83,7 @@ public class Settings {
 
   /**
    * Returns game currencies.
+   *
    * @return list of currencies.
    */
   public static List<Currency> getCurrencyList() {
@@ -91,6 +92,7 @@ public class Settings {
 
   /**
    * Returns game generators.
+   *
    * @return list of generators.
    */
   public static List<Generator> getGeneratorList() {
