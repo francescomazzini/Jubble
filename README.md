@@ -2,8 +2,8 @@
 
 ## Group Members
 
-@Francesco.Mazzini
-@ahl-berto
+Francesco Mazzini (@Francesco.Mazzini)  
+Alberto Defendi (@ahl-berto)  
 
 ## What is Jubble?
 
