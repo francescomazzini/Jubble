@@ -1,6 +1,9 @@
 package com.jubble.app.core.resources;
 
-public class Currency {
+/**
+ * Defines the shape of a currency of the game.
+ */
+public final class Currency {
   private final String name;
   private double owned;
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Settings {
 
-  private static List<Currency> currencies = List.of(new Currency("Energy"));
+  private static final List<Currency> CURRENCY_LIST = List.of(new Currency("Energy"));
 
-  private static final List<Generator> GENERATORS =
+  private static final List<Generator> GENERATOR_LIST =
       List.of(
           new Generator.Builder()
               .name("Stellar Panel")
@@ -81,11 +81,19 @@ public class Settings {
               .rateGrowth(1.07)
               .build());
 
-  public static List<Currency> getCurrencies() {
-    return currencies;
+  /**
+   * Returns game currencies.
+   * @return list of currencies.
+   */
+  public static List<Currency> getCurrencyList() {
+    return CURRENCY_LIST;
   }
 
-  public static List<Generator> getGenerators() {
-    return GENERATORS;
+  /**
+   * Returns game generators.
+   * @return list of generators.
+   */
+  public static List<Generator> getGeneratorList() {
+    return GENERATOR_LIST;
   }
 }

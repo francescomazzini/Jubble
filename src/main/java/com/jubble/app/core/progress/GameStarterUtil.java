@@ -6,20 +6,21 @@ import com.jubble.app.core.resources.Balance;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Wrapper class that abstract the the game lifecycle to simpler methods.
+ */
 public final class GameStarterUtil {
   private GameStarterUtil() {}
 
   private static void recoverGameValues(final GameProgress progress) {
-    System.out.println("Recovering game values.");
     Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < Settings.getGenerators().size(); i++) {
-      Settings.getGenerators().get(i).setNumberOwned(numberOwned.get(i));
+    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+      Settings.getGeneratorList().get(i).setNumberOwned(numberOwned.get(i));
     }
   }
 
   private static void startFromScratch() {
-    System.out.println("No saved values fault. Starting from scratch.");
     GameActions.giftInitialAmount();
   }
 
@@ -29,6 +30,10 @@ public final class GameStarterUtil {
       final GameProgress savedProgress = GameProgressSerializer.loadGame();
       recoverGameValues(savedProgress);
     } catch (IOException e) {
+      /*
+      The exception is ignored because if the progress file is not present,
+      the application uses the default values.
+       */
       System.out.println(e.getMessage());
       startFromScratch();
     }

@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-/** Util to perform spellout of a double number. */
-public class NumberNamesUtil {
+/** Util that spells a double number out. */
+public final class NumberNamesUtil {
   private static final String[] NAMES = new String[] {"", "K", "M", "B", "T", "Q"};
 
   private static final int THOUSAND = 1000;
@@ -20,22 +20,22 @@ public class NumberNamesUtil {
   }
 
   private NumberNamesUtil() {}
+
   /**
    * Strips decimal part of the number, keeping only the first three significant digits.
    *
-   * @param key
-   * @param number
+   * @param key approximated number reference in the map.
+   * @param number number to spell.
    * @return stripped number.
    */
   private static double performApproximation(Double key, double number) {
     double d = key / THOUSAND;
     double m = number / d;
-    double f = m / 1000.0f;
-    return f;
+    return m / 1000.0f;
   }
 
   /**
-   * Perform a spellout of the given number.
+   * Spells the given number out.
    *
    * @param number to spell.
    * @return spelled number, spelled in english and approximated.
