@@ -81,10 +81,18 @@ public class Settings {
               .rateGrowth(1.07)
               .build());
 
+  /**
+   * Returns game currencies.
+   * @return list of currencies.
+   */
   public static List<Currency> getCurrencyList() {
     return CURRENCY_LIST;
   }
 
+  /**
+   * Returns game generators.
+   * @return list of generators.
+   */
   public static List<Generator> getGeneratorList() {
     return GENERATOR_LIST;
   }

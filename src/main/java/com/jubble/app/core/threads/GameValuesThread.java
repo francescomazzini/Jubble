@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 /** Thread that increments the game value every predefined amount of time. */
 public class GameValuesThread extends TimerTask {
-  /** Increment balance */
+  /** Increment balance at each run. */
   @Override
   public void run() {
     Balance.addPrimary(GameActions.getTotalGeneratorsSum());
