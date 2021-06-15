@@ -8,7 +8,7 @@ import com.jubble.app.core.Settings;
  * The use of the singleton pattern ensures an unique instance of this class across the app.
  * Bill Pugh Singleton pattern Implementation.
  */
-public class Balance {
+public final class Balance {
   /** Primary currency of the game. */
   private final Currency primary;
   private static final int DEFAULT_PRIMARY_CURRENCY = 0;

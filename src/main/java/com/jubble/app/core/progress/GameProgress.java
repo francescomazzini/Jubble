@@ -8,9 +8,9 @@ import java.util.List;
  * Defines all the data that should be saved in the JSON file. An object of type GameProgress will
  * be passed to the class GameProgressSerializer.
  */
-public class GameProgress {
-  private List<Integer> ownedGenerators;
-  private double balance;
+public final class GameProgress {
+  private final List<Integer> ownedGenerators;
+  private final double balance;
 
   /**
    * @param ownedGenerators list of owned generators.
@@ -34,11 +34,4 @@ public class GameProgress {
     return balance;
   }
 
-  public void setOwnedGenerators(List<Integer> ownedGenerators) {
-    this.ownedGenerators = ownedGenerators;
-  }
-
-  public void setBalance(double balance) {
-    this.balance = balance;
-  }
 }

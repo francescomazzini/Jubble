@@ -4,7 +4,7 @@ import com.jubble.app.core.progress.GameStarterUtil;
 import java.util.Timer;
 
 /** Wrapper to manage start/stop of GameValuesThread TimerTask. */
-public class ThreadRunner {
+public final class ThreadRunner {
   /** Contains each GameValuesThread TimerTask instantiated by run(). */
   private static final Timer VALUES_TIMER = new Timer();
 
