@@ -103,6 +103,9 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - Singleton pattern: Balance class.
 - Builder pattern: Generator class.
 
+## Interfaces
+
+thhingsss
 
 ## Dependencies of the project
 ### Dependencies
