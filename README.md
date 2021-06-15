@@ -114,7 +114,6 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - spotless: code formatter
 
 ## Our Experience
-
 ### Internal Organization
 We didn't decide at the beginning any special organization between us. We only wanted to try things, discover new techniques and create what we thought it could have been useful for the project. 
 
@@ -134,7 +133,7 @@ Since the beginning, we approached the development on different branches, using 
 Close to the end of the project, where the code was starting to becoming more stable and we learned the best practices, we started using gitlab issues, in order to keep the focus on the remaining features and track better the work.
 From this, in the final days we extended the branching techniques to side branches that were opened directly from the issues.
 
-## Main Challenge Faced
+### Main Challenge Faced
 
 Francesco: "I think I had two main challenges while developing the game. The first came up when I realised that the game needed to be more fexible and more adaptable to internal change adding another generator. The most difficult part of that was making the interface (especially javafx one) to adapt to a change like this or to the possibility to have an infinite number (not really infinite) of generators. The second came up instead when I started to see that the code I wrote was too difficult to be read, even by me. At that point, Alberto and I, started a quite long period of cleaning code. We decide that the way the code is wrote is more important than the number of features actually implemented. Even if this part can seem easy and relaxing, it is not and it is also much stressful because I lost much time thinking on how things should be done, trying to follow the most correct logical approach. What I mean is, for example, asking myself if a class should be a util class or maybe a singleton class or just a normal class, or another example trying to understand if some classes were too big and how decompos them in other subclasses (which need to be logically correct, sharing variables that were logical to be there together)"
 
