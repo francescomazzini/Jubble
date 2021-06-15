@@ -78,6 +78,10 @@ $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 This is computed the total production:
 $`production_{total} = (production_{base} \times owned) \times multipliers`$
 
+## Code Structure:
+
+thihngs
+
 ## Implemented features:
 
 - Abstract classes: needed to separate the various calculation methods and the normal variables of a generator. 
