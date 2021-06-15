@@ -111,7 +111,7 @@ public class JubbleBot extends TelegramLongPollingBot {
 
     if (action.startsWith(MessageContent.CHECK_BALANCE.getAction())) {
       int numGenerator = Integer.parseInt(action.substring(3));
-      Generator gen = Settings.getGenerators().get(numGenerator);
+      Generator gen = Settings.getGeneratorList().get(numGenerator);
       boolean isBought = GameActions.buyGenerator(gen);
 
       if (isBought)

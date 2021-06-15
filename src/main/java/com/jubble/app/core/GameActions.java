@@ -6,28 +6,42 @@ import com.jubble.app.core.resources.generator.IllegalOperationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Util that wraps common actions performed during the game.
+ */
 public class GameActions {
 
   private GameActions() {}
 
+  /**
+   * Buys a generator.
+   * @param generator type of generator to buy.
+   * @return true if generator was bought, false if was no bought.
+   */
   public static boolean buyGenerator(Generator generator) {
-
+    boolean isBought = false;
     if (Balance.getPrimary() >= generator.getNextCost()) {
       Balance.addPrimary(generator.getNextCost() * -1);
       generator.incrementNumberOwned();
-
-      return true;
+      isBought = true;
     }
-
-    return false;
+    return isBought;
   }
 
+  /**
+   * Sums the production value of each generator and returns the sum.
+   * @return total production.
+   */
   public static double getTotalGeneratorsSum() {
-    return Settings.getGenerators().stream().mapToDouble(Generator::getProduction).sum();
+    return Settings.getGeneratorList().stream().mapToDouble(Generator::getProduction).sum();
   }
 
+  /**
+   * Maps each generator into a list of numberOwned attribute.
+   * @return list of number owned generators.
+   */
   public static List<Integer> getListOfGeneratorsNumberOwned() {
-    return Settings.getGenerators().stream()
+    return Settings.getGeneratorList().stream()
         .map(Generator::getNumberOwned)
         .collect(Collectors.toList());
   }
@@ -35,9 +49,9 @@ public class GameActions {
   /** Gift initial generator. Used in case the default file is not found. */
   public static void giftInitialAmount() {
     final int first = 0;
-    if (Settings.getGenerators().get(first).isMoreThanZeroOwned())
+    if (Settings.getGeneratorList().get(first).isMoreThanZeroOwned())
       throw new IllegalOperationException();
 
-    Settings.getGenerators().get(first).incrementNumberOwned();
+    Settings.getGeneratorList().get(first).incrementNumberOwned();
   }
 }

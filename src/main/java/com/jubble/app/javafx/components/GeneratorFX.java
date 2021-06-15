@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ * GUI representation of a generator.
+ */
 public final class GeneratorFX {
   private final Generator generator;
   private final Label nameGeneratorLabel;
@@ -53,25 +56,25 @@ public final class GeneratorFX {
     buttonBuyGenerator.getStyleClass().add("button-buy");
   }
 
-  public void setNameGeneratorLabel() {
+private void setNameGeneratorLabel() {
     nameGeneratorLabel.setText(generator.getName());
   }
 
-  public void setProductionGeneratorLabel() {
+  private void setProductionGeneratorLabel() {
     String formattingProduction = NumberNamesUtil.createString(generator.getProductionBase());
     productionGeneratorLabel.setText("Production: " + formattingProduction + "/s");
   }
 
-  public void setCostGeneratorLabel() {
+  private void setCostGeneratorLabel() {
     String formattingCost = NumberNamesUtil.createString(generator.getNextCost());
     costGeneratorLabel.setText("Cost: " + formattingCost);
   }
 
-  public void setNumberOwnedGeneratorLabel() {
+  private void setNumberOwnedGeneratorLabel() {
     numberOwnedGeneratorLabel.setText("Qt: " + generator.getNumberOwned());
   }
 
-  public void setImageGeneratorShopIcon(String imageGeneratorPath) {
+ private void setImageGeneratorShopIcon(String imageGeneratorPath) {
     final int HEIGHT = 58;
     final int WIDTH = 160;
     imageGeneratorShopIcon.setImage(new Image(imageGeneratorPath));
@@ -79,7 +82,7 @@ public final class GeneratorFX {
     imageGeneratorShopIcon.setFitWidth(WIDTH);
   }
 
-  public void setImageGeneratorPageIcon(String imageGeneratorPath) {
+  private void setImageGeneratorPageIcon(String imageGeneratorPath) {
     final int WIDTH = 70;
     final int HEIGHT = 193;
     imageGeneratorPageIcon.setImage(new Image(imageGeneratorPath));
@@ -87,7 +90,7 @@ public final class GeneratorFX {
     imageGeneratorPageIcon.setFitWidth(HEIGHT);
   }
 
-  public void setWrapperGeneratorAsShopElement() {
+private void setWrapperGeneratorAsShopElement() {
     VBox topPadding = new VBox();
     topPadding.setMinHeight(25);
 
@@ -108,25 +111,38 @@ public final class GeneratorFX {
     wrapperGeneratorAsShopElement.setMinHeight(100);
   }
 
-  public void setWrapperGeneratorAsPageElement() {
+  private void setWrapperGeneratorAsPageElement() {
     wrapperGeneratorAsPageElement = new VBox(2, imageGeneratorPageIcon, numberOwnedGeneratorLabel);
     wrapperGeneratorAsPageElement.setAlignment(Pos.TOP_CENTER);
     wrapperGeneratorAsPageElement.setVisible(generator.isMoreThanZeroOwned());
   }
 
+  /**
+   * Returns the VBox of a generator.
+   * @return the shop version of a generator.
+   */
   public VBox getWrapperGeneratorAsShopElement() {
     return wrapperGeneratorAsShopElement;
   }
 
+  /**
+   * Returns the VBox of a generator.
+   * @return the page version of a generator.
+   */
   public VBox getWrapperGeneratorAsPageElement() {
     return wrapperGeneratorAsPageElement;
   }
 
+  /**
+   * Says if the generator element is visible.
+   *
+   * @return true if isVisible, false otherwise.
+   */
   public boolean isWrapperGeneratorAsPageElementVisible() {
     return wrapperGeneratorAsPageElement.isVisible();
   }
 
-  public void buyGenerator(ActionEvent event) {
+  private void buyGenerator(ActionEvent event) {
     GameActions.buyGenerator(generator);
     setCostGeneratorLabel();
     setNumberOwnedGeneratorLabel();

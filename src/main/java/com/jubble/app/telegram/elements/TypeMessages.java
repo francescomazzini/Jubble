@@ -53,7 +53,7 @@ public class TypeMessages {
                 + " / s"
                 + "\n\n *Generators Owned* \uD83D\uDE80: "));
 
-    for (Generator gen : Settings.getGenerators()) {
+    for (Generator gen : Settings.getGeneratorList()) {
       statusContentMessage
           .append("\n   • ")
           .append(gen.getName())
@@ -78,8 +78,8 @@ public class TypeMessages {
                 + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n\n*Shop* \uD83D\uDCB8:"));
 
-    for (int i = 0; i < Settings.getGenerators().size(); i++) {
-      Generator gen = Settings.getGenerators().get(i);
+    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+      Generator gen = Settings.getGeneratorList().get(i);
       shopContentMessage
           .append("\n   ")
           .append(i + 1)
@@ -106,7 +106,7 @@ public class TypeMessages {
 
     Map<String, String> shopButtonsMessage = new HashMap<>();
 
-    for (int i = 0; i < Settings.getGenerators().size(); i++)
+    for (int i = 0; i < Settings.getGeneratorList().size(); i++)
       shopButtonsMessage.put("gen" + i, (i + 1) + "");
 
     shopButtonsMessage.put("begin", " ◀️ Back");

@@ -1,6 +1,6 @@
 package com.jubble.app.javafx;
 
-import com.jubble.app.javafx.tasks.AbstractTask;
+import com.jubble.app.javafx.tasks.AbstractGameTask;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public final class ThreadTaskUtil {
    *
    * @param task
    */
-  public static void create(AbstractTask task) {
+  public static void create(AbstractGameTask task) {
     Thread thread = new Thread(task);
     thread.setName(task.getName());
     STRING_THREAD_MAP.put(task.getName(), thread);
@@ -27,7 +27,7 @@ public final class ThreadTaskUtil {
    *
    * @param task
    */
-  public static void autoBuild(AbstractTask task) {
+  public static void autoBuild(AbstractGameTask task) {
     create(task);
     getThread(task.getName()).setDaemon(true);
     getThread(task.getName()).start();

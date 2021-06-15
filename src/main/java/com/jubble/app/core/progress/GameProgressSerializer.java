@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /** Saves and loads the game. */
-public class GameProgressSerializer {
+public final class GameProgressSerializer {
   public static final String PROGRESS_FILE_PATH = "game_progress.json";
   private static final File FILE = new File(PROGRESS_FILE_PATH);
 

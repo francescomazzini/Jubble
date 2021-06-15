@@ -3,13 +3,13 @@ package com.jubble.app.javafx.tasks;
 import com.jubble.app.core.GameActions;
 import com.jubble.app.core.utils.NumberNamesUtil;
 
-public final class ProductionTask extends AbstractTask {
+public final class ProductionTask extends AbstractGameTask {
 
   @Override
   protected Void call() throws Exception {
     while (true) {
 
-      Thread.sleep(500);
+      Thread.sleep(REFRESH_INTERVAL);
       updateProgress(GameActions.getTotalGeneratorsSum(), 0);
     }
   }

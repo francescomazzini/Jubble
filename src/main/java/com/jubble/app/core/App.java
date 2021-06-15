@@ -5,7 +5,7 @@ import com.jubble.app.javafx.GUIRunner;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-/** Main app class */
+/** Main entry point of Javafx application */
 public class App extends Application {
 
   @Override

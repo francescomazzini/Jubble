@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class ConcreteTaskTest {
-  AbstractTask task = new BalanceTask();
+  AbstractGameTask task = new BalanceTask();
 
   @Test
   public void shouldDisplayCorrectName() {
