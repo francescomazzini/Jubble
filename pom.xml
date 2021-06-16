@@ -16,6 +16,7 @@
         <maven.compiler.target>13</maven.compiler.target>
         <jackson.version>2.12.0</jackson.version>
         <spotless.version>2.11.1</spotless.version>
+        <jacoco.version>0.8.7</jacoco.version>
     </properties>
 
     <dependencies>
@@ -165,6 +166,25 @@
                             <configuration>
                                 <mainClass>com.jubble.app.telegram.Main</mainClass>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>site</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
