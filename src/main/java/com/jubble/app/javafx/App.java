@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 /** Main entry point of Javafx application */
 public class App extends Application {
 
+  private App() {}
+
   @Override
   public void start(Stage primaryStage) throws Exception {
     ThreadRunner.run();
