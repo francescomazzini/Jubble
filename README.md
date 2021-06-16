@@ -80,7 +80,17 @@ $`production_{total} = (production_{base} \times owned) \times multipliers`$
 
 ## Code Structure:
 
-thihngs
+In brief, the code is divided in three folders:
+- core
+- javafx
+- telegram
+
+The last two, are independent from each other, and are based on the "core". They can be run using the command specified above. 
+
+The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named jubble_bot. 
+However, since sharing bot tokens is specifically discouraged by the bot library, should this game become very successfull and someone decide to self host it, we reccomend to replace that token with a personal one.  
+
+A detailed representation of the code structure can be found in the generated Javadoc.
 
 ## Implemented features:
 
@@ -99,7 +109,6 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - Multithreading
 - Resource sharing (between threads)
 - Test hooks (@beforeAll, @beforeEach. . . )
-
 - Singleton pattern: Balance class.
 - Builder pattern: Generator class.
 
@@ -118,9 +127,9 @@ thhingsss
 
 ## Our Experience
 ### Internal Organization
-We didn't decide at the beginning any special organization between us. We only wanted to try things, discover new techniques and create what we thought it could have been useful for the project.
+By being a very small team, we felt not necessary at the beginning to lay down any special organization between us. We only wanted to try libraries, discover new techniques and do the best we thought it could have been useful for the project.  
 
-In a more advanced part of the development, we divided a bit the jobs, but just to avoid many conflicts. For example Francesco spent a bit more time in the interfaces (when the main core was ready) while Alberto continued developing in the core adding loading and saving the game. Each time we thought it was needed to focus on different things, we divided jobs to do, otherwise we only advised each other on what we were working, based on we wanted to do for curiosity or because of specific ideas.
+In a more advanced part of the development, we found a better division of the workload necessary to avoid conflicts. For example Francesco dedicated more time in the interfaces (when the main core was ready) while Alberto continued developing in the core adding loading and saving the game. Always with a flexible approach, each time we thought it was needed to prioritize different features, we divided jobs to do so, otherwise we only notified each other on which part we were working, based on we wanted to do for curiosity or because of specific ideas.
 
 ### Branch Strategy
 Since the beginning, we approached the development on different branches, using a flexible policy but keeping the principle of having the working code on two branches.
@@ -133,14 +142,19 @@ Since the beginning, we approached the development on different branches, using 
 
 - NrIssue-name-issue: another generic example of branches created in order to satisfy a specific issue (we started using them only at the end).
 
-Close to the end of the project, where the code was starting to becoming more stable and we learned the best practices, we started using gitlab issues, in order to keep the focus on the remaining features and track better the work.
-From this, in the final days we extended the branching techniques to side branches that were opened directly from the issues.
+Close to the end of the project, where the code was starting to becoming more stable, trustable and documented, we started using gitlab issues, in order to keep the focus on the remaining features and track better the work.
+From this, in the final days we extended the branching techniques to side branches that were opened directly from the issues (but in little part since the limited size of the project).
 
 ### Main Challenge Faced
 
 Francesco: "I think I had two main challenges while developing the game. The first came up when I realised that the game needed to be more fexible and more adaptable to internal change adding another generator. The most difficult part of that was making the interface (especially javafx one) to adapt to a change like this or to the possibility to have an infinite number (not really infinite) of generators. The second came up instead when I started to see that the code I wrote was too difficult to be read, even by me. At that point, Alberto and I, started a quite long period of cleaning code. We decide that the way the code is wrote is more important than the number of features actually implemented. Even if this part can seem easy and relaxing, it is not and it is also much stressful because I lost much time thinking on how things should be done, trying to follow the most correct logical approach. What I mean is, for example, asking myself if a class should be a util class or maybe a singleton class or just a normal class, or another example trying to understand if some classes were too big and how decompos them in other subclasses (which need to be logically correct, sharing variables that were logical to be there together)"
 
 Alberto:
+"Should I restart the project today, I would use more the gitlab issues, which have revealed themselves to be very useful to prioritize the important features. In the project, I worked more on the "business logic", working especially on serialization and refactoring 
+Since I feel devtools to be an important part of projects, I tried to make practice with Maven, with some successes and a lot of failures.
+Firstly, I was never able to make the codeformatter and the linter run automathically at a linked lifecycle, but they never worked. I feel this problem to have partly negatively impacted the code quality, because those tools didn't run very often and we ended up with unformatted code and many spotbugs/checkstyle warnings to clean at the end of the project. I also had problems with gitlab CI to deploy the Javadocs, those I could upload the correct artifacts but weren't hosted.
+In this project there were also moments where we had to reconsider our decisions, and I want to mention those memories since I feel to be useful to develop a critic approach to software development: in the beginning, we implemented the Observer pattern, but we felt it was introducing unnecessary complexity. Also when to make a singleton class deserialize data before the beginning of the game. After being stuck for a while, we decided that was not necessary and could have broken the thread resource sharing, due the fact that the deserialized reference would have been null".
+
 
 
 ## Next Steps
