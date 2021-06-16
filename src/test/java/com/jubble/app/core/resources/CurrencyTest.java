@@ -2,7 +2,6 @@ package com.jubble.app.core.resources;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.checkerframework.dataflow.qual.TerminatesExecution;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +21,4 @@ public class CurrencyTest {
     currency.setOwned(N);
     assertThat(currency.toString()).isEqualTo("currency=TEST\nowned=100.35");
   }
-
 }

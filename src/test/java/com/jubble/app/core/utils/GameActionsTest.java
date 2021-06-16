@@ -1,12 +1,12 @@
 package com.jubble.app.core.utils;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.jubble.app.core.GameActions;
 import com.jubble.app.core.resources.Balance;
 import com.jubble.app.core.resources.generator.Generator;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -109,5 +109,12 @@ public class GameActionsTest {
     GameActions.buyGenerator(genExample);
 
     assertThat(Balance.getPrimary()).isEqualTo(10);
+  }
+
+  @Test
+  @DisplayName("Should return list of 0 in beginning")
+  public void shouldReturnListOf0InBeginning() {
+    assertThat(GameActions.getListOfGeneratorsNumberOwned())
+        .isEqualTo(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
   }
 }
