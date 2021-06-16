@@ -21,7 +21,7 @@ docs:
   stage: docs
   script:
     - mvn clean site
-    - mv target/site/ public/
+    - mv target/site/ public
   artifacts:
     paths:
       - public
