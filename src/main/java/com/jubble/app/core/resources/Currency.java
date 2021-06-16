@@ -35,6 +35,6 @@ public final class Currency {
 
   @Override
   public String toString() {
-    return "Currency: " + name;
+    return "currency=" + name + "\nowned=" + owned;
   }
 }
