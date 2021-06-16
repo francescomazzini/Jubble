@@ -45,7 +45,7 @@ Generate executable Jars (one for JAVAFX, another for TELEGRAM).
 mvn package
 ```
 
-Generate JAVADOC.
+Generate JAVADOC (then you can find it at target/site/apidocs/index.html).
 
 ```
 mvn javadoc:javadoc
