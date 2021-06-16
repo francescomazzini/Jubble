@@ -117,5 +117,4 @@ public class GameActionsTest {
     assertThat(GameActions.getListOfGeneratorsNumberOwned())
         .isEqualTo(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
   }
-
 }
