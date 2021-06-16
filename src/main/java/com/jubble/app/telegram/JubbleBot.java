@@ -13,7 +13,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class JubbleBot extends TelegramLongPollingBot {
+public final class JubbleBot extends TelegramLongPollingBot {
 
   /**
    * listMessages map is a Map that for each type of TelegramMessage (already written in
@@ -28,11 +28,21 @@ public class JubbleBot extends TelegramLongPollingBot {
     isGameOn = gameOn;
   }
 
+  /**
+   * Returns the predefined bot username.
+   *
+   * @return bot username.
+   */
   @Override
   public String getBotUsername() {
     return BotConstants.BOT_USERNAME.getValue();
   }
 
+  /**
+   * Returns the predefined bot token.
+   *
+   * @return bot token.
+   */
   @Override
   public String getBotToken() {
     return BotConstants.BOT_TOKEN.getValue();
@@ -42,7 +52,6 @@ public class JubbleBot extends TelegramLongPollingBot {
     Objects.requireNonNull(telegramMessage);
     actionPerformer(command, telegramMessage);
     telegramMessage.setChatId(update);
-
     try {
       execute(telegramMessage);
     } catch (TelegramApiException e) {
@@ -50,11 +59,26 @@ public class JubbleBot extends TelegramLongPollingBot {
     }
   }
 
+  private String getReceivedCommand(Update update) {
+    if (update.hasCallbackQuery()) return update.getCallbackQuery().getData();
+    else return update.getMessage().getText();
+  }
+
+  private TelegramMessage getMenu(String command) {
+    return listMessages.get(command);
+  }
+
+  private TelegramMessage getSubMenu(String command) {
+    String tempCommand = command.substring(0, 3);
+    return listMessages.get(tempCommand);
+  }
+
   /**
-   * Each time that the bot receives an update, it analyzes the command receive. It could be a
-   * normal command like "/start" or a callBackQuery like "shop". They are treated in the same way
-   * so it just put it in a string. Then it search in the map the correct TelegramMessage to use it
-   * to answer to the command given.
+   * Each time that the bot receives an update, it analyzes the command received. All the commands
+   * are defined in {@link com.jubble.app.telegram.elements.MessageContent} Two types of updates
+   * exist, that are handled equally by this method: - a command: ex. "/start" - a callBackQuery:
+   * ex. "shop". so it just put it in a string. Then it search in the map the correct
+   * TelegramMessage to use it to answer to the command given.
    *
    * <p>There can be cases where the command is not found and it could be because the commands to
    * buy generators are all wrapped under "gen" command and then followed by the number of the
@@ -65,31 +89,21 @@ public class JubbleBot extends TelegramLongPollingBot {
    */
   @Override
   public void onUpdateReceived(Update update) {
-
-    String command;
-
-    if (update.hasCallbackQuery()) command = update.getCallbackQuery().getData();
-    else command = update.getMessage().getText();
-
-    TelegramMessage telegramMessage = listMessages.get(command);
-
-    if (Objects.isNull(telegramMessage)) {
-      String tempCommand = command.substring(0, 3);
-      telegramMessage = listMessages.get(tempCommand);
-    }
-
+    Objects.requireNonNull(update);
+    String command = getReceivedCommand(update);
+    TelegramMessage telegramMessage =
+        !Objects.isNull(getMenu(command)) ? getMenu(command) : getSubMenu(command);
     tryToExecuteAction(telegramMessage, command, update);
   }
 
   /**
-   * actionPerformer runs snippet of code modifying TelegramMessage depending on the command
+   * ActionPerformer runs snippet of code modifying TelegramMessage depending on the command
    * inserted. This is needed because some information are generated or executed at run time
    *
    * @param action that is the command given by the update
    * @param tlMsg is the TelegramMessage which correspond to the key command in the Map
    */
   private void actionPerformer(String action, TelegramMessage tlMsg) {
-
     if (action.equals(MessageContent.CHOSE_OPTIONS.getAction()) && !isGameOn) {
       tlMsg.setContent("The *game* is running.\n" + tlMsg.getContent());
       ThreadRunner.run();
