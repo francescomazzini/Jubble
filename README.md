@@ -27,11 +27,36 @@ Run telegram bot.
 mvn clean compile exec:java@telegram
 ```
 
+Clean project.
+
+```
+mvn clean 
+```
+
+Run project tests.
+
+```
+mvn test 
+```
+
+Generate executable Jars (one for JAVAFX, another for TELEGRAM).
+
+```
+mvn package
+```
+
+Generate JAVADOC.
+
+```
+mvn javadoc:javadoc
+```
+
 Build project and verify code style
 
 ```
 mvn clean verify
 ```
+
 
 Generate code style report (the errors reported are suggestions and should not be considered as the only as absolute truth)
 
