@@ -17,16 +17,14 @@ format:
   script:
     - mvn spotless:apply
 
-check:
-  stage: check
-  script:
-    - mvn checkstyle:check
 docs:
   stage: docs
   script:
-    - mvn javadoc:javadoc
-    - mvn site
-    - mv target/site/ ../public
+    - mvn clean site
+    - mv target/site/ public/
   artifacts:
     paths:
       - public
+  only:
+  - master
+  - dev_main
