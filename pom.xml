@@ -14,7 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
-        <exec.mainClass>com.jubble.app.core.App</exec.mainClass>
         <jackson.version>2.12.0</jackson.version>
         <spotless.version>2.11.1</spotless.version>
     </properties>
@@ -53,19 +52,7 @@
             <artifactId>javafx-controls</artifactId>
             <version>16</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
-        <!--dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>16</version>
-        </dependency-->
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-        <!--dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>16</version>
-        </dependency-->
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+       <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -110,9 +97,12 @@
                                     <!-- add Main-Class to manifest file -->
                                     <transformer
                                             implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                        <mainClass>com.jubble.app.core.App</mainClass>
+                                        <mainClass>com.jubble.app.javafx.Main</mainClass>
                                     </transformer>
                                 </transformers>
+                                <createDependencyReducedPom>
+                                    false
+                                </createDependencyReducedPom>
                                 <filters>
                                     <filter>
                                         <artifact>*:*</artifact>
@@ -135,13 +125,13 @@
                         <execution>
                             <id>javafx</id>
                             <configuration>
-                                <mainClass>com.jubble.app.core.App</mainClass>
+                                <mainClass>com.jubble.app.javafx.Main</mainClass>
                             </configuration>
                         </execution>
                         <execution>
                             <id>telegram</id>
                             <configuration>
-                                <mainClass>com.jubble.app.telegram.AppTelegram</mainClass>
+                                <mainClass>com.jubble.app.telegram.Main</mainClass>
                             </configuration>
                         </execution>
                     </executions>
@@ -206,7 +196,7 @@
                     <artifactId>javafx-maven-plugin</artifactId>
                     <version>0.0.6</version>
                     <configuration>
-                        <mainClass>com.jubble.app.core.App</mainClass>
+                        <mainClass>com.jubble.app.javafx.App</mainClass>
                     </configuration>
                     <dependencies>
                         <dependency>
