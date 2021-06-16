@@ -30,13 +30,13 @@ mvn clean compile exec:java@telegram
 Clean project.
 
 ```
-mvn clean 
+mvn clean
 ```
 
 Run project tests.
 
 ```
-mvn test 
+mvn test
 ```
 
 Generate executable Jars (one for JAVAFX, another for TELEGRAM).
