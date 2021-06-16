@@ -51,25 +51,25 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17-ea+9</version>
+            <version>16</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
-        <dependency>
+        <!--dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <version>17-ea+9</version>
-        </dependency>
+            <version>16</version>
+        </dependency-->
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-        <dependency>
+        <!--dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>17-ea+9</version>
-        </dependency>
+            <version>16</version>
+        </dependency-->
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17-ea+9</version>
+            <version>16</version>
         </dependency>
         <!-- Jackson: JSON serialization library -->
         <dependency>
@@ -89,17 +89,9 @@
             <artifactId>telegrambots</artifactId>
             <version>5.2.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.3.0</version>
-            <type>maven-plugin</type>
-        </dependency>
     </dependencies>
 
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -259,6 +251,5 @@
                     <version>3.0.0</version>
                 </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 </project>
