@@ -21,7 +21,7 @@ Run Javafx app.
 mvn clean compile exec:java@javafx
 ```
 
-Run telegram bot.
+Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm).
 
 ```
 mvn clean compile exec:java@telegram
