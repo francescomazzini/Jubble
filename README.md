@@ -47,8 +47,8 @@ mvn com.coveo:fmt-maven-plugin:format
 
 ## Gameplay
 
-In Jubble, a little Astronaut landed on a planet after having run out of fuel. 
-This planet is mostly inhabited, and no one can help. At the beginning he (or she) is left only with a little stellar panel, which makes possible to recover some Energy to back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space. 
+In Jubble, a little Astronaut landed on a planet after having run out of fuel.
+This planet is mostly inhabited, and no one can help. At the beginning he (or she) is left only with a little stellar panel, which makes possible to recover some Energy to back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space.
 More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!
 The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
 
@@ -87,11 +87,11 @@ In brief, the code is splitted in three folders:
 - telegram
 
 The core is the core logic of the game and constitutes an api that can be accessed to the clients.
-Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above. 
+Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above.
 
 ### Telegram
-The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named "@jubble_bot". 
-However, since [bot tokens should remain secret](https://github.com/rubenlagus/TelegramBots/wiki/Handling-Bot-Tokens#-bot-token-rules), should you want to fork this project or to self host it, we recommend replacing the token with a personal one.  
+The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named "@jubble_bot".
+However, since [bot tokens should remain secret](https://github.com/rubenlagus/TelegramBots/wiki/Handling-Bot-Tokens#-bot-token-rules), should you want to fork this project or to self host it, we recommend replacing the token with a personal one.
 
 A detailed representation of the packages and classes can be found in the generated Javadoc. A brief information on the dependencies of the project can be found in the pom.xml file.
 
@@ -131,8 +131,8 @@ thhingsss
 
 ## Our Experience
 ### Internal Organization
-By being a very small team, we kept our organization flexible, without using any special working technique. We only wanted to try libraries, apply what we learned in the course and do the best we thought was useful for the project.  
-In a more advanced part of the development, we found a better division of the workload necessary to avoid conflicts. For example Francesco dedicated more time in the interfaces (when the main core was ready) while Alberto continued developing in the core adding loading and saving the game. 
+By being a very small team, we kept our organization flexible, without using any special working technique. We only wanted to try libraries, apply what we learned in the course and do the best we thought was useful for the project.
+In a more advanced part of the development, we found a better division of the workload necessary to avoid conflicts. For example Francesco dedicated more time in the interfaces (when the main core was ready) while Alberto continued developing in the core adding loading and saving the game.
 Each time we thought it was needed to prioritize different features, we divided jobs to do so, otherwise we only notified each other on which part we were working, based on we wanted to do for curiosity or because of specific ideas.
 
 ### Branch Strategy
@@ -150,9 +150,9 @@ From this, in the final days we extended the branching techniques to side branch
 Francesco: "I think I had two main challenges while developing the game. The first came up when I realised that the game needed to be more flexible and more adaptable to internal change adding another generator. The most difficult part of that was making the interface (especially javafx one) to adapt to a change like this or to the possibility to have an infinite number (not really infinite) of generators. The second came up instead when I started to see that the code I wrote was too difficult to be read, even by me. At that point, Alberto and I, started a quite long period of "housekeeping". We decide that the way the code is wrote is more important than the number of features actually implemented. Even if at first sight this part can seem easy and relaxing, I felt it to be much stressful because I lost much time thinking on how things should be refactored, trying to follow the most correct logical approach. What I mean is, for example, asking myself if a class should be a util class or maybe a singleton class or just a normal class, or another example trying to understand if some classes were too big and how decompose them in other subclasses (which need to be logically correct, sharing variables that were logical to be there together)".
 
 Alberto:
-"Should I restart the project today, I would use more the gitlab issues, which revealed to be very useful to prioritize the important features. In the project, I worked more on the "business logic", working especially on serialization and refactoring 
+"Should I restart the project today, I would use more the gitlab issues, which revealed to be very useful to prioritize the important features. In the project, I worked more on the "business logic", working especially on serialization and refactoring
 Since I feel devtools to be an important part of projects, I tried to make practice with Maven, with some successes and a lot of failures.
-Firstly, I was never able to make the code formatter and the linter run automatically at a linked Maven lifecycle. I feel this problem to have negatively impacted the code quality, because those tools didn't run at the specified stage, so we ended up with unformatted code, or worse, many spotbugs/checkstyle warnings to clean at the end of the project. 
+Firstly, I was never able to make the code formatter and the linter run automatically at a linked Maven lifecycle. I feel this problem to have negatively impacted the code quality, because those tools didn't run at the specified stage, so we ended up with unformatted code, or worse, many spotbugs/checkstyle warnings to clean at the end of the project.
 I also had problems with gitlab CI to deploy the Javadocs, those I could upload the correct artifacts but weren't hosted.
 In this project there were also moments where we had to reconsider our decisions, which I felt crucial to adopt a reasoned approach to software development: in the beginning, we implemented the Observer pattern, but we felt it was introducing unnecessary complexity. Another time, we tried to make a singleton class deserialize data before the beginning of the game. After being stuck for a while, we decided that was not necessary and could have broken the thread resource sharing, so we avoided using it even we liked this design pattern".
 
