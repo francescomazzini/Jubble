@@ -76,6 +76,11 @@ public class TelegramMessage extends SendMessage {
     this.setReplyMarkup(markupInline);
   }
 
+  /**
+   * Set the id of the chat.
+   *
+   * @param update from chat.
+   */
   public void setChatId(Update update) {
 
     String parameter;
@@ -87,15 +92,30 @@ public class TelegramMessage extends SendMessage {
     this.setChatId(parameter);
   }
 
+  /**
+   * Returns content of a message.
+   *
+   * @return content of message.
+   */
   public String getContent() {
     return content;
   }
 
+  /**
+   * Set content of a message.
+   *
+   * @param content to be set.
+   */
   public void setContent(String content) {
     this.content = content;
     this.setText(content);
   }
 
+  /**
+   * Sets and generates inline button of a message.
+   *
+   * @param inlineButtons buttons to be set.
+   */
   public void setInlineButtons(Map<String, String> inlineButtons) {
     this.inlineButtons = inlineButtons;
 

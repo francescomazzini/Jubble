@@ -12,11 +12,11 @@ public final class ThreadTaskUtil {
   private ThreadTaskUtil() {}
 
   /**
-   * Create thread from given Task.
+   * Create thread from given Task and puts it in a collection.
    *
-   * @param task
+   * @param task task to be linked to a thread.
    */
-  public static void create(AbstractGameTask task) {
+  public static void create(final AbstractGameTask task) {
     Thread thread = new Thread(task);
     thread.setName(task.getName());
     STRING_THREAD_MAP.put(task.getName(), thread);
@@ -25,7 +25,7 @@ public final class ThreadTaskUtil {
   /**
    * Create thread from given Task and start the task as a daemon.
    *
-   * @param task
+   * @param task to be built.
    */
   public static void autoBuild(AbstractGameTask task) {
     create(task);
@@ -34,7 +34,7 @@ public final class ThreadTaskUtil {
   }
 
   /**
-   * Stops and remove a thread in the map.
+   * Stops and remove a thread in the collection.
    *
    * @param threadName name of the thread to remove.
    */
@@ -44,7 +44,7 @@ public final class ThreadTaskUtil {
   }
 
   /**
-   * Return number of threads in the Map taskThreads.
+   * Return number of threads in the collection.
    *
    * @return number of threads
    */
@@ -53,12 +53,12 @@ public final class ThreadTaskUtil {
   }
 
   /**
-   * Return a thread in the map given the name of the linked task.
+   * Return a thread in the collection given the name of the linked task.
    *
    * @param threadName name of the thread to retrieve.
    * @return thread linked to the map.
    */
-  public static Thread getThread(String threadName) {
+  public static Thread getThread(final String threadName) {
     return STRING_THREAD_MAP.get(threadName);
   }
 }

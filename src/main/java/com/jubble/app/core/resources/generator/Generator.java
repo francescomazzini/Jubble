@@ -4,7 +4,7 @@ package com.jubble.app.core.resources.generator;
  * Represents a generator in the game. Implements the builder pattern and can be instantiated only
  * providing a builder.
  */
-public class Generator extends GeneratorBody {
+public final class Generator extends GeneratorBody {
 
   private Generator(Builder builder) {
     super(builder);
@@ -36,18 +36,38 @@ public class Generator extends GeneratorBody {
     super.setNumberOwned(numberOwned);
   }
 
+  /**
+   * Computes the cost of the next generator.
+   *
+   * @return next cost.
+   */
   public double getNextCost() {
     return super.getCostBase() * Math.pow(super.getRateGrowth(), super.getNumberOwned());
   }
 
+  /**
+   * Computes the total production of a generator.
+   *
+   * @return total production.
+   */
   public double getProduction() {
     return (super.getProductionBase() * super.getNumberOwned());
   }
 
+  /**
+   * Returns the production base.
+   *
+   * @return productionBase.
+   */
   public double getProductionBase() {
     return super.getProductionBase();
   }
 
+  /**
+   * Returns the name of this generator.
+   *
+   * @return name.
+   */
   public String getName() {
     return super.getName();
   }

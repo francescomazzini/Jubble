@@ -14,7 +14,6 @@ public final class ThreadRunner {
     final int timerDelay = 0;
     GameStarterUtil.load();
     VALUES_TIMER.schedule(new GameValuesThread(), timerDelay, timerRefreshRate);
-    System.out.println("Game thread started");
   }
 
   private static void stopTimer() {
@@ -28,6 +27,5 @@ public final class ThreadRunner {
   public static void stop() {
     stopTimer();
     GameStarterUtil.save();
-    System.out.println("Game thread stopped");
   }
 }

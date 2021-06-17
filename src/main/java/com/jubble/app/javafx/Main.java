@@ -1,7 +1,7 @@
 package com.jubble.app.javafx;
 
 /** Main of javafx app. */
-public class Main {
+public final class Main {
 
   private Main() {}
   /**

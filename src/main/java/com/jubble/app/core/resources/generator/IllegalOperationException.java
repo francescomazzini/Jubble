@@ -9,7 +9,10 @@ public class IllegalOperationException extends RuntimeException {
     super("Number of owned generator can be set only at the start of the app.");
   }
 
-  /** @param numberOwned number of owned generator for this generator. */
+  /**
+   * @param numberOwned number of owned generator for this generator.
+   * @throws IllegalOperationException if the following condition is met.
+   */
   static void checkIfNumberOwnedIsDefault(int numberOwned) {
     if (numberOwned != Generator.DEFAULT_NUMBER_OWNED_GENERATORS)
       throw new IllegalOperationException();

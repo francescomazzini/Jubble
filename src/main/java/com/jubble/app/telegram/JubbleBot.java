@@ -30,7 +30,7 @@ public final class JubbleBot extends TelegramLongPollingBot {
    */
   @Override
   public String getBotUsername() {
-    return BotConstants.BOT_USERNAME.getValue();
+    return BotConstants.BOT_USERNAME.value();
   }
 
   /**
@@ -40,7 +40,7 @@ public final class JubbleBot extends TelegramLongPollingBot {
    */
   @Override
   public String getBotToken() {
-    return BotConstants.BOT_TOKEN.getValue();
+    return BotConstants.BOT_TOKEN.value();
   }
 
   private void tryToExecuteAction(TelegramMessage telegramMessage, String command, Update update) {
