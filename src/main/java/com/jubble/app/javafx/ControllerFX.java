@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 /** Main application panel. Contains all the submodules for the various panels of the game. */
-public class ControllerFX implements Initializable {
+public final class ControllerFX implements Initializable {
   /**
    * Maps the name of the page with its physical element. A mainScreenBodyPages is a body page of
    * the Main Screen, which is the part in which the background with the generators is placed.
@@ -35,7 +35,7 @@ public class ControllerFX implements Initializable {
   @FXML private Label totalProductionLabel;
   @FXML private VBox shopPanelContainer;
 
-  private void setShopVisibility(boolean status) {
+  private void setShopVisibility(final boolean status) {
     shopPanelContainer.setVisible(status);
     shopPanel.setVisible(status);
   }
@@ -50,7 +50,7 @@ public class ControllerFX implements Initializable {
     setShopVisibility(false);
   }
 
-  private void switchMainPage(int newPageNumber) {
+  private void switchMainPage(final int newPageNumber) {
     String namePageWanted = "page" + newPageNumber;
 
     BodyGenerators bodyWanted = (BodyGenerators) mainScreenBodyPages.get(namePageWanted);
@@ -117,7 +117,7 @@ public class ControllerFX implements Initializable {
     shop.generateShopPanel();
     shopPopUp.getChildren().add(shop);
 
-    int nGenerators = GameActions.getNumberOfGenerators();
+    final int nGenerators = GameActions.getNumberOfGenerators();
     shopPopUp.setMinHeight(
         220 * Math.ceil((double) nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 

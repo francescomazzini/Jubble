@@ -3,13 +3,13 @@ package com.jubble.app.javafx.tasks;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.utils.NumberNamesUtil;
 
-public class BalanceTask extends AbstractGameTask {
+public final class BalanceTask extends AbstractGameTask {
 
   /**
-   * This method is called when the thread that contains this task is started every 500ms it updates
+   * Called by the Task when the thread that contains this task is started every 500ms it updates
    * the progress (@updateProgress) of the currency
    *
-   * @return nothing.
+   * @return Void placeholder for void.
    * @throws Exception if the thread was stopped.
    */
   @Override
@@ -21,12 +21,11 @@ public class BalanceTask extends AbstractGameTask {
   }
 
   /**
-   * This method is called by @call every 500ms and it updates the progress of the balance. Not only
-   * does it update the progress itself but also it gives a message that is binded to the label
-   * which represents the game balance
+   * When called by the task updates the progress of the balance and gives a message that is bound
+   * to the label which represents the game balance.
    *
-   * @param v is the actual balance variable
-   * @param v1 is not used but the ovverrided method provided two inputs
+   * @param v is the actual balance variable.
+   * @param v1 is not used.
    */
   @Override
   protected void updateProgress(double v, double v1) {

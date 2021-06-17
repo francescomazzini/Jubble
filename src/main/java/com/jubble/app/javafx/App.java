@@ -5,9 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /** Main entry point of Javafx application */
-public class App extends Application {
-
-  private App() {}
+public final class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {

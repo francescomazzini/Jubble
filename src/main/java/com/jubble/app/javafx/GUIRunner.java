@@ -45,7 +45,7 @@ public final class GUIRunner {
     primaryStage.show();
   }
 
-  /** Stop the GUI. */
+  /** Stops the GUI and the threads. */
   public static void stop() {
     ThreadRunner.stop();
     Platform.exit();

@@ -1,10 +1,16 @@
 package com.jubble.app.javafx.components.popups;
 
+/** Defines the position in the shop. */
 public enum ShopPos {
   ROW_GENERATOR_MAX(3);
 
   private final int value;
 
+  /**
+   * Return value set in enum.
+   *
+   * @return value.
+   */
   public int value() {
     return value;
   }

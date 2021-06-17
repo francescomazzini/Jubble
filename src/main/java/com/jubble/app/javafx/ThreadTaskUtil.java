@@ -16,7 +16,7 @@ public final class ThreadTaskUtil {
    *
    * @param task task to be linked to a thread.
    */
-  public static void create(AbstractGameTask task) {
+  public static void create(final AbstractGameTask task) {
     Thread thread = new Thread(task);
     thread.setName(task.getName());
     STRING_THREAD_MAP.put(task.getName(), thread);
@@ -58,7 +58,7 @@ public final class ThreadTaskUtil {
    * @param threadName name of the thread to retrieve.
    * @return thread linked to the map.
    */
-  public static Thread getThread(String threadName) {
+  public static Thread getThread(final String threadName) {
     return STRING_THREAD_MAP.get(threadName);
   }
 }
