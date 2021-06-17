@@ -34,7 +34,7 @@ public class GameActions {
    *
    * @return total production.
    */
-  public static double getTotalGeneratorsSum() {
+  public static double getSumTotalProductionGenerators() {
     return Settings.getGeneratorList().stream().mapToDouble(Generator::getProduction).sum();
   }
 

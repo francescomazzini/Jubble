@@ -9,6 +9,6 @@ public final class GameValuesThread extends TimerTask {
   /** Increment balance at each run. */
   @Override
   public void run() {
-    Balance.addPrimary(GameActions.getTotalGeneratorsSum());
+    Balance.addPrimary(GameActions.getSumTotalProductionGenerators());
   }
 }

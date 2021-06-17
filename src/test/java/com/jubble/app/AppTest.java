@@ -1,4 +1,4 @@
-package com.jubble.app.core;
+package com.jubble.app;
 
 import static org.junit.Assert.assertTrue;
 

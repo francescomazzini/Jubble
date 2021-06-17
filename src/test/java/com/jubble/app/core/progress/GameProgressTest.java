@@ -1,4 +1,4 @@
-package com.jubble.app.core.utils;
+package com.jubble.app.core.progress;
 
 import static com.google.common.truth.Truth.assertThat;
 

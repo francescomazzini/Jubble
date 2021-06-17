@@ -10,7 +10,7 @@ public final class ProductionTask extends AbstractGameTask {
     while (true) {
 
       Thread.sleep(REFRESH_INTERVAL);
-      updateProgress(GameActions.getTotalGeneratorsSum(), 0);
+      updateProgress(GameActions.getSumTotalProductionGenerators(), 0);
     }
   }
 

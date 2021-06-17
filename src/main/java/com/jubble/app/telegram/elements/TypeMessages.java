@@ -51,7 +51,7 @@ public class TypeMessages {
             ("\n *Balance* \uD83D\uDCB0: "
                 + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n *Total Production* \uD83D\uDCC8: "
-                + NumberNamesUtil.createString(GameActions.getTotalGeneratorsSum())
+                + NumberNamesUtil.createString(GameActions.getSumTotalProductionGenerators())
                 + " / s"
                 + "\n\n *Generators Owned* \uD83D\uDE80: "));
 
