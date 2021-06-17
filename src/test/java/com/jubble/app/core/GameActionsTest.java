@@ -118,12 +118,6 @@ public class GameActionsTest {
   }
 
   @Test
-  @DisplayName("getNumberOfGenerators Should Return The Size of The List Generators in Settings")
-  public void getNumberOfGeneratorsShouldReturnSizeListGeneratorsInSettings() {
-    assertThat(GameActions.getNumberOfGenerators()).isEqualTo(Settings.getGeneratorList().size());
-  }
-
-  @Test
   @DisplayName(
       "getSumTotalProductionGenerators Should Return The Sum of Total Production of Generators")
   public void getSumTotalProductionGeneratorsShouldReturnSumTotalProductionGenerators() {
