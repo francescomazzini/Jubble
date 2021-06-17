@@ -30,7 +30,7 @@ public class GameActions {
   }
 
   /**
-   * Returns the production value of each generator and returns the sum.
+   * Returns sums the production value of each generator.
    *
    * @return total production.
    */
