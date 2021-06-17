@@ -143,6 +143,7 @@ public final class GeneratorFX {
   }
 
   private void buyGenerator(ActionEvent event) {
+    Objects.requireNonNull(event);
     GameActions.buyGenerator(generator);
     setCostGeneratorLabel();
     setNumberOwnedGeneratorLabel();

@@ -4,6 +4,7 @@ import com.jubble.app.core.resources.Balance;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.resources.generator.IllegalOperationException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** Util that wraps common actions performed during the game. */
@@ -18,6 +19,7 @@ public class GameActions {
    * @return true if generator was bought, false if was no bought.
    */
   public static boolean buyGenerator(Generator generator) {
+    Objects.requireNonNull(generator);
     boolean isBought = false;
     if (Balance.getPrimary() >= generator.getNextCost()) {
       Balance.addPrimary(generator.getNextCost() * -1);

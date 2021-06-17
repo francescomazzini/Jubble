@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 /** Saves and loads the game. */
 public final class GameProgressSerializer {
@@ -21,7 +22,7 @@ public final class GameProgressSerializer {
    * @throws JsonProcessingException if data doesn't match structure.
    */
   public static String serialize(GameProgress progress) throws JsonProcessingException {
-    if (progress == null) throw new IllegalArgumentException("Progress can't be null.");
+    Objects.requireNonNull(progress);
     ObjectMapper mapper = new ObjectMapper();
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
     mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -35,6 +36,7 @@ public final class GameProgressSerializer {
    * @throws IOException if saving fails.
    */
   public static void saveGame(GameProgress progress) throws IOException {
+    Objects.requireNonNull(progress);
     try {
       Path file = Path.of(PROGRESS_FILE_PATH);
       Files.writeString(file, serialize(progress));

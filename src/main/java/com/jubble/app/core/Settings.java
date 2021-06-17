@@ -4,7 +4,10 @@ import com.jubble.app.core.resources.Currency;
 import com.jubble.app.core.resources.generator.Generator;
 import java.util.List;
 
+/** Here are defined the default values for the game. */
 public class Settings {
+
+  private Settings() {}
 
   private static final List<Currency> CURRENCY_LIST = List.of(new Currency("Energy"));
 

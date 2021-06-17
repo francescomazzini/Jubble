@@ -7,6 +7,7 @@ import com.jubble.app.core.threads.ThreadRunner;
 import com.jubble.app.telegram.elements.MessageContent;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
+import java.util.Objects;
 
 public final class BotActions {
   private TelegramMessage message;
@@ -16,10 +17,16 @@ public final class BotActions {
     isGameOn = false;
   }
 
-  public void setGameOn(boolean gameOn) {
+  public void setGameOn(final boolean gameOn) {
     isGameOn = gameOn;
   }
 
+  /**
+   * Perform an action.
+   *
+   * @param action to be executed.
+   * @param message received from the chat.
+   */
   public void perform(final String action, final TelegramMessage message) {
     this.message = message;
 
@@ -41,25 +48,26 @@ public final class BotActions {
     }
   }
 
-  public void start() {
+  private void start() {
     message.setContent("The *game* is running.\n" + message.getContent());
     ThreadRunner.run();
   }
 
-  public void stop() {
+  private void stop() {
     ThreadRunner.stop();
   }
 
-  public void openStatus() {
+  private void openStatus() {
     message.setText(message.getContent() + TypeMessages.generateStatusContent());
   }
 
-  public void openShop() {
+  private void openShop() {
     message.setText(message.getContent() + TypeMessages.generateShopContent());
     message.setInlineButtons(TypeMessages.generateShopButtons());
   }
 
-  public void openBalance(String action) {
+  private void openBalance(final String action) {
+    Objects.requireNonNull(action);
 
     int numGenerator = Integer.parseInt(action.substring(3));
     Generator gen = Settings.getGeneratorList().get(numGenerator);

@@ -5,12 +5,14 @@ import com.jubble.app.core.Settings;
 import com.jubble.app.core.resources.Balance;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /** Wrapper class that abstract the the game lifecycle to simpler methods. */
 public final class GameStarterUtil {
   private GameStarterUtil() {}
 
   private static void recoverGameValues(final GameProgress progress) {
+    Objects.requireNonNull(progress);
     Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
     for (int i = 0; i < GameActions.getNumberOfGenerators(); i++) {

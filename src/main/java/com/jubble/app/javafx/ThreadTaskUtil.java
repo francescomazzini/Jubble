@@ -3,6 +3,7 @@ package com.jubble.app.javafx;
 import com.jubble.app.javafx.tasks.AbstractGameTask;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** Wrapper for a map of thread where each thread is linked to the name of its specific task. */
 public final class ThreadTaskUtil {
@@ -17,6 +18,7 @@ public final class ThreadTaskUtil {
    * @param task task to be linked to a thread.
    */
   public static void create(final AbstractGameTask task) {
+    Objects.requireNonNull(task);
     Thread thread = new Thread(task);
     thread.setName(task.getName());
     STRING_THREAD_MAP.put(task.getName(), thread);
@@ -28,6 +30,7 @@ public final class ThreadTaskUtil {
    * @param task to be built.
    */
   public static void autoBuild(AbstractGameTask task) {
+    Objects.requireNonNull(task);
     create(task);
     getThread(task.getName()).setDaemon(true);
     getThread(task.getName()).start();
@@ -59,6 +62,7 @@ public final class ThreadTaskUtil {
    * @return thread linked to the map.
    */
   public static Thread getThread(final String threadName) {
+    Objects.requireNonNull(threadName);
     return STRING_THREAD_MAP.get(threadName);
   }
 }

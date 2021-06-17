@@ -1,5 +1,7 @@
 package com.jubble.app.telegram.elements;
 
+import java.util.Objects;
+
 /** Message and their contents are defined here. */
 public enum MessageContent {
   WELCOME(
@@ -37,7 +39,7 @@ public enum MessageContent {
   }
 
   MessageContent(String action, String message) {
-    this.action = action;
-    this.message = message;
+    this.action = Objects.requireNonNull(action);
+    this.message = Objects.requireNonNull(message);
   }
 }

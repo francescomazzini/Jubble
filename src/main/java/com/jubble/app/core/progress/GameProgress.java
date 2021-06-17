@@ -3,6 +3,7 @@ package com.jubble.app.core.progress;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Defines all the data that should be saved in the JSON file. An object of type GameProgress will
@@ -20,7 +21,7 @@ public final class GameProgress {
   public GameProgress(
       @JsonProperty("ownedGenerators") List<Integer> ownedGenerators,
       @JsonProperty("balance") double balance) {
-    this.ownedGenerators = ownedGenerators;
+    this.ownedGenerators = Objects.requireNonNull(ownedGenerators);
     this.balance = balance;
   }
 

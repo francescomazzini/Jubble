@@ -1,5 +1,7 @@
 package com.jubble.app.core.resources;
 
+import java.util.Objects;
+
 /** Defines the shape of a currency of the game. */
 public final class Currency {
   private final String name;
@@ -11,7 +13,7 @@ public final class Currency {
    * @param name of the currency.
    */
   public Currency(String name) {
-    this.name = name;
+    this.name = Objects.requireNonNull(name);
     owned = 0;
   }
 

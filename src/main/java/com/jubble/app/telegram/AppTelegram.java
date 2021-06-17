@@ -4,15 +4,17 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-public class AppTelegram {
+public final class AppTelegram {
+
+  private AppTelegram() {}
 
   /**
    * Main methods create a instance of the bot and run it following the telegram API and use gameOn
    * as variable in the game to know if the user has already clicked begin or not.
    *
-   * @param args
+   * @param args default args.
    */
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
 
     JubbleBot jubbleBot = null;
 
