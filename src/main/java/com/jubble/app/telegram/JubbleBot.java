@@ -1,6 +1,5 @@
 package com.jubble.app.telegram;
 
-import com.jubble.app.telegram.elements.MessageContent;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 import java.util.Map;
@@ -14,10 +13,14 @@ public final class JubbleBot extends TelegramLongPollingBot {
   /** Maps the command name (callBackQuery) with each TelegramMessage. */
   private final Map<String, TelegramMessage> listMessages = TypeMessages.listOfMessages;
 
-  private boolean isGameOn;
+  private final BotActions actionPerformer;
 
-  public void setGameOn(boolean gameOn) {
-    isGameOn = gameOn;
+  JubbleBot() {
+    actionPerformer = new BotActions();
+  }
+
+  public BotActions getActionPerformer() {
+    return actionPerformer;
   }
 
   /**
@@ -60,6 +63,12 @@ public final class JubbleBot extends TelegramLongPollingBot {
     return listMessages.get(command);
   }
 
+  /**
+   * Extracts the command to buy a generator from a message.
+   *
+   * @param command for a generator.
+   * @return generator without referred number.
+   */
   private String extractGeneratorCommand(String command) {
     return command.substring(0, 3);
   }
@@ -98,24 +107,6 @@ public final class JubbleBot extends TelegramLongPollingBot {
   private void actionPerformer(final String action, final TelegramMessage message) {
     Objects.requireNonNull(action);
     Objects.requireNonNull(message);
-
-    BotActions actionPerformer = new BotActions(message);
-
-    if (action.equals(MessageContent.CHOSE_OPTIONS.getAction()) && !isGameOn) {
-      actionPerformer.start();
-      isGameOn = true;
-    }
-    if (action.equals(MessageContent.STOP_GAME.getAction()) && isGameOn) {
-      actionPerformer.stop();
-      isGameOn = false;
-    } else {
-      if (action.equals(MessageContent.STATUS.getAction())) {
-        actionPerformer.openStatus();
-      } else if (action.equals(MessageContent.OPEN_SHOP.getAction())) {
-        actionPerformer.openShop();
-      } else if (action.startsWith(MessageContent.CHECK_BALANCE.getAction())) {
-        actionPerformer.openBalance(action);
-      }
-    }
+    actionPerformer.perform(action, message);
   }
 }

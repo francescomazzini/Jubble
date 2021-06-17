@@ -4,14 +4,41 @@ import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.threads.ThreadRunner;
+import com.jubble.app.telegram.elements.MessageContent;
 import com.jubble.app.telegram.elements.TelegramMessage;
 import com.jubble.app.telegram.elements.TypeMessages;
 
-public class BotActions {
+public final class BotActions {
   private TelegramMessage message;
+  private boolean isGameOn;
 
-  BotActions(TelegramMessage message) {
+  BotActions() {
+    isGameOn = false;
+  }
+
+  public void setGameOn(boolean gameOn) {
+    isGameOn = gameOn;
+  }
+
+  public void perform(final String action, final TelegramMessage message) {
     this.message = message;
+
+    if (action.equals(MessageContent.CHOSE_OPTIONS.getAction()) && !isGameOn) {
+      start();
+      isGameOn = true;
+    }
+    if (action.equals(MessageContent.STOP_GAME.getAction()) && isGameOn) {
+      stop();
+      isGameOn = false;
+    } else {
+      if (action.equals(MessageContent.STATUS.getAction())) {
+        openStatus();
+      } else if (action.equals(MessageContent.OPEN_SHOP.getAction())) {
+        openShop();
+      } else if (action.startsWith(MessageContent.CHECK_BALANCE.getAction())) {
+        openBalance(action);
+      }
+    }
   }
 
   public void start() {
