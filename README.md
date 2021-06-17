@@ -184,7 +184,7 @@ What could we add in the future versions:
 
 ## Youtube Video
 
-Link: (https://www.youtube.com/watch?v=p3bSIx2WK3s)[https://www.youtube.com/watch?v=p3bSIx2WK3s]
+Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
 
 ## References
