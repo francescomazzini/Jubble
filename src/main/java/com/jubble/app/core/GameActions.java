@@ -28,7 +28,7 @@ public class GameActions {
   }
 
   /**
-   * Sums the production value of each generator and returns the sum.
+   * Returns the production value of each generator and returns the sum.
    *
    * @return total production.
    */
@@ -45,6 +45,15 @@ public class GameActions {
     return Settings.getGeneratorList().stream()
         .map(Generator::getNumberOwned)
         .collect(Collectors.toList());
+  }
+
+  /**
+   * Returns the number of generators defined in the Settings class.
+   *
+   * @return number of generators in the list.
+   */
+  public static int getNumberOfGenerators() {
+    return Settings.getGeneratorList().size();
   }
 
   /** Gift initial generator. Used in case the default file is not found. */

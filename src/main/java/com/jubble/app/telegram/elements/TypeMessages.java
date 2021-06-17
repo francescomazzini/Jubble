@@ -80,7 +80,7 @@ public class TypeMessages {
                 + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n\n*Shop* \uD83D\uDCB8:"));
 
-    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+    for (int i = 0; i < GameActions.getNumberOfGenerators(); i++) {
       Generator gen = Settings.getGeneratorList().get(i);
       shopContentMessage
           .append("\n   ")
