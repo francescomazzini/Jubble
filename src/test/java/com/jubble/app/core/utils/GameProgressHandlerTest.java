@@ -72,10 +72,8 @@ public class GameProgressHandlerTest {
   }
 
   @Test
-  @DisplayName("if progress == null serialize should throw IllegalArgumentException")
+  @DisplayName("if progress == null serialize should throw exception")
   public void serializeNullProgressShouldThrowIllegalArgumentException() {
-    Exception expected =
-        assertThrows(IllegalArgumentException.class, () -> GameProgressSerializer.serialize(null));
-    assertThat(expected.getMessage()).contains("Progress can't be null.");
+    assertThrows(NullPointerException.class, () -> GameProgressSerializer.serialize(null));
   }
 }

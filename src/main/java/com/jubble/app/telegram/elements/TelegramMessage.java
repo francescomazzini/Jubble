@@ -3,20 +3,21 @@ package com.jubble.app.telegram.elements;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-public class TelegramMessage extends SendMessage {
+public final class TelegramMessage extends SendMessage {
 
   private String content;
   private Map<String, String> inlineButtons;
 
   public TelegramMessage(String content, Map<String, String> inlineButtons) {
-    this.content = content;
-    this.inlineButtons = inlineButtons;
+    this.content = Objects.requireNonNull(content);
+    this.inlineButtons = Objects.requireNonNull(inlineButtons);
 
     this.setText(content);
     this.setParseMode(ParseMode.MARKDOWN);
@@ -82,9 +83,8 @@ public class TelegramMessage extends SendMessage {
    * @param update from chat.
    */
   public void setChatId(Update update) {
-
+    Objects.requireNonNull(update);
     String parameter;
-
     if (update.hasCallbackQuery())
       parameter = update.getCallbackQuery().getMessage().getChatId() + "";
     else parameter = update.getMessage().getChatId() + "";
@@ -107,7 +107,7 @@ public class TelegramMessage extends SendMessage {
    * @param content to be set.
    */
   public void setContent(String content) {
-    this.content = content;
+    this.content = Objects.requireNonNull(content);
     this.setText(content);
   }
 
@@ -117,7 +117,7 @@ public class TelegramMessage extends SendMessage {
    * @param inlineButtons buttons to be set.
    */
   public void setInlineButtons(Map<String, String> inlineButtons) {
-    this.inlineButtons = inlineButtons;
+    this.inlineButtons = Objects.requireNonNull(inlineButtons);
 
     generateButtons();
   }

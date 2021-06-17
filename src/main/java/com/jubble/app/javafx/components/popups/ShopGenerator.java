@@ -2,6 +2,7 @@ package com.jubble.app.javafx.components.popups;
 
 import com.jubble.app.javafx.components.GeneratorFX;
 import java.util.List;
+import java.util.Objects;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -11,7 +12,7 @@ public class ShopGenerator extends GridPane {
   private final List<GeneratorFX> generatorList;
 
   public ShopGenerator(List<GeneratorFX> generatorList) {
-    this.generatorList = generatorList;
+    this.generatorList = Objects.requireNonNull(generatorList);
     this.maxLengthPerCol =
         (int) Math.ceil((double) generatorList.size() / ShopPos.ROW_GENERATOR_MAX.value());
   }

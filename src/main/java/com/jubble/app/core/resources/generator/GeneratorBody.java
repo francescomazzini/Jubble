@@ -1,5 +1,7 @@
 package com.jubble.app.core.resources.generator;
 
+import java.util.Objects;
+
 /**
  * Represents a generator in the game. Implements the builder pattern and can be instantiated only
  * providing a builder.
@@ -19,6 +21,7 @@ public abstract class GeneratorBody {
   private int numberOwned;
 
   GeneratorBody(Builder<?> builder) {
+    Objects.requireNonNull(builder);
     name = builder.name;
     description = builder.description;
     level = builder.level;
@@ -45,7 +48,7 @@ public abstract class GeneratorBody {
      * @return self.
      */
     public T name(String val) {
-      name = val;
+      name = Objects.requireNonNull(val);
       return self();
     }
 
@@ -56,7 +59,7 @@ public abstract class GeneratorBody {
      * @return self.
      */
     public T description(String val) {
-      description = val;
+      description = Objects.requireNonNull(val);
       return self();
     }
 

@@ -1,9 +1,6 @@
 package com.jubble.app.core.utils;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /** Util that spells a double number out. */
 public final class NumberNamesUtil {
@@ -41,6 +38,7 @@ public final class NumberNamesUtil {
    * @return spelled number, spelled in english and approximated.
    */
   public static String createString(Double number) {
+    Objects.requireNonNull(number);
     Map.Entry<Double, String> entry = MAP.floorEntry(Math.abs(number));
     String numberName;
     if (entry == null) {
