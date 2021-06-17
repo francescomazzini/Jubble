@@ -23,19 +23,19 @@ public final class BotActions {
   public void perform(final String action, final TelegramMessage message) {
     this.message = message;
 
-    if (action.equals(MessageContent.CHOSE_OPTIONS.getAction()) && !isGameOn) {
+    if (action.equals(MessageContent.CHOSE_OPTIONS.action()) && !isGameOn) {
       start();
       isGameOn = true;
     }
-    if (action.equals(MessageContent.STOP_GAME.getAction()) && isGameOn) {
+    if (action.equals(MessageContent.STOP_GAME.action()) && isGameOn) {
       stop();
       isGameOn = false;
     } else {
-      if (action.equals(MessageContent.STATUS.getAction())) {
+      if (action.equals(MessageContent.STATUS.action())) {
         openStatus();
-      } else if (action.equals(MessageContent.OPEN_SHOP.getAction())) {
+      } else if (action.equals(MessageContent.OPEN_SHOP.action())) {
         openShop();
-      } else if (action.startsWith(MessageContent.CHECK_BALANCE.getAction())) {
+      } else if (action.startsWith(MessageContent.CHECK_BALANCE.action())) {
         openBalance(action);
       }
     }

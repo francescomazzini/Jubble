@@ -5,6 +5,10 @@ public enum MessagePos {
   MAX_BUTTONS_PER_ROW(5);
   private final int value;
 
+  /**
+   * Returns value defined in enum.
+   * @return value.
+   */
   public int value() {
     return value;
   }
