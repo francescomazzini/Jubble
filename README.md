@@ -33,7 +33,7 @@ Clean project.
 mvn clean
 ```
 
-Run project tests.
+Run project tests and generate coverage report.
 
 ```
 mvn test
@@ -53,9 +53,6 @@ mvn javadoc:javadoc
 
 Build project and verify code style
 
-```
-mvn clean verify
-```
 
 Generate code style report (the errors reported are suggestions and should not be considered as the only as absolute truth)
 
@@ -63,11 +60,6 @@ Generate code style report (the errors reported are suggestions and should not b
 mvn checkstyle:check
 ```
 
-Temporal command for formatting:
-
-```
-mvn com.coveo:fmt-maven-plugin:format
-```
 
 ## Gameplay
 
@@ -100,7 +92,7 @@ Number of level achieved by the player. It ranges from 1 to n, where n is the nu
 This is how we compute the cost of the next generator:
 $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 
-This is computed the total production:
+This is how the total production is computed:
 $`production_{total} = (production_{base} \times owned)`$
 
 ## Code Structure:
