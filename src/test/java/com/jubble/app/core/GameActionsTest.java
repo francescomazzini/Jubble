@@ -8,14 +8,11 @@ import com.jubble.app.core.progress.GameProgressSerializer;
 import com.jubble.app.core.progress.GameStarterUtil;
 import com.jubble.app.core.resources.Balance;
 import com.jubble.app.core.resources.generator.Generator;
-
+import com.jubble.app.core.resources.generator.IllegalOperationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import com.jubble.app.core.resources.generator.IllegalOperationException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -121,58 +118,49 @@ public class GameActionsTest {
   }
 
   @Test
-  @DisplayName("Should return list of 0 in beginning")
-  public void shouldReturnListOf0InBeginning() {
-    assertThat(GameActions.getListOfGeneratorsNumberOwned())
-        .isEqualTo(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-  }
-
-  @Test
   @DisplayName("getNumberOfGenerators Should Return The Size of The List Generators in Settings")
   public void getNumberOfGeneratorsShouldReturnSizeListGeneratorsInSettings() {
-    assertThat(GameActions.getNumberOfGenerators())
-            .isEqualTo(Settings.getGeneratorList().size());
+    assertThat(GameActions.getNumberOfGenerators()).isEqualTo(Settings.getGeneratorList().size());
   }
 
   @Test
-  @DisplayName("getSumTotalProductionGenerators Should Return The Sum of Total Production of Generators")
+  @DisplayName(
+      "getSumTotalProductionGenerators Should Return The Sum of Total Production of Generators")
   public void getSumTotalProductionGeneratorsShouldReturnSumTotalProductionGenerators() {
 
     double sum = 0;
 
-    for (int i =0 ; i < Settings.getGeneratorList().size(); i++)
+    for (int i = 0; i < Settings.getGeneratorList().size(); i++)
       sum += Settings.getGeneratorList().get(i).getProduction();
 
-    assertThat(GameActions.getSumTotalProductionGenerators())
-            .isEqualTo(sum);
+    assertThat(GameActions.getSumTotalProductionGenerators()).isEqualTo(sum);
   }
 
-
   @Test
-  @DisplayName("giftInitialAmount Should Give The First Generator ONLY If There is No Generators Owned")
+  @DisplayName(
+      "giftInitialAmount Should Give The First Generator ONLY If There is No Generators Owned")
   public void giftInitialAmountShouldGiveFirstGeneratorONLYIfNoOwned() throws IOException {
 
     String jsonBackup = "";
     Path pathFile = Path.of("game_progress.json");
 
-    if(Files.exists(pathFile))
-      jsonBackup = Files.readString(pathFile);
+    if (Files.exists(pathFile)) jsonBackup = Files.readString(pathFile);
 
     GameProgressSerializer.saveGame(new GameProgress(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 15.0));
 
     GameStarterUtil.load();
-    GameActions.giftInitialAmount();
 
     assertAll(
-            () -> assertThat(Settings.getGeneratorList().get(0).getNumberOwned()).isEqualTo(1),
-            () -> assertThrows(IllegalOperationException.class, GameActions::giftInitialAmount)
-    );
+        () ->
+            assertThat(GameActions.getListOfGeneratorsNumberOwned())
+                .isEqualTo(List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
+        () -> {
+          GameActions.giftInitialAmount();
+          assertThat(Settings.getGeneratorList().get(0).getNumberOwned()).isEqualTo(1);
+        },
+        () -> assertThrows(IllegalOperationException.class, GameActions::giftInitialAmount));
 
-    if(jsonBackup.equals(""))
-      Files.delete(pathFile);
-    else
-      Files.writeString(pathFile, jsonBackup);
+    if (jsonBackup.equals("")) Files.delete(pathFile);
+    else Files.writeString(pathFile, jsonBackup);
   }
-
-
 }
