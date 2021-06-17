@@ -7,6 +7,7 @@ public enum MessagePos {
 
   /**
    * Returns value defined in enum.
+   *
    * @return value.
    */
   public int value() {

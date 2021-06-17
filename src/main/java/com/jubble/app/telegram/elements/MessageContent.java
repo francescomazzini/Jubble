@@ -1,8 +1,6 @@
 package com.jubble.app.telegram.elements;
 
-/**
- * Message and their contents are defined here.
- */
+/** Message and their contents are defined here. */
 public enum MessageContent {
   WELCOME(
       "/start",
@@ -22,6 +20,7 @@ public enum MessageContent {
 
   /**
    * Returns message defined in enum.
+   *
    * @return message.
    */
   public String message() {
@@ -30,6 +29,7 @@ public enum MessageContent {
 
   /**
    * Returns action defined in enum.
+   *
    * @return action.
    */
   public String action() {

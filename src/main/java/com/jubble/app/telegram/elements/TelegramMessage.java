@@ -78,6 +78,7 @@ public class TelegramMessage extends SendMessage {
 
   /**
    * Set the id of the chat.
+   *
    * @param update from chat.
    */
   public void setChatId(Update update) {
@@ -93,6 +94,7 @@ public class TelegramMessage extends SendMessage {
 
   /**
    * Returns content of a message.
+   *
    * @return content of message.
    */
   public String getContent() {
@@ -101,6 +103,7 @@ public class TelegramMessage extends SendMessage {
 
   /**
    * Set content of a message.
+   *
    * @param content to be set.
    */
   public void setContent(String content) {
@@ -108,9 +111,9 @@ public class TelegramMessage extends SendMessage {
     this.setText(content);
   }
 
-
   /**
    * Sets and generates inline button of a message.
+   *
    * @param inlineButtons buttons to be set.
    */
   public void setInlineButtons(Map<String, String> inlineButtons) {
