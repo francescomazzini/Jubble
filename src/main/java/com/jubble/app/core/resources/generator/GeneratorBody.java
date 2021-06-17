@@ -38,75 +38,166 @@ public abstract class GeneratorBody {
     private double rateGrowth = 0d;
     private int numberOwned = DEFAULT_NUMBER_OWNED_GENERATORS;
 
+    /**
+     * Set the name.
+     *
+     * @param val name.
+     * @return self.
+     */
     public T name(String val) {
       name = val;
       return self();
     }
 
+    /**
+     * Set the description.
+     *
+     * @param val description.
+     * @return self.
+     */
     public T description(String val) {
       description = val;
       return self();
     }
 
+    /**
+     * Set the level.
+     *
+     * @param val level.
+     * @return self.
+     */
     public T level(int val) {
       level = val;
       return self();
     }
 
+    /**
+     * Set the cost base.
+     *
+     * @param val costBase.
+     * @return self.
+     */
     public T costBase(double val) {
       costBase = val;
       return self();
     }
 
+    /**
+     * Set the production base.
+     *
+     * @param val productionBase.
+     * @return self.
+     */
     public T productionBase(double val) {
       productionBase = val;
       return self();
     }
 
+    /**
+     * Set rate growth.
+     *
+     * @param val rateGrowth.
+     * @return self.
+     */
     public T rateGrowth(double val) {
       rateGrowth = val;
       return self();
     }
 
+    /**
+     * Set number owned.
+     *
+     * @param val numberOwned.
+     * @return self.
+     */
     public T numberOwned(int val) {
       numberOwned = val;
       return self();
     }
 
+    /**
+     * Builds this class.
+     *
+     * @return object.
+     */
     abstract GeneratorBody build();
 
-    // Subclasses must override this method to return "this"
+    /**
+     * Subclasses must override this method to return "this"
+     *
+     * @return this.
+     */
     protected abstract T self();
   }
 
+  /**
+   * Returns number owned.
+   *
+   * @return numberOwned.
+   */
   public int getNumberOwned() {
     return numberOwned;
   }
 
+  /**
+   * Sets numberOwned.
+   *
+   * @param numberOwned value to be set.
+   */
   public void setNumberOwned(int numberOwned) {
     this.numberOwned = numberOwned;
   }
 
+  /**
+   * Returns level.
+   *
+   * @return level.
+   */
   public int getLevel() {
     return level;
   }
 
+  /**
+   * Returns name.
+   *
+   * @return name.
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns description.
+   *
+   * @return description.
+   */
   public String getDescription() {
     return description;
   }
 
+  /**
+   * Returns costBase.
+   *
+   * @return costBase.
+   */
   public double getCostBase() {
     return costBase;
   }
 
+  /**
+   * Returns productionBase.
+   *
+   * @return productionBase.
+   */
   public double getProductionBase() {
     return productionBase;
   }
 
+  /**
+   * Returns rateGrowth.
+   *
+   * @return rateGrowth.
+   */
   public double getRateGrowth() {
     return rateGrowth;
   }
