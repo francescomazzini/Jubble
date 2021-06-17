@@ -13,7 +13,7 @@ public final class GameStarterUtil {
   private static void recoverGameValues(final GameProgress progress) {
     Balance.setPrimary(progress.getBalance());
     List<Integer> numberOwned = progress.getOwnedGenerators();
-    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+    for (int i = 0; i < GameActions.getNumberOfGenerators(); i++) {
       Settings.getGeneratorList().get(i).setNumberOwned(numberOwned.get(i));
     }
   }

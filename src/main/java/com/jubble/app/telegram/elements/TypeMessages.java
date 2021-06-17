@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TypeMessages {
+  private TypeMessages() {}
+
   private static final Map<String, String> START_BUTTON =
       Map.of(MessageContent.CHOSE_OPTIONS.getAction(), "✅ Begin ");
   private static final Map<String, String> NAVIGATION_BUTTONS = Map.of("begin", " ◀️ Back");
@@ -78,7 +80,7 @@ public class TypeMessages {
                 + NumberNamesUtil.createString(Balance.getPrimary())
                 + "\n\n*Shop* \uD83D\uDCB8:"));
 
-    for (int i = 0; i < Settings.getGeneratorList().size(); i++) {
+    for (int i = 0; i < GameActions.getNumberOfGenerators(); i++) {
       Generator gen = Settings.getGeneratorList().get(i);
       shopContentMessage
           .append("\n   ")
@@ -97,19 +99,18 @@ public class TypeMessages {
   }
 
   /**
-   * It generates the shop telegram message buttons. It is needed to be generated because it is also
-   * quite complex and each button need its specific key which should refer to its generator.
+   * Generates the shop buttons, linking to each button its specific key that refers to a generator.
    *
-   * @return
+   * @return map of shop buttons.
    */
   public static Map<String, String> generateShopButtons() {
-
     Map<String, String> shopButtonsMessage = new HashMap<>();
 
-    for (int i = 0; i < Settings.getGeneratorList().size(); i++)
+    for (int i = 0; i < GameActions.getNumberOfGenerators(); i++) {
       shopButtonsMessage.put("gen" + i, (i + 1) + "");
+    }
 
-    shopButtonsMessage.put("begin", " ◀️ Back");
+    shopButtonsMessage.putAll(NAVIGATION_BUTTONS);
 
     return shopButtonsMessage;
   }

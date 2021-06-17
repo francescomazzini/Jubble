@@ -1,5 +1,6 @@
 package com.jubble.app.javafx;
 
+import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.javafx.components.BalanceFX;
@@ -116,7 +117,7 @@ public class ControllerFX implements Initializable {
     shop.generateShopPanel();
     shopPopUp.getChildren().add(shop);
 
-    int nGenerators = Settings.getGeneratorList().size();
+    int nGenerators = GameActions.getNumberOfGenerators();
     shopPopUp.setMinHeight(
         220 * Math.ceil((double) nGenerators / ShopPos.ROW_GENERATOR_MAX.value()));
 

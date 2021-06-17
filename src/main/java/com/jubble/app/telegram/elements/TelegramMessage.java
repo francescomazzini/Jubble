@@ -21,14 +21,11 @@ public class TelegramMessage extends SendMessage {
     this.setText(content);
     this.setParseMode(ParseMode.MARKDOWN);
 
-    generateButtons();
+    generateMessageButtonsList();
   }
 
-  /**
-   * This method generate buttons for the Message in a way that buttons are one under the other.
-   * Therefore there is only one button per line
-   */
-  private void generateButtons() {
+  /** Generates message buttons aligning them in a list. */
+  private void generateMessageButtonsList() {
 
     InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
     List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -48,12 +45,10 @@ public class TelegramMessage extends SendMessage {
   }
 
   /**
-   * This method generates buttons for the Message in a way that they are more than one and maximum
-   * MAX_PER_ROW in a line. Therefore in a line there can be a maximum of MAX_PER_ROW buttons.
-   *
-   * @param MAX_PER_ROW
+   * Generates Message buttons such that the number of message in a line is 1 <= messageNumber <=
+   * MAX_PER_ROW.
    */
-  private void generateButtons(int MAX_PER_ROW) {
+  private void generateButtons() {
     InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
     List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
     List<InlineKeyboardButton> rowInline = null;
@@ -62,7 +57,7 @@ public class TelegramMessage extends SendMessage {
 
     for (String key : inlineButtons.keySet()) {
 
-      if (counter % MAX_PER_ROW == 0) {
+      if (counter % MessagePos.MAX_BUTTONS_PER_ROW.value() == 0) {
         rowInline = new ArrayList<>();
         rowsInline.add(rowInline);
       }
@@ -101,9 +96,9 @@ public class TelegramMessage extends SendMessage {
     this.setText(content);
   }
 
-  public void setInlineButtons(Map<String, String> inlineButtons, int MAX_PER_ROW) {
+  public void setInlineButtons(Map<String, String> inlineButtons) {
     this.inlineButtons = inlineButtons;
 
-    generateButtons(MAX_PER_ROW);
+    generateButtons();
   }
 }

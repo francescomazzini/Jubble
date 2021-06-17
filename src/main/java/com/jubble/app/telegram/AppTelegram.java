@@ -24,6 +24,6 @@ public class AppTelegram {
       e.printStackTrace();
     }
 
-    if (jubbleBot != null) jubbleBot.setGameOn(false);
+    if (jubbleBot != null) jubbleBot.getActionPerformer().setGameOn(false);
   }
 }
