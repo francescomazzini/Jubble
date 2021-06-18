@@ -146,6 +146,12 @@ To cover more code as possible we used a plugin called "Jacoco" which after the 
   
 In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.  
 
+## Pipeline
+We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:
+- build: builds the project.
+- test: runs test actions.
+- deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature 
+
 ## Dependencies of the project
 ### Dependencies
 - Truth: assertion library.
