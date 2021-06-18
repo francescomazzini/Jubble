@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class GameProgressHandlerTest {
+public class GameProgressSerializerTest {
   GameProgress progress = new GameProgress(List.of(1, 0, 0, 0, 0, 0), 15.0);
   static String jsonOfProgress =
       "{\n" + "  \"ownedGenerators\" : [ 1, 0, 0, 0, 0, 0 ],\n" + "  \"balance\" : 15.0\n" + "}";
