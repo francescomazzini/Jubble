@@ -42,7 +42,7 @@ public final class BotActions {
         openStatus();
       } else if (action.equals(MessageContent.OPEN_SHOP.action())) {
         openShop();
-      } else if (action.startsWith(MessageContent.CHECK_BALANCE.action())) {
+      } else if (action.startsWith(MessageContent.BUY_GEN.action())) {
         openBalance(action);
       }
     }

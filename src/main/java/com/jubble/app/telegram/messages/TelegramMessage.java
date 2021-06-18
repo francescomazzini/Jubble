@@ -15,6 +15,13 @@ public final class TelegramMessage extends SendMessage {
   private String content;
   private Map<String, String> inlineButtons;
 
+  /**
+   * Constructor of a TelegramMessage that is composed of a content and inlineButtons
+   *
+   * @param content of the message
+   * @param inlineButtons that are linked to the message when this is sent. They allow to
+   *                      do function or to change page
+   */
   public TelegramMessage(String content, Map<String, String> inlineButtons) {
     this.content = Objects.requireNonNull(content);
     this.inlineButtons = Objects.requireNonNull(inlineButtons);
