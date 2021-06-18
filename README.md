@@ -129,17 +129,25 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 ## User Interfaces
 
 ### JavaFX
+JavaFX provides a graphics user interface of the game. To realize it we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, to add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
 
-
-explanation buttons
+#### Explanation of Some Useful Buttons:  
+Left Arrow Button: skips to the next page (if there are enough generators to need more than 1 page)  
+Right Arrow Button: skips to the previous page (if you changed page)   
+Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators  
 
 
 ### Telegram
 The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
-explanation buttons
-
+#### Explanation of Some Useful Buttons:  
+Begin: starts the game from the client  
+Shop: opens the shop  
+Status: opens a report of the status of the resources (generators and balance)  
+Back: goes to the previous message  
+Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)  
+ 
 ## Tests
 
 To cover more code as possible we used a plugin called "Jacoco" which after the maven command "mvn test" returns a report which contains the test coverage. However we want to specify that we wanted to test only the core of the app (excluding the user interfaces). We only tested a little part in javaFx where we had Tasks which are graphical threads and we just wanted to be sure that we set them in the correct way.  
@@ -147,10 +155,10 @@ To cover more code as possible we used a plugin called "Jacoco" which after the 
 In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.  
 
 ## Pipeline
-We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:
-- build: builds the project.
-- test: runs test actions.
-- deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature 
+We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:  
+- build: builds the project.  
+- test: runs test actions.  
+- deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature  
 
 ## Dependencies of the project
 ### Dependencies
