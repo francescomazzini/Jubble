@@ -9,8 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 /**
- * Defines the telegram bot that users interact with while playing the game. Extends the TelegramLongPollingBot providing additional methods for handling the game commands.
- * Is responsible for the bot lifecycle and listens to interactions between the player and the server.
+ * Defines the telegram bot that users interact with while playing the game. Extends the
+ * TelegramLongPollingBot providing additional methods for handling the game commands. Is
+ * responsible for the bot lifecycle and listens to interactions between the player and the server.
  */
 public final class JubbleBot extends TelegramLongPollingBot {
 
@@ -19,13 +20,16 @@ public final class JubbleBot extends TelegramLongPollingBot {
 
   private final BotActions actionPerformer;
 
-  /**
-   * Starts the bot when an instance is created.
-   */
+  /** Starts the bot when an instance is created. */
   JubbleBot() {
     actionPerformer = new BotActions();
   }
 
+  /**
+   * Returns the Object of BotActions which can perform actions
+   *
+   * @return BotActions object
+   */
   public BotActions getActionPerformer() {
     return actionPerformer;
   }

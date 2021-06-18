@@ -26,6 +26,11 @@ public class TypeMessages {
           MessageContent.STOP_GAME.action(),
           "\uD83D\uDCDB Stop ");
 
+  /**
+   * It contains the pairs of a String (which represents the CallBackAction that can activate the
+   * following message) and of a TelegramMessage (that represents the response of that
+   * CallBackAction called)
+   */
   public static final Map<String, TelegramMessage> listOfMessages =
       Map.of(
           MessageContent.WELCOME.action(),
@@ -38,8 +43,8 @@ public class TypeMessages {
           new TelegramMessage(MessageContent.STATUS.message(), NAVIGATION_BUTTONS),
           MessageContent.OPEN_SHOP.action(),
           new TelegramMessage(MessageContent.OPEN_SHOP.message(), NAVIGATION_BUTTONS),
-          MessageContent.CHECK_BALANCE.action(),
-          new TelegramMessage(MessageContent.CHECK_BALANCE.message(), NAVIGATION_BUTTONS));
+          MessageContent.BUY_GEN.action(),
+          new TelegramMessage(MessageContent.BUY_GEN.message(), NAVIGATION_BUTTONS));
 
   /**
    * It generates the status telegram message content. It is needed to be generated because it

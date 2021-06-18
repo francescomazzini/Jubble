@@ -22,6 +22,7 @@ public abstract class GeneratorBody {
 
   /**
    * Takes a builder object and fills the class attributes.
+   *
    * @param builder builder with desired values.
    */
   GeneratorBody(Builder<?> builder) {
@@ -36,8 +37,9 @@ public abstract class GeneratorBody {
   }
 
   /**
-   * Abstract builder class for the GeneratorBody that must be extended when GeneratorBody is subclassed.
-   * Implementation of the builder pattern.
+   * Abstract builder class for the GeneratorBody that must be extended when GeneratorBody is
+   * subclassed. Implementation of the builder pattern.
+   *
    * @param <T> type of the subclass.
    */
   abstract static class Builder<T extends Builder<T>> {

@@ -10,17 +10,17 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-/**
- * Defines the type of message that can be exchanged between the server and the chat.
- */
+/** Defines the type of message that can be exchanged between the server and the chat. */
 public final class TelegramMessage extends SendMessage {
   private String content;
   private Map<String, String> inlineButtons;
 
   /**
-   * Create a message.
-   * @param content to insert in the message.
-   * @param inlineButtons map of action buttons that simulate the buttons of a menu.
+   * Creates a message, injecting the content and the inlineButtons.
+   *
+   * @param content of the message.
+   * @param inlineButtons map of action buttons that are linked to the message when this is sent.
+   *     that simulate the buttons of a menu. When clicked trigger a function or change page.
    */
   public TelegramMessage(String content, Map<String, String> inlineButtons) {
     this.content = Objects.requireNonNull(content);

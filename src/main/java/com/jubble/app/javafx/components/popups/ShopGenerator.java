@@ -7,16 +7,16 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-/**
- * Defines the shop page where the user can purchase the generators.
- */
+/** Defines the shop page where the user can purchase the generators. */
 public final class ShopGenerator extends GridPane {
   private final int maxLengthPerCol;
   private final List<GeneratorFX> generatorList;
 
   /**
-   * Generates the shop panel.
-   * @param generatorList list of generators to be inserted in the window.
+   * Constructor of the Shop Generator. It computes also the max length of columns based on how many
+   * generators can be per row and there are.
+   *
+   * @param generatorList list of generators to be inserted in the window
    */
   public ShopGenerator(List<GeneratorFX> generatorList) {
     this.generatorList = Objects.requireNonNull(generatorList);
@@ -24,9 +24,7 @@ public final class ShopGenerator extends GridPane {
         (int) Math.ceil((double) generatorList.size() / ShopPos.ROW_GENERATOR_MAX.value());
   }
 
-  /**
-   * Fills the shop window.
-   */
+  /** It generates the graphic of the shop panel pop up */
   public void generateShopPanel() {
     final double HUNDRED = 100;
 
