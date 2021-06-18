@@ -21,7 +21,7 @@ Run Javafx app.
 mvn clean compile exec:java@javafx
 ```
 
-Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm).  
+Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm).
 To play from the telegram client go on [@jubble_bot](https://t.me/jubble_bot) on telegram.
 
 ```
@@ -63,8 +63,8 @@ mvn checkstyle:check
 
 In Jubble, a little Astronaut landed on a planet after having run out of fuel.
 This planet is mostly inhabited, and no one can help. At the beginning he/she only has a little stellar panel, which produces some Energy needed to come back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space.
-More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!  
-The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!  
+More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!
+The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
 
 ## Game mechanics
 
@@ -97,11 +97,11 @@ In brief, the code is splitted in three folders:
 - javafx
 - telegram
 
-The core is the core logic of the game and constitutes an api that can be accessed to the clients.  
-  
+The core is the core logic of the game and constitutes an api that can be accessed to the clients.
+
 Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above.
-  
-![Scheme](https://i.imgur.com/lBHDLUB.png)  
+
+![Scheme](https://i.imgur.com/lBHDLUB.png)
 
 A detailed representation of the packages and classes can be found in the generated Javadoc. A brief information on the dependencies of the project can be found in the pom.xml file.
 
@@ -131,34 +131,34 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 ### JavaFX
 JavaFX provides a graphics user interface of the game. To realize it we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, to add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
 
-#### Explanation of Some Useful Buttons:  
-Left Arrow Button: skips to the next page (if there are enough generators to need more than 1 page)  
-Right Arrow Button: skips to the previous page (if you changed page)   
-Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators  
+#### Explanation of Some Useful Buttons:
+Left Arrow Button: skips to the next page (if there are enough generators to need more than 1 page)
+Right Arrow Button: skips to the previous page (if you changed page)
+Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators
 
 
 ### Telegram
 The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
-#### Explanation of Some Useful Buttons:  
-Begin: starts the game from the client  
-Shop: opens the shop  
-Status: opens a report of the status of the resources (generators and balance)  
-Back: goes to the previous message  
-Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)  
- 
+#### Explanation of Some Useful Buttons:
+Begin: starts the game from the client
+Shop: opens the shop
+Status: opens a report of the status of the resources (generators and balance)
+Back: goes to the previous message
+Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)
+
 ## Tests
 
-To cover more code as possible we used a plugin called "Jacoco" which after the maven command "mvn test" returns a report which contains the test coverage. However we want to specify that we wanted to test only the core of the app (excluding the user interfaces). We only tested a little part in javaFx where we had Tasks which are graphical threads and we just wanted to be sure that we set them in the correct way.  
-  
-In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.  
+To cover more code as possible we used a plugin called "Jacoco" which after the maven command "mvn test" returns a report which contains the test coverage. However we want to specify that we wanted to test only the core of the app (excluding the user interfaces). We only tested a little part in javaFx where we had Tasks which are graphical threads and we just wanted to be sure that we set them in the correct way.
+
+In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.
 
 ## Pipeline
-We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:  
-- build: builds the project.  
-- test: runs test actions.  
-- deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature  
+We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:
+- build: builds the project.
+- test: runs test actions.
+- deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature
 
 ## Dependencies of the project
 ### Dependencies

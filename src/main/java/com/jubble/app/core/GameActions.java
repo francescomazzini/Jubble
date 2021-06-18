@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** Util that wraps common actions performed during the game. */
+/** Util that wraps common actions performed during the game. It acts like an API to interact with the core of
+ * the game */
 public class GameActions {
 
   private GameActions() {}
@@ -30,7 +31,7 @@ public class GameActions {
   }
 
   /**
-   * Returns sums the production value of each generator.
+   * Returns the sum of the production value for each generator.
    *
    * @return total production.
    */
