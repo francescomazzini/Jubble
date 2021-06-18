@@ -40,11 +40,13 @@ public final class ControllerFX implements Initializable {
     shopPanel.setVisible(status);
   }
 
+  /** When the linked action is triggered makes the shop panel visible. */
   @FXML
   public void showShopPanel() {
     setShopVisibility(true);
   }
 
+  /** When the linked action is triggered hides the shop panel. */
   @FXML
   public void hideShopPanel() {
     setShopVisibility(false);
@@ -63,11 +65,13 @@ public final class ControllerFX implements Initializable {
       }
   }
 
+  /** When the linked action is triggered switches by a page left. */
   @FXML
   public void switchMainPageLeft() {
     switchMainPage(currentSelectedPage + 1);
   }
 
+  /** When the linked action is triggered switches by a page right. */
   @FXML
   public void switchMainPageRight() {
     switchMainPage(currentSelectedPage - 1);

@@ -11,7 +11,9 @@ import java.util.Objects;
 
 /** Saves and loads the game. */
 public final class GameProgressSerializer {
+  /** Path of the file. */
   public static final String PROGRESS_FILE_PATH = "game_progress.json";
+
   private static final File FILE = new File(PROGRESS_FILE_PATH);
 
   /**
@@ -49,6 +51,7 @@ public final class GameProgressSerializer {
    * Loads the game from the saving file.
    *
    * @return loaded progress from file or null if file was found.
+   * @throws IOException if the file was not found.
    */
   public static GameProgress loadGame() throws IOException {
     ObjectMapper mapper = new ObjectMapper();

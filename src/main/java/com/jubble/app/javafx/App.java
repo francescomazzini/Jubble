@@ -15,7 +15,11 @@ public final class App extends Application {
     primaryStage.setOnCloseRequest(e -> GUIRunner.stop());
   }
 
-  /** Start game main loop. */
+  /**
+   * Start game main loop.
+   *
+   * @param args default args.
+   */
   public static void main(String[] args) {
     launch(args);
   }

@@ -26,6 +26,12 @@ public final class GeneratorFX {
   private VBox wrapperGeneratorAsShopElement;
   private VBox wrapperGeneratorAsPageElement;
 
+  /**
+   * Creates the GUI representation of a generator.
+   *
+   * @param generator generator to be injected in the GUI.
+   * @param imageGeneratorPath path of the image of this generator.
+   */
   public GeneratorFX(Generator generator, String imageGeneratorPath) {
     this.generator = Objects.requireNonNull(generator);
     Objects.requireNonNull(imageGeneratorPath);
