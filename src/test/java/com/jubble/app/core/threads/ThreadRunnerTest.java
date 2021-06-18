@@ -24,7 +24,10 @@ public class ThreadRunnerTest {
   }
 
   /*
-  It is 10ms while actually should be 1000 because the tests must run fast!
+    It is 10ms while actually should be 1000 because the tests must run fast!
+    The check is done after the 20 ms because it is not possible to fully rely on THread.sleep. So
+    we just make sure that after 20ms it should have incremented values (if it does not it is
+    because there is no generators, therefore we check this with a condition).
    */
   @RepeatedTest(2)
   @Test
