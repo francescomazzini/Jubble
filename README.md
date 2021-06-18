@@ -86,11 +86,11 @@ Ratio between ↯ production and costs.
 Multiplier:
 Number of level achieved by the player. It ranges from 1 to n, where n is the number of generator level achieved by the player.
 
-This is how we compute the cost of the next generator:
+This is how we compute the next cost of a generator:
 $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 
-This is how the total production is computed:
-$`production_{total} = (production_{base} \times owned)`$
+This is how the total production per second is computed:
+$`production_{total} = \displaystyle \sum_{i=0}^{generators} (production_{base_i} \times owned_i)`$
 
 ## Code Structure:
 
