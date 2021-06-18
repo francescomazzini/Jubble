@@ -97,8 +97,11 @@ In brief, the code is splitted in three folders:
 - javafx
 - telegram
 
-The core is the core logic of the game and constitutes an api that can be accessed to the clients.
+The core is the core logic of the game and constitutes an api that can be accessed to the clients.  
+  
 Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above.
+  
+![Scheme](https://i.imgur.com/lBHDLUB.png)  
 
 A detailed representation of the packages and classes can be found in the generated Javadoc. A brief information on the dependencies of the project can be found in the pom.xml file.
 
