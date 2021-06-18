@@ -9,15 +9,18 @@ import com.jubble.app.telegram.messages.TelegramMessage;
 import com.jubble.app.telegram.messages.TypeMessages;
 import java.util.Objects;
 
+/**
+ * Defines the possible actions that can be performed by the bot.
+ */
 public final class BotActions {
   private TelegramMessage message;
-  private boolean isGameOn;
+  private boolean isGameOn = false;
 
-  BotActions() {
-    isGameOn = false;
-  }
-
-  public void setGameOn(final boolean gameOn) {
+  /**
+   * Communicates whether the bot is active or not.
+   * @param gameOn status.
+   */
+  public void setIsGameOn(final boolean gameOn) {
     isGameOn = gameOn;
   }
 

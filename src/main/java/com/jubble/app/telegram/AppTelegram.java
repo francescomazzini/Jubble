@@ -4,6 +4,9 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+/**
+ * Main class for the telegram bot.
+ */
 public final class AppTelegram {
 
   private AppTelegram() {}
@@ -26,6 +29,6 @@ public final class AppTelegram {
       e.printStackTrace();
     }
 
-    if (jubbleBot != null) jubbleBot.getActionPerformer().setGameOn(false);
+    if (jubbleBot != null) jubbleBot.getActionPerformer().setIsGameOn(false);
   }
 }

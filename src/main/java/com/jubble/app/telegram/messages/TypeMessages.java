@@ -8,6 +8,9 @@ import com.jubble.app.core.utils.NumberNamesUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class is responsible for defining and generating the different types of message in the bot.
+ */
 public class TypeMessages {
   private TypeMessages() {}
 

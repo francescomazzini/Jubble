@@ -20,6 +20,10 @@ public abstract class GeneratorBody {
   public static final int DEFAULT_NUMBER_OWNED_GENERATORS = 0;
   private int numberOwned;
 
+  /**
+   * Takes a builder object and fills the class attributes.
+   * @param builder builder with desired values.
+   */
   GeneratorBody(Builder<?> builder) {
     Objects.requireNonNull(builder);
     name = builder.name;
@@ -31,6 +35,11 @@ public abstract class GeneratorBody {
     numberOwned = builder.numberOwned;
   }
 
+  /**
+   * Abstract builder class for the GeneratorBody that must be extended when GeneratorBody is subclassed.
+   * Implementation of the builder pattern.
+   * @param <T> type of the subclass.
+   */
   abstract static class Builder<T extends Builder<T>> {
     // Optional parameters - initialized to default values.
     private String name = "";
