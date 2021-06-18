@@ -17,6 +17,9 @@ public final class ShopGenerator extends GridPane {
         (int) Math.ceil((double) generatorList.size() / ShopPos.ROW_GENERATOR_MAX.value());
   }
 
+  /**
+   * It generates the graphic of the shop panel pop up
+   */
   public void generateShopPanel() {
     final double HUNDRED = 100;
 

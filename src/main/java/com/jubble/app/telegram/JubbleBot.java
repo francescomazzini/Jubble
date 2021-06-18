@@ -19,6 +19,7 @@ public final class JubbleBot extends TelegramLongPollingBot {
     actionPerformer = new BotActions();
   }
 
+  /** Returns the Object of BotActions which can perform actions*/
   public BotActions getActionPerformer() {
     return actionPerformer;
   }

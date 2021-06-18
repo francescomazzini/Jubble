@@ -17,6 +17,8 @@ public final class BotActions {
     isGameOn = false;
   }
 
+  /**Set the Game On or Off, it is used to know in the response of the callback actions if the game has
+   * already been activated or not */
   public void setGameOn(final boolean gameOn) {
     isGameOn = gameOn;
   }
