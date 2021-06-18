@@ -132,6 +132,10 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 
 thhingsss
 
+## Tests
+
+thingsss
+
 ## Dependencies of the project
 ### Dependencies
 - Truth: assertion library.
