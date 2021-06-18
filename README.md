@@ -123,7 +123,11 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - Singleton pattern: Balance class.
 - Builder pattern: Made possible to reduce the constructor parameters of the Generator class.
 
-## Interfaces
+## User Interfaces
+
+### JavaFX
+  
+
 
 ### Telegram
 The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
@@ -131,7 +135,9 @@ However, if you would prefer to have your personal bot which use our code, you c
 
 ## Tests
 
-thingsss
+To cover more code as possible we used a plugin called "Jacoco" which after the maven command "mvn test" returns a report which contains the test coverage. However we want to specify that we wanted to test only the core of the app (excluding the user interfaces). We only tested a little part in javaFx where we had Tasks which are graphical threads and we just wanted to be sure that we set them in the correct way.  
+  
+In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.  
 
 ## Dependencies of the project
 ### Dependencies
