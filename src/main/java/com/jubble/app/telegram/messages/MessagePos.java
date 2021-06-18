@@ -1,4 +1,4 @@
-package com.jubble.app.telegram.elements;
+package com.jubble.app.telegram.messages;
 
 /** Defines common position constants of a message. */
 public enum MessagePos {

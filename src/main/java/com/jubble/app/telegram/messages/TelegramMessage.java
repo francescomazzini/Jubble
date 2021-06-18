@@ -1,4 +1,4 @@
-package com.jubble.app.telegram.elements;
+package com.jubble.app.telegram.messages;
 
 import java.util.ArrayList;
 import java.util.List;

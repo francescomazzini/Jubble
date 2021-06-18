@@ -55,7 +55,7 @@ public final class ControllerFX implements Initializable {
 
     BodyGenerators bodyWanted = (BodyGenerators) mainScreenBodyPages.get(namePageWanted);
 
-    if (bodyWanted != null)
+    if (!Objects.isNull(bodyWanted))
       if (bodyWanted.areThereGeneratorsVisible()) {
         mainBody.getChildren().clear();
         mainBody.getChildren().add(bodyWanted);
