@@ -10,7 +10,7 @@ Alberto Defendi (@ahl-berto)
 Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition.
 
 You can play it via javafx or via a telegram bot.
-If you want to play it using Telegram you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).
+If you want to play it using Telegram, you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).
 Be aware that the server of telegram bot can only have one client, because we did not want to create a more complicated server able to manage more requests and with a database of all the data from each player. Through telegram bot we only wanted to show that the core of the game is separated from the User Interfaces used. Therefore you can play the game with javafx, then close it and resume your session using the telegram bot (using same data!).
 
 ## Commands
@@ -62,7 +62,7 @@ mvn checkstyle:check
 ## Gameplay
 
 In Jubble, a little Astronaut landed on a planet after having run out of fuel.
-This planet is mostly inhabited, and no one can help. At the beginning he/she only has a little stellar panel, which produces some Energy needed to come back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space.
+This planet is mostly uninhabited, and no one can help him/her. At the beginning he/she only has a little stellar panel, which produces some Energy needed to come back home, but this is obviously not enough to make his rocket able to travel for millions of light years in the space.
 More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!
 The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
 
@@ -75,7 +75,7 @@ Based on the typical model of tycoon games, the game is composed by:
 - A Platonic goal to achieve by the player: accumulate resources endlessly.
 
 Primary currency: ↯
-Is incremented each second basing of the number of owned generators.
+Is incremented each second according to the number of owned generators.
 
 Generator:
 Item that produces the primary currency.
@@ -108,9 +108,9 @@ A detailed representation of the packages and classes can be found in the genera
 
 ## Implemented features:
 
-- Abstract classes: needed to separate the various calculation methods and the normal variables of a generator.
+- Abstract classes: needed to separate the various computation methods and the normal variables of a generator.
 - Generics (methods or classes): following the advices provided in effective Java, we generified a builder pattern.
-- Collections: principally lists and maps.
+- Collections: mainly lists and maps.
 - Custom exceptions: IllegalOperationException.
 - Exception handling:
 Like in Json file reading. We had to "mute" some exceptions where throwing them would have stopped the app without any meaning. In those situations, we motivated the decision in a comment.
@@ -120,20 +120,20 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - File I/O
 - Serialization (to JSON, XML, CSV) to store game progress (Jackson)
 - Deserialization (from JSON, XML, CSV) to recover game progress (Jackson)
-- Multithreading
+- Multithreading: needed to manage the communication with the user through an UI and to let the Balance being incremented every second. There are also Deamons in the JAVAFX part which updates label, working as graphic threads.
 - Resource sharing (between threads): In Balance class.
 - Test hooks (@beforeAll, @beforeEach. . . )
 - Singleton pattern: Balance class.
-- Builder pattern: Made possible to reduce the constructor parameters of the Generator class.
+- Builder pattern: used to reduce the constructor parameters of the Generator class.
 
 ## User Interfaces
 
 ### JavaFX
-JavaFX provides a graphics user interface of the game. To realize it we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, to add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
+JavaFX provides a graphics user interface of the game. To realize it, we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
 
 #### Explanation of Some Useful Buttons:
-Left Arrow Button: skips to the next page (if there are enough generators to need more than 1 page)
-Right Arrow Button: skips to the previous page (if you changed page)
+Left Arrow Button: skips to the next page (if there are enough generators so that more than 1 page is needed)
+Right Arrow Button: skips to the previous page (if you changed page)  
 Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators
 
 
@@ -142,17 +142,17 @@ The telegram bot doesn't need a configuration, because we have already prepared 
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
 #### Explanation of Some Useful Buttons:
-Begin: starts the game from the client
-Shop: opens the shop
-Status: opens a report of the status of the resources (generators and balance)
-Back: goes to the previous message
+Begin: starts the game from the client  
+Shop: opens the shop  
+Status: opens a report of the status of the resources (generators and balance)  
+Back: goes to the previous message  
 Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)
 
 ## Tests
 
 To cover more code as possible we used a plugin called "Jacoco" which after the maven command "mvn test" returns a report which contains the test coverage. However we want to specify that we wanted to test only the core of the app (excluding the user interfaces). We only tested a little part in javaFx where we had Tasks which are graphical threads and we just wanted to be sure that we set them in the correct way.
 
-In the core instead, almost everythings is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.
+In the core instead, almost everything is covered. What it remains are basic methods and testing them would be useless (like basic getter and setter) and also a part of threads. That part is not covered because we have special exception in case someone tries to set number of generators once the App is started. Therefore tests would work only if they are run lonely, which does not make sense, so we tested that code copying it in another test (which mainly check the job of threads and timer) and without setting number of generators. In this way it is covered but not directly and not specificly, but it is not even much needed because we already tested de/serialization.
 
 ## Pipeline
 We set up a continous integration system to validate the code after each push on Gitlab. We defined three stages:
@@ -161,19 +161,22 @@ We set up a continous integration system to validate the code after each push on
 - deploy: deploys Javadoc to artifacts. The intention was to deploy the Javadoc on Gitlab pages, but we couldn't enable this feature
 
 ## Dependencies of the project
+
+Other plugins can be found in the [pom.xml](pom.xml) file.
+
 ### Dependencies
 - Truth: assertion library.
 - Javafx: JavaFX GUI library.
 - Junit: testing framework.
-- Telegrambots: Telegram bot api.
+- Telegrambot: Telegram bot api.
 
 ### Dev-dependencies
 - Spotless: code formatter bounded to test/build lifecicle.
 - Sheckstyle: code linter that enforces Google styleguide.
 - Spotbugs: code analyzer that spots buggy patterns.
 - Maven shade plugin: creates jar.
+  
 
-Other plugins can be found in the pom.xml file.
 
 ## Our Experience
 ### Internal Organization
@@ -203,6 +206,9 @@ I also had problems with gitlab CI to deploy the Javadocs, those I could upload 
 In this project there were also moments where we had to reconsider our decisions, which I felt crucial to adopt a reasoned approach to software development: in the beginning, we implemented the Observer pattern, but we felt it was introducing unnecessary complexity. Another time, we tried to make a singleton class deserialize data before the beginning of the game. After being stuck for a while, we decided that was not necessary and could have broken the thread resource sharing, so we avoided using it even we liked this design pattern".
 
 
+## Youtube Video
+
+Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
 ## Next Steps
 
@@ -211,11 +217,6 @@ What could we add in the future versions:
 - [ ] Implement the concept of derivative currencies (secondary currencies that can be exchanged with the primary and gainable from different type of generators).
 - [ ] Add random events during the game experience.
 - [ ] Add minigames which allow to bet using the primary currency, risking to lose it or gain more of it.
-
-## Youtube Video
-
-Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
-
 
 ## References
 
