@@ -8,6 +8,10 @@ public class IllegalOperationException extends RuntimeException {
   private static final String MESSAGE =
       "Number of owned generator can be set only at the start of the app.";
 
+  /**
+   * IllegalOperationException is a RuntimeException that should be run when a method tries to
+   * perform a illegal operation that breaks the logic of the game.
+   */
   public IllegalOperationException() {
     super(MESSAGE);
   }

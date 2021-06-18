@@ -17,7 +17,9 @@ public abstract class GeneratorBody {
   private final double costBase;
   private final double productionBase;
   private final double rateGrowth;
+  /** Default number of owned generators at the beginning of the game. */
   public static final int DEFAULT_NUMBER_OWNED_GENERATORS = 0;
+
   private int numberOwned;
 
   /**
@@ -130,7 +132,7 @@ public abstract class GeneratorBody {
     }
 
     /**
-     * Builds this class.
+     * Builds this class when called.
      *
      * @return object.
      */

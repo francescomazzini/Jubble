@@ -40,6 +40,8 @@ public final class ThreadTaskUtil {
    * Stops and remove a thread in the collection.
    *
    * @param threadName name of the thread to remove.
+   * @return removed thread.
+   * @throws InterruptedException if the thread is illegally interrupted.
    */
   public static Thread remove(String threadName) throws InterruptedException {
     getThread(threadName).join();
