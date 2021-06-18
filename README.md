@@ -226,4 +226,4 @@ Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
 ## License
 
-Chose a license.
+[MIT](https://gitlab.inf.unibz.it/jubble/prpr_project_jubble/-/blob/master/LICENSE)
