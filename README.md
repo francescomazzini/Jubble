@@ -83,9 +83,6 @@ There are different types of generator, each produces a certain amount of ↯ pe
 Production rate:
 Ratio between ↯ production and costs.
 
-Multiplier:
-Number of level achieved by the player. It ranges from 1 to n, where n is the number of generator level achieved by the player.
-
 This is how we compute the next cost of a generator:
 $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 
@@ -103,7 +100,7 @@ The core is the core logic of the game and constitutes an api that can be access
 Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above.
 
 ### Telegram
-The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named "@jubble_bot".
+The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
 However, since [bot tokens should remain secret](https://github.com/rubenlagus/TelegramBots/wiki/Handling-Bot-Tokens#-bot-token-rules), should you want to fork this project or to self host it, we recommend replacing the token with a personal one.
 
 A detailed representation of the packages and classes can be found in the generated Javadoc. A brief information on the dependencies of the project can be found in the pom.xml file.
