@@ -62,9 +62,9 @@ mvn checkstyle:check
 ## Gameplay
 
 In Jubble, a little Astronaut landed on a planet after having run out of fuel.
-This planet is mostly inhabited, and no one can help. At the beginning he (or she) is left only with a little stellar panel, which makes possible to recover some Energy to back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space.
-More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!
-The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!
+This planet is mostly inhabited, and no one can help. At the beginning he/she only has a little stellar panel, which produces some Energy needed to come back home, but is obviously not enough to make his rocket able to travel for millions of light years in the space.
+More and more energy is needed in order to do so! In the shop, the player can also buy generators with higher production rate to make the way to home faster!  
+The endless goal is to reach as more energy as the player can. Depending on how the player will buy generators, his production will be different, being more or less efficient!  
 
 ## Game mechanics
 
@@ -126,12 +126,16 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 ## User Interfaces
 
 ### JavaFX
-  
+
+
+explanation buttons
 
 
 ### Telegram
 The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
+
+explanation buttons
 
 ## Tests
 
