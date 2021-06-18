@@ -21,7 +21,8 @@ Run Javafx app.
 mvn clean compile exec:java@javafx
 ```
 
-Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm).
+Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm)
+To play from the telegram client go on [@jubble_bot](https://t.me/jubble_bot) on telegram.
 
 ```
 mvn clean compile exec:java@telegram
@@ -99,11 +100,8 @@ In brief, the code is splitted in three folders:
 The core is the core logic of the game and constitutes an api that can be accessed to the clients.
 Java and Telegram have different entrypoint, and are based on the "core". They can be run using the command specified above.
 
-### Telegram
-The telegram bot doesn't need a configuration, since we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
-However, since [bot tokens should remain secret](https://github.com/rubenlagus/TelegramBots/wiki/Handling-Bot-Tokens#-bot-token-rules), should you want to fork this project or to self host it, we recommend replacing the token with a personal one.
-
 A detailed representation of the packages and classes can be found in the generated Javadoc. A brief information on the dependencies of the project can be found in the pom.xml file.
+
 
 ## Implemented features:
 
@@ -127,7 +125,9 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 
 ## Interfaces
 
-thhingsss
+### Telegram
+The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
+However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
 ## Tests
 
