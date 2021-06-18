@@ -26,7 +26,7 @@ public class ThreadRunnerTest {
   /*
   It is 10ms while actually should be 1000 because the tests must run fast!
    */
-  @RepeatedTest(4)
+  @RepeatedTest(2)
   @Test
   @DisplayName("Timer Should Update Balance Value Every Tot Set ms")
   public void timerShouldUpdateBalanceEveryTotSeconds() throws InterruptedException {
