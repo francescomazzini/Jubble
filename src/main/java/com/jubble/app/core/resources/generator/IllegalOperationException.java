@@ -5,15 +5,17 @@ package com.jubble.app.core.resources.generator;
  * This exception is thrown when such values are updated without permission by other methods.
  */
 public class IllegalOperationException extends RuntimeException {
+  private static final String MESSAGE = "Number of owned generator can be set only at the start of the app.";
   public IllegalOperationException() {
-    super("Number of owned generator can be set only at the start of the app.");
+    super(MESSAGE);
   }
 
   /**
+   * Throws an exception if param is different than default.
    * @param numberOwned number of owned generator for this generator.
    * @throws IllegalOperationException if the following condition is met.
    */
-  static void checkIfNumberOwnedIsDefault(int numberOwned) {
+  public static void checkIfNumberOwnedIsDefault(int numberOwned) {
     if (numberOwned != Generator.DEFAULT_NUMBER_OWNED_GENERATORS)
       throw new IllegalOperationException();
   }
