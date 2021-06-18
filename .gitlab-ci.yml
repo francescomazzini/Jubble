@@ -19,8 +19,8 @@ test:
 deploy:
   stage: deploy
   script:
-    - mvn clean site
-    - mv target/site/ public
+    - mvn javadoc:javadoc
+    - mv target/site/apidocs public
   artifacts:
     paths:
       - public
