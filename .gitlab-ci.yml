@@ -2,23 +2,22 @@ image: maven:latest
 
 stages:
   - build
-  - docs
-  - check
-  - format
+  - test
+  - deploy
 
 build:
   stage: build
   script:
-    - mvn test
     - mvn compile
+    - mvn package
 
-format:
-  stage: format
+test:
+  stage: test
   script:
-    - mvn spotless:apply
+    - mvn test
 
-docs:
-  stage: docs
+deploy:
+  stage: deploy
   script:
     - mvn clean site
     - mv target/site/ public
