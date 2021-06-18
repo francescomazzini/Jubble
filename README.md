@@ -33,7 +33,7 @@ Clean project.
 mvn clean
 ```
 
-Run project tests and generate coverage report.
+Run project tests and generate coverage report (then you can find it at /target/site/jacoco/index.html).
 
 ```
 mvn test
@@ -45,14 +45,11 @@ Generate executable Jars (one for JAVAFX, another for TELEGRAM).
 mvn package
 ```
 
-Generate JAVADOC (then you can find it at target/site/apidocs/index.html).
+Generate JAVADOC (then you can find it at /target/site/apidocs/index.html).
 
 ```
 mvn javadoc:javadoc
 ```
-
-Build project and verify code style
-
 
 Generate code style report (the errors reported are suggestions and should not be considered as the only as absolute truth)
 
