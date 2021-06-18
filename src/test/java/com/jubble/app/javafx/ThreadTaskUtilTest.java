@@ -4,6 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.jubble.app.javafx.tasks.BalanceTask;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ThreadTaskUtilTest {
@@ -14,6 +15,7 @@ public class ThreadTaskUtilTest {
     ThreadTaskUtil.create(task);
   }
 
+  @DisplayName("Should create task univocally")
   @Test
   public void threadCreateShouldBeUnique() {
     ThreadTaskUtil.create(task);
@@ -26,6 +28,7 @@ public class ThreadTaskUtilTest {
     assertThat(ThreadTaskUtil.getThread(task.getName()).isAlive()).isFalse();
   }
 
+  @DisplayName("Removed thread should not be alive")
   @Test
   public void removedThreadShouldNotBeAlive() throws InterruptedException {
     ThreadTaskUtil.getThread(task.getName()).start();
