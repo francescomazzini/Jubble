@@ -21,7 +21,7 @@ Run Javafx app.
 mvn clean compile exec:java@javafx
 ```
 
-Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm)
+Run telegram bot as server (to stop it you need to press Ctrl+C/Cmnd+C and confirm).  
 To play from the telegram client go on [@jubble_bot](https://t.me/jubble_bot) on telegram.
 
 ```
