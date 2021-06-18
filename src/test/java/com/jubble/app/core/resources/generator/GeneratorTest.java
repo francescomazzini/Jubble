@@ -83,4 +83,22 @@ public class GeneratorTest {
 
     assertThat(actualResult).isEqualTo(expectedResult);
   }
+
+  @Test
+  @DisplayName("NumberOwned Should Be Settable At The Beginning Also Through Builder")
+  public void numberOwnedShouldBeSettableAtBeginningAlsoThroughBuilder() {
+
+    generator =
+            new Generator.Builder()
+                    .name("Stellar Panel")
+                    .level(1)
+                    .description("")
+                    .costBase(3.738)
+                    .productionBase(1.67)
+                    .rateGrowth(1.07)
+                    .numberOwned(3)
+                    .build();
+
+    assertThat(generator.getNumberOwned()).isEqualTo(3);
+  }
 }
