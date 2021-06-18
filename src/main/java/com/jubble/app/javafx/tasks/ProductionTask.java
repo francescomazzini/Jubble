@@ -3,6 +3,7 @@ package com.jubble.app.javafx.tasks;
 import com.jubble.app.core.GameActions;
 import com.jubble.app.core.utils.NumberNamesUtil;
 
+/** Updates the production label. */
 public final class ProductionTask extends AbstractGameTask {
 
   @Override

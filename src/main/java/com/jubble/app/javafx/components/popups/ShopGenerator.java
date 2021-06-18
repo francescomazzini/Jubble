@@ -7,7 +7,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class ShopGenerator extends GridPane {
+public final class ShopGenerator extends GridPane {
   private final int maxLengthPerCol;
   private final List<GeneratorFX> generatorList;
 

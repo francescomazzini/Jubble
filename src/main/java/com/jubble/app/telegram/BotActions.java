@@ -4,9 +4,9 @@ import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.resources.generator.Generator;
 import com.jubble.app.core.threads.ThreadRunner;
-import com.jubble.app.telegram.elements.MessageContent;
-import com.jubble.app.telegram.elements.TelegramMessage;
-import com.jubble.app.telegram.elements.TypeMessages;
+import com.jubble.app.telegram.messages.MessageContent;
+import com.jubble.app.telegram.messages.TelegramMessage;
+import com.jubble.app.telegram.messages.TypeMessages;
 import java.util.Objects;
 
 public final class BotActions {

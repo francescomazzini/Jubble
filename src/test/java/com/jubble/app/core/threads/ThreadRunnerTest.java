@@ -15,8 +15,8 @@ public class ThreadRunnerTest {
   Timer VALUES_TIMER;
   static List<Generator> generatorList;
   static Currency balance;
-  final int timerRefreshRate = 10;
-  final int timerDelay = 0;
+  static final int TIMER_REFRESH_RATE = 10;
+  static final int TIMER_DELAY = 0;
 
   @BeforeAll
   static void setUp() {
@@ -24,23 +24,22 @@ public class ThreadRunnerTest {
   }
 
   /*
-    It is 10ms while actually should be 1000 because the tests must run fast!
-    The check is done after the 20 ms because it is not possible to fully rely on THread.sleep. So
-    we just make sure that after 20ms it should have incremented values (if it does not it is
-    because there is no generators, therefore we check this with a condition).
-   */
+   It is 10ms while actually should be 1000 because the tests must run fast!
+   The check is done after the 20 ms because it is not possible to fully rely on Thread.sleep. So
+   we just make sure that after 20ms it should have incremented values (if it does not it is
+   because there is no generators, therefore we check this with a condition).
+  */
   @RepeatedTest(2)
-  @Test
   @DisplayName("Timer Should Update Balance Value Every Tot Set ms")
   public void timerShouldUpdateBalanceEveryTotSeconds() throws InterruptedException {
 
     VALUES_TIMER = new Timer();
     balance = Settings.getCurrencyList().get(0);
-    VALUES_TIMER.schedule(new GameValuesThread(), timerDelay, timerRefreshRate);
+    VALUES_TIMER.schedule(new GameValuesThread(), TIMER_DELAY, TIMER_REFRESH_RATE);
 
     double initialValue = balance.getOwned();
 
-    Thread.sleep(timerRefreshRate * 2);
+    Thread.sleep(TIMER_REFRESH_RATE * 2);
 
     if (GameActions.getSumTotalProductionGenerators() != 0)
       assertThat(balance.getOwned())

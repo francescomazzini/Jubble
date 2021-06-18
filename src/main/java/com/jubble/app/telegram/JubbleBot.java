@@ -1,7 +1,7 @@
 package com.jubble.app.telegram;
 
-import com.jubble.app.telegram.elements.TelegramMessage;
-import com.jubble.app.telegram.elements.TypeMessages;
+import com.jubble.app.telegram.messages.TelegramMessage;
+import com.jubble.app.telegram.messages.TypeMessages;
 import java.util.Map;
 import java.util.Objects;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -79,7 +79,7 @@ public final class JubbleBot extends TelegramLongPollingBot {
   }
 
   /**
-   * All the commands are defined in {@link com.jubble.app.telegram.elements.MessageContent} Two
+   * All the commands are defined in {@link com.jubble.app.telegram.messages.MessageContent} Two
    * types of updates exist, that are handled equally by this method: - a command: ex. "/start" - a
    * callBackQuery: ex. "shop". so it just put it in a string.
    *

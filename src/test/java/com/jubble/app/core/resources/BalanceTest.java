@@ -7,11 +7,9 @@ import com.jubble.app.core.resources.generator.Generator;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 public class BalanceTest {
 
-  @Test
   @RepeatedTest(4)
   @DisplayName("Changing Balance Concurrently Should Have Coherent Results")
   public void changeBalanceConcurrentlyShouldHaveCoherentResults() throws InterruptedException {
@@ -53,7 +51,6 @@ public class BalanceTest {
     assertThat(Balance.getPrimary()).isEqualTo(startValue);
   }
 
-  @Test
   @RepeatedTest(4)
   @DisplayName("Adding Balance Concurrently While Buy Generators Should Have Coherent Results")
   public void addBalanceConcurrentlyWhileBuyGeneratorsShouldHaveCoherentResults()

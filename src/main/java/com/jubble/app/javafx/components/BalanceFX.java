@@ -7,7 +7,7 @@ import java.util.Objects;
 import javafx.scene.control.Label;
 
 /** Defines the GUI representation of the Balance class. */
-public class BalanceFX {
+public final class BalanceFX {
   private final Label balanceLabel;
   private final Label totalProductionLabel;
 

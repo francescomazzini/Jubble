@@ -3,11 +3,12 @@ package com.jubble.app.javafx.tasks;
 import com.jubble.app.core.Settings;
 import com.jubble.app.core.utils.NumberNamesUtil;
 
+/** Updates the balance label. */
 public final class BalanceTask extends AbstractGameTask {
 
   /**
    * Called by the Task when the thread that contains this task is started every 500ms it updates
-   * the progress (@updateProgress) of the currency
+   * the progress (@updateProgress) of the currency.
    *
    * @return Void placeholder for void.
    * @throws Exception if the thread was stopped.

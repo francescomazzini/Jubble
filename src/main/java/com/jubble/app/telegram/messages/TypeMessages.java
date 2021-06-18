@@ -1,4 +1,4 @@
-package com.jubble.app.telegram.elements;
+package com.jubble.app.telegram.messages;
 
 import com.jubble.app.core.GameActions;
 import com.jubble.app.core.Settings;
