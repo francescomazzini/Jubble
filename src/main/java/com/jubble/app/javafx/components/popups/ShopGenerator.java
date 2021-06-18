@@ -11,6 +11,11 @@ public final class ShopGenerator extends GridPane {
   private final int maxLengthPerCol;
   private final List<GeneratorFX> generatorList;
 
+  /**Constructor of the Shop Generator.
+   * It computes also the max length of columns based on how many generators
+   * can be per row and there are.
+   *
+   * @param generatorList, list of the generator */
   public ShopGenerator(List<GeneratorFX> generatorList) {
     this.generatorList = Objects.requireNonNull(generatorList);
     this.maxLengthPerCol =
