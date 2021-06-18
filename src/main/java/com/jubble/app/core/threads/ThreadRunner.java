@@ -5,6 +5,8 @@ import java.util.Timer;
 
 /** Wrapper to manage start/stop of GameValuesThread TimerTask. */
 public final class ThreadRunner {
+  private ThreadRunner() {}
+
   /** Contains each GameValuesThread TimerTask instantiated by run(). */
   private static final Timer VALUES_TIMER = new Timer();
 
