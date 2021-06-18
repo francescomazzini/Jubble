@@ -88,7 +88,7 @@ This is how we compute the next cost of a generator:
 $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 
 This is how the total production per second is computed:
-$`production_{total} = \displaystyle \sum_{i=0}^{generators} (production_{base_i} \times owned_i)`$
+$`production_{total} = \displaystyle \sum_{i=0}^{generators number} (production_{base_i} \times owned_i)`$
 
 ## Code Structure:
 
@@ -163,12 +163,17 @@ We set up a continous integration system to validate the code after each push on
 ## Dependencies of the project
 ### Dependencies
 - Truth: assertion library.
-- Javafx.
-- Telegram.
+- Javafx: JavaFX GUI library.
+- Junit: testing framework.
+- Telegrambots: Telegram bot api.
 
 ### Dev-dependencies
-- spotless: code formatter.
-- checkstyle: code linter.
+- Spotless: code formatter bounded to test/build lifecicle.
+- Sheckstyle: code linter that enforces Google styleguide.
+- Spotbugs: code analyzer that spots buggy patterns.
+- Maven shade plugin: creates jar.
+
+Other plugins can be found in the pom.xml file.
 
 ## Our Experience
 ### Internal Organization
