@@ -18,14 +18,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="850.0" styleClass="flow" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jubble.app.javafx.ControllerFX">
+<FlowPane fx:id="main_page_container" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="850.0" styleClass="flow" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jubble.app.javafx.ControllerFX">
    <stylesheets>
       <URL value="@style.css" />
    </stylesheets>
    <children>
       <HBox prefHeight="128.0" prefWidth="499.0">
          <children>
-            <Button fx:id="shop_button" mnemonicParsing="false" onAction="#displayShop" prefHeight="63.0" prefWidth="61.0" styleClass="shop-button">
+            <Button fx:id="shop_button" mnemonicParsing="false" onAction="#showShopPanel" prefHeight="63.0" prefWidth="61.0" styleClass="shop-button">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>
@@ -41,7 +41,7 @@
       </HBox>
       <ImageView fitHeight="79.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/energy.png" />
+            <Image url="@assets/game-components/primary-resource.png" />
          </image>
          <FlowPane.margin>
             <Insets />
@@ -49,12 +49,12 @@
       </ImageView>
       <VBox alignment="CENTER_RIGHT" prefHeight="122.0" prefWidth="245.0">
          <children>
-            <Label fx:id="label_balance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
+            <Label fx:id="balanceLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="37.0" prefWidth="245.0" styleClass="balance-label">
                <font>
                   <Font name="Arial" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="label_production_total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="24.0" prefWidth="149.0" textAlignment="RIGHT" textFill="WHITE">
+            <Label fx:id="totalProductionLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="24.0" prefWidth="149.0" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -70,9 +70,9 @@
       <VBox />
       <StackPane prefHeight="352.0" prefWidth="852.0">
          <children>
-            <VBox prefHeight="321.0" prefWidth="852.0">
+            <VBox fx:id="mainBody" prefHeight="321.0" prefWidth="852.0">
                <children>
-                  <GridPane fx:id="grid_page" alignment="CENTER" prefHeight="332.0" prefWidth="852.0">
+                  <GridPane fx:id="pageGrid" alignment="CENTER" prefHeight="332.0" prefWidth="852.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -89,11 +89,41 @@
                   <Insets top="50.0" />
                </StackPane.margin>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
+            <HBox prefHeight="362.0" prefWidth="852.0">
                <children>
-                  <VBox fx:id="shop_panel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
+                  <Button fx:id="left_arrow" mnemonicParsing="false" onAction="#switchMainPageLeft" prefHeight="37.0" prefWidth="39.0" styleClass="shop-button">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/button/left-arrow-button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox alignment="TOP_RIGHT" prefHeight="352.0" prefWidth="779.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#hideShop" styleClass="shop-button">
+                        <Button mnemonicParsing="false" onAction="#switchMainPageRight" prefHeight="42.0" prefWidth="54.0" styleClass="shop-button">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/button/right-arrow-button.png" />
+                                 </image></ImageView>
+                           </graphic></Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <VBox fx:id="shopPanelContainer" alignment="TOP_CENTER" prefHeight="352.0" prefWidth="852.0">
+               <children>
+                  <VBox fx:id="shopPanel" alignment="TOP_RIGHT" maxWidth="600.0" minWidth="600.0" prefHeight="302.0" prefWidth="600.0" styleClass="shop-panel-header">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#hideShopPanel" styleClass="shop-button">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -105,24 +135,9 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <ScrollPane fx:id="scroll_pane_shop" hbarPolicy="NEVER">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel">
-                                 <children>
-                                    <GridPane fx:id="grid_shop" prefHeight="472.0" prefWidth="584.0" styleClass="shop-button" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="365.5" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.5" minWidth="10.0" prefWidth="366.5" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="197.5" minHeight="10.0" prefHeight="176.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="143.5" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="179.5" minHeight="10.0" prefHeight="114.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
+                            <AnchorPane fx:id="shopPopUp" minHeight="0.0" minWidth="0.0" prefWidth="588.0" styleClass="shop-panel" />
                           </content>
                            <VBox.margin>
                               <Insets />

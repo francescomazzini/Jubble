@@ -2,20 +2,28 @@ image: maven:latest
 
 stages:
   - build
-  - docs
+  - test
+  - deploy
 
 build:
   stage: build
   script:
-    - mvn test
     - mvn compile
+    - mvn package
 
-docs:
-  stage: docs
+test:
+  stage: test
+  script:
+    - mvn test
+
+deploy:
+  stage: deploy
   script:
     - mvn javadoc:javadoc
-    - mvn site
-    - mv target/site/ public
+    - mv target/site/apidocs public
   artifacts:
     paths:
       - public
+  only:
+  - master
+  - dev_main
