@@ -1,5 +1,8 @@
 # Jubble🚀
 
+## Table of Contents
+[[_TOC_]]
+
 ## What is Jubble?
 
 Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition.
@@ -7,9 +10,6 @@ Jubble is a "spacial" multithreading incremental game, also known as clicker gam
 You can play it via javafx or via a telegram bot.
 If you want to play it using Telegram, you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).
 Be aware that the server of telegram bot can only have one client, because we did not want to create a more complicated server able to manage more requests and with a database of all the data from each player. Through telegram bot we only wanted to show that the core of the game is separated from the User Interfaces used. Therefore you can play the game with javafx, then close it and resume your session using the telegram bot (using same data!).
-
-## Table of Contents
-[[_TOC_]]
 
 ## Usage
 
@@ -208,6 +208,11 @@ In this project there were also moments where we had to reconsider our decisions
 
 Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
+## Group Members
+
+Francesco Mazzini (@Francesco.Mazzini)
+Alberto Defendi (@ahl-berto)
+
 ## Next Steps
 
 What could we add in the future versions:
@@ -215,11 +220,6 @@ What could we add in the future versions:
 - [ ] Implement the concept of derivative currencies (secondary currencies that can be exchanged with the primary and gainable from different type of generators).
 - [ ] Add random events during the game experience.
 - [ ] Add minigames which allow to bet using the primary currency, risking to lose it or gain more of it.
-
-## Group Members
-
-Francesco Mazzini (@Francesco.Mazzini)
-Alberto Defendi (@ahl-berto)
 
 ## References
 
