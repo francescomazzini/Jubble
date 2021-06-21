@@ -15,6 +15,12 @@ test:
   stage: test
   script:
     - mvn test
+    artifacts:
+      when: always
+      reports:
+        junit:
+          - target/surefire-reports/TEST-*.xml
+
 
 deploy:
   stage: deploy
