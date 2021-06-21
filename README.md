@@ -1,9 +1,7 @@
 # Jubble🚀
 
-## Group Members
-
-Francesco Mazzini (@Francesco.Mazzini)
-Alberto Defendi (@ahl-berto)
+## Table of Contents
+[[_TOC_]]
 
 ## What is Jubble?
 
@@ -13,7 +11,7 @@ You can play it via javafx or via a telegram bot.
 If you want to play it using Telegram, you have to run the specific command written below (which start the game server) and then you can go on telegram, search for "@jubble_bot" and start it (as a client).
 Be aware that the server of telegram bot can only have one client, because we did not want to create a more complicated server able to manage more requests and with a database of all the data from each player. Through telegram bot we only wanted to show that the core of the game is separated from the User Interfaces used. Therefore you can play the game with javafx, then close it and resume your session using the telegram bot (using same data!).
 
-## Commands
+## Usage
 
 Run Javafx app.
 
@@ -90,7 +88,7 @@ $`cost_{next} = cost_{base} \times (rate_{growth})^{owned}`$
 This is how the total production per second is computed:
 $`production_{total} = \displaystyle \sum_{i=0}^{generators number} (production_{base_i} \times owned_i)`$
 
-## Code Structure:
+## Code structure:
 
 In brief, the code is splitted in three folders:
 - core
@@ -126,14 +124,14 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 - Singleton pattern: Balance class.
 - Builder pattern: used to reduce the constructor parameters of the Generator class.
 
-## User Interfaces
+## User interfaces
 
 ### JavaFX
 JavaFX provides a graphics user interface of the game. To realize it, we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
 
-#### Explanation of Some Useful Buttons:
+#### How to interact with the GUI:
 Left Arrow Button: skips to the next page (if there are enough generators so that more than 1 page is needed)
-Right Arrow Button: skips to the previous page (if you changed page)  
+Right Arrow Button: skips to the previous page (if you changed page)
 Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators
 
 
@@ -141,11 +139,11 @@ Shop Button: open the pop up of the scrollable shop. There it is possible to buy
 The telegram bot doesn't need a configuration, because we have already prepared a Token linked to a bot named "[@jubble_bot](https://t.me/jubble_bot)".
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
-#### Explanation of Some Useful Buttons:
-Begin: starts the game from the client  
-Shop: opens the shop  
-Status: opens a report of the status of the resources (generators and balance)  
-Back: goes to the previous message  
+#### How to interact with the Bot:
+Begin: starts the game from the client
+Shop: opens the shop
+Status: opens a report of the status of the resources (generators and balance)
+Back: goes to the previous message
 Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)
 
 ## Tests
@@ -175,7 +173,7 @@ Other plugins can be found in the [pom.xml](pom.xml) file.
 - Sheckstyle: code linter that enforces Google styleguide.
 - Spotbugs: code analyzer that spots buggy patterns.
 - Maven shade plugin: creates jar.
-  
+
 
 
 ## Our Experience
@@ -210,6 +208,11 @@ In this project there were also moments where we had to reconsider our decisions
 
 Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
+## Group Members
+
+Francesco Mazzini (@Francesco.Mazzini)
+Alberto Defendi (@ahl-berto)
+
 ## Next Steps
 
 What could we add in the future versions:
@@ -222,7 +225,6 @@ What could we add in the future versions:
 
 1. A. Pecorella. (2016). The Math of Idle Games, Part I, II, III. [online] Available at: https://blog.kongregate.com/the-math-of-idle-games-part-i/ [Accessed 13 Jun. 2021].
 2. J. Bloch. (2017). Effective Java: Programming Language Guide, third edition.
-
 
 
 ## License
