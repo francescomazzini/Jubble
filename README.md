@@ -130,9 +130,9 @@ Like in Json file reading. We had to "mute" some exceptions where throwing them 
 JavaFX provides a graphics user interface of the game. To realize it, we used SceneBuilder to generate a main structure so that was summarized in a unique fxml and the other things were instead created through code. In this way the graphic tends to adapt to the program as more as possible. Thanks to this "expandibility" feature it is much simple to make the number of generators being more or less (it is only needed to modify the Settings class adding more Generators, add a new image for that generator and the job it is done! Remember that you need to restart the game from zero because this is a development edit, so you need to delete your game_progress.json and start the game! We have done this also in the youtube video presentation that you can find below).
 
 #### How to interact with the GUI:
-Left Arrow Button: skips to the next page (if there are enough generators so that more than 1 page is needed)
-Right Arrow Button: skips to the previous page (if you changed page)
-Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators
+Left Arrow Button: skips to the next page (if there are enough generators so that more than 1 page is needed)  
+Right Arrow Button: skips to the previous page (if you changed page)  
+Shop Button: open the pop up of the scrollable shop. There it is possible to buy generators  
 
 
 ### Telegram
@@ -140,11 +140,11 @@ The telegram bot doesn't need a configuration, because we have already prepared 
 However, if you would prefer to have your personal bot which use our code, you could create a new bot on telegram and you could use your token and your bot name replacing ours [in this class](src/main/java/com/jubble/app/telegram/BotConstants.java).
 
 #### How to interact with the Bot:
-Begin: starts the game from the client
-Shop: opens the shop
-Status: opens a report of the status of the resources (generators and balance)
-Back: goes to the previous message
-Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)
+Begin: starts the game from the client  
+Shop: opens the shop  
+Status: opens a report of the status of the resources (generators and balance)  
+Back: goes to the previous message  
+Stop: stops the game in order to make the progress saved  (this has to be run before of stopping the server!)  
 
 ## Tests
 
