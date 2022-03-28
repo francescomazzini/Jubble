@@ -210,8 +210,8 @@ Link: https://www.youtube.com/watch?v=p3bSIx2WK3s
 
 ## Group Members
 
-Francesco Mazzini (@Francesco.Mazzini)
-Alberto Defendi (@ahl-berto)
+Francesco Mazzini (Gitlab: @Francesco.Mazzini, Github: @francescomazzini)
+Alberto Defendi (Gitlab: @ahl-berto)
 
 ## Next Steps
 
