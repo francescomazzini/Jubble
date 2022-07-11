@@ -1,9 +1,36 @@
 # Jubble🚀
 
 ## Table of Contents
-[[_TOC_]]
+  * [What is Jubble](#What-is-Jubble)
+  * [Usage](#usage)
+  * [Gameplay](#gameplay)
+  * [Game mechanics](#game-mechanics)
+  * [Code structure](#code-structure)
+  * [Implemented features](#implemented-features)
+  * [User interfaces](#user-interfaces)
+    + [JavaFX](#javafx)
+      - [How to interact with the GUI](#how-to-interact-with-the-gui)
+    + [Telegram](#telegram)
+      - [How to interact with the Bot](#how-to-interact-with-the-bot)
+  * [Tests](#tests)
+  * [Pipeline](#pipeline)
+  * [Dependencies of the project](#dependencies-of-the-project)
+    + [Dependencies](#dependencies)
+    + [Dev-dependencies](#dev-dependencies)
+  * [Our Experience](#our-experience)
+    + [Internal Organization](#internal-organization)
+    + [Branch Strategy](#branch-strategy)
+    + [Main Challenge Faced](#main-challenge-faced)
+  * [Youtube Video](#youtube-video)
+  * [Group Members](#group-members)
+  * [Next Steps](#next-steps)
+  * [References](#references)
+  * [License](#license)
 
-## What is Jubble?
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
+## What is Jubble
 
 Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition.
 
