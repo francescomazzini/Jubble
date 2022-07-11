@@ -1,7 +1,7 @@
 # Jubble🚀
 
 ## Table of Contents
-  * [What is Jubble](#What-is-Jubble)
+  * [What is Jubble?](#What-is-Jubble)
   * [Usage](#usage)
   * [Gameplay](#gameplay)
   * [Game mechanics](#game-mechanics)
@@ -28,7 +28,7 @@
   * [License](#license)
 
 
-## What is Jubble
+## What is Jubble?
 
 Jubble is a "spacial" multithreading incremental game, also known as clicker game or an idle game. It is a videogame whose gameplay consists of the player performing simple actions such as clicking on the screen repeatedly. This “grinding” earns the player in-game currency which can be used to increase the rate of currency acquisition.
 
